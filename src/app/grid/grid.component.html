@@ -1,0 +1,90 @@
+<mat-drawer-container class="drawer-container">
+	<mat-drawer #left mode="side">
+		IgnoreListManagment - <button (click)="left.close()">Close</button>
+		<mat-expansion-panel *ngFor="let list of ignoreListNames">
+			<mat-expansion-panel-header>{{list}}({{ ignoreLists[list].length }})</mat-expansion-panel-header>
+			<table>
+				<thead>
+					<tr>
+						<th>Channel Name</th>
+						<th>Title</th>
+						<th>Move To</th>
+					</tr>
+				</thead>
+				<tr *ngFor="let ignore of ignoreLists[list]">
+					<td>{{ignore.channelName}}</td>
+					<td>{{ignore.title}}</td>
+					<td>
+						<button (click)="deleteFromList(ignore, ignoreLists[list])">delete</button>
+						<button *ngFor="let list1 of ignoreListNames | listNamesfilter: list" (click)="moveEntry(ignore, list1)">{{list1}}</button>
+					</td>
+				</tr>
+			</table>
+		</mat-expansion-panel>
+	</mat-drawer>
+	<mat-drawer-content>
+		<div class="container">
+			<div class="content">
+				<select [(ngModel)]="selectedServer">
+					<option *ngFor="let server of servers" [value]="server">{{server}}</option>
+				</select>
+				<input [(ngModel)]="options.limit" /> <span (click)="options.limit = totalCount">({{totalCount}})</span>
+				<button (click)="httppost()">httpPost {{selectedServer}}</button><button (click)="fetch()">fetch</button>
+				<pre>{{errors | json}}</pre>
+
+				<button (click)="left.open()">manage Ignores</button>
+				<div><label>Length</label>
+					<span><input type="radio" name="length" [(ngModel)]="filterLength" [value]="undefined" (change)="filterAll()"/>Don't care</span>
+					<span><input type="radio" name="length" [(ngModel)]="filterLength" value="short"  (change)="filterAll()"/>short</span>
+					<span><input type="radio" name="length" [(ngModel)]="filterLength" value="medium"  (change)="filterAll()"/>medium</span>
+					<span><input type="radio" name="length" [(ngModel)]="filterLength" value="long"  (change)="filterAll()"/>long</span>
+				</div>
+				<div><label>Episodic</label>
+					<span><input type="radio" name="episodic" [(ngModel)]="episodic" [value]="undefined" (change)="filterAll()"/>Don't care</span>
+					<span><input type="radio" name="episodic" [(ngModel)]="episodic" [value]="true"  (change)="filterAll()"/>episodic</span>
+					<span><input type="radio" name="episodic" [(ngModel)]="episodic" [value]="false"  (change)="filterAll()"/>Movie</span>
+				</div>
+
+				<table class="grid">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Channel Name</th>
+							<th>Title</th>
+							<th>{{filteredEntries.size}} ( {{lastignoredcount}})</th>
+						</tr>
+					</thead>
+					<tr *ngFor="let entry of (filteredEntries | keyvalue)" (mouseenter)="selectedEntry = entry.value">
+						<td>{{entry.value[0].channelNumber}}</td>
+						<td>
+							<div><span>{{entry.value[0].channelName}}</span><button (click)="ignoreChanelName(entry.value[0].channelName, 'Meh')">Meh</button></div>
+						</td>
+						<td>
+							<div><span>{{entry.value[0].title}} ({{entry.value.length}})</span><button *ngFor="let list of ignoreListNames" (click)="ignoreTitle(entry.value[0].title, list)">{{list}}</button></div>
+						</td>
+						<td><button (click)="ignore(entry.value[0], 'Meh')">combo Meh</button></td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="content">
+				<ng-container *ngIf="selectedEntry[0]">
+					<h2>{{selectedEntry[0].title}} ({{selectedEntry.length}})</h2>
+					<img [src]="selectedEntry[0].image" style="width: 10em;float:left;padding-right:1em;" />
+					<h3>{{selectedEntry[0].subtitle || "_"}} {{ selectedEntry[0].start * 1000 | newDate | date:'medium' }}</h3>
+					<h4>{{selectedEntry[0].channelNumber}} {{selectedEntry[0].channelName}} 🕰{{ (selectedEntry[0].stop - selectedEntry[0].start) / 60 }}</h4>
+					<h4>S{{selectedEntry[0].seasonNumber || "_" }} - E{{selectedEntry[0].episodeNumber }}</h4>
+					<p>{{selectedEntry[0].description}}</p>
+					<ul *ngIf="selectedEntry.length > 1">
+						<h4>Upcoming</h4>
+						<li *ngFor="let e of selectedEntry.slice(1);">
+							<h4>{{selectedEntry[0].channelNumber}} {{selectedEntry[0].channelName}} 🕰{{ (selectedEntry[0].stop - selectedEntry[0].start) / 60 }}</h4>
+							{{ e.start * 1000 | newDate | date:'medium' }}
+							<h4 *ngIf="e.subtitle">{{e.subtitle}}</h4>
+						</li>
+					</ul>
+				</ng-container>
+			</div>
+		</div>
+	</mat-drawer-content>
+</mat-drawer-container>

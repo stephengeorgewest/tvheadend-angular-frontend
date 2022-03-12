@@ -1,0 +1,12 @@
+app-navigation {
+    height: 2.3em;
+    display: block;
+}
+
+.drawer-container {
+    height: calc(100% - 2.3em);
+}
+
+.mat-drawer-content {
+    padding-left: 0.5em;
+}

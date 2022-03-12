@@ -1,0 +1,201 @@
+{
+	"entries": [{
+		"key": "6126ee448bb759d9c88819a7adc4536e",
+		"val": "2.1 KUTV2"
+	}, {
+		"key": "184e6b7e72758c049f7fdb034e9bbcd3",
+		"val": "2.2 KMYU"
+	}, {
+		"key": "8e3563040acce14647f2f249af152222",
+		"val": "4.1 KTVX-HD"
+	}, {
+		"key": "a48248b52b780b41f4520a56c991f726",
+		"val": "4.2 METV"
+	}, {
+		"key": "38b8461fb2baac97692f12b7127f585e",
+		"val": "4.3 Rewind"
+	}, {
+		"key": "ab96ac19a917b4a7858a833c3a7e9d49",
+		"val": "4.4 HnI"
+	}, {
+		"key": "ba75b8c445ac1aa0acd2ea0fe192da3a",
+		"val": "5.1 KSL-DT "
+	}, {
+		"key": "0e681288161003f56509f7a06600e9d1",
+		"val": "5.2 COZI-TV"
+	}, {
+		"key": "5a734361007882ccfa192b8e052a82af",
+		"val": "5.3 thisTV "
+	}, {
+		"key": "2620e3bd8efd1488f8503e57d843cc7e",
+		"val": "7.1 KUED-HD"
+	}, {
+		"key": "fa224c1027d538deeb22381ef0796d0b",
+		"val": "7.2 World"
+	}, {
+		"key": "142ef3dd917d3c97105a2513cadfb046",
+		"val": "7.3 PBSKids"
+	}, {
+		"key": "dab995f41bf7749b3afa92de950680e1",
+		"val": "7.4 Create"
+	}, {
+		"key": "9adad709f42002cd6f4a20f9126d2b91",
+		"val": "9.1 KUEN"
+	}, {
+		"key": "f7a805d502cef36de78419eabcf67c70",
+		"val": "9.2 NASA"
+	}, {
+		"key": "dfb97041407662d4c95b27e05a5eeff5",
+		"val": "9.3 FNX"
+	}, {
+		"key": "b48fd66cc1500220738ff9aa7767799b",
+		"val": "9.4 NHK"
+	}, {
+		"key": "8c0099b6a447fe08f826682397eb1a55",
+		"val": "9.91 KUER-FM"
+	}, {
+		"key": "80e703e4b741654f66ae9b10d3d5ea6f",
+		"val": "11.1 KBYU"
+	}, {
+		"key": "90b2fadb23002e0df132f935b0500d99",
+		"val": "11.2 BYURDIO"
+	}, {
+		"key": "0b10166e3514351d5d67327fe9ba4915",
+		"val": "11.3 Classical 89"
+	}, {
+		"key": "e8c2a81524d6825c952406bb78de40ee",
+		"val": "13.1 KSTU-HD"
+	}, {
+		"key": "cb3ab18816e87a53a5fbc3fe8f732435",
+		"val": "13.2 ANTTV  "
+	}, {
+		"key": "9789a850773e6299401c0e1c5f1c355e",
+		"val": "13.3 COURTTV"
+	}, {
+		"key": "26eea4b802ea92a49cb8a3763c48b5e1",
+		"val": "13.4 MYSTERY"
+	}, {
+		"key": "b1fbd08727e91c71787affbc03c04c6d",
+		"val": "14.1 KJZZ-HD"
+	}, {
+		"key": "ad226e1fa4beb143580a77c874cb153a",
+		"val": "14.2 Comet"
+	}, {
+		"key": "76395a8c3737bc2dca4ed7b43fdf8cb7",
+		"val": "14.3 TBD"
+	}, {
+		"key": "7ec93c9cc246a8d6eb40c87b2a8b33ba",
+		"val": "14.4 Charge!"
+	}, {
+		"key": "39dc298e1ee6313054862e0dee4523a8",
+		"val": "14.5 DABL"
+	}, {
+		"key": "6f044f54143325b1da8f0ed769844995",
+		"val": "16.1 ION"
+	}, {
+		"key": "64cccbf0f06af9e874d9ea7e78bcb82c",
+		"val": "16.2 Grit"
+	}, {
+		"key": "d7770ab4e230b8b4351087353acd4b42",
+		"val": "16.3 Laff"
+	}, {
+		"key": "1168dd0819217d54491438c85afffa1f",
+		"val": "16.4 Bounce"
+	}, {
+		"key": "10211e15b52f3774ad877989edeb13bb",
+		"val": "16.5 Defy TV"
+	}, {
+		"key": "bc655b6d2897ea0a55e6e23b4ac11783",
+		"val": "16.6 TruReal"
+	}, {
+		"key": "2813b9a56fd15a2122aed97e38288f1d",
+		"val": "19.1 KPDR-1"
+	}, {
+		"key": "1fb456e26075f4bb43729e354f1cbe4f",
+		"val": "19.2 RNTV"
+	}, {
+		"key": "d527d6c81bd8f2ec2ff24df4472d1fd9",
+		"val": "19.3 HSN2"
+	}, {
+		"key": "28d442dd5c77e05783cb74c3f31b2145",
+		"val": "19.4 JTV"
+	}, {
+		"key": "8c0aab654ca74c39d5fd38fb4b5cd298",
+		"val": "19.5 KPDR-5"
+	}, {
+		"key": "3f077c833b4e87d4b65ef2a1f3205630",
+		"val": "19.6 CRTV"
+	}, {
+		"key": "12179280f2dc0ef43a423b558b912b7a",
+		"val": "19.7 KPDR-7"
+	}, {
+		"key": "429451af9f285f828d7ce8f0fba23be0",
+		"val": "20.1 KTMW   "
+	}, {
+		"key": "62f4356bcc27fe40fc04fbbf2e477950",
+		"val": "20.2 TelXito"
+	}, {
+		"key": "7437ac961db7292cc3bbb81cd86f0673",
+		"val": "20.3 TheGrio"
+	}, {
+		"key": "e6d19feba15c56f66643c1bbe870db68",
+		"val": "20.4 NBCLX  "
+	}, {
+		"key": "d7f56cfa9ac5ae661932937827bb3a97",
+		"val": "23.1 KBTU-LD"
+	}, {
+		"key": "7161b16bcafbc180fc93b1a1837b9ef1",
+		"val": "23.2 KBTU-LD"
+	}, {
+		"key": "b8f2c3490d14278ef137ecdb85a76613",
+		"val": "23.3 KBTU-LD"
+	}, {
+		"key": "581b327aaf17bce260e4b1fafb4425b7",
+		"val": "23.4 KBTU-LD"
+	}, {
+		"key": "65d4190eeda9a5134019db44f61d3adf",
+		"val": "23.5 KBTU-LD"
+	}, {
+		"key": "91524181561a7cd0bcd5aad5867054d9",
+		"val": "23.6 KBTU-LD"
+	}, {
+		"key": "59f6f6f5b612263715e5abb3084cbf72",
+		"val": "23.7 KBTU-LD"
+	}, {
+		"key": "43ed55da3b4d10f617dc7b3fc77a303f",
+		"val": "24.1 KPNZ-DT"
+	}, {
+		"key": "3e601bf584ba5d9257f8b671322b9ca2",
+		"val": "24.2 KPNZ-DT"
+	}, {
+		"key": "d0f2e461d4527a11704e5501a21e2b15",
+		"val": "24.3 KPNZ-DT"
+	}, {
+		"key": "2c506a81fdce7523ea3f8761c064e20a",
+		"val": "24.4 KPNZ-DT"
+	}, {
+		"key": "c5944efddfaba97b6de5c35850027707",
+		"val": "25.1 KSVN-LD"
+	}, {
+		"key": "d89e3b1829236f1364d05a94b6fb195e",
+		"val": "25.2 NVision"
+	}, {
+		"key": "6419fc1c33830196e58b623d4b64e30f",
+		"val": "25.3 KSVN-FM"
+	}, {
+		"key": "fa6a5adc9ac3671659caaa4bb3fbec1d",
+		"val": "30.1 KUCW-HD"
+	}, {
+		"key": "ea3fff0c1545f36d164918e03f6f4eaf",
+		"val": "30.2 Movies"
+	}, {
+		"key": "5188dbecab31bdcfb3e50b416c2ea803",
+		"val": "30.3 Quest"
+	}, {
+		"key": "af20a4b47a127746de6d05a4df2801b9",
+		"val": "30.4 HSN"
+	}, {
+		"key": "b00dbf0488c3c24696dbe2e9a3cb0931",
+		"val": "50.1 KEJT-HD"
+	}]
+}
