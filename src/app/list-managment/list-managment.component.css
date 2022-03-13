@@ -1,3 +1,11 @@
 ::ng-deep .mat-expansion-panel-body {
 	padding: 0 !important;
 }
+
+
+/* action button*/
+
+tr th:last-child,
+tr td:last-child {
+	width: 6.3em;
+}

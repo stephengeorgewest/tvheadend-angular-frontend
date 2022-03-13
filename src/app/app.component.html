@@ -1,1 +1,12 @@
-<app-grid></app-grid>
+<mat-drawer-container class="drawer-container">
+	<mat-drawer #left mode="side" mode="over">
+		IgnoreListManagment - <button (click)="left.close()">Close</button>
+		<app-list-managment></app-list-managment>
+	</mat-drawer>
+	<mat-drawer-content>
+		<div>
+			B u t t o n<button (click)="left.open()">manage Ignores</button></div>
+		<p>blah</p>
+		<app-grid></app-grid>
+	</mat-drawer-content>
+</mat-drawer-container>

@@ -24,20 +24,6 @@ div.content {
 	}
 }
 
-table {
-	width: 100%;
-	border-spacing: 0;
-	border-collapse: collapse;
-}
-
-tr:nth-child(2n) td {
-	background-color: #242424;
-}
-
-td {
-	padding: .2em;
-}
-
 
 /* # */
 
@@ -86,32 +72,4 @@ li h4:first-child {
 
 li h4 {
 	margin: 0;
-}
-
-button {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	font-family: inherit;
-	display: inline-block;
-	border: 0;
-	border-radius: 5px;
-	background: #4676d7;
-	color: #fff;
-	padding: 0.2em;
-	font-size: 1rem;
-	text-decoration: none;
-	cursor: pointer;
-	transition: 0.1s ease-out;
-	margin: 0.2em;
-	align-self: center;
-}
-
-button:hover {
-	background: #1d49aa;
-}
-
-button:focus {
-	outline: none;
-	box-shadow: 0 0 0 4px #cbd6ee;
 }
