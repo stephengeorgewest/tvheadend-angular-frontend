@@ -1,26 +1,7 @@
 <mat-drawer-container class="drawer-container">
 	<mat-drawer #left mode="side">
 		IgnoreListManagment - <button (click)="left.close()">Close</button>
-		<mat-expansion-panel *ngFor="let list of ignoreListNames">
-			<mat-expansion-panel-header>{{list}}({{ ignoreLists[list].length }})</mat-expansion-panel-header>
-			<table>
-				<thead>
-					<tr>
-						<th>Channel Name</th>
-						<th>Title</th>
-						<th>Move To</th>
-					</tr>
-				</thead>
-				<tr *ngFor="let ignore of ignoreLists[list]">
-					<td>{{ignore.channelName}}</td>
-					<td>{{ignore.title}}</td>
-					<td>
-						<button (click)="deleteFromList(ignore, ignoreLists[list])">delete</button>
-						<button *ngFor="let list1 of ignoreListNames | listNamesfilter: list" (click)="moveEntry(ignore, list1)">{{list1}}</button>
-					</td>
-				</tr>
-			</table>
-		</mat-expansion-panel>
+		<app-list-managment></app-list-managment>
 	</mat-drawer>
 	<mat-drawer-content>
 		<div class="container">
@@ -79,7 +60,7 @@
 						<h4>Upcoming</h4>
 						<li *ngFor="let e of selectedEntry.slice(1);">
 							<h4>{{selectedEntry[0].channelNumber}} {{selectedEntry[0].channelName}} 🕰{{ (selectedEntry[0].stop - selectedEntry[0].start) / 60 }}</h4>
-							{{ e.start * 1000 | newDate | date:'medium' }}
+							{{ e.start | newDate | date:'medium' }}
 							<h4 *ngIf="e.subtitle">{{e.subtitle}}</h4>
 						</li>
 					</ul>

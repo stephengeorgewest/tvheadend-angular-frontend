@@ -1,0 +1,20 @@
+<mat-expansion-panel *ngFor="let list of ignoreListNames">
+	<mat-expansion-panel-header>{{list}}({{ ignoreLists[list].length }})</mat-expansion-panel-header>
+	<table>
+		<thead>
+			<tr>
+				<th>Channel Name</th>
+				<th>Title</th>
+				<th>Move To</th>
+			</tr>
+		</thead>
+		<tr *ngFor="let ignore of ignoreLists[list]">
+			<td>{{ignore.channelName}}</td>
+			<td>{{ignore.title}}</td>
+			<td>
+				<button (click)="deleteFromList(ignore, ignoreLists[list])">delete</button>
+				<button *ngFor="let list1 of ignoreListNames | listNamesfilter: list" (click)="moveEntry(ignore, list1)">{{list1}}</button>
+			</td>
+		</tr>
+	</table>
+</mat-expansion-panel>
