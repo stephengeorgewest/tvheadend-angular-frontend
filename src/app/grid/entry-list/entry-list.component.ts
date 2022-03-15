@@ -9,13 +9,3 @@ import { GridEntry } from 'src/app/api/epg/events/grid/responsemodel';
 export class EntryListComponent {
 	@Input() public selectedEntry: GridEntry[] = [];
 }
-
-@Pipe({
-	name: 'newDate',
-	pure: false
-})
-export class NewDatePipe implements PipeTransform {
-	transform(seconds: number): Date {
-		return new Date(seconds * 1000);
-	}
-}

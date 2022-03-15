@@ -1,6 +1,6 @@
 <mat-drawer-container class="drawer-container">
 	<mat-drawer #left mode="side" mode="over">
-		IgnoreListManagment - <button (click)="left.close()">Close</button>
+		IgnoreListManagment - <button mat-raised-button color="primary" (click)="left.close()">Close</button>
 		<app-list-managment></app-list-managment>
 	</mat-drawer>
 	<mat-drawer-content class="drawer-content">

@@ -1,42 +1,54 @@
-table {
+mat-tab-content {
 	display: block;
 	max-height: 100%;
 	overflow: auto;
 }
 
+mat-list-item:nth-child(2n +1) {
+	background-color: #242424;
+}
 
-/* # */
-
-.grid tr th:first-child,
-.grid tr td:first-child {
-	text-align: right;
-	vertical-align: middle;
-	width: 3em;
+mat-list-item.tapped {
+	border: 2px dashed #7b1fa2;
+	box-sizing: border-box;
 }
 
 
-/* channel */
+/* channel# */
 
-.grid tr th:nth-child(2),
-.grid tr td:nth-child(2) {
-	width: 8em;
-}
-
-.grid tr td:nth-child(2) div,
-.grid tr td:nth-child(3) div {
+mat-list-item .channel {
+	flex: 0 0 8em;
 	display: flex;
 }
 
-.grid tr td:nth-child(2) div span,
-.grid tr td:nth-child(3) div span {
-	flex: auto;
-	align-self: center;
+mat-list-item .channel div:first-child {
+	text-align: right;
+	flex: 0 0 2em;
+}
+
+mat-list-item .channel div:last-child {
+	margin-left: 0.4em;
+	flex: 0 0 5em;
 }
 
 
-/* action button*/
+/* title*/
 
-.grid tr th:last-child,
-.grid tr td:last-child {
-	width: 6.3em;
+mat-list-item .title {
+	flex-grow: 1;
+	justify-content: start;
+}
+
+
+/* # */
+
+mat-list-item .number {
+	flex: 0 0 2em;
+}
+
+
+/* action button */
+
+mat-list-item button {
+	flex: 0 0 2em;
 }

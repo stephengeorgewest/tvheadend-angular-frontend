@@ -2,7 +2,7 @@
 	<div>
 		<h2>{{selectedEntry[0].title}} ({{selectedEntry.length}})</h2>
 		<img [src]="selectedEntry[0].image" style="width: 10em;float:left;padding-right:1em;" />
-		<h3>{{selectedEntry[0].subtitle || "_"}} {{ selectedEntry[0].start * 1000 | newDate | date:'medium' }}</h3>
+		<h3>{{selectedEntry[0].subtitle || "_"}} {{ selectedEntry[0].start | newDate | date:'medium' }}</h3>
 		<h4>{{selectedEntry[0].channelNumber}} {{selectedEntry[0].channelName}} 🕰{{ (selectedEntry[0].stop - selectedEntry[0].start) / 60 }}</h4>
 		<h4>S{{selectedEntry[0].seasonNumber || "_" }} - E{{selectedEntry[0].episodeNumber }}</h4>
 		<p>{{selectedEntry[0].description}}</p>
