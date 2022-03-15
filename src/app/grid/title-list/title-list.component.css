@@ -1,0 +1,42 @@
+table {
+	display: block;
+	max-height: 100%;
+	overflow: auto;
+}
+
+
+/* # */
+
+.grid tr th:first-child,
+.grid tr td:first-child {
+	text-align: right;
+	vertical-align: middle;
+	width: 3em;
+}
+
+
+/* channel */
+
+.grid tr th:nth-child(2),
+.grid tr td:nth-child(2) {
+	width: 8em;
+}
+
+.grid tr td:nth-child(2) div,
+.grid tr td:nth-child(3) div {
+	display: flex;
+}
+
+.grid tr td:nth-child(2) div span,
+.grid tr td:nth-child(3) div span {
+	flex: auto;
+	align-self: center;
+}
+
+
+/* action button*/
+
+.grid tr th:last-child,
+.grid tr td:last-child {
+	width: 6.3em;
+}

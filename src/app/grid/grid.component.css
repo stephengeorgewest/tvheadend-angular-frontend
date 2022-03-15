@@ -1,75 +1,36 @@
-div.container {
+:host() {
 	display: flex;
-	height: 100%;
 }
 
-div.content {
-	height: 100%;
-	overflow: auto;
+.content,
+app-entry-list {
+	/*overflow: auto;*/
 }
 
 @media(width <=70em) {
-	div.container {
+	:host() {
 		flex-direction: column;
 	}
-	div.content {
-		height: 100%;
-		overflow: auto;
+	.content,
+	app-entry-list {
+		height: 50%;
 	}
 }
 
 @media(width>70em) {
-	div.content {
+	.content,
+	app-entry-list {
+		height: 100%;
 		width: 50%;
 	}
 }
 
-
-/* # */
-
-.grid tr th:first-child,
-.grid tr td:first-child {
-	text-align: right;
-	vertical-align: middle;
-	width: 3em;
-}
-
-
-/* channel */
-
-.grid tr th:nth-child(2),
-.grid tr td:nth-child(2) {
-	width: 8em;
-}
-
-.grid tr td:nth-child(2) div,
-.grid tr td:nth-child(3) div {
+.content {
 	display: flex;
+	flex-direction: column;
 }
 
-.grid tr td:nth-child(2) div span,
-.grid tr td:nth-child(3) div span {
-	flex: auto;
-	align-self: center;
-}
-
-
-/* action button*/
-
-.grid tr th:last-child,
-.grid tr td:last-child {
-	width: 6.3em;
-}
-
-ul {
-	clear: both;
-	list-style-type: none;
-}
-
-li h4:first-child {
-	margin-left: -1em;
-}
-
-li h4 {
-	margin: 0;
+.content app-title-list {
+	height: 100%;
+	overflow: auto;
 }

@@ -13,10 +13,12 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { GridComponent, NewDatePipe } from './grid/grid.component';
+import { GridComponent } from './grid/grid.component';
 import { FormsModule } from '@angular/forms';
 import { ListNamesFilterPipe } from './list-name.pipe';
 import { ListManagmentComponent } from './list-managment/list-managment.component';
+import { EntryListComponent, NewDatePipe } from './grid/entry-list/entry-list.component';
+import { TitleListComponent } from './grid/title-list/title-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { ListManagmentComponent } from './list-managment/list-managment.componen
     GridComponent,
     NewDatePipe,
     ListNamesFilterPipe,
-    ListManagmentComponent
+    ListManagmentComponent,
+    EntryListComponent,
+    TitleListComponent
   ],
   imports: [
     BrowserModule,

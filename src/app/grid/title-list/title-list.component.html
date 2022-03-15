@@ -1,0 +1,20 @@
+<table class="grid">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Channel Name</th>
+			<th>Title</th>
+			<th>{{filteredEntries.size}} ( {{lastignoredcount}})</th>
+		</tr>
+	</thead>
+	<tr *ngFor="let entry of (filteredEntries | keyvalue)" (mouseenter)="selectedEntry.emit(entry.value)">
+		<td>{{entry.value[0].channelNumber}}</td>
+		<td>
+			<div><span>{{entry.value[0].channelName}}</span><button (click)="ignoreChanelName(entry.value[0].channelName, 'Meh')">Meh</button></div>
+		</td>
+		<td>
+			<div><span>{{entry.value[0].title}} ({{entry.value.length}})</span><button *ngFor="let list of ignoreListNames" (click)="ignoreTitle(entry.value[0].title, list)">{{list}}</button></div>
+		</td>
+		<td><button (click)="ignore(entry.value[0], 'Meh')">combo Meh</button></td>
+	</tr>
+</table>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ignoreEntry, IgnoreListService, listNames } from '../ignore-list.service';
 
 @Component({
@@ -6,18 +7,19 @@ import { ignoreEntry, IgnoreListService, listNames } from '../ignore-list.servic
 	templateUrl: './list-managment.component.html',
 	styleUrls: ['./list-managment.component.css']
 })
-export class ListManagmentComponent implements OnInit {
+export class ListManagmentComponent implements OnDestroy {
 	public ignoreListNames: Array<listNames> = ["Recorded", "Garbage", "Meh"];
 	public ignoreLists: { [key in listNames]: Array<ignoreEntry> } = { "Recorded": [], "Garbage": [], "Meh": [] };
+	private subscription: Subscription;
+
 	constructor(private ignoreService: IgnoreListService) {
-		this.ignoreService.onList().subscribe((e) => {
+		this.subscription = this.ignoreService.onList().subscribe((e) => {
 			this.ignoreLists = e.list;
 		});
 	}
-
-	ngOnInit(): void {
+	ngOnDestroy(): void {
+		this.subscription.unsubscribe();
 	}
-
 
 	public deleteFromList(entry: ignoreEntry, list: ignoreEntry[]) {
 		this.ignoreService.deleteFromList(entry, list);

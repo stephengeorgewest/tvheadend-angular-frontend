@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnDestroy, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 import example from "../api/epg/events/grid/exampleresponse.json";
 import { GridRequest } from '../api/epg/events/grid/requestmodel';
@@ -14,7 +15,7 @@ const hour = 60 * 60;
 	templateUrl: './grid.component.html',
 	styleUrls: ['./grid.component.css']
 })
-export class GridComponent implements OnInit {
+export class GridComponent implements OnInit, OnDestroy {
 	private entries: GridEntry[] = example.entries as GridEntry[];
 	public totalCount: number = example.totalCount;
 	public filteredEntries: Map<string, GridEntry[]> = new Map();
@@ -25,10 +26,12 @@ export class GridComponent implements OnInit {
 	public episodic: boolean | undefined = false;
 
 	public ignoreListNames: Array<listNames> = ["Recorded", "Garbage", "Meh"];
-	public ignoreLists: { [key in listNames]: Array<ignoreEntry> } = { "Recorded": [], "Garbage": [], "Meh": [] };
+	private ignoreLists: { [key in listNames]: Array<ignoreEntry> } = { "Recorded": [], "Garbage": [], "Meh": [] };
+
+	private subscription: Subscription;
 	constructor(private http: HttpClient, private _snackBar: MatSnackBar, private ignoreService: IgnoreListService) {
 		this.filterAll();
-		this.ignoreService.onList().subscribe((e) => {
+		this.subscription = this.ignoreService.onList().subscribe((e) => {
 			this.ignoreLists = e.list;
 			switch (e.type) {
 				case modificationType.delete:
@@ -43,14 +46,8 @@ export class GridComponent implements OnInit {
 	ngOnInit(): void {
 		//this.filterAll();
 	}
-	public ignore(entry: ignoreEntry, listName: listNames) {
-		this.ignoreService.ignore(entry, listName);
-	}
-	public ignoreTitle(title: string, listName: listNames) {
-		this.ignoreService.ignoreTitle(title, listName);
-	}
-	public ignoreChanelName(channelName: string, listName: listNames) {
-		this.ignoreService.ignoreChanelName(channelName, listName);
+	ngOnDestroy(): void {
+		this.subscription.unsubscribe();
 	}
 
 	private filterNew() {
@@ -73,7 +70,7 @@ export class GridComponent implements OnInit {
 		}
 		this.lastignoredcount = count - this.length(this.filteredEntries);
 		this.totalIgnored = this.entries.length - this.length(this.filteredEntries);
-		this._snackBar.open(this.lastignoredcount + "");
+		// this._snackBar.open(this.lastignoredcount + "");
 	}
 	public filterAll() {
 		this.filter(this.entries);
@@ -95,7 +92,7 @@ export class GridComponent implements OnInit {
 		}, new Map<string, GridEntry[]>());
 		this.lastignoredcount = count - this.length(this.filteredEntries);
 		this.totalIgnored = this.entries.length - this.length(this.filteredEntries);
-		this._snackBar.open(this.lastignoredcount + "");
+		//this._snackBar.open(this.lastignoredcount + "");
 	}
 	private length(a: Map<string, GridEntry[]>) {
 		return Array.from(a.values()).reduce((prev, cur) => { return prev + cur.length }, 0);
@@ -165,15 +162,5 @@ export class GridComponent implements OnInit {
 	}
 	private getOptions() {
 		return Object.entries(this.options).reduce((prev, current, index) => (prev + index ? "" : "&") + current[0] + "=" + current[1], "");
-	}
-}
-
-@Pipe({
-	name: 'newDate',
-	pure: false
-})
-export class NewDatePipe implements PipeTransform {
-	transform(seconds: number): Date {
-		return new Date(seconds * 1000);
 	}
 }
