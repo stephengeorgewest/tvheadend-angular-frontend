@@ -109,15 +109,21 @@ export class TitleListComponent {
 	public ignoreChanelName(channelName: string, listName: listNames) {
 		this.ignoreService.ignoreChanelName(channelName, listName);
 	}
+	
 	public groupOrder(a: KeyValue<t, Map<string, GridEntry[]>>, b: KeyValue<t, Map<string, GridEntry[]>>) {
-		if (a.key === b.key)
-			return 0;
-		if (a.key === "past")
-			return -1;
-		return -1;
+		const keySortOrder: t[] = [
+			"past", "now", "next", "tomorrow", "nextWeek", "nextMonth"
+		];
+		return keySortOrder.indexOf(a.key) - keySortOrder.indexOf(b.key);
 	}
 	public otherOrder(a: KeyValue<string, GridEntry[]>, b: KeyValue<string, GridEntry[]>) {
-		// if(a === b)
-		return -1;
+		if (a.value[0].start === b.value[0].start) {
+			const channel_a = a.value[0].channelNumber.split(".");
+			const channel_b = b.value[0].channelNumber.split(".");
+			if (channel_a[0] === channel_b[0])
+				return parseInt(channel_a[1]) - parseInt(channel_b[1]);
+			return parseInt(channel_a[0]) - parseInt(channel_b[0]);
+		}
+		return a.value[0].start - b.value[0].start;
 	}
 }
