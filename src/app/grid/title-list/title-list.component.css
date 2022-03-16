@@ -9,8 +9,7 @@ mat-list-item:nth-child(2n +1) {
 }
 
 mat-list-item.tapped {
-	border: 2px dashed #7b1fa2;
-	box-sizing: border-box;
+	box-shadow: 0 0 0 2px #7b1fa2 inset;
 }
 
 
