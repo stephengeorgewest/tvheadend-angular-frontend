@@ -18,10 +18,9 @@ mat-list .date {
 }
 
 
-/* fix overflow */
-
-
-/* not sure why overflow ... isn't working on the list items*/
+/* fix overflow
+not sure why 'overflow:hidden; text-overflow: ellipsis;'
+isn't working on the list items*/
 
 .mat-list-base .mat-list-item .mat-line,
 .mat-line.subtitle {
