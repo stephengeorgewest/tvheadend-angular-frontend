@@ -3,19 +3,27 @@
 	flex-direction: column;
 }
 
-div:last-child {
-	height: 100%;
+div {
+	flex: 0;
+}
+
+mat-list {
+	flex: 1;
 	overflow: auto;
 }
 
-ul {
-	list-style-type: none;
+mat-list .subtitle,
+mat-list .date {
+	margin-left: 1em;
 }
 
-li h4:first-child {
-	margin-left: -1em;
-}
 
-li h4 {
-	margin: 0;
+/* fix overflow */
+
+
+/* not sure why overflow ... isn't working on the list items*/
+
+.mat-list-base .mat-list-item .mat-line,
+.mat-line.subtitle {
+	white-space: normal;
 }

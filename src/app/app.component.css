@@ -6,9 +6,12 @@
 	display: flex;
 	/*flex-direction: column;*/
 	/*breaks something*/
+}
+
+.drawer-content button {
 	flex: 0;
 }
 
-app-grid {
+.drawer-content app-grid {
 	flex-grow: 1;
 }
