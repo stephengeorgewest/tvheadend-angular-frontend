@@ -4,7 +4,13 @@ mat-tab-content {
 	overflow: auto;
 }
 
-mat-list-item:nth-child(2n +1) {
+.mat-list-base .mat-subheader {
+	margin-bottom: -8px;
+	flex-direction: row-reverse;
+	border-top: 2px solid #242424;
+}
+
+mat-list-item:nth-child(2n) {
 	background-color: #242424;
 }
 
