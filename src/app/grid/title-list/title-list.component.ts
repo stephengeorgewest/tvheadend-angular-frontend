@@ -79,20 +79,20 @@ export class TitleListComponent {
 
 	public tapped: string = "";
 
-	public ignoreListNames: Array<{name: "Recorded" | "Garbage"| "Meh", icon: string}>= [
-		{name: "Recorded", icon: "task_alt"},
-		{name: "Garbage", icon: "paid"},
-		{name: "Meh", icon: "star_half"},
+	public ignoreListNames: Array<{ name: "Recorded" | "Garbage" | "Meh", icon: string }> = [
+		{ name: "Recorded", icon: "task_alt" },
+		{ name: "Garbage", icon: "paid" },
+		{ name: "Meh", icon: "star_half" },
 	];
 
 	constructor(private ignoreService: IgnoreListService) { }
 
-	public select(event: GridEntry[]){
-		if(!this.tapped)
+	public select(event: GridEntry[]) {
+		if (!this.tapped)
 			this.selectedEntry.emit(event);
 	}
-	public tap(event: GridEntry[]){
-		if(this.tapped == event[0].title){
+	public tap(event: GridEntry[]) {
+		if (this.tapped == event[0].title) {
 			this.tapped = "";
 		}
 		else {
