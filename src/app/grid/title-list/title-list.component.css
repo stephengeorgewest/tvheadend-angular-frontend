@@ -14,10 +14,6 @@ mat-list-item:nth-child(2n) {
 	background-color: #242424;
 }
 
-mat-list-item.tapped {
-	box-shadow: 0 0 0 2px #7b1fa2 inset;
-}
-
 
 /* channel# */
 

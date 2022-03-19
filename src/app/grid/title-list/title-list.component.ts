@@ -105,11 +105,11 @@ export class TitleListComponent {
 
 	constructor(private ignoreService: IgnoreListService) { }
 
-	public select(event: GridEntry[]) {
+	public mouseenter(event: GridEntry[]) {
 		if (!this.tapped)
 			this.selectedEntry.emit(event);
 	}
-	public tap(event: GridEntry[]) {
+	public click(event: GridEntry[]) {
 		if (this.tapped == event[0].title) {
 			this.tapped = "";
 		}

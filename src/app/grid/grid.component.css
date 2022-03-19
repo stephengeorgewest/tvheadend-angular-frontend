@@ -2,11 +2,6 @@
 	display: flex;
 }
 
-.content,
-app-entry-list {
-	/*overflow: auto;*/
-}
-
 @media(width <=70em) {
 	:host() {
 		flex-direction: column;
@@ -21,7 +16,12 @@ app-entry-list {
 	.content,
 	app-entry-list {
 		height: 100%;
-		width: 50%;
+	}
+	.content {
+		width: 30em;
+	}
+	app-entry-list {
+		width: 100%;
 	}
 }
 
@@ -31,6 +31,5 @@ app-entry-list {
 }
 
 .content app-title-list {
-	height: 100%;
 	overflow: auto;
 }

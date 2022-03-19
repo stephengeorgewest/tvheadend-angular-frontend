@@ -18,6 +18,10 @@ a:visited {
 	color: lightcoral
 }
 
+.selected {
+	box-shadow: 0 0 0 2px #7b1fa2 inset;
+}
+
 table {
 	width: 100%;
 	border-spacing: 0;
@@ -30,4 +34,9 @@ tr:nth-child(2n) td {
 
 td {
 	padding: .2em;
+}
+
+.custom-dialog-container .mat-dialog-container {
+	padding: 0;
+	border-radius: 0px;
 }

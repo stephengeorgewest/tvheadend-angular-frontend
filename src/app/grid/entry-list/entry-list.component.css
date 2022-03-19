@@ -3,12 +3,44 @@
 	flex-direction: column;
 }
 
-div {
+div.info {
 	flex: 0;
+	display: flex;
+	max-width: 45em;
+}
+
+figure {
+	margin: 0;
+	margin-right: 1em;
+}
+
+img {
+	max-width: 10em;
+}
+
+
+/*fix overflow, not sure why this causes overflow
+ when there is available spaces to break on*/
+
+h2,
+h3 {
+	/*word-break: break-word;*/
+	overflow-wrap: anywhere;
+}
+
+p {
+	margin-left: 1em;
+	text-indent: 1em;
+	max-width: 35em;
+}
+
+.upcoming {
+	padding-top: 0;
+	padding-bottom: 0;
+	margin-bottom: 0.2em;
 }
 
 mat-list {
-	flex: 1;
 	overflow: auto;
 }
 

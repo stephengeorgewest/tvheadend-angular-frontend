@@ -22,8 +22,8 @@ export class GridComponent implements OnInit, OnDestroy {
 	public selectedEntry: GridEntry[] = [];
 	public lastignoredcount = 0;
 	public totalIgnored = 0;
-	public filterLength: "short" | "medium" | "long" | undefined = "long";
-	public episodic: boolean | undefined = false;
+	public filterLength: "short" | "medium" | "long" | undefined;
+	public episodic: boolean | undefined;
 
 	public ignoreListNames: Array<listNames> = ["Recorded", "Garbage", "Meh"];
 	private ignoreLists: { [key in listNames]: Array<ignoreEntry> } = { "Recorded": [], "Garbage": [], "Meh": [] };

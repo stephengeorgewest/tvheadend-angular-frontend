@@ -17,8 +17,9 @@
 			<span><input type="radio" name="episodic" [(ngModel)]="episodic" [value]="true"  (change)="filterAll()"/>episodic</span>
 			<span><input type="radio" name="episodic" [(ngModel)]="episodic" [value]="false"  (change)="filterAll()"/>Movie</span>
 		</div>
+		({{lastignoredcount}})
 	</div>
-	<app-title-list [filteredEntries]="filteredEntries" [lastignoredcount]="lastignoredcount" (selectedEntry)="selectedEntry = $event"></app-title-list>
+	<app-title-list [filteredEntries]="filteredEntries" (selectedEntry)="selectedEntry = $event"></app-title-list>
 </div>
 
 <app-entry-list [selectedEntry]="selectedEntry"></app-entry-list>

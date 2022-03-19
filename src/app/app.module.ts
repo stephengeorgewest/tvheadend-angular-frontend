@@ -23,6 +23,7 @@ import { ListManagmentComponent } from './list-managment/list-managment.componen
 import { EntryListComponent } from './grid/entry-list/entry-list.component';
 import { TitleListComponent } from './grid/title-list/title-list.component';
 import { NewDatePipe } from './date-from-unix-date.pipe';
+import { EntryComponent, EntryDialog } from './grid/entry-list/entry/entry.component';
 
 @NgModule({
 	declarations: [
@@ -32,7 +33,9 @@ import { NewDatePipe } from './date-from-unix-date.pipe';
 		ListNamesFilterPipe,
 		ListManagmentComponent,
 		EntryListComponent,
-		TitleListComponent
+		TitleListComponent,
+		EntryDialog,
+		EntryComponent
 	],
 	imports: [
 		BrowserModule,

@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>
+	{{entry.title}}
+</h2>
+<figure mat-dialog-content (click)="json = !json">
+	<img [src]="entry.image" *ngIf="!json" />
+	<pre *ngIf="!json" style="white-space: pre-wrap;">{{entry | json }}</pre>
+</figure>
+<figcaption mat-dialog-actions>
+	<h3 *ngIf="entry.subtitle">{{entry.subtitle}}</h3>
+	<h4>{{entry.channelNumber}} {{entry.channelName}} 🕰{{ (entry.stop - entry.start) / 60 }}</h4>
+	<h4> {{ entry.start | newDate | date:'medium' }}</h4>
+	<h4><span *ngIf="entry.seasonNumber">S{{entry.seasonNumber}}</span><span *ngIf="entry.episodeNumber">E{{entry.episodeNumber }}</span></h4>
+</figcaption>
