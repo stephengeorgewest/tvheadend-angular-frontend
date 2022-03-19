@@ -1,10 +1,10 @@
 <mat-drawer-container class="drawer-container">
 	<mat-drawer #left mode="side" mode="over">
-		IgnoreListManagment - <button mat-raised-button color="primary" (click)="left.close()">Close</button>
-		<app-list-managment></app-list-managment>
+		<app-navigation type="list" (menuClicked)="left.close()"></app-navigation>
+		<button mat-raised-button color="primary">Close</button>
 	</mat-drawer>
 	<mat-drawer-content class="drawer-content">
-		<button (click)="left.open()">manage Ignores</button>
-		<app-grid></app-grid>
+		<app-navigation type="button" (menuClicked)="left.open()"></app-navigation>
+		<router-outlet></router-outlet>
 	</mat-drawer-content>
 </mat-drawer-container>

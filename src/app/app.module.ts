@@ -12,18 +12,18 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatTabsModule } from "@angular/material/tabs";
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
-import { GridComponent } from './grid/grid.component';
 import { FormsModule } from '@angular/forms';
+
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { GridComponent } from './grid/grid.component';
 import { ListNamesFilterPipe } from './list-name.pipe';
-import { ListManagmentComponent } from './list-managment/list-managment.component';
+import { IgnoreListManagmentComponent } from './ignore-list-managment/ignore-list-managment.component';
 import { EntryListComponent } from './grid/entry-list/entry-list.component';
 import { TitleListComponent } from './grid/title-list/title-list.component';
 import { NewDatePipe } from './date-from-unix-date.pipe';
 import { EntryComponent, EntryDialog } from './grid/entry-list/entry/entry.component';
+import { NavigationComponent } from './navigation/navigation/navigation.component';
 
 @NgModule({
 	declarations: [
@@ -31,11 +31,12 @@ import { EntryComponent, EntryDialog } from './grid/entry-list/entry/entry.compo
 		GridComponent,
 		NewDatePipe,
 		ListNamesFilterPipe,
-		ListManagmentComponent,
+		IgnoreListManagmentComponent,
 		EntryListComponent,
 		TitleListComponent,
 		EntryDialog,
-		EntryComponent
+		EntryComponent,
+  NavigationComponent
 	],
 	imports: [
 		BrowserModule,

@@ -4,10 +4,10 @@ import { ignoreEntry, IgnoreListService, listNames } from '../ignore-list.servic
 
 @Component({
 	selector: 'app-list-managment',
-	templateUrl: './list-managment.component.html',
-	styleUrls: ['./list-managment.component.css']
+	templateUrl: './ignore-list-managment.component.html',
+	styleUrls: ['./ignore-list-managment.component.css']
 })
-export class ListManagmentComponent implements OnDestroy {
+export class IgnoreListManagmentComponent implements OnDestroy {
 	public ignoreListNames: Array<listNames> = ["Recorded", "Garbage", "Meh"];
 	public ignoreLists: { [key in listNames]: Array<ignoreEntry> } = { "Recorded": [], "Garbage": [], "Meh": [] };
 	private subscription: Subscription;

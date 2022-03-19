@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListManagmentComponent } from './list-managment.component';
+import { NavigationComponent } from './navigation.component';
 
-describe('ListManagmentComponent', () => {
-  let component: ListManagmentComponent;
-  let fixture: ComponentFixture<ListManagmentComponent>;
+describe('NavigationComponent', () => {
+  let component: NavigationComponent;
+  let fixture: ComponentFixture<NavigationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListManagmentComponent ]
+      declarations: [ NavigationComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListManagmentComponent);
+    fixture = TestBed.createComponent(NavigationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

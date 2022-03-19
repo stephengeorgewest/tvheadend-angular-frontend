@@ -3,7 +3,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"angular-routable-sidebar-dialog": {
+		"tvheadend-frontend": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:application": {
