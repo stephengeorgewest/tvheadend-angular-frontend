@@ -31,5 +31,6 @@
 }
 
 .content app-title-list {
-	overflow: auto;
+	flex: 1 1 auto;
+	height: 0;
 }

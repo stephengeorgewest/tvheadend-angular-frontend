@@ -1,3 +1,7 @@
+mat-tab-group {
+	height: 100%;
+}
+
 .mat-list-base .mat-subheader {
 	margin-bottom: -8px;
 	flex-direction: row-reverse;

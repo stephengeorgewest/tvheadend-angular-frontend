@@ -5,7 +5,12 @@
 .drawer-content {
 	height: 100%;
 	display: flex;
-	/*flex-direction: column;*/
+}
+
+@media(width <=70em) {
+	.drawer-content {
+		flex-direction: column;
+	}
 }
 
 ::ng-deep .mat-drawer-content.drawer-content>*:last-child {
