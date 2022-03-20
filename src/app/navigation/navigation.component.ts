@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import {  ActivationEnd, Event, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
 	selector: 'app-navigation',
@@ -11,8 +12,13 @@ export class NavigationComponent {
 	@Output() public menuClicked: EventEmitter<void> = new EventEmitter();
 
 	public links: {path?: string, icon?: string, friendlyName?: string}[];
+	public activatedPath: string | undefined;
 
-	constructor(public router: Router){
+	constructor(public router: Router) {
 		this.links = router.config.map(r => ({path: r.path, icon: r.data?.['icon'], friendlyName: r.data?.['friendlyName']}));
+		router.events.pipe(
+			filter((e: Event): e is ActivationEnd => e instanceof ActivationEnd),
+		)
+		.subscribe((event: ActivationEnd) => this.activatedPath = event.snapshot.url[0].path);
 	}
 }
