@@ -2,7 +2,9 @@
 	<mat-tab *ngFor="let coarseTimeGroup of (coarseTimeGroups | keyvalue: coarseTimeGroupOrder)" [label]="coarseTimeGroup.key" [disabled]="!coarseTimeGroup.value.size">
 		<mat-list *ngFor="let fineTimeGroup of (coarseTimeGroup.value | keyvalue)">
 			<h3 matSubheader>
-				<mat-icon matListIcon>schedule</mat-icon>{{fineTimeGroup.key | newDate | date: 'mediumTime' }}</h3>
+				<mat-icon matListIcon>schedule</mat-icon>
+				{{fineTimeGroup.key | newDate | date: 'mediumTime' }}
+			</h3>
 			<mat-list-item *ngFor="let entry of (fineTimeGroup.value | keyvalue: fineTimeGroupOrder)" (mouseenter)="mouseenter(entry.value)" (click)="click(entry.value)" [class.selected]="tapped === entry.value[0].title">
 				<div class="channel">
 					<div>{{entry.value[0].channelNumber}}</div>

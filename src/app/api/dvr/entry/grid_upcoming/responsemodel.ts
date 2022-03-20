@@ -1,9 +1,11 @@
-interface GridUpcomingResponse {
+import { Entry } from "../../../entry";
+
+export interface GridUpcomingResponse {
 	entries: GridUpcomingEntry[];
 	total: number;
 }
 
-interface GridUpcomingEntry extends Entry {
+export interface GridUpcomingEntry extends Entry {
 	title: Title;
 	description?: Title;
 	subtitle?: Title;

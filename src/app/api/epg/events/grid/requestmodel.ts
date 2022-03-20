@@ -1,7 +1,4 @@
-export type GridRequest = {
-	sort: "dir";
-	dir: "ASC";
-	duplicates: 0;
-	start:0;
-	limit:number;
-};
+import { GridRequest } from "src/app/api/grid-request";
+import { GridResponse } from "./responsemodel";
+
+export type EpgEventsGridRequest = GridRequest<GridResponse>;

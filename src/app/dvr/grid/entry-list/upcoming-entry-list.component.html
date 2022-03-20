@@ -1,0 +1,26 @@
+<div *ngIf="topEntry" class="info">
+	<figure><img [src]="topEntry.image" /></figure>
+	<div>
+		<h2 (click)="open()">
+			{{topEntry.disp_title}}
+		</h2>
+		<h3 *ngIf="topEntry.disp_subtitle">{{topEntry.disp_subtitle}}</h3>
+		<h4>{{topEntry.channelname }} 🕰{{ (topEntry.stop - topEntry.start) / 60 }}</h4>
+		<h4>{{ topEntry.start | newDate | date:'medium' }}</h4>
+		<h4>{{ topEntry.episode_disp }}</h4>
+	</div>
+</div>
+<p *ngIf="topEntry">{{topEntry.disp_description}}</p>
+<h3 matSubheader class="upcoming" *ngIf="selectedEntry.length > 1" [class.selected]="topEntry?.uuid !== selectedEntry[0].uuid" (click)="click($event, selectedEntry[0])">
+	Upcoming ({{selectedEntry.length - 1}})
+	<mat-icon *ngIf="topEntry?.uuid !== selectedEntry[0].uuid">reset_tv</mat-icon>
+</h3>
+<mat-divider></mat-divider>
+<mat-list *ngIf="selectedEntry.length > 1" (click)="click($event, selectedEntry[0])">
+	<mat-list-item *ngFor="let entry of selectedEntry.slice(1);" (click)="click($event, entry)" [class.selected]="topEntry?.uuid == entry.uuid">
+		<mat-icon matListIcon>schedule</mat-icon>
+		<h4 mat-line>{{entry.channelname}} 🕰{{ (entry.stop - entry.start) / 60 }}</h4>
+		<div mat-line class="date">{{ entry.start | newDate | date:'medium' }}</div>
+		<h4 mat-line class="subtitle">{{entry.disp_subtitle}}</h4>
+	</mat-list-item>
+</mat-list>

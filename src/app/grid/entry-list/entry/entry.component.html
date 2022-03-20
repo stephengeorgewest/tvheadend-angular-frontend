@@ -3,7 +3,7 @@
 </h2>
 <figure mat-dialog-content (click)="json = !json">
 	<img [src]="entry.image" *ngIf="!json" />
-	<pre *ngIf="!json" style="white-space: pre-wrap;">{{entry | json }}</pre>
+	<pre *ngIf="json" style="white-space: pre-wrap;">{{entry | json }}</pre>
 </figure>
 <figcaption mat-dialog-actions>
 	<h3 *ngIf="entry.subtitle">{{entry.subtitle}}</h3>

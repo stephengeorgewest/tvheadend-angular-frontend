@@ -16,27 +16,44 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { GridComponent } from './grid/grid.component';
-import { ListNamesFilterPipe } from './list-name.pipe';
-import { IgnoreListManagmentComponent } from './ignore-list-managment/ignore-list-managment.component';
+
+import { GridUpcomingComponent } from './dvr/grid/grid.component';
+import { UpcomingEntryListComponent } from './dvr/grid/entry-list/upcoming-entry-list.component';
+import { DvrUpcomingEntryComponent, UpcomingEntryDialog } from './dvr/grid/entry-list/entry/upcoming-entry.component';
+
+import { GridComponent as EpgGridComponent } from './grid/grid.component';
 import { EntryListComponent } from './grid/entry-list/entry-list.component';
 import { TitleListComponent } from './grid/title-list/title-list.component';
-import { NewDatePipe } from './date-from-unix-date.pipe';
 import { EntryComponent, EntryDialog } from './grid/entry-list/entry/entry.component';
 import { NavigationComponent } from './navigation/navigation/navigation.component';
+
+import { IgnoreListManagmentComponent } from './ignore-list-managment/ignore-list-managment.component';
+
+import { NewDatePipe } from './date-from-unix-date.pipe';
+import { ListNamesFilterPipe } from './list-name.pipe';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		GridComponent,
-		NewDatePipe,
-		ListNamesFilterPipe,
-		IgnoreListManagmentComponent,
+
+		GridUpcomingComponent,
+		UpcomingEntryListComponent,
+		DvrUpcomingEntryComponent,
+		GridUpcomingComponent,
+		UpcomingEntryDialog,
+
+		EpgGridComponent,
 		EntryListComponent,
 		TitleListComponent,
 		EntryDialog,
 		EntryComponent,
-  NavigationComponent
+		EntryDialog,
+
+		IgnoreListManagmentComponent,
+ 		NavigationComponent,
+		
+		NewDatePipe,
+		ListNamesFilterPipe,
 	],
 	imports: [
 		BrowserModule,

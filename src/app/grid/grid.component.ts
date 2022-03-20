@@ -4,8 +4,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 
 import example from "../api/epg/events/grid/exampleresponse.json";
-import { GridRequest } from '../api/epg/events/grid/requestmodel';
+import { GridRequest } from '../api/grid-request';
 import { GridEntry, GridResponse } from '../api/epg/events/grid/responsemodel';
+import { formEncode } from '../api/util';
 import { ignoreEntry, IgnoreListService, listNames, modificationType } from '../ignore-list.service';
 
 const halfHour = 30 * 60;
@@ -136,7 +137,7 @@ export class GridComponent implements OnInit, OnDestroy {
 		return match_title || match_channel || match_both || false;
 	}
 
-	public options: GridRequest = { sort: "dir", dir: "ASC", duplicates: 0, start: 0, limit: 300 };
+	public options: GridRequest<GridResponse> = { dir: "ASC", duplicates: 0, start: 0, limit: 300 };
 	public servers = ["dell-dm051", "ao751h.lan"];
 	public selectedServer = this.servers[0];
 	public errors: any = undefined;
@@ -147,20 +148,17 @@ export class GridComponent implements OnInit, OnDestroy {
 		//Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://dell-dm051:9981/api/epg/events/grid. (Reason: header ‘content-type’ is not allowed according to header ‘Access-Control-Allow-Headers’ from CORS preflight response).
 		this.http.post<GridResponse>(
 			'http://' + this.selectedServer + ':9981/api/epg/events/grid',
-			this.getOptions(), { headers: {} }
+			formEncode(this.options), { headers: {} }
 		)
 			.subscribe(d => this.entries = d.entries, errors => this.errors = errors);
 
 	}
 	public fetch() {
 		fetch('http://' + this.selectedServer + ':9981/api/epg/events/grid', {
-			body: this.getOptions(),
+			body: formEncode(this.options),
 			method: 'POST',
 			mode: 'cors',
 			headers: { "content-type": "application/x-www-form-urlencoded; charset=UTF-8" }
 		}).then(response => response.json()).then(data => { this.entries = data.entries; this.totalCount = data.totalCount; this.filteredEntries = new Map(); this.filterAll() });
-	}
-	private getOptions() {
-		return Object.entries(this.options).reduce((prev, current, index) => (prev + index ? "" : "&") + current[0] + "=" + current[1], "");
 	}
 }

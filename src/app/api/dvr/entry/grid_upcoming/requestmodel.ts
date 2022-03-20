@@ -1,5 +1,3 @@
-type grid_upcoming_request = {
-	sort: "start_real";
-	dir: "ASC";
-	duplicates: 0;
-};
+import { GridRequest } from "src/app/api/grid-request";
+import { GridUpcomingEntry } from "./responsemodel"
+export type GridUpcomingRequest = GridRequest<GridUpcomingEntry>;

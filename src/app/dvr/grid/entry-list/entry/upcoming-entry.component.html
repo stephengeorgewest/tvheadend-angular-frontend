@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>
+	{{ entry.disp_title }}
+</h2>
+<figure mat-dialog-content>
+	<pre style="white-space: pre-wrap;">{{ entry | json }}</pre>
+</figure>
+<figcaption mat-dialog-actions>
+	<h3 *ngIf="entry.disp_subtitle">{{ entry.disp_subtitle }}</h3>
+	<h4>{{ entry.channelname }} 🕰{{ (entry.stop - entry.start) / 60 }}</h4>
+	<h4>{{ entry.start | newDate | date:'medium' }}</h4>
+	<h4> {{ entry.disp_description }}</h4>
+</figcaption>
