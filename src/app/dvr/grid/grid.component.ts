@@ -1,7 +1,8 @@
+import { KeyValue } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { GridUpcomingRequest } from 'src/app/api/dvr/entry/grid_upcoming/requestmodel';
 import { GridUpcomingEntry, GridUpcomingResponse } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
-import { formEncode } from 'src/app/api/util';
+import { fetchData, formEncode } from 'src/app/api/util';
 
 @Component({
 	selector: 'app-upcoming-grid',
@@ -14,8 +15,16 @@ export class GridUpcomingComponent {
 
 	public selectedEntry: GridUpcomingEntry[] = [];
 	
-	constructor() { 
-		this.fetch();
+	constructor() {
+		fetchData('/dvr/entry/grid_upcoming', this.options, data => {
+			this.entries = (data as GridUpcomingResponse).entries.reduce((prev, cur) => {
+				const e = prev.get(cur.disp_title);
+				if(e) e.push(cur);
+				else prev.set(cur.disp_title, [cur]);
+				return prev;
+			}, new Map<string, GridUpcomingEntry[]>());
+			this.totalCount = data.totalCount;
+		});
 	}
 
 	public tapped: string = "";
@@ -37,32 +46,17 @@ export class GridUpcomingComponent {
 	public servers = ["dell-dm051", "ao751h.lan"];
 	public selectedServer = this.servers[0];
 	public errors: any = undefined;
-/*
-	public httppost() {
-		this.errors = undefined;
-		//https://stackoverflow.com/questions/50594372/angular-dont-send-content-type-request-header
-		//Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://dell-dm051:9981/api/epg/events/grid. (Reason: header ‘content-type’ is not allowed according to header ‘Access-Control-Allow-Headers’ from CORS preflight response).
-		this.http.post<GridUpcomingResponse>(
-			'http://' + this.selectedServer + ':9981/api/dvr/entry/grid_upcoming',
-			formEncode(this.options), { headers: {} }
-		)
-			.subscribe(d => this.entries = d.entries, errors => this.errors = errors);
 
-	}*/
-	public fetch() {
-		fetch('http://' + this.selectedServer + ':9981/api/dvr/entry/grid_upcoming', {
-			body: formEncode(this.options),
-			method: 'POST',
-			mode: 'cors',
-			headers: { "content-type": "application/x-www-form-urlencoded; charset=UTF-8" }
-		}).then(response => response.json()).then(data => {
-			this.entries = (data as GridUpcomingResponse).entries.reduce((prev, cur) => {
-				const e = prev.get(cur.disp_title);
-				if(e) e.push(cur);
-				else prev.set(cur.disp_title, [cur]);
-				return prev;
-			}, new Map<string, GridUpcomingEntry[]>());
-			this.totalCount = data.totalCount;
-		});
+
+	public sort = this.timesort;
+	public switchSort(){
+		console.log("switched");
+		this.sort = this.asort;
+	}
+	public timesort(a: KeyValue<string, GridUpcomingEntry[]>, b: KeyValue<string, GridUpcomingEntry[]>){
+		return a.value[0].start - b.value[0].start;
+	}
+	public asort(a: KeyValue<string, GridUpcomingEntry[]>, b: KeyValue<string, GridUpcomingEntry[]>){
+		return 0;
 	}
 }

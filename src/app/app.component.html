@@ -1,7 +1,6 @@
 <mat-drawer-container class="drawer-container">
 	<mat-drawer #left mode="side" mode="over">
 		<app-navigation type="list" (menuClicked)="left.close()"></app-navigation>
-		<button mat-raised-button color="primary">Close</button>
 	</mat-drawer>
 	<mat-drawer-content class="drawer-content">
 		<app-navigation type="button" (menuClicked)="left.open()"></app-navigation>

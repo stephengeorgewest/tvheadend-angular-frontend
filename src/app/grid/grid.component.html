@@ -1,11 +1,12 @@
 <div class="content">
-	<div>
-		<select [(ngModel)]="selectedServer">
-			<option *ngFor="let server of servers" [value]="server">{{server}}</option>
-		</select>
-		<input [(ngModel)]="options.limit" /> <span (click)="options.limit = totalCount">({{totalCount}})</span>
-		<button (click)="httppost()">httpPost {{selectedServer}}</button><button (click)="fetch()">fetch</button>
-		<pre>{{errors | json}}</pre>
+	<form>
+		<mat-form-field>
+			<mat-label>({{totalCount}})</mat-label>
+			<input matInput [(ngModel)]="options.limit" [ngModelOptions]="{standalone: true}" />
+		</mat-form-field>
+		<button mat-button (click)="options.limit = totalCount"><mat-icon>select_all</mat-icon></button>
+		<button mat-icon-button (click)="refresh()"><mat-icon>refresh</mat-icon></button>
+
 		<div><label>Length</label>
 			<span><input type="radio" name="length" [(ngModel)]="filterLength" [value]="undefined" (change)="filterAll()"/>Don't care</span>
 			<span><input type="radio" name="length" [(ngModel)]="filterLength" value="short"  (change)="filterAll()"/>short</span>
@@ -18,7 +19,7 @@
 			<span><input type="radio" name="episodic" [(ngModel)]="episodic" [value]="false"  (change)="filterAll()"/>Movie</span>
 		</div>
 		({{lastignoredcount}})
-	</div>
+	</form>
 	<app-title-list [filteredEntries]="filteredEntries" (selectedEntry)="selectedEntry = $event"></app-title-list>
 </div>
 

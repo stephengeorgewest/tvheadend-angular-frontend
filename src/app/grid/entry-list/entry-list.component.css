@@ -18,16 +18,6 @@ img {
 	max-width: 10em;
 }
 
-
-/*fix overflow, not sure why this causes overflow
- when there is available spaces to break on*/
-
-h2,
-h3 {
-	/*word-break: break-word;*/
-	overflow-wrap: anywhere;
-}
-
 p {
 	margin-left: 1em;
 	text-indent: 1em;
@@ -47,14 +37,4 @@ mat-list {
 mat-list .subtitle,
 mat-list .date {
 	margin-left: 1em;
-}
-
-
-/* fix overflow
-not sure why 'overflow:hidden; text-overflow: ellipsis;'
-isn't working on the list items*/
-
-.mat-list-base .mat-list-item .mat-line,
-.mat-line.subtitle {
-	white-space: normal;
 }

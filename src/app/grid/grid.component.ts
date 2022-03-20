@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 
 import example from "../api/epg/events/grid/exampleresponse.json";
 import { GridRequest } from '../api/grid-request';
 import { GridEntry, GridResponse } from '../api/epg/events/grid/responsemodel';
-import { formEncode } from '../api/util';
+import { fetchData, formEncode } from '../api/util';
 import { ignoreEntry, IgnoreListService, listNames, modificationType } from '../ignore-list.service';
 
 const halfHour = 30 * 60;
@@ -138,27 +138,12 @@ export class GridComponent implements OnInit, OnDestroy {
 	}
 
 	public options: GridRequest<GridResponse> = { dir: "ASC", duplicates: 0, start: 0, limit: 300 };
-	public servers = ["dell-dm051", "ao751h.lan"];
-	public selectedServer = this.servers[0];
-	public errors: any = undefined;
+	public refresh() {
+		fetchData('/epg/events/grid', this.options, data => {
+			this.entries = data.entries;
+			this.totalCount = data.totalCount;
+			this.filteredEntries = new Map(); this.filterAll();
+		});
 
-	public httppost() {
-		this.errors = undefined;
-		//https://stackoverflow.com/questions/50594372/angular-dont-send-content-type-request-header
-		//Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://dell-dm051:9981/api/epg/events/grid. (Reason: header ‘content-type’ is not allowed according to header ‘Access-Control-Allow-Headers’ from CORS preflight response).
-		this.http.post<GridResponse>(
-			'http://' + this.selectedServer + ':9981/api/epg/events/grid',
-			formEncode(this.options), { headers: {} }
-		)
-			.subscribe(d => this.entries = d.entries, errors => this.errors = errors);
-
-	}
-	public fetch() {
-		fetch('http://' + this.selectedServer + ':9981/api/epg/events/grid', {
-			body: formEncode(this.options),
-			method: 'POST',
-			mode: 'cors',
-			headers: { "content-type": "application/x-www-form-urlencoded; charset=UTF-8" }
-		}).then(response => response.json()).then(data => { this.entries = data.entries; this.totalCount = data.totalCount; this.filteredEntries = new Map(); this.filterAll() });
 	}
 }

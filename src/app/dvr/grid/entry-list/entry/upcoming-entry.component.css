@@ -22,6 +22,7 @@ figcaption.mat-dialog-actions {
 	margin-bottom: 0;
 	display: flex;
 	flex-direction: column;
+	/*(25:2) autoprefixer: start value has mixed support, consider using flex-start instead*/
 	align-items: start;
 	text-align: left;
 }
