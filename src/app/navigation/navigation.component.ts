@@ -17,7 +17,7 @@ export class NavigationComponent {
 	constructor(public router: Router) {
 		this.links = router.config.map(r => ({path: r.path, icon: r.data?.['icon'], friendlyName: r.data?.['friendlyName']}));
 		router.events.pipe(
-			filter((e: Event): e is ActivationEnd => e instanceof ActivationEnd),
+			filter((e: Event): e is ActivationEnd/*NavigationEnd??*/ => e instanceof ActivationEnd),
 		)
 		.subscribe((event: ActivationEnd) => this.activatedPath = event.snapshot.url[0].path);
 	}
