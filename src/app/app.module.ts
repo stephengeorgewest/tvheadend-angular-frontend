@@ -27,7 +27,7 @@ import { GridComponent as EpgGridComponent } from './grid/grid.component';
 import { EntryListComponent } from './grid/entry-list/entry-list.component';
 import { TitleListComponent } from './grid/title-list/title-list.component';
 import { EntryComponent, EntryDialog } from './grid/entry-list/entry/entry.component';
-import { NavigationComponent } from './navigation/navigation/navigation.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 import { IgnoreListManagmentComponent } from './ignore-list-managment/ignore-list-managment.component';
 
