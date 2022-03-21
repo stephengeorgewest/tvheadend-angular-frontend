@@ -2,14 +2,14 @@ import { KeyValue } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { GridUpcomingRequest } from 'src/app/api/dvr/entry/grid_upcoming/requestmodel';
 import { GridUpcomingEntry, GridUpcomingResponse } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
-import { fetchData, formEncode } from 'src/app/api/util';
+import { fetchData } from 'src/app/api/util';
 
 @Component({
-	selector: 'app-upcoming-grid',
-	templateUrl: './grid.component.html',
-	styleUrls: ['./grid.component.css']
+	selector: 'app-dvr-upcoming',
+	templateUrl: './upcoming.component.html',
+	styleUrls: ['./upcoming.component.css']
 })
-export class GridUpcomingComponent {
+export class UpcomingComponent {
 	public entries: Map<string, GridUpcomingEntry[]> = new Map();
 	public totalCount = 0;
 

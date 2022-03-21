@@ -6,17 +6,17 @@ import { Subscription } from 'rxjs';
 import example from "../api/epg/events/grid/exampleresponse.json";
 import { GridRequest } from '../api/grid-request';
 import { GridEntry, GridResponse } from '../api/epg/events/grid/responsemodel';
-import { fetchData, formEncode } from '../api/util';
+import { fetchData } from '../api/util';
 import { ignoreEntry, IgnoreListService, listNames, modificationType } from '../ignore-list.service';
 
 const halfHour = 30 * 60;
 const hour = 60 * 60;
 @Component({
-	selector: 'app-grid',
-	templateUrl: './grid.component.html',
-	styleUrls: ['./grid.component.css']
+	selector: 'app-epg',
+	templateUrl: './epg.component.html',
+	styleUrls: ['./epg.component.css']
 })
-export class GridComponent implements OnInit, OnDestroy {
+export class EpgComponent implements OnInit, OnDestroy {
 	private entries: GridEntry[] = example.entries as GridEntry[];
 	public totalCount: number = example.totalCount;
 	public filteredEntries: Map<string, GridEntry[]> = new Map();

@@ -12,6 +12,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from "@angular/material/list";
 import { MatMenuModule } from "@angular/material/menu";
+import { MatSelectModule } from "@angular/material/select";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatTabsModule } from "@angular/material/tabs";
@@ -19,14 +20,16 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { GridUpcomingComponent } from './dvr/grid/grid.component';
-import { UpcomingEntryListComponent } from './dvr/grid/entry-list/upcoming-entry-list.component';
-import { DvrUpcomingEntryComponent, UpcomingEntryDialog } from './dvr/grid/entry-list/entry/upcoming-entry.component';
+import { UpcomingComponent } from './dvr/upcoming/upcoming.component';
+import { UpcomingEntryListComponent } from './dvr/upcoming/entry-list/upcoming-entry-list.component';
+import { DvrUpcomingEntryComponent, UpcomingEntryDialog } from './dvr/upcoming/entry-list/entry/upcoming-entry.component';
+import { DurationPipe, FileSizePipe, FinishedComponent } from './dvr/finished/finished.component';
 
-import { GridComponent as EpgGridComponent } from './grid/grid.component';
-import { EntryListComponent } from './grid/entry-list/entry-list.component';
-import { TitleListComponent } from './grid/title-list/title-list.component';
-import { EntryComponent, EntryDialog } from './grid/entry-list/entry/entry.component';
+
+import { EpgComponent } from './epg/epg.component';
+import { EntryListComponent } from './epg/entry-list/entry-list.component';
+import { TitleListComponent } from './epg/title-list/title-list.component';
+import { EntryComponent, EntryDialog } from './epg/entry-list/entry/entry.component';
 import { NavigationComponent } from './navigation/navigation.component';
 
 import { IgnoreListManagmentComponent } from './ignore-list-managment/ignore-list-managment.component';
@@ -39,13 +42,13 @@ import { AboutComponent } from './about/about.component';
 	declarations: [
 		AppComponent,
 
-		GridUpcomingComponent,
+		UpcomingComponent,
 		UpcomingEntryListComponent,
 		DvrUpcomingEntryComponent,
-		GridUpcomingComponent,
 		UpcomingEntryDialog,
+		FinishedComponent,
 
-		EpgGridComponent,
+		EpgComponent,
 		EntryListComponent,
 		TitleListComponent,
 		EntryDialog,
@@ -55,9 +58,12 @@ import { AboutComponent } from './about/about.component';
 		IgnoreListManagmentComponent,
  		NavigationComponent,
 		
+		AboutComponent,
+		
 		NewDatePipe,
 		ListNamesFilterPipe,
-		AboutComponent,
+		FileSizePipe,
+		DurationPipe
 	],
 	imports: [
 		BrowserModule,
@@ -72,6 +78,7 @@ import { AboutComponent } from './about/about.component';
 		MatInputModule,
 		MatListModule,
 		MatMenuModule,
+		MatSelectModule,
 		MatSidenavModule,
 		MatSnackBarModule,
 		MatTabsModule,

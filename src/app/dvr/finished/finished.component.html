@@ -1,0 +1,39 @@
+<form>
+	<fieldset>
+		<legend>Options</legend>
+		<mat-form-field>
+			<mat-select (change)="groupSortChange($event)" [(ngModel)]="groupBy" [ngModelOptions]="{standalone: true}">
+				<mat-option value="disp_title">Title</mat-option>
+				<mat-option value="channel">Channel</mat-option>
+				<mat-option value="filesize">FileSize</mat-option>
+			</mat-select>
+			<mat-label>GroupBy</mat-label>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-select (change)="groupSortChange($event)" [(ngModel)]="groupSort" [ngModelOptions]="{standalone: true}">
+				<mat-option *ngFor="let sort of sortList" [value]="sort">{{mapping[sort]}}</mat-option>
+			</mat-select>
+			<mat-label>GroupSort</mat-label>
+		</mat-form-field>
+		<div class="sortList">
+			<label>Sort</label>
+			<span *ngFor="let sort of sortList; let first = first; let last = last;">
+					<mat-icon (click)="up(sort)">keyboard_double_arrow_up</mat-icon>
+					<mat-icon (click)="down(sort)">keyboard_double_arrow_down</mat-icon>
+					{{mapping[sort]}}
+				</span>
+		</div>
+	</fieldset>
+</form>
+({{totalCount}}) {{filesize | filesize}} - {{ duration| duration}}
+<mat-list *ngFor="let group of (entryGroups | keyvalue: timesort)">
+	<h3 matSubheader>
+		{{ group.key }}({{ group.value.entries.length }}) - {{ group.value.filesize | filesize }} - {{ group.value.duration | duration }} -
+	</h3>
+	<mat-list-item *ngFor="let entry of group.value.entries">
+		<span class="title">{{ entry.disp_title }}</span>
+		<span>{{ entry.filesize | filesize }}</span>
+		<mat-icon *ngIf="entry.data_errors || entry.data_errors">warning</mat-icon>
+		<span class="time">{{entry.start_real | newDate | date: "short"}}</span>
+	</mat-list-item>
+</mat-list>
