@@ -9,8 +9,8 @@
 
 .mat-list-base .mat-subheader {
 	margin-bottom: -8px;
-	flex-direction: row-reverse;
 	border-top: 2px solid #242424;
+	flex-direction: column;
 }
 
 mat-list-item:nth-child(2n + 1) {

@@ -2,16 +2,17 @@
 	<fieldset>
 		<legend>Options</legend>
 		<mat-form-field>
-			<mat-select (change)="groupSortChange($event)" [(ngModel)]="groupBy" [ngModelOptions]="{standalone: true}">
+			<mat-select (selectionChange)="groupChange($event)" [(ngModel)]="groupBy" [ngModelOptions]="{standalone: true}">
+				<mat-option [value]="undefined"></mat-option>
 				<mat-option value="disp_title">Title</mat-option>
-				<mat-option value="channel">Channel</mat-option>
+				<mat-option value="channelname">Channel</mat-option>
 				<mat-option value="filesize">FileSize</mat-option>
 			</mat-select>
 			<mat-label>GroupBy</mat-label>
 		</mat-form-field>
 		<mat-form-field>
-			<mat-select (change)="groupSortChange($event)" [(ngModel)]="groupSort" [ngModelOptions]="{standalone: true}">
-				<mat-option *ngFor="let sort of sortList" [value]="sort">{{mapping[sort]}}</mat-option>
+			<mat-select (selectionChange)="groupSortChange($event)" [disabled]="!groupBy" [(ngModel)]="groupSort" [ngModelOptions]="{standalone: true}">
+				<mat-option *ngFor="let sort of groupsortList" [value]="sort">{{mapping[sort.key]}}</mat-option>
 			</mat-select>
 			<mat-label>GroupSort</mat-label>
 		</mat-form-field>
@@ -20,18 +21,24 @@
 			<span *ngFor="let sort of sortList; let first = first; let last = last;">
 					<mat-icon (click)="up(sort)">keyboard_double_arrow_up</mat-icon>
 					<mat-icon (click)="down(sort)">keyboard_double_arrow_down</mat-icon>
-					{{mapping[sort]}}
+					{{mapping[sort.key]}}
 				</span>
 		</div>
 	</fieldset>
 </form>
 ({{totalCount}}) {{filesize | filesize}} - {{ duration| duration}}
-<mat-list *ngFor="let group of (entryGroups | keyvalue: timesort)">
+<mat-list *ngFor="let group of entryGroups">
 	<h3 matSubheader>
-		{{ group.key }}({{ group.value.entries.length }}) - {{ group.value.filesize | filesize }} - {{ group.value.duration | duration }} -
+		<span *ngIf="groupBy === 'disp_title'">{{ group.grouptitle }}</span>
+		<span *ngIf="groupBy === 'channelname'">Channel: {{ group.grouptitle }}</span>
+		<span *ngIf="groupBy === 'filesize'">Sizebin: {{ $any(group.grouptitle) | filesize }}</span>
+		<span> ({{ group.entries.length }}) - {{ group.filesize | filesize }} - {{ group.duration | duration }}</span>
 	</h3>
-	<mat-list-item *ngFor="let entry of group.value.entries">
-		<span class="title">{{ entry.disp_title }}</span>
+	<mat-list-item *ngFor="let entry of group.entries">
+		<span class="title" *ngIf="groupBy !== 'disp_title'">{{ entry.disp_title }}</span>
+		<span class="title">{{ entry.disp_subtitle }}</span>
+		<span class="title">{{ entry.episode_disp }}</span>
+
 		<span>{{ entry.filesize | filesize }}</span>
 		<mat-icon *ngIf="entry.data_errors || entry.data_errors">warning</mat-icon>
 		<span class="time">{{entry.start_real | newDate | date: "short"}}</span>

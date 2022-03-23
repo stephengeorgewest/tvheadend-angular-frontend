@@ -1,11 +1,22 @@
 import { KeyValue } from '@angular/common';
 import { Component, Pipe, PipeTransform } from '@angular/core';
+import { MatSelectChange } from '@angular/material/select';
 import { GridUpcomingRequest } from 'src/app/api/dvr/entry/grid_upcoming/requestmodel';
 import { GridUpcomingEntry, GridUpcomingResponse } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
 import { fetchData } from 'src/app/api/util';
 type groupkeys = keyof Pick<GridUpcomingEntry,
 	"disp_title" |
-	"channel" |
+	"channelname" |
+	"filesize"
+>;
+type groupsortkeys = keyof Pick<GridUpcomingEntry,
+	"disp_title" |
+	"disp_description" |
+	"disp_subtitle" |
+	"episode_disp" |
+	"channelname" |
+	"start_real" |
+	"duration" |
 	"filesize"
 >;
 type sortkeys = keyof Pick<GridUpcomingEntry,
@@ -13,7 +24,7 @@ type sortkeys = keyof Pick<GridUpcomingEntry,
 	"disp_description" |
 	"disp_subtitle" |
 	"episode_disp" |
-	"channel" |
+	"channelname" |
 	"start_real" |
 	"duration" |
 	"filesize" |
@@ -21,10 +32,16 @@ type sortkeys = keyof Pick<GridUpcomingEntry,
 	"data_errors"
 >;
 type grouped = {
+	grouptitle: string | number;
 	filesize: number;
 	duration: number;
 	entries: GridUpcomingEntry[];
 };
+
+type sortType<T> = {
+	key: T,
+	ascending: boolean
+}
 
 @Component({
 	selector: 'app-dvr-finished',
@@ -32,12 +49,12 @@ type grouped = {
 	styleUrls: ['./finished.component.css']
 })
 export class FinishedComponent {
-	public mapping: {[property in sortkeys]?: string} = {
+	public mapping: { [property in keyof GridUpcomingEntry]?: string } = {
 		disp_title: "Title",
 		disp_description: "Description",
 		disp_subtitle: "Subtitle",
 		episode_disp: "Episode",
-		channel: "Channel",
+		channelname: "Channel",
 		start_real: "Start Time",
 		duration: "Duration",
 		filesize: "Size",
@@ -46,55 +63,73 @@ export class FinishedComponent {
 	};
 
 	public groupList: Array<groupkeys> = ["disp_title",
-		"channel",
+		"channelname",
 		"filesize"
 	];
-	public groupBy: groupkeys = "disp_title";
-	public groupSort: sortkeys = "episode_disp";
-	public groupSortChange(event: Event){
-		if(event.target)
-			this.groupSort = (event.target as HTMLInputElement).value as sortkeys;
+	public groupBy: groupkeys | undefined = "disp_title";
+	public groupSort: groupsortkeys = "episode_disp";
+
+	public groupChange(event: MatSelectChange) {
+		if (event.value)
+			this.groupBy = event.value as groupkeys;
 		this.groupAndSort();
 	}
-	public sortList: Array<sortkeys> = [
-		"disp_title",
-		"disp_description",
-		"disp_subtitle",
-		"episode_disp",
-		"channel",
-		"start_real",
-		"duration",
-		"filesize",
-		"errors",
-		"data_errors"
-	];
-	public up(sortName: sortkeys):void {
-		const index = this.sortList.findIndex((s) => sortName === s);
-		if(index !== 0){
-			this.sortList[index] = this.sortList[index-1];
-			this.sortList[index-1] = sortName;
-		}
+	public groupSortChange(event: MatSelectChange) {
+		if (event.value)
+			this.groupSort = event.value as groupsortkeys;
+		this.sortGroups();
 	}
-	public down(sortName: sortkeys):void {
-		const index = this.sortList.findIndex((s) => sortName === s);
-		if(index !== this.sortList.length-1){
-			this.sortList[index] = this.sortList[index+1];
-			this.sortList[index+1] = sortName;
+	public groupsortList: Array<sortType<groupsortkeys>> = [
+		{ key: "disp_title", ascending: false },
+		{ key: "disp_description", ascending: false },
+		{ key: "disp_subtitle", ascending: false },
+		{ key: "episode_disp", ascending: false },
+		{ key: "channelname", ascending: false },
+		{ key: "start_real", ascending: false },
+		{ key: "duration", ascending: false },
+		{ key: "filesize", ascending: false },
+	];
+	public sortList: Array<sortType<sortkeys>> = [
+		{ key: "disp_title", ascending: false },
+		{ key: "disp_description", ascending: false },
+		{ key: "disp_subtitle", ascending: false },
+		{ key: "episode_disp", ascending: false },
+		{ key: "channelname", ascending: false },
+		{ key: "start_real", ascending: false },
+		{ key: "duration", ascending: false },
+		{ key: "filesize", ascending: false },
+		{ key: "errors", ascending: false },
+		{ key: "data_errors", ascending: false }
+	];
+	public up(sort: sortType<sortkeys>): void {
+		const index = this.sortList.findIndex((s) => sort.key === s.key);
+		if (index !== 0) {
+			this.sortList[index] = this.sortList[index - 1];
+			this.sortList[index - 1] = sort;
 		}
+		this.sortEntries();
+	}
+	public down(sort: sortType<sortkeys>): void {
+		const index = this.sortList.findIndex((s) => sort.key === s.key);
+		if (index !== this.sortList.length - 1) {
+			this.sortList[index] = this.sortList[index + 1];
+			this.sortList[index + 1] = sort;
+		}
+		this.sortEntries();
 	}
 
 	public filesize: number = 0;
 	public duration: number = 0;
-	public entryGroups: Map<string | number, grouped> = new Map();
+	public entryGroups: grouped[] = [];
 	public totalCount = 0;
 
 	public selectedEntry: GridUpcomingEntry[] = [];
-	
+
 	private entries: GridUpcomingEntry[] = [];
 	constructor() {
 		fetchData(
 			'/dvr/entry/grid_finished',
-			{ start:0, dir: "ASC", duplicates: 0, limit: 999999999 },
+			{ start: 0, dir: "ASC", duplicates: 0, limit: 999999999 },
 			data => {
 				this.entries = (data as GridUpcomingResponse).entries;
 				this.totalCount = data.total;
@@ -103,32 +138,79 @@ export class FinishedComponent {
 		);
 	}
 	private groupAndSort() {
-		this.entryGroups = this.entries.reduce((prev, cur) => {
-			const e = prev.get(cur[this.groupBy]);
-			if(e) {
+		this.filesize = 0;
+		this.duration = 0;
+		this.entryGroups = [...this.entries.reduce((prev, cur) => {
+			const group = !this.groupBy ?
+				"NO_GROUP" :
+				this.groupBy === "filesize" ?
+					this.getBin(512, cur[this.groupBy])
+					: cur[this.groupBy];
+			const e = prev.get(group);
+			this.filesize += cur.filesize;
+			this.duration += cur.duration;
+			if (e) {
 				e.filesize += cur.filesize;
 				e.duration += cur.duration;
 				e.entries.push(cur);
 			}
-			else prev.set(cur.disp_title, {
+			else prev.set(group, {
+				grouptitle: group,
 				filesize: cur.filesize,
 				duration: cur.duration,
 				entries: [cur]
 			});
 			return prev;
-		}, new Map<string | number, grouped>());
-
-		for(let g of this.entryGroups.values()){
-			this.filesize += g.filesize;
-			this.duration += g.duration;
-			g.entries.sort((a,b) => this.compare(a[this.sortList[0]], b[this.sortList[0]]));
+		}, new Map<string | number, grouped>()).values()];
+		this.sortGroups();
+		this.sortEntries();
+	}
+	private getBin(binSize: number, filesize: number) {
+		let s = filesize;
+		let bin = 0;
+		while (s > binSize) {
+			s /= binSize;
+			bin++;
+		}
+		let e = Math.round(s);
+		while (bin > 0) {
+			e *= binSize;
+			bin--;
+		}
+		return e;
+	}
+	private sortGroups() {
+		this.entryGroups.sort((a, b) => {
+			switch (this.groupSort) {
+				case "duration":
+				case "filesize":
+					return this.compare(a[this.groupSort], b[this.groupSort]);
+				case "start_real":
+					const f = (cur: number, prev: GridUpcomingEntry) => prev.start_real < cur ? prev.start_real : cur;
+					const aStart = a.entries.reduce(f, 9999999999);
+					const bStart = b.entries.reduce(f, 9999999999);
+					return bStart - aStart;
+				default:
+					return 0;
+			}
+		});
+	}
+	private sortEntries() {
+		for (let g of this.entryGroups) {
+			g.entries.sort((a, b) => {
+				for (let s of this.sortList) {
+					const v = s.ascending ? this.compare(a[s.key], b[s.key]) : this.compare(b[s.key], a[s.key]);
+					if (v != 0) { return v; }
+				}
+				return 0;
+			});
 		}
 	}
-	private compare<T extends string | number>(a: T, b: T): number{
-		if(typeof a === "string")
+	private compare<T extends string | number>(a: T, b: T): number {
+		if (typeof a === "string")
 			return a.localeCompare(<string>b);
 		else
-			return <number>a-<number>b;
+			return <number>b - <number>a;
 	}
 
 	public tapped: string = "";
@@ -144,14 +226,6 @@ export class FinishedComponent {
 			this.tapped = event[0].uuid;
 			this.selectedEntry = event;
 		}
-	}
-
-
-	public timesort(
-		a: KeyValue<string | number, grouped>,
-		b: KeyValue<string | number, grouped>
-	){
-		return a.value.entries[0].start - b.value.entries[0].start;
 	}
 }
 
@@ -170,11 +244,11 @@ export class FileSizePipe implements PipeTransform {
 
 		let s = size;
 		let bin = 0;
-		while(s > 1024){
-			s/=1024;
+		while (s > 1024) {
+			s /= 1024;
 			bin++;
 		}
-		return (s).toFixed(0) + sizes[bin];
+		return (bin > 2 ? (s).toFixed(1) : Math.round(s)) + sizes[bin];
 	}
 }
 
@@ -185,21 +259,21 @@ export class FileSizePipe implements PipeTransform {
 export class DurationPipe implements PipeTransform {
 	transform(duration: number) {
 		let d = duration;
-		
-		const seconds = d%60;
-		d = (d-seconds)/60;
-		
-		const minutes = d%60;
-		d = (d-minutes)/60;
 
-		const hours = d%60;
-		const days = (d-hours)/24;
+		const seconds = d % 60;
+		d = (d - seconds) / 60;
 
-		const times:string[] = [];
-		if(days) times.push(days + " days");
-		if(hours) times.push(hours + " hours");
-		if(minutes) times.push(minutes + " minutes");
-		if(seconds) times.push(seconds + " seconds");
+		const minutes = d % 60;
+		d = (d - minutes) / 60;
+
+		const hours = d % 60;
+		const days = (d - hours) / 24;
+
+		const times: string[] = [];
+		if (days) times.push(days + " days");
+		if (hours) times.push(hours + " hours");
+		if (minutes) times.push(minutes + " minutes");
+		if (seconds) times.push(seconds + " seconds");
 
 		return times.join(", ");
 	}
