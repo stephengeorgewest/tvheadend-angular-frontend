@@ -62,6 +62,19 @@ export class FinishedComponent {
 		data_errors: "data Errors"
 	};
 
+	public displayedColumns: Array<keyof GridUpcomingEntry> = [
+		"disp_title",
+		"disp_description",
+		"disp_subtitle",
+		"episode_disp",
+		"channelname",
+		"start_real",
+		"duration",
+		"filesize",
+		"errors",
+		"data_errors"
+	];
+
 	public groupList: Array<groupkeys> = ["disp_title",
 		"channelname",
 		"filesize"

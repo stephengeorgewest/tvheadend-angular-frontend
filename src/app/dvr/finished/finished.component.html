@@ -27,20 +27,30 @@
 	</fieldset>
 </form>
 ({{totalCount}}) {{filesize | filesize}} - {{ duration| duration}}
-<mat-list *ngFor="let group of entryGroups">
-	<h3 matSubheader>
-		<span *ngIf="groupBy === 'disp_title'">{{ group.grouptitle }}</span>
-		<span *ngIf="groupBy === 'channelname'">Channel: {{ group.grouptitle }}</span>
-		<span *ngIf="groupBy === 'filesize'">Sizebin: {{ $any(group.grouptitle) | filesize }}</span>
-		<span> ({{ group.entries.length }}) - {{ group.filesize | filesize }} - {{ group.duration | duration }}</span>
-	</h3>
-	<mat-list-item *ngFor="let entry of group.entries">
-		<span class="title" *ngIf="groupBy !== 'disp_title'">{{ entry.disp_title }}</span>
-		<span class="title">{{ entry.disp_subtitle }}</span>
-		<span class="title">{{ entry.episode_disp }}</span>
-
-		<span>{{ entry.filesize | filesize }}</span>
-		<mat-icon *ngIf="entry.data_errors || entry.data_errors">warning</mat-icon>
-		<span class="time">{{entry.start_real | newDate | date: "short"}}</span>
-	</mat-list-item>
-</mat-list>
+<table>
+	<thead>
+		<tr class="firstHeader">
+			<th *ngFor="let col of displayedColumns">{{mapping[col]}}</th>
+		</tr>
+	</thead>
+	<ng-container *ngFor="let group of entryGroups; let first = first">
+		<tr class="secondHeader">
+			<th [attr.colspan]="displayedColumns.length">
+				<span *ngIf="groupBy === 'disp_title'">{{ group.grouptitle }}</span>
+				<span *ngIf="groupBy === 'channelname'">Channel: {{ group.grouptitle }}</span>
+				<span *ngIf="groupBy === 'filesize'">Sizebin: {{ $any(group.grouptitle) | filesize }}</span>
+				<span> ({{ group.entries.length }}) - {{ group.filesize | filesize }} - {{ group.duration | duration }}</span>
+			</th>
+		</tr>
+		<tr *ngFor="let entry of group.entries">
+			<td *ngFor="let col of displayedColumns" [ngSwitch]="col" [class]="col">
+				<ng-container *ngSwitchCase="'filesize'">{{entry.filesize | filesize}}</ng-container>
+				<ng-container *ngSwitchCase="'data_errors'">
+					<mat-icon *ngIf="entry.data_errors || entry.data_errors">warning</mat-icon>
+				</ng-container>
+				<ng-container *ngSwitchCase="'start_real'">{{entry.start_real | newDate | date: "short"}}</ng-container>
+				<ng-container *ngSwitchDefault>{{entry[col]}}</ng-container>
+			</td>
+		</tr>
+	</ng-container>
+</table>

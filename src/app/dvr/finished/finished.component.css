@@ -33,3 +33,23 @@ span.time {
 mat-list-item mat-icon {
 	flex: 0 0 1em;
 }
+
+table {
+	position: relative;
+	border-collapse: collapse;
+}
+
+th {
+	background: #242424;
+	position: sticky;
+	/* Don't forget this, required for the stickiness */
+	box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
+
+tr.firstHeader th {
+	top: 0;
+}
+
+tr.secondHeader th {
+	top: 1em;
+}
