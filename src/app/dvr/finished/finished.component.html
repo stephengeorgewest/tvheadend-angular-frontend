@@ -26,15 +26,16 @@
 		</div>
 	</fieldset>
 </form>
-({{totalCount}}) {{filesize | filesize}} - {{ duration| duration}}
+
 <table>
+	<caption>({{totalCount}}) {{filesize | filesize}} - {{ duration| duration}}</caption>
 	<thead>
-		<tr class="firstHeader">
+		<tr>
 			<th *ngFor="let col of displayedColumns">{{mapping[col]}}</th>
 		</tr>
 	</thead>
-	<ng-container *ngFor="let group of entryGroups; let first = first">
-		<tr class="secondHeader">
+	<tbody *ngFor="let group of entryGroups; let first = first">
+		<tr>
 			<th [attr.colspan]="displayedColumns.length">
 				<span *ngIf="groupBy === 'disp_title'">{{ group.grouptitle }}</span>
 				<span *ngIf="groupBy === 'channelname'">Channel: {{ group.grouptitle }}</span>
@@ -52,5 +53,10 @@
 				<ng-container *ngSwitchDefault>{{entry[col]}}</ng-container>
 			</td>
 		</tr>
-	</ng-container>
+	</tbody>
+	<tfoot>
+		<tr>
+			<th *ngFor="let col of displayedColumns">{{mapping[col]}}</th>
+		</tr>
+	</tfoot>
 </table>

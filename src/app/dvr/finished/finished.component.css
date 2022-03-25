@@ -9,12 +9,12 @@
 
 .mat-list-base .mat-subheader {
 	margin-bottom: -8px;
-	border-top: 2px solid #242424;
+	border-top: 2px solid var(--secondary-bg-color);
 	flex-direction: column;
 }
 
 mat-list-item:nth-child(2n + 1) {
-	background-color: #242424;
+	background-color: var(--secondary-bg-color);
 }
 
 span.title {
@@ -39,17 +39,29 @@ table {
 	border-collapse: collapse;
 }
 
-th {
-	background: #242424;
+caption {
+	background-color: var(--tertiary-bg-color);
 	position: sticky;
+	top: 0em;
+}
+
+th {
+	background: var(--secondary-bg-color);
+	position: sticky;
+	box-shadow: 0 2px 2px -1px var(--tertiary-bg-color);
+}
+
+thead tr th {
 	/* Don't forget this, required for the stickiness */
-	box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+	top: 1.2em;
 }
 
-tr.firstHeader th {
-	top: 0;
+tbody tr th {
+	/* Don't forget this, required for the stickiness */
+	top: 3em;
 }
 
-tr.secondHeader th {
-	top: 1em;
+tfoot tr th {
+	/* Don't forget this, required for the stickiness */
+	bottom: 0em;
 }

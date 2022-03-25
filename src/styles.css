@@ -1,4 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+	--main-fg-color: white;
+	--main-bg-color: #303030;
+	--secondary-bg-color: #242424;
+	--tertiary-bg-color: #141414;
+	--highlight-color: #7b1fa2;
+	--link-visited-color: lightcoral;
+}
 
 html,
 body {
@@ -10,16 +17,16 @@ body {
 body {
 	margin: 0;
 	font-family: Roboto, "Helvetica Neue", sans-serif;
-	background-color: #303030;
-	color: white;
+	background-color: var(--main-bg-color);
+	color: var(--main-fg-color);
 }
 
 a:visited {
-	color: lightcoral
+	color: var(--link-visited-color);
 }
 
 .selected {
-	box-shadow: 0 0 0 2px #7b1fa2 inset;
+	box-shadow: 0 0 0 2px var(--highlight-color) inset;
 }
 
 table {
@@ -29,7 +36,7 @@ table {
 }
 
 tr:nth-child(2n) td {
-	background-color: #242424;
+	background-color: var(--secondary-bg-color);
 }
 
 td {
