@@ -1,6 +1,6 @@
-import { KeyValue } from '@angular/common';
-import { Component, Pipe, PipeTransform } from '@angular/core';
+import { Component, Pipe, PipeTransform, SecurityContext } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
+import { DomSanitizer } from '@angular/platform-browser';
 import { GridUpcomingRequest } from 'src/app/api/dvr/entry/grid_upcoming/requestmodel';
 import { GridUpcomingEntry, GridUpcomingResponse } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
 import { fetchData } from 'src/app/api/util';
@@ -49,7 +49,7 @@ type sortType<T> = {
 	styleUrls: ['./finished.component.css']
 })
 export class FinishedComponent {
-	public mapping: { [property in keyof GridUpcomingEntry]?: string } = {
+	public mapping: { [property in sortkeys]?: string } = {
 		disp_title: "Title",
 		disp_description: "Description",
 		disp_subtitle: "Subtitle",
@@ -62,11 +62,11 @@ export class FinishedComponent {
 		data_errors: "data Errors"
 	};
 
-	public displayedColumns: Array<keyof GridUpcomingEntry> = [
+	public displayedColumns: Array<sortkeys> = [
 		"disp_title",
-		"disp_description",
 		"disp_subtitle",
 		"episode_disp",
+		"disp_description",
 		"channelname",
 		"start_real",
 		"duration",
@@ -75,12 +75,16 @@ export class FinishedComponent {
 		"data_errors"
 	];
 
-	public groupList: Array<groupkeys> = ["disp_title",
+	public groupList: Array<groupkeys> = [
+		"disp_title",
 		"channelname",
 		"filesize"
 	];
 	public groupBy: groupkeys | undefined = "disp_title";
-	public groupSort: groupsortkeys = "episode_disp";
+	public groupSort: sortType<groupsortkeys> = {
+		key: "episode_disp",
+		ascending: true
+	};
 
 	public groupChange(event: MatSelectChange) {
 		if (event.value)
@@ -89,7 +93,7 @@ export class FinishedComponent {
 	}
 	public groupSortChange(event: MatSelectChange) {
 		if (event.value)
-			this.groupSort = event.value as groupsortkeys;
+			this.groupSort = (event.value as sortType<groupsortkeys>);
 		this.sortGroups();
 	}
 	public groupsortList: Array<sortType<groupsortkeys>> = [
@@ -114,20 +118,36 @@ export class FinishedComponent {
 		{ key: "errors", ascending: false },
 		{ key: "data_errors", ascending: false }
 	];
-	public up(sort: sortType<sortkeys>): void {
-		const index = this.sortList.findIndex((s) => sort.key === s.key);
+	public reverse(sortKey: sortkeys){
+		const sort = this.sortList.find(s => sortKey === s.key);
+		if(sort) {
+			sort.ascending = !sort.ascending;
+		}
+		this.sortList = [...this.sortList];
+		this.sortEntries();
+	}
+	public up(sortKey: sortkeys): void {
+		const index = this.sortList.findIndex((s) => sortKey === s.key);
+		if(index === -1)
+		{
+			return;
+		}
+		const sort = this.sortList[index];
 		if (index !== 0) {
 			this.sortList[index] = this.sortList[index - 1];
 			this.sortList[index - 1] = sort;
 		}
+		this.sortList = [...this.sortList];
 		this.sortEntries();
 	}
-	public down(sort: sortType<sortkeys>): void {
-		const index = this.sortList.findIndex((s) => sort.key === s.key);
+	public down(sortKey: sortkeys): void {
+		const index = this.sortList.findIndex((s) => sortKey === s.key);
+		const sort = this.sortList[index];
 		if (index !== this.sortList.length - 1) {
 			this.sortList[index] = this.sortList[index + 1];
 			this.sortList[index + 1] = sort;
 		}
+		this.sortList = [...this.sortList];
 		this.sortEntries();
 	}
 
@@ -194,26 +214,30 @@ export class FinishedComponent {
 	}
 	private sortGroups() {
 		this.entryGroups.sort((a, b) => {
-			switch (this.groupSort) {
+			let sortValue: number;
+			switch (this.groupSort.key) {
 				case "duration":
 				case "filesize":
-					return this.compare(a[this.groupSort], b[this.groupSort]);
+					sortValue = this.compare(a[this.groupSort.key], b[this.groupSort.key]);
+					break;
 				case "start_real":
 					const f = (cur: number, prev: GridUpcomingEntry) => prev.start_real < cur ? prev.start_real : cur;
 					const aStart = a.entries.reduce(f, 9999999999);
 					const bStart = b.entries.reduce(f, 9999999999);
-					return bStart - aStart;
+					sortValue = bStart - aStart;
+					break;
 				default:
-					return 0;
+					sortValue = 0;
 			}
+			return this.groupSort ? sortValue: - sortValue;
 		});
 	}
 	private sortEntries() {
 		for (let g of this.entryGroups) {
 			g.entries.sort((a, b) => {
 				for (let s of this.sortList) {
-					const v = s.ascending ? this.compare(a[s.key], b[s.key]) : this.compare(b[s.key], a[s.key]);
-					if (v != 0) { return v; }
+					const v = this.compare(a[s.key], b[s.key]);
+					if (v != 0) { return s.ascending ? v : -v; }
 				}
 				return 0;
 			});
@@ -270,7 +294,7 @@ export class FileSizePipe implements PipeTransform {
 	name: 'duration'
 })
 export class DurationPipe implements PipeTransform {
-	transform(duration: number) {
+	transform(duration: number, type?: "short") {
 		let d = duration;
 
 		const seconds = d % 60;
@@ -283,11 +307,39 @@ export class DurationPipe implements PipeTransform {
 		const days = (d - hours) / 24;
 
 		const times: string[] = [];
-		if (days) times.push(days + " days");
-		if (hours) times.push(hours + " hours");
-		if (minutes) times.push(minutes + " minutes");
-		if (seconds) times.push(seconds + " seconds");
+		if (days) times.push(days + (type ? "d": " day" + (days > 1? "s": "")));
+		if (hours) times.push((type && hours < 10 && days ? "0": "") + hours + (type ? "h": " hour" + (hours > 1 ? "s": "")));
+		if (minutes) times.push((type && minutes < 10 && (days || hours) ? "0": "") + minutes + (type ? "m": " minute" + (minutes > 1 ? "s": "")));
+		if (seconds) times.push((type && seconds < 10 && (days || hours || minutes) ? "0": "") + seconds + (type ? "s": " second" + (seconds > 1 ? "s": "")));
 
 		return times.join(", ");
+	}
+}
+
+@Pipe({
+	name: 'episode_disp'
+})
+export class EpisodeDisplayPipe implements PipeTransform {
+	transform(season_episode: string) {
+		const season_episode_array = season_episode.replace(" ", " ").split(".");
+		return season_episode_array.join(" ");
+	}
+}
+
+@Pipe({
+	name: 'sortListPosition'
+})
+export class SortListPositionPipe implements PipeTransform {
+	transform(sortKey: keyof GridUpcomingEntry, sortList: Array<sortType<any>>) {
+		return sortList.findIndex((s:sortType<any>) => s.key === sortKey);
+	}
+}
+
+@Pipe({
+	name: 'sortListDirection'
+})
+export class SortListDirectionPipe implements PipeTransform {
+	transform(sortKey: keyof GridUpcomingEntry, sortList: Array<sortType<any>>) {
+		return sortList.find((s:sortType<any>) => s.key === sortKey)?.ascending;
 	}
 }

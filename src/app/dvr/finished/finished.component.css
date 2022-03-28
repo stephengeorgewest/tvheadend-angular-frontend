@@ -49,12 +49,33 @@ th {
 	background: var(--secondary-bg-color);
 	position: sticky;
 	box-shadow: 0 2px 2px -1px var(--tertiary-bg-color);
+	white-space: nowrap;
 }
 
 thead tr th {
 	/* Don't forget this, required for the stickiness */
 	top: 1.2em;
 }
+
+.ascending {
+	transform: scaleY(-1);
+}
+
+
+/*
+tbody {
+	display: block;
+	transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+	height: auto;
+}
+
+tbody.hide {
+	height: 1em;
+}
+
+tr {
+	display: table-row;
+}*/
 
 tbody tr th {
 	/* Don't forget this, required for the stickiness */
@@ -64,4 +85,20 @@ tbody tr th {
 tfoot tr th {
 	/* Don't forget this, required for the stickiness */
 	bottom: 0em;
+}
+
+td {
+	border-left: 1px dotted var(--highlight-color);
+}
+
+.filesize,
+.duration {
+	text-align: right;
+}
+
+.channelname,
+.errors,
+.data_errors,
+.start_real {
+	text-align: center;
 }

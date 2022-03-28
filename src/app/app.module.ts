@@ -23,7 +23,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { UpcomingComponent } from './dvr/upcoming/upcoming.component';
 import { UpcomingEntryListComponent } from './dvr/upcoming/entry-list/upcoming-entry-list.component';
 import { DvrUpcomingEntryComponent, UpcomingEntryDialog } from './dvr/upcoming/entry-list/entry/upcoming-entry.component';
-import { DurationPipe, FileSizePipe, FinishedComponent } from './dvr/finished/finished.component';
+import { DurationPipe, EpisodeDisplayPipe, FileSizePipe, FinishedComponent, SortListDirectionPipe, SortListPositionPipe } from './dvr/finished/finished.component';
 
 
 import { EpgComponent } from './epg/epg.component';
@@ -63,7 +63,10 @@ import { AboutComponent } from './about/about.component';
 		NewDatePipe,
 		ListNamesFilterPipe,
 		FileSizePipe,
-		DurationPipe
+		DurationPipe,
+		EpisodeDisplayPipe,
+		SortListPositionPipe,
+		SortListDirectionPipe
 	],
 	imports: [
 		BrowserModule,
