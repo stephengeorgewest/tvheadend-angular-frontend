@@ -5,6 +5,7 @@
 	--tertiary-bg-color: #141414;
 	--highlight-color: #7b1fa2;
 	--link-visited-color: lightcoral;
+	--pad-color: rgba(240, 128, 128, 0.459);
 }
 
 html,
@@ -46,4 +47,35 @@ td {
 .custom-dialog-container .mat-dialog-container {
 	padding: 0;
 	border-radius: 0px;
+}
+
+mat-list-item {
+	z-index: -2;
+}
+
+mat-list-item span.inprogress_beginpad,
+mat-list-item span.inprogress_endpad,
+mat-list-item span.inprogress {
+	display: block;
+	right: 0;
+	position: absolute;
+	pointer-events: none;
+	z-index: -1;
+	height: 0.2em;
+}
+
+mat-list-item span.inprogress_beginpad,
+mat-list-item span.inprogress {
+	left: 0;
+}
+
+mat-list-item span.inprogress_beginpad,
+mat-list-item span.inprogress_endpad {
+	background-color: var(--pad-color);
+	bottom: 0.1em;
+}
+
+mat-list-item span.inprogress {
+	background-color: var(--highlight-color);
+	bottom: 0.2em;
 }

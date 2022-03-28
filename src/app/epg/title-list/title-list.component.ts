@@ -145,15 +145,3 @@ export class TitleListComponent {
 		return a.value[0].start - b.value[0].start;
 	}
 }
-
-@Pipe({
-	name: 'completePercent'
-})
-export class CompletePercentPipe implements PipeTransform {
-	transform(entry: GridEntry) {
-		const currentLength = Date.now()/1000-entry.start;
-		if(currentLength < 0) return 0;
-		const runLength = entry.stop - entry.start;
-		return (((currentLength)/(runLength)*100).toFixed(0)) + "%";
-	}
-}

@@ -28,7 +28,7 @@ import { DurationPipe, EpisodeDisplayPipe, FileSizePipe, FinishedComponent, Sort
 
 import { EpgComponent } from './epg/epg.component';
 import { EntryListComponent } from './epg/entry-list/entry-list.component';
-import { CompletePercentPipe, TitleListComponent } from './epg/title-list/title-list.component';
+import { TitleListComponent } from './epg/title-list/title-list.component';
 import { EntryComponent, EntryDialog } from './epg/entry-list/entry/entry.component';
 import { NavigationComponent } from './navigation/navigation.component';
 
@@ -37,6 +37,7 @@ import { IgnoreListManagmentComponent } from './ignore-list-managment/ignore-lis
 import { NewDatePipe } from './date-from-unix-date.pipe';
 import { ListNamesFilterPipe } from './list-name.pipe';
 import { AboutComponent } from './about/about.component';
+import { BeginPercentPipe, CompletePercentPipe, EndPercentPipe } from './complete-percent.pipe';
 
 @NgModule({
 	declarations: [
@@ -59,8 +60,10 @@ import { AboutComponent } from './about/about.component';
  		NavigationComponent,
 		
 		AboutComponent,
-		
+
 		CompletePercentPipe,
+		BeginPercentPipe,
+		EndPercentPipe,
 		NewDatePipe,
 		ListNamesFilterPipe,
 		FileSizePipe,
