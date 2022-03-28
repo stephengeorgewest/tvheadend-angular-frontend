@@ -10,6 +10,19 @@ mat-tab-group {
 
 mat-list-item:nth-child(2n) {
 	background-color: #242424;
+	z-index: -2;
+}
+
+mat-list-item span.inprogress {
+	display: block;
+	left: 0;
+	right: 0;
+	bottom: 0.2em;
+	position: absolute;
+	pointer-events: none;
+	background-color: var(--highlight-color);
+	z-index: -1;
+	height: 0.2em;
 }
 
 

@@ -6,6 +6,7 @@
 				{{fineTimeGroup.key | newDate | date: 'mediumTime' }}
 			</h3>
 			<mat-list-item *ngFor="let entry of (fineTimeGroup.value | keyvalue: fineTimeGroupOrder)" (mouseenter)="mouseenter(entry.value)" (click)="click(entry.value)" [class.selected]="tapped === entry.value[0].title">
+				<span class="inprogress" [style.width]="entry.value[0] | completePercent"></span>
 				<div class="channel">
 					<div>{{entry.value[0].channelNumber}}</div>
 					<div>{{entry.value[0].channelName}}</div>

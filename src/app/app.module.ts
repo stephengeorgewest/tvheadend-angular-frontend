@@ -28,7 +28,7 @@ import { DurationPipe, EpisodeDisplayPipe, FileSizePipe, FinishedComponent, Sort
 
 import { EpgComponent } from './epg/epg.component';
 import { EntryListComponent } from './epg/entry-list/entry-list.component';
-import { TitleListComponent } from './epg/title-list/title-list.component';
+import { CompletePercentPipe, TitleListComponent } from './epg/title-list/title-list.component';
 import { EntryComponent, EntryDialog } from './epg/entry-list/entry/entry.component';
 import { NavigationComponent } from './navigation/navigation.component';
 
@@ -60,6 +60,7 @@ import { AboutComponent } from './about/about.component';
 		
 		AboutComponent,
 		
+		CompletePercentPipe,
 		NewDatePipe,
 		ListNamesFilterPipe,
 		FileSizePipe,
