@@ -49,10 +49,6 @@ td {
 	border-radius: 0px;
 }
 
-mat-list-item {
-	z-index: -2;
-}
-
 mat-list-item span.inprogress_beginpad,
 mat-list-item span.inprogress_endpad,
 mat-list-item span.inprogress {
@@ -60,7 +56,6 @@ mat-list-item span.inprogress {
 	right: 0;
 	position: absolute;
 	pointer-events: none;
-	z-index: -1;
 	height: 0.2em;
 }
 
