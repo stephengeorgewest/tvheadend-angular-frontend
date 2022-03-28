@@ -8,3 +8,8 @@
 		flex-direction: row;
 	}
 }
+
+button:hover,
+mat-list-item:hover {
+	color: var(--link-visited-color);
+}

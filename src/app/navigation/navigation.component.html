@@ -10,7 +10,7 @@
 	<button mat-icon-button (click)="menuClicked.emit()">
 		<mat-icon>menu</mat-icon>
 	</button>
-	<button mat-icon-button *ngFor="let link of links" [routerLink]="link.path" [color]="link.path === activatedPath ? 'primary': ''">
+	<button mat-icon-button *ngFor="let link of links" [title]="link.friendlyName" [routerLink]="link.path" [color]="link.path === activatedPath ? 'primary': ''">
 		<mat-icon>{{link.icon}}</mat-icon>
 	</button>
 </div>
