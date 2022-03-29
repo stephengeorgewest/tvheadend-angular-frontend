@@ -3,7 +3,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 
-import example from "../api/epg/events/grid/exampleresponse.json";
 import { GridRequest } from '../api/grid-request';
 import { GridEntry, GridResponse } from '../api/epg/events/grid/responsemodel';
 import { fetchData } from '../api/util';
@@ -17,8 +16,8 @@ const hour = 60 * 60;
 	styleUrls: ['./epg.component.css']
 })
 export class EpgComponent implements OnInit, OnDestroy {
-	private entries: GridEntry[] = example.entries as GridEntry[];
-	public totalCount: number = example.totalCount;
+	private entries: GridEntry[] = [];
+	public totalCount: number = 0;
 	public filteredEntries: Map<string, GridEntry[]> = new Map();
 	public selectedEntry: GridEntry[] = [];
 	public lastignoredcount = 0;
@@ -31,7 +30,7 @@ export class EpgComponent implements OnInit, OnDestroy {
 
 	private subscription: Subscription;
 	constructor(private http: HttpClient, private _snackBar: MatSnackBar, private ignoreService: IgnoreListService) {
-		this.filterAll();
+		this.refresh();
 		this.subscription = this.ignoreService.onList().subscribe((e) => {
 			this.ignoreLists = e.list;
 			switch (e.type) {
@@ -81,12 +80,12 @@ export class EpgComponent implements OnInit, OnDestroy {
 
 		this.filteredEntries = list.reduce((prev, entry) => {
 			if (this.filter1(entry)) {
-				const l = prev.get(entry.title);
+				const l = prev.get(entry.title || "");
 				if (l) {
 					l.push(entry);
 				}
 				else {
-					prev.set(entry.title, [entry]);
+					prev.set(entry.title || "", [entry]);
 				}
 			}
 			return prev;

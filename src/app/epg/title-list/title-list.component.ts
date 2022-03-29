@@ -46,6 +46,14 @@ export class TitleListComponent {
 			nextWeek: new Map<start, Map<title, GridEntry[]>>(),
 			nextMonth: new Map<start, Map<title, GridEntry[]>>()
 		};
+	public friendlyNames: { [key in coarseTimeGroupKeys]: string } = {
+		"past": "Past",
+		"now": "Now",
+		"next": "Next",
+		"tomorrow": "Tomorrow",
+		"nextWeek": "Next Week",
+		"nextMonth": "Next Month"
+	};
 
 	@Input() public set filteredEntries(filteredEntries: Map<title, GridEntry[]>) {
 		this.times = getDates();
@@ -74,7 +82,7 @@ export class TitleListComponent {
 				}
 
 				const fineTimeGroup = coarseTimeGroup.get(entryList[0].start);
-				if(fineTimeGroup) {
+				if (fineTimeGroup) {
 					fineTimeGroup.set(title, entryList)
 				}
 				else {
@@ -95,7 +103,10 @@ export class TitleListComponent {
 	@Input() public lastignoredcount: number = 0;
 	@Output() public selectedEntry: EventEmitter<GridEntry[]> = new EventEmitter();
 
-	public tapped: string = "";
+	public track(index: number, entry: GridEntry[]) {
+		return entry[0].title
+	}
+	public tapped?: string;
 
 	public ignoreListNames: Array<{ name: "Recorded" | "Garbage" | "Meh", icon: string }> = [
 		{ name: "Recorded", icon: "task_alt" },
@@ -111,7 +122,7 @@ export class TitleListComponent {
 	}
 	public click(event: GridEntry[]) {
 		if (this.tapped == event[0].title) {
-			this.tapped = "";
+			this.tapped = undefined;
 		}
 		else {
 			this.tapped = event[0].title;
@@ -121,14 +132,15 @@ export class TitleListComponent {
 	public ignore(entry: ignoreEntry, listName: listNames) {
 		this.ignoreService.ignore(entry, listName);
 	}
-	public ignoreTitle(title: string, listName: listNames) {
-		this.ignoreService.ignoreTitle(title, listName);
+	public ignoreTitle(title: string | undefined, listName: listNames) {
+		if (title)
+			this.ignoreService.ignoreTitle(title, listName);
 	}
 	public ignoreChanelName(channelName: string, listName: listNames) {
 		this.ignoreService.ignoreChanelName(channelName, listName);
 	}
 
-	public coarseTimeGroupOrder(a: KeyValue<coarseTimeGroupKeys,any>, b: KeyValue<coarseTimeGroupKeys, any>) {
+	public coarseTimeGroupOrder(a: KeyValue<coarseTimeGroupKeys, any>, b: KeyValue<coarseTimeGroupKeys, any>) {
 		const keySortOrder: coarseTimeGroupKeys[] = [
 			"past", "now", "next", "tomorrow", "nextWeek", "nextMonth"
 		];
@@ -136,10 +148,11 @@ export class TitleListComponent {
 	}
 	public fineTimeGroupOrder(a: KeyValue<string, GridEntry[]>, b: KeyValue<string, GridEntry[]>) {
 		if (a.value[0].start === b.value[0].start) {
-			const channel_a = a.value[0].channelNumber.split(".");
-			const channel_b = b.value[0].channelNumber.split(".");
-			if (channel_a[0] === channel_b[0])
-				return parseInt(channel_a[1]) - parseInt(channel_b[1]);
+			const channel_a = (a.value[0].channelNumber || "0").split(".");
+			const channel_b = (b.value[0].channelNumber || "0").split(".");
+			if (channel_a[0] === channel_b[0]) {
+				return (parseInt(channel_a[1]) || -1) - (parseInt(channel_b[1]) || -1);
+			}
 			return parseInt(channel_a[0]) - parseInt(channel_b[0]);
 		}
 		return a.value[0].start - b.value[0].start;

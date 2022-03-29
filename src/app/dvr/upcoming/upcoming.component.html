@@ -5,8 +5,8 @@
 		<span class="inprogress_beginpad" [style.width]="entry.value[0] | beginPercent"></span>
 		<span class="inprogress_endpad" [style.width]="entry.value[0] | endPercent"></span>
 		<span class="title">{{ entry.value[0].disp_title }} ({{entry.value.length}})</span>
-		<mat-icon *ngIf="entry.value[0].filename || entry.value[0].filename">fiber_smart_record</mat-icon>
-		<mat-icon *ngIf="entry.value[0].data_errors || entry.value[0].data_errors">warning</mat-icon>
+		<mat-icon *ngIf="entry.value[0].sched_status ==='recording'" class="recording">fiber_smart_record</mat-icon>
+		<mat-icon *ngIf="entry.value[0].data_errors || entry.value[0].data_errors" [title]="entry.value[0].data_errors">warning</mat-icon>
 		<span class="time">{{entry.value[0].start_real | newDate | date: "short"}}</span>
 	</mat-list-item>
 </mat-list>

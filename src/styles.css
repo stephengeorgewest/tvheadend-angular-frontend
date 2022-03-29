@@ -74,3 +74,19 @@ mat-list-item span.inprogress {
 	background-color: var(--highlight-color);
 	bottom: 0.2em;
 }
+
+@keyframes recording-animation {
+	0% {
+		color: red;
+	}
+	50% {
+		color: transparent;
+	}
+}
+
+.recording {
+	animation-name: recording-animation;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: steps(1);
+}

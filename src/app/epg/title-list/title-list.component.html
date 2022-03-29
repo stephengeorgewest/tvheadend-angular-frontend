@@ -1,36 +1,40 @@
-<mat-tab-group>
-	<mat-tab *ngFor="let coarseTimeGroup of (coarseTimeGroups | keyvalue: coarseTimeGroupOrder)" [label]="coarseTimeGroup.key" [disabled]="!coarseTimeGroup.value.size">
-		<mat-list *ngFor="let fineTimeGroup of (coarseTimeGroup.value | keyvalue)">
-			<h3 matSubheader>
-				<mat-icon matListIcon>schedule</mat-icon>
-				{{fineTimeGroup.key | newDate | date: 'mediumTime' }}
-			</h3>
-			<mat-list-item *ngFor="let entry of (fineTimeGroup.value | keyvalue: fineTimeGroupOrder)" (mouseenter)="mouseenter(entry.value)" (click)="click(entry.value)" [class.selected]="tapped === entry.value[0].title">
-				<span class="inprogress" [style.width]="entry.value[0] | completePercent"></span>
-				<div class="channel">
-					<div>{{entry.value[0].channelNumber}}</div>
-					<div>{{entry.value[0].channelName}}</div>
-				</div>
-				<div class="title">
-					{{entry.value[0].title}}
-				</div>
-				<div class="number">
-					({{entry.value.length}})
-				</div>
-				<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+<mat-tab-group animationDuration="0">
+	<ng-container *ngFor="let coarseTimeGroup of (coarseTimeGroups | keyvalue: coarseTimeGroupOrder)">
+		<mat-tab *ngIf="coarseTimeGroup.value.size" [label]="friendlyNames[coarseTimeGroup.key] + ' (' + coarseTimeGroup.value.size + ')'">
+			<mat-list *ngFor="let fineTimeGroup of (coarseTimeGroup.value | keyvalue)">
+				<h3 matSubheader>
+					<mat-icon matListIcon>schedule</mat-icon>
+					{{fineTimeGroup.key | newDate | date: 'mediumTime' }}
+				</h3>
+				<mat-list-item *ngFor="let entry of (fineTimeGroup.value | keyvalue: fineTimeGroupOrder); trackby:track" (mouseenter)="mouseenter(entry.value)" (click)="click(entry.value)" [class.selected]="tapped === entry.value[0].title">
+					<span class="inprogress" [style.width]="entry.value[0] | completePercent"></span>
+					<div class="channel">
+						<div>{{entry.value[0].channelNumber}}</div>
+						<div>{{entry.value[0].channelName}}</div>
+					</div>
+					<div class="title">
+						{{entry.value[0].title}}
+					</div>
+					<mat-icon *ngIf="entry.value[0].dvrState === 'recording'" class="recording">fiber_smart_record</mat-icon>
+					<mat-icon *ngIf="entry.value[0].dvrState === 'scheduled'">videocam</mat-icon>
+					<div class="number">
+						({{entry.value.length}})
+					</div>
+					<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
 						<mat-icon>thumb_down</mat-icon>
 					</button>
-				<mat-menu #menu="matMenu">
-					<button mat-menu-item *ngFor="let list of ignoreListNames" (click)="ignoreTitle(entry.value[0].title, list.name)">
+					<mat-menu #menu="matMenu">
+						<button mat-menu-item *ngFor="let list of ignoreListNames" (click)="ignoreTitle(entry.value[0].title, list.name)">
 							<mat-icon>{{ list.icon }}</mat-icon>
 							<span>{{list.name}}</span>
 						</button>
-					<button mat-menu-item (click)="ignoreChanelName(entry.value[0].channelName, 'Meh')">
+						<button mat-menu-item (click)="ignoreChanelName(entry.value[0].channelName, 'Meh')">
 							<span>Channel Meh</span>
 						</button>
-					<button mat-menu-item (click)="ignore(entry.value[0], 'Meh')">Combo Meh</button>
-				</mat-menu>
-			</mat-list-item>
-		</mat-list>
-	</mat-tab>
+						<button mat-menu-item (click)="ignore(entry.value[0], 'Meh')">Combo Meh</button>
+					</mat-menu>
+				</mat-list-item>
+			</mat-list>
+		</mat-tab>
+	</ng-container>
 </mat-tab-group>
