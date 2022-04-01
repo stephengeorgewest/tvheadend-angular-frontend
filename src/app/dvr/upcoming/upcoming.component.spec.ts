@@ -1,6 +1,18 @@
+import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 import { UpcomingComponent } from './upcoming.component';
+import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
+
+@Component({
+  selector: 'app-upcoming-entry-list ',
+  template: ''
+})
+class MockUpcomingEntryListComponent {
+  @Input() public selectedEntry:GridUpcomingEntry[] =[];
+}
 
 describe('UpcomingComponent', () => {
   let component: UpcomingComponent;
@@ -8,7 +20,8 @@ describe('UpcomingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UpcomingComponent ]
+      imports:[MatIconModule, MatListModule],
+      declarations: [ UpcomingComponent, MockUpcomingEntryListComponent ]
     })
     .compileComponents();
   });
