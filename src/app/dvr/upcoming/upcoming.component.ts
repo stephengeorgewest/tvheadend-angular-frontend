@@ -1,5 +1,6 @@
 import { KeyValue } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { timer } from 'rxjs';
 import { GridUpcomingRequest } from 'src/app/api/dvr/entry/grid_upcoming/requestmodel';
 import { GridUpcomingEntry, GridUpcomingResponse } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
 import { fetchData } from 'src/app/api/util';
@@ -9,11 +10,13 @@ import { fetchData } from 'src/app/api/util';
 	templateUrl: './upcoming.component.html',
 	styleUrls: ['./upcoming.component.css']
 })
-export class UpcomingComponent {
+export class UpcomingComponent implements OnDestroy {
 	public entries: Map<string, GridUpcomingEntry[]> = new Map();
 	public totalCount = 0;
 
 	public selectedEntry: GridUpcomingEntry[] = [];
+	public now: number = Date.now()/1000;
+	private sub;
 	
 	constructor() {
 		fetchData('/dvr/entry/grid_upcoming', this.options, data => {
@@ -25,6 +28,12 @@ export class UpcomingComponent {
 			}, new Map<string, GridUpcomingEntry[]>());
 			this.totalCount = data.totalCount;
 		});
+		this.sub = timer(60*1000, 60*1000).subscribe(() => {
+			this.now = Date.now()/1000;
+		});
+	}
+	public ngOnDestroy(): void {
+		this.sub.unsubscribe();
 	}
 
 	public tapped: string = "";

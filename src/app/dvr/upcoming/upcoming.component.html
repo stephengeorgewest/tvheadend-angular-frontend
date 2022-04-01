@@ -1,7 +1,7 @@
 <mat-list>
 	<h3 mat-subheader (click)="switchSort()">switch</h3>
 	<mat-list-item *ngFor="let entry of (entries | keyvalue: sort)" (mouseenter)="mouseenter(entry.value)" (click)="click(entry.value)" [class.selected]="tapped === entry.value[0].uuid">
-		<span class="inprogress" [style.width]="entry.value[0] | completePercent"></span>
+		<span class="inprogress" [style.width]="entry.value[0] | completePercent: now"></span>
 		<span class="inprogress_beginpad" [style.width]="entry.value[0] | beginPercent"></span>
 		<span class="inprogress_endpad" [style.width]="entry.value[0] | endPercent"></span>
 		<span class="title">{{ entry.value[0].disp_title }} ({{entry.value.length}})</span>

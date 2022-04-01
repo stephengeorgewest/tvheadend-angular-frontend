@@ -1,15 +1,18 @@
 import { KeyValue } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output, Pipe, PipeTransform } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { timer } from 'rxjs';
 import { GridEntry } from 'src/app/api/epg/events/grid/responsemodel';
 import { ignoreEntry, IgnoreListService, listNames } from 'src/app/ignore-list.service';
 
-type coarseTimeGroupKeys = "past" | "now" | "next" | "tomorrow" | "nextWeek" | "nextMonth";
+export type coarseTimeGroupKeys = "past" | "now" | "next" | "tomorrow" | "nextWeek" | "nextMonth";
 type dateBoundryKeys = Exclude<coarseTimeGroupKeys, "past" | "next">;
 
 type title = string;
-type start = number
+type start = number;
+export type GridEntryLite = Pick<GridEntry, "start" | "stop" | "title">;
+type timesType = { [key in dateBoundryKeys]: number };
 
-function getDates(): { [key in dateBoundryKeys]: number } {
+function getDates(): timesType {
 	const now = Date.now() / 1000;
 
 	const todayDate = new Date();
@@ -34,8 +37,9 @@ function getDates(): { [key in dateBoundryKeys]: number } {
 	templateUrl: './title-list.component.html',
 	styleUrls: ['./title-list.component.css']
 })
-export class TitleListComponent {
-	public times = getDates();
+export class TitleListComponent implements OnDestroy {
+	public now: number = Date.now() / 1000;
+	private sub;
 	public coarseTimeGroups: {
 		[key in coarseTimeGroupKeys]: Map<start, Map<title, GridEntry[]>>
 	} = {
@@ -56,30 +60,22 @@ export class TitleListComponent {
 	};
 
 	@Input() public set filteredEntries(filteredEntries: Map<title, GridEntry[]>) {
-		this.times = getDates();
-		this._filteredEntries = filteredEntries;
-		this.reGroup();
+		const times = getDates();
+		this.now = times.now;
+		this.coarseTimeGroups = this.reGroup(filteredEntries, times);
 	}
-	private _filteredEntries: Map<title, GridEntry[]> | undefined = undefined;
-	private reGroup() {
-		if (this._filteredEntries) {
-			this.coarseTimeGroups = [...this._filteredEntries.entries()].reduce((prev, [title, entryList]) => {
-				let coarseTimeGroup = prev.nextMonth;
-				if (entryList[0].stop < this.times.now) {
-					coarseTimeGroup = prev.past;
-				}
-				else if (entryList[0].start <= this.times.now) {
-					coarseTimeGroup = prev.now;
-				}
-				else if (this.times.now <= entryList[0].start && entryList[0].start < this.times.tomorrow) {
-					coarseTimeGroup = prev.next;
-				}
-				else if (this.times.tomorrow <= entryList[0].start && entryList[0].start < this.times.nextWeek) {
-					coarseTimeGroup = prev.tomorrow;
-				}
-				else if (this.times.nextWeek <= entryList[0].start && entryList[0].start < this.times.nextMonth) {
-					coarseTimeGroup = prev.nextWeek;
-				}
+	public reGroup(filteredEntries: Map<string, GridEntry[]>, times: timesType) {
+		const defaultTimeGroups = {
+			past: new Map<start, Map<title, GridEntry[]>>(),
+			now: new Map<start, Map<title, GridEntry[]>>(),
+			next: new Map<start, Map<title, GridEntry[]>>(),
+			tomorrow: new Map<start, Map<title, GridEntry[]>>(),
+			nextWeek: new Map<start, Map<title, GridEntry[]>>(),
+			nextMonth: new Map<start, Map<title, GridEntry[]>>()
+		};
+		if (filteredEntries) {
+			const coarseTimeGroups = [...filteredEntries.entries()].reduce((prev, [title, entryList]) => {
+				let coarseTimeGroup = this.getCoarseTimeGroup(prev, entryList, times);
 
 				const fineTimeGroup = coarseTimeGroup.get(entryList[0].start);
 				if (fineTimeGroup) {
@@ -89,15 +85,41 @@ export class TitleListComponent {
 					coarseTimeGroup.set(entryList[0].start, new Map([[title, entryList]]))
 				}
 				return prev;
-			}, {
-				past: new Map<start, Map<title, GridEntry[]>>(),
-				now: new Map<start, Map<title, GridEntry[]>>(),
-				next: new Map<start, Map<title, GridEntry[]>>(),
-				tomorrow: new Map<start, Map<title, GridEntry[]>>(),
-				nextWeek: new Map<start, Map<title, GridEntry[]>>(),
-				nextMonth: new Map<start, Map<title, GridEntry[]>>()
-			});
+			}, defaultTimeGroups);
+			return coarseTimeGroups
 		}
+		return defaultTimeGroups;
+	}
+
+	private getCoarseTimeGroup(
+		prev: {
+			[key in coarseTimeGroupKeys]: Map<start, Map<title, GridEntryLite[]>>
+		},
+		entryList: GridEntryLite[],
+		times: {
+			now: number;
+			tomorrow: number;
+			nextWeek: number;
+			nextMonth: number;
+		}
+	) {
+		let coarseTimeGroup = prev.nextMonth;
+		if (entryList[0].stop < times.now) {
+			coarseTimeGroup = prev.past;
+		}
+		else if (entryList[0].start <= times.now) {
+			coarseTimeGroup = prev.now;
+		}
+		else if (times.now <= entryList[0].start && entryList[0].start < times.tomorrow) {
+			coarseTimeGroup = prev.next;
+		}
+		else if (times.tomorrow <= entryList[0].start && entryList[0].start < times.nextWeek) {
+			coarseTimeGroup = prev.tomorrow;
+		}
+		else if (times.nextWeek <= entryList[0].start && entryList[0].start < times.nextMonth) {
+			coarseTimeGroup = prev.nextWeek;
+		}
+		return coarseTimeGroup;
 	}
 
 	@Input() public lastignoredcount: number = 0;
@@ -114,7 +136,86 @@ export class TitleListComponent {
 		{ name: "Meh", icon: "star_half" },
 	];
 
-	constructor(private ignoreService: IgnoreListService) { }
+	constructor(private ignoreService: IgnoreListService) {
+		this.sub = timer(1000, 1000).subscribe(() => {
+			const times = getDates();
+			this.now = times.now;
+			this.a(this.coarseTimeGroups, times);
+		});
+	}
+
+	public a(coarseTimeGroups: {
+		[key in coarseTimeGroupKeys]: Map<start, Map<title, GridEntryLite[]>>
+	}, times: {
+		now: number;
+		tomorrow: number;
+		nextWeek: number;
+		nextMonth: number;
+	}) {
+		// move now entries that have past to past.
+		outer: for (let [coarseTimeGroupNowKey, titleEntryListMap] of coarseTimeGroups.now.entries()) {
+			inner: for (let [title, entryList] of titleEntryListMap) {
+				if (entryList[0].stop < times.now) {
+					let e = entryList.shift();
+					titleEntryListMap.delete(title);
+					if (titleEntryListMap.size === 0) {
+						coarseTimeGroups.now.delete(coarseTimeGroupNowKey);
+					}
+					if (entryList.length !== 0) {
+						const newCoarseTimeGroup = this.getCoarseTimeGroup(coarseTimeGroups, entryList, times);
+						const newCTGGroup = newCoarseTimeGroup.get(entryList[0].start);
+						if (newCTGGroup) {
+							newCTGGroup.set(title, entryList)
+						}
+						else {
+							newCoarseTimeGroup.set(entryList[0].start, new Map([[title, entryList]]));
+						}
+
+					}
+					if (!e) continue inner;
+					let timegroup = coarseTimeGroups.past.get(e.start);
+					if (timegroup) {
+						const entryGroup = timegroup.get(e.title || "");
+						if (entryGroup) {
+							entryGroup.push(e);
+						}
+						else {
+							timegroup.set(e.title || "", [e])
+						}
+					}
+					else {
+						timegroup = new Map([[e.title || "", [e]]]);
+						coarseTimeGroups.past.set(e.start, timegroup);
+					}
+				}
+			}
+		}
+		const later: coarseTimeGroupKeys[] = ["next", "tomorrow", "nextWeek", "nextMonth"];
+		for (let coarseTimeKey of later) {
+			const group = coarseTimeGroups[coarseTimeKey];
+			for (let [coarseTimeGroupLaterKey, entryMap] of group.entries()) {
+				const newCoarseTimeGroup = this.getCoarseTimeGroup(coarseTimeGroups, [{ start: coarseTimeGroupLaterKey, stop: coarseTimeGroupLaterKey + 1 }], times);
+				if (newCoarseTimeGroup !== group) {
+					group.delete(coarseTimeGroupLaterKey);
+
+					const g = newCoarseTimeGroup.get(coarseTimeGroupLaterKey);
+					if(g){
+						newCoarseTimeGroup.set(coarseTimeGroupLaterKey, new Map([...g, ...entryMap]));
+					}
+					else{
+						newCoarseTimeGroup.set(coarseTimeGroupLaterKey, entryMap);
+					}
+				}
+				else {
+					continue;
+				}
+			}
+		}
+	}
+
+	public ngOnDestroy(): void {
+		this.sub.unsubscribe();
+	}
 
 	public mouseenter(event: GridEntry[]) {
 		if (!this.tapped)

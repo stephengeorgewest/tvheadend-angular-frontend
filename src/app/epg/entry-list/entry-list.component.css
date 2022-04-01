@@ -18,6 +18,10 @@ img {
 	max-width: 10em;
 }
 
+h4 {
+	margin-bottom: 0;
+}
+
 p {
 	margin-left: 1em;
 	text-indent: 1em;
