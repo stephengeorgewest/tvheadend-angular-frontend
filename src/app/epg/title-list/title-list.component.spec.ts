@@ -31,6 +31,7 @@ describe('TitleListComponent', () => {
 	describe("re-shuffle", () => {
 		type start = number; type title = string;
 		const a_now_entry:GridEntryLite = {start: 0, stop: 10, title: "a"};
+		const a_now_different_channel_entry:GridEntryLite = {start: 0, stop: 10, title: "a"};
 		const a_next_entry:GridEntryLite = {start: 10, stop: 20, title: "a"};
 		const a_tomorrow_entry:GridEntryLite = {start: 20, stop: 30, title: "a"};
 
@@ -53,7 +54,7 @@ describe('TitleListComponent', () => {
 			past: new Map<start, Map<title, GridEntryLite[]>>(),
 			now: new Map<start, Map<title, GridEntryLite[]>>([
 				[0, new Map([
-					["a", [a_now_entry, a_next_entry, a_tomorrow_entry]],
+					["a", [a_now_entry, a_now_different_channel_entry, a_next_entry, a_tomorrow_entry]],
 					["b", [b_now_entry, b_tomorrow_entry]]
 				])],
 				[5, new Map([
@@ -81,7 +82,7 @@ describe('TitleListComponent', () => {
 		it('past', () => {
 			expect(coarseTimeGroups.past).toEqual(new Map<start, Map<title, GridEntryLite[]>>([
 				[0, new Map([
-					["a", [a_now_entry]],
+					["a", [a_now_entry, a_now_different_channel_entry]],
 					["b", [b_now_entry]]
 				])],
 				[5, new Map([

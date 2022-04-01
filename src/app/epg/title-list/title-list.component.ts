@@ -155,8 +155,11 @@ export class TitleListComponent implements OnDestroy {
 		// move now entries that have past to past.
 		outer: for (let [coarseTimeGroupNowKey, titleEntryListMap] of coarseTimeGroups.now.entries()) {
 			inner: for (let [title, entryList] of titleEntryListMap) {
-				if (entryList[0].stop < times.now) {
-					let e = entryList.shift();
+				let pastEntries = [];
+				while(entryList.length && entryList[0].stop < times.now){
+					pastEntries.push(entryList.shift() as GridEntryLite);
+				}
+				if (pastEntries.length) {
 					titleEntryListMap.delete(title);
 					if (titleEntryListMap.size === 0) {
 						coarseTimeGroups.now.delete(coarseTimeGroupNowKey);
@@ -172,20 +175,19 @@ export class TitleListComponent implements OnDestroy {
 						}
 
 					}
-					if (!e) continue inner;
-					let timegroup = coarseTimeGroups.past.get(e.start);
+					let timegroup = coarseTimeGroups.past.get(pastEntries[0].start);
 					if (timegroup) {
-						const entryGroup = timegroup.get(e.title || "");
+						const entryGroup = timegroup.get(pastEntries[0].title || "");
 						if (entryGroup) {
-							entryGroup.push(e);
+							entryGroup.push(pastEntries[0]);
 						}
 						else {
-							timegroup.set(e.title || "", [e])
+							timegroup.set(pastEntries[0].title || "", pastEntries)
 						}
 					}
 					else {
-						timegroup = new Map([[e.title || "", [e]]]);
-						coarseTimeGroups.past.set(e.start, timegroup);
+						timegroup = new Map([[pastEntries[0].title || "", pastEntries]]);
+						coarseTimeGroups.past.set(pastEntries[0].start, timegroup);
 					}
 				}
 			}
