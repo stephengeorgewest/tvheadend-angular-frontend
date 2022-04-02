@@ -153,8 +153,8 @@ export class TitleListComponent implements OnDestroy {
 		nextMonth: number;
 	}) {
 		// move now entries that have past to past.
-		outer: for (let [coarseTimeGroupNowKey, titleEntryListMap] of coarseTimeGroups.now.entries()) {
-			inner: for (let [title, entryList] of titleEntryListMap) {
+		for (let [coarseTimeGroupNowKey, titleEntryListMap] of coarseTimeGroups.now.entries()) {
+			for (let [title, entryList] of titleEntryListMap) {
 				let pastEntries = [];
 				while(entryList.length && entryList[0].stop < times.now){
 					pastEntries.push(entryList.shift() as GridEntryLite);
