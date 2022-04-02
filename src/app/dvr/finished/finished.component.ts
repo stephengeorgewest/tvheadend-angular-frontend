@@ -1,4 +1,4 @@
-import { Component, Pipe, PipeTransform, SecurityContext } from '@angular/core';
+import { Component, Input, Pipe, PipeTransform, SecurityContext } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
 import { DomSanitizer } from '@angular/platform-browser';
 import { GridUpcomingRequest } from 'src/app/api/dvr/entry/grid_upcoming/requestmodel';
@@ -64,9 +64,9 @@ export class FinishedComponent {
 
 	public displayedColumns: Array<sortkeys> = [
 		"disp_title",
-		"disp_subtitle",
 		"episode_disp",
-		"disp_description",
+		"disp_subtitle",
+		/*"disp_description",*/
 		"channelname",
 		"start_real",
 		"duration",
@@ -316,13 +316,22 @@ export class DurationPipe implements PipeTransform {
 	}
 }
 
-@Pipe({
-	name: 'episode_disp'
+@Component({
+	selector: 'episode_disp',
+	template: "<div *ngIf='season'>{{season}}</div><div>{{episode}}</div>"
 })
-export class EpisodeDisplayPipe implements PipeTransform {
-	transform(season_episode: string) {
-		const season_episode_array = season_episode.replace(" ", " ").split(".");
-		return season_episode_array.join(" ");
+export class EpisodeDisplayComponent {
+	public season: string = "";
+	public episode: string = "";
+	@Input() public set season_episode(season_episode: string){
+		const season_episode_array = season_episode.split(".");
+		if(season_episode_array.length === 2){
+			this.season = season_episode_array[0];
+			this.episode = season_episode_array[1];
+		}
+		else if(season_episode_array.length === 1){
+			if(season_episode_array[0].startsWith("E")) this.episode = season_episode_array[0];
+		}
 	}
 }
 

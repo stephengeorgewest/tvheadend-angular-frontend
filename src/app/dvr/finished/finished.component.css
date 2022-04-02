@@ -57,6 +57,11 @@ thead tr th {
 	top: 1.2em;
 }
 
+thead tr:nth-child(2) th {
+	/* Don't forget this, required for the stickiness */
+	top: 2.4em;
+}
+
 .ascending {
 	transform: scaleY(-1);
 }
@@ -79,7 +84,9 @@ tr {
 
 tbody tr th {
 	/* Don't forget this, required for the stickiness */
-	top: 3em;
+	top: 4.2em;
+	background-color: var(--tertiary-bg-color);
+	padding: 1em;
 }
 
 tfoot tr th {

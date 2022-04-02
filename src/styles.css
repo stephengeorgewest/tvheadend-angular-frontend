@@ -41,7 +41,7 @@ tr:nth-child(2n) td {
 }
 
 td {
-	padding: .2em;
+	padding: .5em;
 }
 
 .custom-dialog-container .mat-dialog-container {
