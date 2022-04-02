@@ -5,7 +5,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from "@angular/material/tabs";
 import { CompletePercentPipe } from 'src/app/complete-percent.pipe';
 
-import { coarseTimeGroupKeys, GridEntryLite, TitleListComponent } from './title-list.component';
+import { coarseTimeGroupKeys, getDates, GridEntryLite, timesType, TitleListComponent } from './title-list.component';
 
 describe('TitleListComponent', () => {
 	let component: TitleListComponent;
@@ -28,6 +28,58 @@ describe('TitleListComponent', () => {
 	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
+
+	describe("times", () => {
+		describe("saturday", () => {
+			const d = new Date(2022, 0, 1, 0, 0, 0, 0);
+
+			it("now", () => {
+				const now = new Date(2022, 0, 1, 0, 0, 0, 0).toString();
+				expect(new Date(getDates(d).now*1000).toString()).toEqual(now);
+			});
+			it("tomorrow", () => {
+				const tomorrow = new Date(2022, 0, 2, 0, 0, 0, 0).toString();
+				expect(new Date(getDates(d).tomorrow*1000).toString()).toEqual(tomorrow);
+			});
+			it("thisWeek", () => {
+				const thisWeek = new Date(2022, 0, 3, 0, 0, 0, 0).toString();
+				expect(new Date(getDates(d).thisWeek*1000).toString()).toEqual(thisWeek);
+			});
+			it("nextWeek", () => {
+				const nextWeek = new Date(2022, 0, 3+7, 0, 0, 0, 0).toString();
+				expect(new Date(getDates(d).nextWeek*1000).toString()).toEqual(nextWeek);
+			});
+			it("twoWeeks", () => {
+				const twoWeeks = new Date(2022, 0, 3+7+7, 0, 0, 0, 0).toString();
+				expect(new Date(getDates(d).twoWeeks*1000).toString()).toEqual(twoWeeks);
+			});
+		});
+		describe("sunday", () => {
+			const d = new Date(2022, 0, 2, 0, 0, 0, 0);
+
+			it("now", () => {
+				const now = new Date(2022, 0, 2, 0, 0, 0, 0).toString();
+				expect(new Date(getDates(d).now*1000).toString()).toEqual(now);
+			});
+			it("tomorrow", () => {
+				const tomorrow = new Date(2022, 0, 3, 0, 0, 0, 0).toString();
+				expect(new Date(getDates(d).tomorrow*1000).toString()).toEqual(tomorrow);
+			});
+			it("thisWeek", () => {
+				const thisWeek = new Date(2022, 0, 3+7, 0, 0, 0, 0).toString();
+				expect(new Date(getDates(d).thisWeek*1000).toString()).toEqual(thisWeek);
+			});
+			it("nextWeek", () => {
+				const nextWeek = new Date(2022, 0, 3+7+7, 0, 0, 0, 0).toString();
+				expect(new Date(getDates(d).nextWeek*1000).toString()).toEqual(nextWeek);
+			});
+			it("twoWeeks", () => {
+				const twoWeeks = new Date(2022, 0, 3+7+7+7, 0, 0, 0, 0).toString();
+				expect(new Date(getDates(d).twoWeeks*1000).toString()).toEqual(twoWeeks);
+			});
+		});
+	});
+
 	describe("re-shuffle", () => {
 		type start = number; type title = string;
 		const a_now_entry:GridEntryLite = {start: 0, stop: 10, title: "a"};
@@ -65,14 +117,16 @@ describe('TitleListComponent', () => {
 				[10, new Map([["d", [d_next_entry, d_tomorrow_entry, d_nextMonth_entry]]])]
 			]),
 			tomorrow: new Map<start, Map<title, GridEntryLite[]>>(),
+			thisWeek: new Map<start, Map<title, GridEntryLite[]>>(),
 			nextWeek: new Map<start, Map<title, GridEntryLite[]>>(),
-			nextMonth: new Map<start, Map<title, GridEntryLite[]>>()
+			twoWeeks: new Map<start, Map<title, GridEntryLite[]>>()
 		}
 		const times = {
 			now: 11,
 			tomorrow: 20,
-			nextWeek: 40,
-			nextMonth: 80
+			thisWeek: 40,
+			nextWeek: 80,
+			twoWeeks: 120,
 		};
 		beforeEach(() => {
 			// component.filteredEntries = new Map();
@@ -102,11 +156,14 @@ describe('TitleListComponent', () => {
 		it('tomorrow', () => {
 			expect(coarseTimeGroups.tomorrow).toEqual(new Map<start, Map<title, GridEntryLite[]>>());
 		});
-		it('nextWeek', () => {
-			expect(coarseTimeGroups.nextWeek).toEqual(new Map<start, Map<title, GridEntryLite[]>>([[50, new Map([["b", [b_tomorrow_entry]]])]]));
+		it('thisWeek', () => {
+			expect(coarseTimeGroups.thisWeek).toEqual(new Map<start, Map<title, GridEntryLite[]>>([[50, new Map([["b", [b_tomorrow_entry]]])]]));
 		});
-		it('nextMonth', () => {
-			expect(coarseTimeGroups.nextMonth).toEqual(new Map<start, Map<title, GridEntryLite[]>>());
+		it('nextWeek', () => {
+			expect(coarseTimeGroups.nextWeek).toEqual(new Map<start, Map<title, GridEntryLite[]>>());
+		});
+		it('twoWeeks', () => {
+			expect(coarseTimeGroups.twoWeeks).toEqual(new Map<start, Map<title, GridEntryLite[]>>());
 		});
 	});
 });

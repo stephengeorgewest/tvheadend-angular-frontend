@@ -4,33 +4,38 @@ import { timer } from 'rxjs';
 import { GridEntry } from 'src/app/api/epg/events/grid/responsemodel';
 import { ignoreEntry, IgnoreListService, listNames } from 'src/app/ignore-list.service';
 
-export type coarseTimeGroupKeys = "past" | "now" | "next" | "tomorrow" | "nextWeek" | "nextMonth";
+export type coarseTimeGroupKeys = "past" | "now" | "next" | "tomorrow" | "thisWeek" | "nextWeek" | "twoWeeks";
 type dateBoundryKeys = Exclude<coarseTimeGroupKeys, "past" | "next">;
 
 type title = string;
 type start = number;
 export type GridEntryLite = Pick<GridEntry, "start" | "stop" | "title">;
-type timesType = { [key in dateBoundryKeys]: number };
+export type timesType = { [key in dateBoundryKeys]: number };
 
-function getDates(): timesType {
-	const now = Date.now() / 1000;
+export function getDates(todayDate: Date): timesType {
+	const now = todayDate.getTime() / 1000;
 
-	const todayDate = new Date();
-	const tomorrowDate = new Date();
-	tomorrowDate.setDate(todayDate.getDate() + 1);
+	const tomorrowDate = new Date(todayDate);
+	tomorrowDate.setDate(tomorrowDate.getDate() + 1);
 	tomorrowDate.setHours(0, 0, 0, 0);
 	const tomorrow = tomorrowDate.getTime() / 1000;
 
-	const nextWeekDate = new Date();
-	nextWeekDate.setDate(tomorrowDate.getDate() + 7);
+	const thisWeekDate = new Date(tomorrowDate);
+	thisWeekDate.setDate(tomorrowDate.getDate() + (7-tomorrowDate.getDay())%7+1);
+	thisWeekDate.setHours(0, 0, 0, 0);
+	const thisWeek = thisWeekDate.getTime() / 1000;
+
+	const nextWeekDate = new Date(thisWeekDate);
+	nextWeekDate.setDate(thisWeekDate.getDate() + 7);
 	nextWeekDate.setHours(0, 0, 0, 0);
 	const nextWeek = nextWeekDate.getTime() / 1000;
 
-	const nextMonthDate = new Date();
-	nextMonthDate.setDate(nextWeekDate.getDate() + 30);
-	nextMonthDate.setHours(0, 0, 0, 0);
-	const nextMonth = nextMonthDate.getTime() / 1000;
-	return { now, tomorrow, nextWeek, nextMonth };
+	const twoWeeksDate = new Date(nextWeekDate);
+	twoWeeksDate.setDate(nextWeekDate.getDate() + 7);
+	twoWeeksDate.setHours(0, 0, 0, 0);
+	const twoWeeks = twoWeeksDate.getTime() / 1000;
+
+	return { now, tomorrow, thisWeek, nextWeek, twoWeeks };
 }
 @Component({
 	selector: 'app-title-list',
@@ -47,20 +52,22 @@ export class TitleListComponent implements OnDestroy {
 			now: new Map<start, Map<title, GridEntry[]>>(),
 			next: new Map<start, Map<title, GridEntry[]>>(),
 			tomorrow: new Map<start, Map<title, GridEntry[]>>(),
+			thisWeek: new Map<start, Map<title, GridEntry[]>>(),
 			nextWeek: new Map<start, Map<title, GridEntry[]>>(),
-			nextMonth: new Map<start, Map<title, GridEntry[]>>()
+			twoWeeks: new Map<start, Map<title, GridEntry[]>>()
 		};
 	public friendlyNames: { [key in coarseTimeGroupKeys]: string } = {
 		"past": "Past",
 		"now": "Now",
-		"next": "Next",
+		"next": "Later Today",
 		"tomorrow": "Tomorrow",
+		"thisWeek": "Later This Week",
 		"nextWeek": "Next Week",
-		"nextMonth": "Next Month"
+		"twoWeeks": "Later"
 	};
 
 	@Input() public set filteredEntries(filteredEntries: Map<title, GridEntry[]>) {
-		const times = getDates();
+		const times = getDates(new Date());
 		this.now = times.now;
 		this.coarseTimeGroups = this.reGroup(filteredEntries, times);
 	}
@@ -70,8 +77,9 @@ export class TitleListComponent implements OnDestroy {
 			now: new Map<start, Map<title, GridEntry[]>>(),
 			next: new Map<start, Map<title, GridEntry[]>>(),
 			tomorrow: new Map<start, Map<title, GridEntry[]>>(),
+			thisWeek: new Map<start, Map<title, GridEntry[]>>(),
 			nextWeek: new Map<start, Map<title, GridEntry[]>>(),
-			nextMonth: new Map<start, Map<title, GridEntry[]>>()
+			twoWeeks: new Map<start, Map<title, GridEntry[]>>()
 		};
 		if (filteredEntries) {
 			const coarseTimeGroups = [...filteredEntries.entries()].reduce((prev, [title, entryList]) => {
@@ -96,28 +104,29 @@ export class TitleListComponent implements OnDestroy {
 			[key in coarseTimeGroupKeys]: Map<start, Map<title, GridEntryLite[]>>
 		},
 		entryList: GridEntryLite[],
-		times: {
-			now: number;
-			tomorrow: number;
-			nextWeek: number;
-			nextMonth: number;
-		}
+		times: timesType
 	) {
-		let coarseTimeGroup = prev.nextMonth;
+		let coarseTimeGroup;
 		if (entryList[0].stop < times.now) {
 			coarseTimeGroup = prev.past;
 		}
 		else if (entryList[0].start <= times.now) {
 			coarseTimeGroup = prev.now;
 		}
-		else if (times.now <= entryList[0].start && entryList[0].start < times.tomorrow) {
+		else if (entryList[0].start < times.tomorrow) {
 			coarseTimeGroup = prev.next;
 		}
-		else if (times.tomorrow <= entryList[0].start && entryList[0].start < times.nextWeek) {
+		else if (entryList[0].start < times.thisWeek) {
 			coarseTimeGroup = prev.tomorrow;
 		}
-		else if (times.nextWeek <= entryList[0].start && entryList[0].start < times.nextMonth) {
+		else if (entryList[0].start < times.nextWeek) {
+			coarseTimeGroup = prev.thisWeek;
+		}
+		else if (entryList[0].start < times.twoWeeks) {
 			coarseTimeGroup = prev.nextWeek;
+		}
+		else {
+			coarseTimeGroup = prev.twoWeeks;
 		}
 		return coarseTimeGroup;
 	}
@@ -138,7 +147,7 @@ export class TitleListComponent implements OnDestroy {
 
 	constructor(private ignoreService: IgnoreListService) {
 		this.sub = timer(1000, 1000).subscribe(() => {
-			const times = getDates();
+			const times = getDates(new Date());
 			this.now = times.now;
 			this.a(this.coarseTimeGroups, times);
 		});
@@ -146,12 +155,7 @@ export class TitleListComponent implements OnDestroy {
 
 	public a(coarseTimeGroups: {
 		[key in coarseTimeGroupKeys]: Map<start, Map<title, GridEntryLite[]>>
-	}, times: {
-		now: number;
-		tomorrow: number;
-		nextWeek: number;
-		nextMonth: number;
-	}) {
+	}, times: timesType) {
 		// move now entries that have past to past.
 		for (let [coarseTimeGroupNowKey, titleEntryListMap] of coarseTimeGroups.now.entries()) {
 			for (let [title, entryList] of titleEntryListMap) {
@@ -192,7 +196,7 @@ export class TitleListComponent implements OnDestroy {
 				}
 			}
 		}
-		const later: coarseTimeGroupKeys[] = ["next", "tomorrow", "nextWeek", "nextMonth"];
+		const later: coarseTimeGroupKeys[] = ["next", "tomorrow", "thisWeek", "nextWeek", "nextWeek", "twoWeeks"];
 		for (let coarseTimeKey of later) {
 			const group = coarseTimeGroups[coarseTimeKey];
 			for (let [coarseTimeGroupLaterKey, entryMap] of group.entries()) {
@@ -245,7 +249,7 @@ export class TitleListComponent implements OnDestroy {
 
 	public coarseTimeGroupOrder(a: KeyValue<coarseTimeGroupKeys, any>, b: KeyValue<coarseTimeGroupKeys, any>) {
 		const keySortOrder: coarseTimeGroupKeys[] = [
-			"past", "now", "next", "tomorrow", "nextWeek", "nextMonth"
+			"past", "now", "next", "tomorrow", "thisWeek", "nextWeek", "twoWeeks"
 		];
 		return keySortOrder.indexOf(a.key) - keySortOrder.indexOf(b.key);
 	}
