@@ -353,3 +353,12 @@ export class SortListDirectionPipe implements PipeTransform {
 		return sortList.find((s:sortType<any>) => s.key === sortKey)?.ascending;
 	}
 }
+
+@Pipe({
+	name: 'inDisplayedColumns'
+})
+export class InDisplayedColumnsPipe implements PipeTransform {
+	transform(columnKey: sortkeys, displayedColumns: Array<sortkeys>) {
+		return !!displayedColumns.find((s) => s === columnKey);
+	}
+}

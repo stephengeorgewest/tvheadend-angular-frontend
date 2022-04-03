@@ -61,6 +61,7 @@ th {
 	box-shadow: 0 2px 2px -1px var(--tertiary-bg-color);
 	white-space: nowrap;
 	padding: 0;
+	z-index: 2;
 }
 
 thead tr:nth-child(2) th {
@@ -109,14 +110,14 @@ td {
 	border-left: 1px dotted var(--highlight-color);
 }
 
-.filesize,
-.duration {
+td.filesize,
+td.duration {
 	text-align: right;
 }
 
-.channelname,
-.errors,
-.data_errors,
-.start_real {
+td.channelname,
+td.errors,
+td.data_errors,
+td.start_real {
 	text-align: center;
 }

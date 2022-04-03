@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http'
 
 import { MatButtonModule } from "@angular/material/button";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatFormFieldModule } from "@angular/material/form-field"
@@ -23,7 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { UpcomingComponent } from './dvr/upcoming/upcoming.component';
 import { UpcomingEntryListComponent } from './dvr/upcoming/entry-list/upcoming-entry-list.component';
 import { DvrUpcomingEntryComponent, UpcomingEntryDialog } from './dvr/upcoming/entry-list/entry/upcoming-entry.component';
-import { DurationPipe, EpisodeDisplayComponent, FileSizePipe, FinishedComponent, SortListDirectionPipe, SortListPositionPipe } from './dvr/finished/finished.component';
+import { DurationPipe, EpisodeDisplayComponent, FileSizePipe, FinishedComponent, InDisplayedColumnsPipe, SortListDirectionPipe, SortListPositionPipe } from './dvr/finished/finished.component';
 
 
 import { EpgComponent } from './epg/epg.component';
@@ -38,6 +39,7 @@ import { NewDatePipe } from './date-from-unix-date.pipe';
 import { ListNamesFilterPipe } from './list-name.pipe';
 import { AboutComponent } from './about/about.component';
 import { BeginPercentPipe, CompletePercentPipe, EndPercentPipe } from './complete-percent.pipe';
+import { MatPseudoCheckboxModule } from '@angular/material/core';
 
 @NgModule({
 	declarations: [
@@ -70,7 +72,8 @@ import { BeginPercentPipe, CompletePercentPipe, EndPercentPipe } from './complet
 		DurationPipe,
 		EpisodeDisplayComponent,
 		SortListPositionPipe,
-		SortListDirectionPipe
+		SortListDirectionPipe,
+		InDisplayedColumnsPipe
 	],
 	imports: [
 		BrowserModule,
@@ -78,6 +81,7 @@ import { BeginPercentPipe, CompletePercentPipe, EndPercentPipe } from './complet
 		FormsModule,
 		HttpClientModule,
 		MatButtonModule,
+		MatCheckboxModule,
 		MatDialogModule,
 		MatExpansionModule,
 		MatFormFieldModule,
