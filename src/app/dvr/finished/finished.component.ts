@@ -318,7 +318,8 @@ export class DurationPipe implements PipeTransform {
 
 @Component({
 	selector: 'episode_disp',
-	template: "<div *ngIf='season'>{{season}}</div><div>{{episode}}</div>"
+	template: "<div *ngIf='season'>{{season}}</div><div>{{episode}}</div>",
+	styles: ["div {white-space:nowrap;}"]
 })
 export class EpisodeDisplayComponent {
 	public season: string = "";
