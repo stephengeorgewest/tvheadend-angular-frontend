@@ -3,6 +3,15 @@
 	flex-direction: column;
 }
 
+form {
+	flex: 0;
+}
+
+div.table {
+	flex: 1;
+	overflow: auto;
+}
+
 .sortlist span {
 	white-space: nowrap;
 }
@@ -39,10 +48,11 @@ table {
 	border-collapse: collapse;
 }
 
-caption {
+th.caption {
 	background-color: var(--tertiary-bg-color);
 	position: sticky;
 	top: 0em;
+	height: 2em;
 }
 
 th {
@@ -50,16 +60,17 @@ th {
 	position: sticky;
 	box-shadow: 0 2px 2px -1px var(--tertiary-bg-color);
 	white-space: nowrap;
-}
-
-thead tr th {
-	/* Don't forget this, required for the stickiness */
-	top: 1.2em;
+	padding: 0;
 }
 
 thead tr:nth-child(2) th {
 	/* Don't forget this, required for the stickiness */
-	top: 2.4em;
+	top: 2em;
+}
+
+thead tr:nth-child(3) th {
+	/* Don't forget this, required for the stickiness */
+	top: 3.2em;
 }
 
 .ascending {
@@ -84,9 +95,9 @@ tr {
 
 tbody tr th {
 	/* Don't forget this, required for the stickiness */
-	top: 4.2em;
+	top: 4.95em;
 	background-color: var(--tertiary-bg-color);
-	padding: 1em;
+	height: 2em;
 }
 
 tfoot tr th {

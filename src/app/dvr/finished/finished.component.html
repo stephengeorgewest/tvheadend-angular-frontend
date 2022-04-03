@@ -18,51 +18,57 @@
 		</mat-form-field>
 	</fieldset>
 </form>
-
-<table>
-	<caption>({{totalCount}}) {{filesize | filesize}} - {{ duration| duration}}</caption>
-	<thead>
-		<tr>
-			<th *ngFor="let col of displayedColumns" [class]="col">
-				{{mapping[col]}}
-			</th>
-		</tr>
-		<tr>
-			<th *ngFor="let col of displayedColumns" [class]="col">
-				<mat-icon [class.ascending]="col | sortListDirection: sortList " (click)="reverse(col)">sort</mat-icon>
-				<mat-icon (click)="up(col)">keyboard_double_arrow_up</mat-icon>{{col | sortListPosition: sortList}}
-				<mat-icon (click)="down(col)">keyboard_double_arrow_down</mat-icon>
-			</th>
-		</tr>
-	</thead>
-	<tbody *ngFor="let group of entryGroups; let first = first">
-		<tr>
-			<th [attr.colspan]="displayedColumns.length">
-				<span *ngIf="groupBy === 'disp_title'">{{ group.grouptitle }}</span>
-				<span *ngIf="groupBy === 'channelname'">Channel: {{ group.grouptitle }}</span>
-				<span *ngIf="groupBy === 'filesize'">Sizebin: {{ $any(group.grouptitle) | filesize }}</span>
-				<span> ({{ group.entries.length }}) - {{ group.filesize | filesize }} - {{ group.duration | duration }}</span>
-			</th>
-		</tr>
-		<tr *ngFor="let entry of group.entries">
-			<td *ngFor="let col of displayedColumns" [ngSwitch]="col" [class]="col">
-				<ng-container *ngSwitchCase="'filesize'">{{entry.filesize | filesize}}</ng-container>
-				<ng-container *ngSwitchCase="'data_errors'">
-					<mat-icon *ngIf="entry.data_errors || entry.data_errors">warning</mat-icon>
-				</ng-container>
-				<ng-container *ngSwitchCase="'start_real'">
-					<div>{{entry.start_real | newDate | date: "shortDate"}}</div>
-					<div>{{entry.start_real | newDate | date: "shortTime"}}</div>
-				</ng-container>
-				<ng-container *ngSwitchCase="'duration'">{{entry.duration | duration: "short"}}</ng-container>
-				<episode_disp *ngSwitchCase="'episode_disp'" [season_episode]="entry.episode_disp"></episode_disp>
-				<ng-container *ngSwitchDefault>{{entry[col]}}</ng-container>
-			</td>
-		</tr>
-	</tbody>
-	<tfoot>
-		<tr>
-			<th *ngFor="let col of displayedColumns">{{mapping[col]}}</th>
-		</tr>
-	</tfoot>
-</table>
+<div class="table">
+	<table>
+		<thead>
+			<!--revert to <caption> once browsers support sticky on caption -->
+			<tr>
+				<th class="caption" [attr.colspan]="displayedColumns.length">({{totalCount}}) {{filesize | filesize}} - {{ duration| duration}}</th>
+			</tr>
+			<tr>
+				<th *ngFor="let col of displayedColumns" [class]="col">
+					{{mapping[col]}}
+				</th>
+			</tr>
+			<tr>
+				<th *ngFor="let col of displayedColumns" [class]="col">
+					<mat-icon [class.ascending]="col | sortListDirection: sortList " (click)="reverse(col)">sort
+					</mat-icon>
+					<mat-icon (click)="up(col)">keyboard_double_arrow_up</mat-icon>{{col | sortListPosition: sortList}}
+					<mat-icon (click)="down(col)">keyboard_double_arrow_down</mat-icon>
+				</th>
+			</tr>
+		</thead>
+		<tbody *ngFor="let group of entryGroups">
+			<tr>
+				<th [attr.colspan]="displayedColumns.length">
+					<span *ngIf="groupBy === 'disp_title'">{{ group.grouptitle }}</span>
+					<span *ngIf="groupBy === 'channelname'">Channel: {{ group.grouptitle }}</span>
+					<span *ngIf="groupBy === 'filesize'">Sizebin: {{ $any(group.grouptitle) | filesize }}</span>
+					<span> ({{ group.entries.length }}) - {{ group.filesize | filesize }} - {{ group.duration | duration
+						}}</span>
+				</th>
+			</tr>
+			<tr *ngFor="let entry of group.entries">
+				<td *ngFor="let col of displayedColumns" [ngSwitch]="col" [class]="col">
+					<ng-container *ngSwitchCase="'filesize'">{{entry.filesize | filesize}}</ng-container>
+					<ng-container *ngSwitchCase="'data_errors'">
+						<mat-icon *ngIf="entry.data_errors || entry.data_errors">warning</mat-icon>
+					</ng-container>
+					<ng-container *ngSwitchCase="'start_real'">
+						<div>{{entry.start_real | newDate | date: "shortDate"}}</div>
+						<div>{{entry.start_real | newDate | date: "shortTime"}}</div>
+					</ng-container>
+					<ng-container *ngSwitchCase="'duration'">{{entry.duration | duration: "short"}}</ng-container>
+					<episode_disp *ngSwitchCase="'episode_disp'" [season_episode]="entry.episode_disp"></episode_disp>
+					<ng-container *ngSwitchDefault>{{entry[col]}}</ng-container>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th *ngFor="let col of displayedColumns">{{mapping[col]}}</th>
+			</tr>
+		</tfoot>
+	</table>
+</div>
