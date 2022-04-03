@@ -162,7 +162,7 @@ export class FinishedComponent {
 	constructor() {
 		fetchData(
 			'/dvr/entry/grid_finished',
-			{ start: 0, dir: "ASC", duplicates: 0, limit: 999999999 },
+			{ start: 0, dir: "ASC", duplicates: 0, limit: 999999999 }).then(
 			data => {
 				this.entries = (data as GridUpcomingResponse).entries;
 				this.totalCount = data.total;

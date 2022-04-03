@@ -13,7 +13,7 @@ export class AboutComponent {
 	public urls: any;
 
 	constructor() {
-		fetchData("serverinfo", {}, (data: any) => {this.about = data;});
-		fetchData("pathlist", {}, (data: any) => {this.urls = data;});
+		fetchData("serverinfo", {}).then((data: any) => {this.about = data;});
+		fetchData("pathlist", {}).then((data: any) => {this.urls = data;});
 	}
 }

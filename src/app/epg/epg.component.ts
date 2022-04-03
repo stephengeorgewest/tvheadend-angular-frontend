@@ -138,11 +138,10 @@ export class EpgComponent implements OnInit, OnDestroy {
 
 	public options: GridRequest<GridResponse> = { dir: "ASC", duplicates: 0, start: 0, limit: 300 };
 	public refresh() {
-		fetchData('/epg/events/grid', this.options, data => {
+		fetchData('/epg/events/grid', this.options).then(data => {
 			this.entries = data.entries;
 			this.totalCount = data.totalCount;
 			this.filteredEntries = new Map(); this.filterAll();
 		});
-
 	}
 }

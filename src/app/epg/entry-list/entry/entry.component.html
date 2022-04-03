@@ -6,6 +6,7 @@
 	<pre *ngIf="json" style="white-space: pre-wrap;">{{entry | json }}</pre>
 </figure>
 <figcaption mat-dialog-actions>
+	<button (click)="record(entry.eventId)" [disabled]="pendingAPI">RECORD</button>
 	<h3 *ngIf="entry.subtitle">{{entry.subtitle}}</h3>
 	<h4>{{entry.channelNumber}} {{entry.channelName}} 🕰{{ (entry.stop - entry.start) / 60 }}</h4>
 	<h4> {{ entry.start | newDate | date:'medium' }}</h4>

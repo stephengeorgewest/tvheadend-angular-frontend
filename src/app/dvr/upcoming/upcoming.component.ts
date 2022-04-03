@@ -19,7 +19,7 @@ export class UpcomingComponent implements OnDestroy {
 	private sub;
 	
 	constructor() {
-		fetchData('/dvr/entry/grid_upcoming', this.options, data => {
+		fetchData('/dvr/entry/grid_upcoming', this.options).then(data => {
 			this.entries = (data as GridUpcomingResponse).entries.reduce((prev, cur) => {
 				const e = prev.get(cur.disp_title);
 				if(e) e.push(cur);
