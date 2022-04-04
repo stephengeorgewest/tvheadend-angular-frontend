@@ -3,6 +3,9 @@ import { BehaviorSubject, Observable, Subject, Subscription } from "rxjs";
 import { ignoreEntry, IgnoreListService, listNames, modificationType } from "../ignore-list.service";
 import { CreateByEventRequest } from "./dvr/entry/create_by_event/requestmodel";
 import { CreateByEventResponse } from "./dvr/entry/create_by_event/responsemodel";
+import { GridUpcomingRequest } from "./dvr/entry/grid_upcoming/requestmodel";
+import { GridUpcomingResponse } from "./dvr/entry/grid_upcoming/responsemodel";
+import { StopBydvrUUIDRequest } from "./dvr/entry/stop/requestmodel";
 import { GridEntry, GridResponse } from "./epg/events/grid/responsemodel";
 import { GridRequest } from "./grid-request";
 import { fetchData } from "./util";
@@ -299,9 +302,32 @@ export class ApiService {
 		});
 	}
 
+	public stopByGridEntry(options: Pick<GridEntry, "dvrUuid" | "eventId">) {
+		if(!options.dvrUuid){
+			return Promise.reject(() => "error");
+		}
+		return this.stopBydvrUUID({uuid: options.dvrUuid}).then(() => {
+			this.refreshEntries(options.eventId)
+		});
+	}
+
+	private gridUpcomingResponse: GridUpcomingResponse | undefined = undefined;
+	private gridUpcomingSubject: BehaviorSubject<GridUpcomingResponse | undefined> = new BehaviorSubject(this.gridUpcomingResponse);
+	public onGridUpcomingResponse(): Observable<GridUpcomingResponse | undefined> {
+		return this.gridUpcomingSubject.asObservable();
+	}
+	public stopBydvrUUID(options: StopBydvrUUIDRequest) {
+		return fetchData("dvr/entry/stop", options).then(() => this.refreshGridUpcoming());
+	}
+	private options: GridUpcomingRequest = { sort: "start_real", dir: "ASC", duplicates: 0 };
+	public refreshGridUpcoming(options?: GridUpcomingRequest){
+		if(options) this.options = options;
+		fetchData('/dvr/entry/grid_upcoming', this.options).then((data:GridUpcomingResponse) => this.gridUpcomingSubject.next(data));
+	};
+
 	//TODO: arrays don't serialize right.
-	private refreshEntries(entryIDs: number[] | number) {
-		fetchData("epg/events/load", {eventId:entryIDs}).then((data: GridResponse) => {
+	private refreshEntries(eventIDs: number[] | number) {
+		fetchData("epg/events/load", {eventId:eventIDs}).then((data: GridResponse) => {
 			data.entries.forEach(e => {
 				if(!this.gridResponse){
 					this.gridResponse = {

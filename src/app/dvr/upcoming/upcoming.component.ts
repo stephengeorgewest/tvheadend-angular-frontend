@@ -1,9 +1,10 @@
 import { KeyValue } from '@angular/common';
 import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { timer } from 'rxjs';
+import { ApiService } from 'src/app/api/api';
 import { GridUpcomingRequest } from 'src/app/api/dvr/entry/grid_upcoming/requestmodel';
 import { GridUpcomingEntry, GridUpcomingResponse } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
-import { fetchData } from 'src/app/api/util';
 
 @Component({
 	selector: 'app-dvr-upcoming',
@@ -18,19 +19,20 @@ export class UpcomingComponent implements OnDestroy {
 	public now: number = Date.now()/1000;
 	private sub;
 	
-	constructor() {
-		fetchData('/dvr/entry/grid_upcoming', this.options).then(data => {
-			this.entries = (data as GridUpcomingResponse).entries.reduce((prev, cur) => {
+	constructor(private apiService: ApiService) {
+		this.apiService.onGridUpcomingResponse().subscribe((data) => {
+			this.entries = (data?.entries || []).reduce((prev, cur) => {
 				const e = prev.get(cur.disp_title);
 				if(e) e.push(cur);
 				else prev.set(cur.disp_title, [cur]);
 				return prev;
 			}, new Map<string, GridUpcomingEntry[]>());
-			this.totalCount = data.totalCount;
+			this.totalCount = data?.total || 0;
 		});
 		this.sub = timer(60*1000, 60*1000).subscribe(() => {
 			this.now = Date.now()/1000;
 		});
+		this.apiService.refreshGridUpcoming();
 	}
 	public ngOnDestroy(): void {
 		this.sub.unsubscribe();
@@ -50,12 +52,10 @@ export class UpcomingComponent implements OnDestroy {
 			this.selectedEntry = event;
 		}
 	}
-
-	public options: GridUpcomingRequest = { sort: "start_real", dir: "ASC", duplicates: 0 };
-	public servers = ["dell-dm051", "ao751h.lan"];
-	public selectedServer = this.servers[0];
-	public errors: any = undefined;
-
+	public stop(event_id: GridUpcomingEntry){
+		//TODO: make safe.
+		this.apiService.stopBydvrUUID(event_id);
+	}
 
 	public sort = this.timesort;
 	public switchSort(){

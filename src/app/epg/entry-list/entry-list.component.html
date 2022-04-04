@@ -8,7 +8,7 @@
 		<h4>{{topEntry.channelNumber}} {{topEntry.channelName}} 🕰{{ (topEntry.stop - topEntry.start) / 60 }}</h4>
 		<h4>
 			{{ topEntry.start | newDate | date:'medium' }}
-			<mat-icon *ngIf="topEntry.dvrState === 'recording'" class="recording">fiber_smart_record</mat-icon>
+			<mat-icon *ngIf="topEntry.dvrState === 'recording'" class="recording" (click)="stop(topEntry)">fiber_smart_record</mat-icon>
 			<mat-icon *ngIf="topEntry.dvrState === 'scheduled'">videocam</mat-icon>
 			<button *ngIf="!topEntry.dvrUuid" mat-button (click)="record(topEntry.eventId)" [disabled]="pendingAPI">RECORD</button>
 		</h4>

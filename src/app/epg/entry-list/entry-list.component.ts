@@ -32,8 +32,13 @@ export class EntryListComponent implements OnChanges {
 		});
 	}
 	public pendingAPI = false;
-	public async record(event_id: number){
+	public record(event_id: number){
 		this.pendingAPI = true;
 		this.apiService.createByEvent({event_id, config_uuid: ""}).catch(() => this.pendingAPI = false).then(() => this.pendingAPI = false);
+	}
+	public stop(event_id: GridEntry){
+		this.pendingAPI = true;
+		//TODO: make safe
+		this.apiService.stopByGridEntry(event_id).catch(() => this.pendingAPI = false).then(() => this.pendingAPI = false);
 	}
 }
