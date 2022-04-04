@@ -1,0 +1,9 @@
+{
+	"totalCount": 4,
+	"entries": [
+		{ "eventId": 592, "channelName": "KJZZ-HD", "channelUuid": "0bd504239f460d84f5e0a5a93133caf2", "channelNumber": "14.1", "start": 1649026800, "stop": 1649030400, "title": "MacGyver", "nextEventId": 593 },
+		{ "eventId": 591, "channelName": "KJZZ-HD", "channelUuid": "0bd504239f460d84f5e0a5a93133caf2", "channelNumber": "14.1", "start": 1649023200, "stop": 1649026800, "title": "Chicago Fire", "description": "Ashley's actions jeopardize Le's profitable deal with a respected customer; a con artist swindles; Ashley engages in an argument with her father and brother.", "nextEventId": 592 },
+		{ "eventId": 666, "channelName": "Quest", "channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01", "channelNumber": "30.3", "start": 1649028600, "stop": 1649030400, "title": "Hardcore Pawn", "description": "Les needs someone to buy a custom party bus; an eccentric scientist's vintage device may be able to remedy fatal illnesses; a couple is outraged at Seth's news.", "nextEventId": 800 },
+		{ "eventId": 621, "channelName": "Movies", "channelUuid": "7e6ea26591b588a14395104e49ecbdf0", "channelNumber": "30.2", "start": 1649073300, "stop": 1649080500, "title": "Come to the Stable", "nextEventId": 711 }
+	]
+}

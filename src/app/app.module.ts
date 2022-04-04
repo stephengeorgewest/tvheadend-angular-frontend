@@ -39,7 +39,8 @@ import { NewDatePipe } from './date-from-unix-date.pipe';
 import { ListNamesFilterPipe } from './list-name.pipe';
 import { AboutComponent } from './about/about.component';
 import { BeginPercentPipe, CompletePercentPipe, EndPercentPipe } from './complete-percent.pipe';
-import { MatPseudoCheckboxModule } from '@angular/material/core';
+import { ApiService } from './api/api';
+import { IgnoreListService } from './ignore-list.service';
 
 @NgModule({
 	declarations: [
@@ -95,7 +96,10 @@ import { MatPseudoCheckboxModule } from '@angular/material/core';
 		MatTabsModule,
 		AppRoutingModule
 	],
-	providers: [],
+	providers: [
+		ApiService,
+		IgnoreListService
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

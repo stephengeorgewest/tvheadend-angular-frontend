@@ -1,12 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 
 import { GridRequest } from '../api/grid-request';
 import { GridEntry, GridResponse } from '../api/epg/events/grid/responsemodel';
-import { fetchData } from '../api/util';
 import { ignoreEntry, IgnoreListService, listNames, modificationType } from '../ignore-list.service';
+import { ApiService } from '../api/api';
 
 const halfHour = 30 * 60;
 const hour = 60 * 60;
@@ -29,8 +27,8 @@ export class EpgComponent implements OnInit, OnDestroy {
 	private ignoreLists: { [key in listNames]: Array<ignoreEntry> } = { "Recorded": [], "Garbage": [], "Meh": [] };
 
 	private subscription: Subscription;
-	constructor(private http: HttpClient, private _snackBar: MatSnackBar, private ignoreService: IgnoreListService) {
-		this.refresh();
+	constructor(private ignoreService: IgnoreListService, private apiService: ApiService) {
+		this.apiService.onGridResponse().subscribe(data => (this.refresh(data)));
 		this.subscription = this.ignoreService.onList().subscribe((e) => {
 			this.ignoreLists = e.list;
 			switch (e.type) {
@@ -44,10 +42,16 @@ export class EpgComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit(): void {
-		//this.filterAll();
+		if(!this.entries || !this.entries.length)
+			this.refreshGrid();
 	}
 	ngOnDestroy(): void {
 		this.subscription.unsubscribe();
+	}
+	private selectedEntryTitle: string | undefined;
+	public selectEntry(entryTitle: string | undefined){
+		this.selectedEntry = this.filteredEntries.get(entryTitle || "") || [];
+		this.selectedEntryTitle = this.selectedEntry.length ? entryTitle : undefined;
 	}
 
 	private filterNew() {
@@ -70,10 +74,13 @@ export class EpgComponent implements OnInit, OnDestroy {
 		}
 		this.lastignoredcount = count - this.length(this.filteredEntries);
 		this.totalIgnored = this.entries.length - this.length(this.filteredEntries);
-		// this._snackBar.open(this.lastignoredcount + "");
+		
+		this.selectEntry(this.selectedEntryTitle);
 	}
 	public filterAll() {
 		this.filter(this.entries);
+		
+		this.selectEntry(this.selectedEntryTitle);
 	}
 	private filter(list: GridEntry[]) {
 		const count = this.length(this.filteredEntries);
@@ -92,7 +99,6 @@ export class EpgComponent implements OnInit, OnDestroy {
 		}, new Map<string, GridEntry[]>());
 		this.lastignoredcount = count - this.length(this.filteredEntries);
 		this.totalIgnored = this.entries.length - this.length(this.filteredEntries);
-		//this._snackBar.open(this.lastignoredcount + "");
 	}
 	private length(a: Map<string, GridEntry[]>) {
 		return Array.from(a.values()).reduce((prev, cur) => { return prev + cur.length }, 0);
@@ -137,11 +143,15 @@ export class EpgComponent implements OnInit, OnDestroy {
 	}
 
 	public options: GridRequest<GridResponse> = { dir: "ASC", duplicates: 0, start: 0, limit: 300 };
-	public refresh() {
-		fetchData('/epg/events/grid', this.options).then(data => {
+	public refreshGrid() {
+		this.apiService.refreshGrid(this.options);
+	}
+	public refresh(data: GridResponse | undefined) {
+		if(data){
 			this.entries = data.entries;
 			this.totalCount = data.totalCount;
-			this.filteredEntries = new Map(); this.filterAll();
-		});
+			this.filteredEntries = new Map();
+			this.filterAll();
+		}
 	}
 }

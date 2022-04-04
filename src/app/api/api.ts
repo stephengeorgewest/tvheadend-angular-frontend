@@ -1,3 +1,12 @@
+import { Injectable, OnDestroy } from "@angular/core";
+import { BehaviorSubject, Observable, Subject, Subscription } from "rxjs";
+import { ignoreEntry, IgnoreListService, listNames, modificationType } from "../ignore-list.service";
+import { CreateByEventRequest } from "./dvr/entry/create_by_event/requestmodel";
+import { CreateByEventResponse } from "./dvr/entry/create_by_event/responsemodel";
+import { GridEntry, GridResponse } from "./epg/events/grid/responsemodel";
+import { GridRequest } from "./grid-request";
+import { fetchData } from "./util";
+
 /*enum access_enum = {
 	ACCESS_ADMIN,
 	ACCESS_ANONYMOUS,
@@ -95,7 +104,12 @@ const api: Map<string, webInterface[]> = new Map([[
 		{ path: "dvr/entry/grid_failed", permissions: "ACCESS_RECORDER", className: "api_idnode_grid", dataType: "api_dvr_entry_grid_failed" },
 		{ path: "dvr/entry/grid_removed", permissions: "ACCESS_RECORDER", className: "api_idnode_grid", dataType: "api_dvr_entry_grid_removed" },
 		{ path: "dvr/entry/create", permissions: "ACCESS_RECORDER", className: "api_dvr_entry_create", dataType: null },
-		{ path: "dvr/entry/create_by_event", permissions: "ACCESS_RECORDER", className: "api_dvr_entry_create_by_event", dataType: null },
+		{ 
+			path: "dvr/entry/create_by_event",
+			permissions: "ACCESS_RECORDER",
+			className: "api_dvr_entry_create_by_event",
+			dataType: null
+		},
 		{ path: "dvr/entry/rerecord/toggle", permissions: "ACCESS_RECORDER", className: "api_dvr_entry_rerecord_toggle", dataType: null },
 		{ path: "dvr/entry/rerecord/deny", permissions: "ACCESS_RECORDER", className: "api_dvr_entry_rerecord_deny", dataType: null },
 		{ path: "dvr/entry/rerecord/allow", permissions: "ACCESS_RECORDER", className: "api_dvr_entry_rerecord_allow", dataType: null },
@@ -260,3 +274,56 @@ const api: Map<string, webInterface[]> = new Map([[
 ]);
 
 const pathlist = ["access/entry/class", "access/entry/create", "access/entry/grid", "access/entry/userlist", "bouquet/class", "bouquet/create", "bouquet/detach", "bouquet/grid", "bouquet/list", "bouquet/scan", "caclient/builders", "caclient/class", "caclient/create", "caclient/list", "channel/class", "channel/create", "channel/grid", "channel/list", "channel/rename", "channelcategory/list", "channeltag/class", "channeltag/create", "channeltag/grid", "channeltag/list", "classes", "codec/list", "codec_profile/class", "codec_profile/create", "codec_profile/list", "config/capabilities", "config/load", "config/save", "connections/cancel", "dvb/orbitalpos/list", "dvb/scanfile/list", "dvr/autorec/class", "dvr/autorec/create", "dvr/autorec/create_by_series", "dvr/autorec/grid", "dvr/config/class", "dvr/config/create", "dvr/config/grid", "dvr/entry/cancel", "dvr/entry/class", "dvr/entry/create", "dvr/entry/create_by_event", "dvr/entry/filemoved", "dvr/entry/grid", "dvr/entry/grid_failed", "dvr/entry/grid_finished", "dvr/entry/grid_removed", "dvr/entry/grid_upcoming", "dvr/entry/move/failed", "dvr/entry/move/finished", "dvr/entry/prevrec/set", "dvr/entry/prevrec/toggle", "dvr/entry/prevrec/unset", "dvr/entry/remove", "dvr/entry/rerecord/allow", "dvr/entry/rerecord/deny", "dvr/entry/rerecord/toggle", "dvr/entry/stop", "dvr/timerec/class", "dvr/timerec/create", "dvr/timerec/grid", "epg/content_type/list", "epg/events/alternative", "epg/events/grid", "epg/events/load", "epg/events/related", "epggrab/channel/class", "epggrab/channel/grid", "epggrab/channel/list", "epggrab/config/load", "epggrab/config/save", "epggrab/internal/rerun", "epggrab/module/list", "epggrab/ota/trigger", "esfilter/audio/class", "esfilter/audio/create", "esfilter/audio/grid", "esfilter/ca/class", "esfilter/ca/create", "esfilter/ca/grid", "esfilter/other/class", "esfilter/other/create", "esfilter/other/grid", "esfilter/subtit/class", "esfilter/subtit/create", "esfilter/subtit/grid", "esfilter/teletext/class", "esfilter/teletext/create", "esfilter/teletext/grid", "esfilter/video/class", "esfilter/video/create", "esfilter/video/grid", "hardware/satip/discover", "hardware/tree", "idnode/class", "idnode/delete", "idnode/load", "idnode/movedown", "idnode/moveup", "idnode/save", "idnode/tree", "imagecache/config/clean", "imagecache/config/load", "imagecache/config/save", "imagecache/config/trigger", "intlconv/charsets", "ipblock/entry/class", "ipblock/entry/create", "ipblock/entry/grid", "language/list", "language/locale", "language/ui_locale", "memoryinfo/class", "memoryinfo/grid", "mpegts/input/network_list", "mpegts/mux/class", "mpegts/mux/grid", "mpegts/mux_sched/class", "mpegts/mux_sched/create", "mpegts/mux_sched/grid", "mpegts/network/builders", "mpegts/network/class", "mpegts/network/create", "mpegts/network/grid", "mpegts/network/mux_class", "mpegts/network/mux_create", "mpegts/network/scan", "mpegts/service/class", "mpegts/service/grid", "passwd/entry/class", "passwd/entry/create", "passwd/entry/grid", "pathlist", "profile/builders", "profile/class", "profile/create", "profile/list", "raw/export", "raw/import", "satips/config/load", "satips/config/save", "serverinfo", "service/list", "service/mapper/load", "service/mapper/save", "service/mapper/status", "service/mapper/stop", "service/removeunseen", "service/streams", "status/connections", "status/inputclrstats", "status/inputs", "status/subscriptions", "timeshift/config/load", "timeshift/config/save", "tvhlog/config/load", "tvhlog/config/save", "wizard/cancel", "wizard/channels/load", "wizard/channels/save", "wizard/hello/load", "wizard/hello/save", "wizard/login/load", "wizard/login/save", "wizard/mapping/load", "wizard/mapping/save", "wizard/muxes/load", "wizard/muxes/save", "wizard/network/load", "wizard/network/save", "wizard/start", "wizard/status/load", "wizard/status/progress", "wizard/status/save"];
+
+@Injectable({
+	providedIn: 'root',
+})
+export class ApiService {
+	private gridResponse: GridResponse | undefined = undefined;
+	private gridSubject: BehaviorSubject<GridResponse | undefined> = new BehaviorSubject(this.gridResponse);
+	public onGridResponse(): Observable<GridResponse | undefined> {
+		return this.gridSubject.asObservable();
+	}
+
+	public createByEvent(options: CreateByEventRequest) {
+		return fetchData("dvr/entry/create_by_event", options).then(response => {
+			const eventResponse = response as CreateByEventResponse;// todo validation?
+			eventResponse.uuid.forEach(u => {
+				const entry = this.gridResponse?.entries.find(e => options.event_id === e.eventId);
+				if(entry)
+					entry.dvrUuid = u;
+			});
+			this.gridSubject.next(this.gridResponse);
+			this.refreshEntries([options.event_id]);
+			return eventResponse;
+		});
+	}
+
+	//TODO: arrays don't serialize right.
+	private refreshEntries(entryIDs: number[] | number) {
+		fetchData("epg/events/load", {eventId:entryIDs}).then((data: GridResponse) => {
+			data.entries.forEach(e => {
+				if(!this.gridResponse){
+					this.gridResponse = {
+						totalCount: 1,
+						entries: [e]
+					}
+				}
+				else{
+					const matchingEntry = this.gridResponse?.entries.findIndex(gridEntry => gridEntry.eventId === e.eventId);
+					if(matchingEntry) {
+						this.gridResponse.entries[matchingEntry] = e;
+					}
+				}
+			});
+			this.gridSubject.next(this.gridResponse);
+		});
+	}
+	
+	public refreshGrid(options: GridRequest<GridResponse>) {
+		fetchData('/epg/events/grid', options).then(data => {
+			this.gridResponse = data;
+			this.gridSubject.next(this.gridResponse);
+		});
+	}
+}

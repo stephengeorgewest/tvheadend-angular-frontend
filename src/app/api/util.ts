@@ -1,9 +1,6 @@
 import { environment } from "src/environments/environment";
-import { CreateByEventRequest } from "./dvr/entry/create_by_event/requestmodel";
-import { CreateByEventResponse } from "./dvr/entry/create_by_event/responsemodel";
-import { GridRequest } from "./grid-request";
 
-function formEncode<T>(options: GridRequest<T>) {
+function formEncode(options: {[key: string]: any}) {
 	return Object.entries(options).reduce(
 		(params, current) => {
 			params.append(current[0], current[1].toString());
@@ -32,10 +29,4 @@ export function fetchData(page: string, options?: any) {
 		mode: 'cors',
 		headers: { "content-type": "application/x-www-form-urlencoded; charset=UTF-8" }
 	}).then(response => response.json());
-}
-export function createByEvent(options: CreateByEventRequest) {
-	return fetchData("dvr/entry/create_by_event", options).then(response => {
-		response as CreateByEventResponse;
-	});
-}
 }

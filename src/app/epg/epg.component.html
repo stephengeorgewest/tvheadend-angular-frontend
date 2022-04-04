@@ -5,7 +5,7 @@
 			<input matInput [(ngModel)]="options.limit" [ngModelOptions]="{standalone: true}" />
 		</mat-form-field>
 		<button mat-button (click)="options.limit = totalCount"><mat-icon>select_all</mat-icon></button>
-		<button mat-icon-button (click)="refresh()"><mat-icon>refresh</mat-icon></button>
+		<button mat-icon-button (click)="refreshGrid()"><mat-icon>refresh</mat-icon></button>
 
 		<div><label>Length</label>
 			<span><input type="radio" name="length" [(ngModel)]="filterLength" [value]="undefined" (change)="filterAll()"/>Don't care</span>
@@ -20,7 +20,7 @@
 		</div>
 		({{lastignoredcount}})
 	</form>
-	<app-title-list [filteredEntries]="filteredEntries" (selectedEntry)="selectedEntry = $event"></app-title-list>
+	<app-title-list [filteredEntries]="filteredEntries" (selectedEntry)="selectEntry($event)"></app-title-list>
 </div>
 
 <app-entry-list [selectedEntry]="selectedEntry"></app-entry-list>

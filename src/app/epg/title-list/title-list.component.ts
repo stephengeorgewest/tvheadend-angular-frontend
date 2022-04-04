@@ -132,7 +132,7 @@ export class TitleListComponent implements OnDestroy {
 	}
 
 	@Input() public lastignoredcount: number = 0;
-	@Output() public selectedEntry: EventEmitter<GridEntry[]> = new EventEmitter();
+	@Output() public selectedEntry: EventEmitter<string | undefined> = new EventEmitter();
 
 	public track(index: number, entry: GridEntry[]) {
 		return entry[0].title
@@ -225,7 +225,7 @@ export class TitleListComponent implements OnDestroy {
 
 	public mouseenter(event: GridEntry[]) {
 		if (!this.tapped)
-			this.selectedEntry.emit(event);
+			this.selectedEntry.emit(event[0].title);
 	}
 	public click(event: GridEntry[]) {
 		if (this.tapped == event[0].title) {
@@ -233,7 +233,7 @@ export class TitleListComponent implements OnDestroy {
 		}
 		else {
 			this.tapped = event[0].title;
-			this.selectedEntry.emit(event);
+			this.selectedEntry.emit(this.tapped);
 		}
 	}
 	public ignore(entry: ignoreEntry, listName: listNames) {
