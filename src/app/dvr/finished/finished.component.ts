@@ -1,6 +1,7 @@
-import { Component, Input, Pipe, PipeTransform, SecurityContext } from '@angular/core';
+import { Component, Input, OnDestroy, Pipe, PipeTransform } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ApiService } from 'src/app/api/api';
 import { GridUpcomingRequest } from 'src/app/api/dvr/entry/grid_upcoming/requestmodel';
 import { GridUpcomingEntry, GridUpcomingResponse } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
 import { RemoveBydvrUUIDRequest } from 'src/app/api/dvr/entry/remove/requestmodel';
@@ -119,9 +120,9 @@ export class FinishedComponent {
 		{ key: "errors", ascending: false },
 		{ key: "data_errors", ascending: false }
 	];
-	public reverse(sortKey: sortkeys){
+	public reverse(sortKey: sortkeys) {
 		const sort = this.sortList.find(s => sortKey === s.key);
-		if(sort) {
+		if (sort) {
 			sort.ascending = !sort.ascending;
 		}
 		this.sortList = [...this.sortList];
@@ -129,10 +130,8 @@ export class FinishedComponent {
 	}
 	public up(sortKey: sortkeys): void {
 		const index = this.sortList.findIndex((s) => sortKey === s.key);
-		if(index === -1)
-		{
+		if (index === -1)
 			return;
-		}
 		const sort = this.sortList[index];
 		if (index !== 0) {
 			this.sortList[index] = this.sortList[index - 1];
@@ -167,12 +166,12 @@ export class FinishedComponent {
 		fetchData(
 			'dvr/entry/grid_finished',
 			{ start: 0, dir: "ASC", duplicates: 0, limit: 999999999 } as GridUpcomingRequest).then(
-			data => {
-				this.entries = (data as GridUpcomingResponse).entries;
-				this.totalCount = data.total;
-				this.groupAndSort();
-			}
-		);
+				data => {
+					this.entries = (data as GridUpcomingResponse).entries;
+					this.totalCount = data.total;
+					this.groupAndSort();
+				}
+			);
 	}
 	private groupAndSort() {
 		this.filesize = 0;
@@ -233,7 +232,7 @@ export class FinishedComponent {
 				default:
 					sortValue = 0;
 			}
-			return this.groupSort ? sortValue: - sortValue;
+			return this.groupSort ? sortValue : - sortValue;
 		});
 	}
 	private sortEntries() {
@@ -324,10 +323,10 @@ export class DurationPipe implements PipeTransform {
 		const days = (d - hours) / 24;
 
 		const times: string[] = [];
-		if (days) times.push(days + (type ? "d": " day" + (days > 1? "s": "")));
-		if (hours) times.push((type && hours < 10 && days ? "0": "") + hours + (type ? "h": " hour" + (hours > 1 ? "s": "")));
-		if (minutes) times.push((type && minutes < 10 && (days || hours) ? "0": "") + minutes + (type ? "m": " minute" + (minutes > 1 ? "s": "")));
-		if (seconds) times.push((type && seconds < 10 && (days || hours || minutes) ? "0": "") + seconds + (type ? "s": " second" + (seconds > 1 ? "s": "")));
+		if (days) times.push(days + (type ? "d" : " day" + (days > 1 ? "s" : "")));
+		if (hours) times.push((type && hours < 10 && days ? "0" : "") + hours + (type ? "h" : " hour" + (hours > 1 ? "s" : "")));
+		if (minutes) times.push((type && minutes < 10 && (days || hours) ? "0" : "") + minutes + (type ? "m" : " minute" + (minutes > 1 ? "s" : "")));
+		if (seconds) times.push((type && seconds < 10 && (days || hours || minutes) ? "0" : "") + seconds + (type ? "s" : " second" + (seconds > 1 ? "s" : "")));
 
 		return times.join(", ");
 	}
@@ -341,14 +340,14 @@ export class DurationPipe implements PipeTransform {
 export class EpisodeDisplayComponent {
 	public season: string = "";
 	public episode: string = "";
-	@Input() public set season_episode(season_episode: string){
+	@Input() public set season_episode(season_episode: string) {
 		const season_episode_array = season_episode.split(".");
-		if(season_episode_array.length === 2){
+		if (season_episode_array.length === 2) {
 			this.season = season_episode_array[0];
 			this.episode = season_episode_array[1];
 		}
-		else if(season_episode_array.length === 1){
-			if(season_episode_array[0].startsWith("E")) this.episode = season_episode_array[0];
+		else if (season_episode_array.length === 1) {
+			if (season_episode_array[0].startsWith("E")) this.episode = season_episode_array[0];
 		}
 	}
 }
@@ -358,7 +357,7 @@ export class EpisodeDisplayComponent {
 })
 export class SortListPositionPipe implements PipeTransform {
 	transform(sortKey: keyof GridUpcomingEntry, sortList: Array<sortType<any>>) {
-		return sortList.findIndex((s:sortType<any>) => s.key === sortKey);
+		return sortList.findIndex((s: sortType<any>) => s.key === sortKey);
 	}
 }
 
@@ -367,7 +366,7 @@ export class SortListPositionPipe implements PipeTransform {
 })
 export class SortListDirectionPipe implements PipeTransform {
 	transform(sortKey: keyof GridUpcomingEntry, sortList: Array<sortType<any>>) {
-		return sortList.find((s:sortType<any>) => s.key === sortKey)?.ascending;
+		return sortList.find((s: sortType<any>) => s.key === sortKey)?.ascending;
 	}
 }
 

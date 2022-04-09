@@ -108,7 +108,7 @@ const api: Map<string, webInterface[]> = new Map([[
 		{ path: "dvr/entry/grid_failed", permissions: "ACCESS_RECORDER", className: "api_idnode_grid", dataType: "api_dvr_entry_grid_failed" },
 		{ path: "dvr/entry/grid_removed", permissions: "ACCESS_RECORDER", className: "api_idnode_grid", dataType: "api_dvr_entry_grid_removed" },
 		{ path: "dvr/entry/create", permissions: "ACCESS_RECORDER", className: "api_dvr_entry_create", dataType: null },
-		{ 
+		{
 			path: "dvr/entry/create_by_event",
 			permissions: "ACCESS_RECORDER",
 			className: "api_dvr_entry_create_by_event",
@@ -283,32 +283,32 @@ const pathlist = ["access/entry/class", "access/entry/create", "access/entry/gri
 	providedIn: 'root',
 })
 export class ApiService {
-	private gridResponse: GridResponse | undefined = undefined;
-	private gridSubject: BehaviorSubject<GridResponse | undefined> = new BehaviorSubject(this.gridResponse);
-	public onGridResponse(): Observable<GridResponse | undefined> {
-		return this.gridSubject.asObservable();
+	private epgGridResponse: GridResponse | undefined = undefined;
+	private epgGridSubject: BehaviorSubject<GridResponse | undefined> = new BehaviorSubject(this.epgGridResponse);
+	public onEpgGridResponse(): Observable<GridResponse | undefined> {
+		return this.epgGridSubject.asObservable();
 	}
 
 	public createByEvent(options: CreateByEventRequest) {
 		return fetchData("dvr/entry/create_by_event", options).then(response => {
 			const eventResponse = response as CreateByEventResponse;// todo validation?
 			eventResponse.uuid.forEach(u => {
-				const entry = this.gridResponse?.entries.find(e => options.event_id === e.eventId);
-				if(entry)
+				const entry = this.epgGridResponse?.entries.find(e => options.event_id === e.eventId);
+				if (entry)
 					entry.dvrUuid = u;
 			});
-			this.gridSubject.next(this.gridResponse);
-			this.refreshEntries([options.event_id]);
+			this.epgGridSubject.next(this.epgGridResponse);
+			this.refreshEpgEvents([options.event_id]);
 			return eventResponse;
 		});
 	}
 
 	public stopByGridEntry(options: Pick<GridEntry, "dvrUuid" | "eventId">) {
-		if(!options.dvrUuid){
+		if (!options.dvrUuid) {
 			return Promise.reject(() => "error");
 		}
-		return this.stopBydvrUUID({uuid: options.dvrUuid}).then(() => {
-			this.refreshEntries(options.eventId)
+		return this.stopBydvrUUID({ uuid: options.dvrUuid }).then(() => {
+			this.refreshEpgEvents(options.eventId)
 		});
 	}
 
@@ -324,47 +324,46 @@ export class ApiService {
 		});
 	}
 	private options: GridUpcomingRequest = { sort: "start_real", dir: "ASC", duplicates: 0 };
-	public refreshGridUpcoming(options?: GridUpcomingRequest){
-		if(options) this.options = options;
-		fetchData('/dvr/entry/grid_upcoming', this.options).then((data:GridUpcomingResponse) => this.gridUpcomingSubject.next(data));
+	public refreshGridUpcoming(options?: GridUpcomingRequest) {
+		if (options) this.options = options;
+		fetchData('dvr/entry/grid_upcoming', this.options).then((data: GridUpcomingResponse) => this.gridUpcomingSubject.next(data));
 	};
 
-	public deleteIdNode(options: DeleteBydvrUUIDRequest){
-		return fetchData("/idnode/delete", options).then(() => this.refreshByUUID(options));
+	public deleteIdNode(options: DeleteBydvrUUIDRequest) {
+		return fetchData("idnode/delete", options).then(() => this.refreshByUUID(options));
 	}
 
-	private refreshByUUID(options: StopBydvrUUIDRequest | DeleteBydvrUUIDRequest){
-		const refreshable = this.gridResponse?.entries.filter(e => e.dvrUuid && (e.dvrUuid === options.uuid || options.uuid.indexOf(e.dvrUuid) !== -1)).map(e => e.eventId);
-		if(refreshable)
-			this.refreshEntries(refreshable);
+	private refreshByUUID(options: StopBydvrUUIDRequest | DeleteBydvrUUIDRequest) {
+		const refreshable = this.epgGridResponse?.entries.filter(e => e.dvrUuid && (e.dvrUuid === options.uuid || options.uuid.indexOf(e.dvrUuid) !== -1)).map(e => e.eventId);
+		if (refreshable)
+			this.refreshEpgEvents(refreshable);
 		this.refreshGridUpcoming();
 	}
 
-	//TODO: arrays don't serialize right.
-	private refreshEntries(eventIDs: number[] | number) {
-		fetchData("epg/events/load", {eventId:eventIDs}).then((data: GridResponse) => {
+	private refreshEpgEvents(eventIDs: number[] | number) {
+		fetchData("epg/events/load", { eventId: eventIDs }).then((data: GridResponse) => {
 			data.entries.forEach(e => {
-				if(!this.gridResponse){
-					this.gridResponse = {
+				if (!this.epgGridResponse) {
+					this.epgGridResponse = {
 						totalCount: 1,
 						entries: [e]
 					}
 				}
-				else{
-					const matchingEntry = this.gridResponse?.entries.findIndex(gridEntry => gridEntry.eventId === e.eventId);
-					if(matchingEntry) {
-						this.gridResponse.entries[matchingEntry] = e;
+				else {
+					const matchingEntry = this.epgGridResponse?.entries.findIndex(gridEntry => gridEntry.eventId === e.eventId);
+					if (matchingEntry) {
+						this.epgGridResponse.entries[matchingEntry] = e;
 					}
 				}
 			});
-			this.gridSubject.next(this.gridResponse);
+			this.epgGridSubject.next(this.epgGridResponse);
 		});
 	}
-	
-	public refreshGrid(options: GridRequest<GridResponse>) {
-		fetchData('/epg/events/grid', options).then(data => {
-			this.gridResponse = data;
-			this.gridSubject.next(this.gridResponse);
+
+	public refreshEpgGrid(options: GridRequest<GridResponse>) {
+		fetchData('epg/events/grid', options).then(data => {
+			this.epgGridResponse = data;
+			this.epgGridSubject.next(this.epgGridResponse);
 		});
 	}
 }

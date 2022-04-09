@@ -28,7 +28,7 @@ export class EpgComponent implements OnInit, OnDestroy {
 
 	private subscription: Subscription;
 	constructor(private ignoreService: IgnoreListService, private apiService: ApiService) {
-		this.apiService.onGridResponse().subscribe(data => (this.refresh(data)));
+		this.apiService.onEpgGridResponse().subscribe(data => (this.refresh(data)));
 		this.subscription = this.ignoreService.onList().subscribe((e) => {
 			this.ignoreLists = e.list;
 			switch (e.type) {
@@ -144,7 +144,7 @@ export class EpgComponent implements OnInit, OnDestroy {
 
 	public options: GridRequest<GridResponse> = { dir: "ASC", duplicates: 0, start: 0, limit: 300 };
 	public refreshGrid() {
-		this.apiService.refreshGrid(this.options);
+		this.apiService.refreshEpgGrid(this.options);
 	}
 	public refresh(data: GridResponse | undefined) {
 		if(data){
