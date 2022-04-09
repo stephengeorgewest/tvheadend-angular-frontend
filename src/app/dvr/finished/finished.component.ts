@@ -3,6 +3,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { DomSanitizer } from '@angular/platform-browser';
 import { GridUpcomingRequest } from 'src/app/api/dvr/entry/grid_upcoming/requestmodel';
 import { GridUpcomingEntry, GridUpcomingResponse } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
+import { RemoveBydvrUUIDRequest } from 'src/app/api/dvr/entry/remove/requestmodel';
 import { fetchData } from 'src/app/api/util';
 type groupkeys = keyof Pick<GridUpcomingEntry,
 	"disp_title" |
@@ -160,9 +161,12 @@ export class FinishedComponent {
 
 	private entries: GridUpcomingEntry[] = [];
 	constructor() {
+		this.refresh();
+	}
+	private refresh() {
 		fetchData(
-			'/dvr/entry/grid_finished',
-			{ start: 0, dir: "ASC", duplicates: 0, limit: 999999999 }).then(
+			'dvr/entry/grid_finished',
+			{ start: 0, dir: "ASC", duplicates: 0, limit: 999999999 } as GridUpcomingRequest).then(
 			data => {
 				this.entries = (data as GridUpcomingResponse).entries;
 				this.totalCount = data.total;
@@ -263,6 +267,19 @@ export class FinishedComponent {
 			this.tapped = event[0].uuid;
 			this.selectedEntry = event;
 		}
+	}
+	//TODO: make safe
+	public remove(entry: GridUpcomingEntry) {
+		const requets: RemoveBydvrUUIDRequest = { uuid: entry.uuid };
+		fetchData('dvr/entry/remove', requets).then(
+			() => this.refresh()
+		);
+	}
+	public removeAll(entries: GridUpcomingEntry[]) {
+		const requets: RemoveBydvrUUIDRequest = { uuid: entries.map(e => e.uuid) };
+		fetchData('dvr/entry/remove', requets).then(
+			() => this.refresh()
+		);
 	}
 }
 

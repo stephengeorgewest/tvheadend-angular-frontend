@@ -1,3 +1,3 @@
 export interface DeleteBydvrUUIDRequest {
-	uuid: string[];
+	uuid: string[] | string;
 };

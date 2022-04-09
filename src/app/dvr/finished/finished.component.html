@@ -56,7 +56,7 @@
 						<mat-icon>menu</mat-icon>
 					</button>
 					<mat-menu #menu="matMenu">
-						<button mat-menu-item>
+						<button mat-menu-item (click)="removeAll(group.entries)">
 							<mat-icon>delete</mat-icon>
 							<span>Remove All</span>
 						</button>
@@ -78,7 +78,7 @@
 							<mat-icon>edit</mat-icon>
 							<span>Edit</span>
 						</button>
-						<button mat-menu-item>
+						<button mat-menu-item (click)="remove(entry)">
 							<mat-icon>delete</mat-icon>
 							<span>Remove</span>
 						</button>
