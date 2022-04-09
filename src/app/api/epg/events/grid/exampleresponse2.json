@@ -1,0 +1,2778 @@
+{
+	"totalCount": 300,
+	"entries": [{
+		"eventId": 1528,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649505600,
+		"stop": 1649511000,
+		"title": "Laurel and Hardy with Leonard Maltin",
+		"nextEventId": 1520
+	}, {
+		"eventId": 1525,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649509200,
+		"stop": 1649512800,
+		"title": "2News This Morning at 7A Saturday",
+		"dvrUuid": "81a1b2e940a8d5866d47404b2abcdbd7",
+		"dvrState": "recording",
+		"nextEventId": 1526
+	}, {
+		"eventId": 1534,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649509200,
+		"stop": 1649512800,
+		"title": "Now That's Clever! with Guy",
+		"nextEventId": 1535
+	}, {
+		"eventId": 1566,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649509200,
+		"stop": 1649511000,
+		"title": "Jack Hanna's Into the Wild",
+		"nextEventId": 1567
+	}, {
+		"eventId": 1483,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649509200,
+		"stop": 1649512800,
+		"title": "Chasing Monsters",
+		"nextEventId": 1484
+	}, {
+		"eventId": 1831,
+		"channelName": "ION",
+		"channelUuid": "226b4baff4b5ec3d256a953f1d07932b",
+		"channelNumber": "16.1",
+		"start": 1649509201,
+		"stop": 1649512801,
+		"title": "NCIS: New Orleans",
+		"description": "The NCIS: New Orleans team investigates a potential assassination attempt on the Vice Chief of Naval Operations; Agent Brody's cryptic past is explored.",
+		"nextEventId": 1832
+	}, {
+		"eventId": 1675,
+		"channelName": "TruReal",
+		"channelUuid": "92205e3164200840ca831d965e9a3e2a",
+		"channelNumber": "16.6",
+		"start": 1649509201,
+		"stop": 1649511001,
+		"title": "Parking Wars",
+		"description": "Two men from Atlanta frantically attempt to retrieve their impounded car before their flight leaves for home; a man's car is towed during a wedding.",
+		"nextEventId": 1676
+	}, {
+		"eventId": 1977,
+		"channelName": "KUTV2",
+		"channelUuid": "2ddb05b20dde041dd0ecfd3c26deac54",
+		"channelNumber": "2.1",
+		"start": 1649509201,
+		"stop": 1649512801,
+		"title": "2News This Morning Weekend",
+		"description": "News coverage to start the day. ",
+		"nextEventId": 1978
+	}, {
+		"eventId": 1826,
+		"channelName": "Bounce",
+		"channelUuid": "9c9c85d94997cdcba6303792beee9e40",
+		"channelNumber": "16.4",
+		"start": 1649509201,
+		"stop": 1649511001,
+		"title": "A Different World",
+		"description": "To take her mind off of her problems, Whitley goes to a club with Kim and Freddie; Freddie confesses to Kim her attraction to Ron.",
+		"nextEventId": 1827
+	}, {
+		"eventId": 1941,
+		"channelName": "KBYU",
+		"channelUuid": "265e3f35fae22bf4bba2e6186fb7d3e5",
+		"channelNumber": "11.1",
+		"start": 1649510581,
+		"stop": 1649511961,
+		"title": "Home Factory",
+		"nextEventId": 1942
+	}, {
+		"eventId": 1567,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649511000,
+		"stop": 1649512800,
+		"title": "Jack Hanna's Into the Wild",
+		"description": "Jack and Suzi visit the Thula Thula Private Game Reserve in the Zululand, KwaZulu-Natal province in South Africa, which is known for saving African elephants.",
+		"nextEventId": 1568
+	}, {
+		"eventId": 1520,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649511000,
+		"stop": 1649518200,
+		"title": "Blondie's Lucky Day",
+		"nextEventId": 1521
+	}, {
+		"eventId": 1676,
+		"channelName": "TruReal",
+		"channelUuid": "92205e3164200840ca831d965e9a3e2a",
+		"channelNumber": "16.6",
+		"start": 1649511001,
+		"stop": 1649512801,
+		"title": "Parking Wars",
+		"description": "Jen and Mike are forced to call the police when an irate man threatens them with a garden tool, while a young man and his sister try to get their car back.",
+		"nextEventId": 1677
+	}, {
+		"eventId": 1827,
+		"channelName": "Bounce",
+		"channelUuid": "9c9c85d94997cdcba6303792beee9e40",
+		"channelNumber": "16.4",
+		"start": 1649511001,
+		"stop": 1649512801,
+		"title": "A Different World",
+		"description": "Whitley's mother makes a surprise visit for Thanksgiving and shocks everyone by introducing her much younger fiancé; Freddie attempts to avoid Ron.",
+		"nextEventId": 1828
+	}, {
+		"eventId": 1942,
+		"channelName": "KBYU",
+		"channelUuid": "265e3f35fae22bf4bba2e6186fb7d3e5",
+		"channelNumber": "11.1",
+		"start": 1649511961,
+		"stop": 1649513341,
+		"title": "Home Factory",
+		"nextEventId": 1943
+	}, {
+		"eventId": 1526,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649512800,
+		"stop": 1649514600,
+		"title": "Elizabeth Stanton's Great Big World",
+		"description": "Elizabeth Stanton travels throughout the world visiting different locales, as she and her special guest friends look to learn more about other country's culture",
+		"nextEventId": 1527
+	}, {
+		"eventId": 1535,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649512800,
+		"stop": 1649516400,
+		"title": "Saturday Morning with Callie & Alyce",
+		"nextEventId": 1688
+	}, {
+		"eventId": 1568,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649512800,
+		"stop": 1649514600,
+		"title": "Jack Hanna's Into the Wild",
+		"nextEventId": 1569
+	}, {
+		"eventId": 1484,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649512800,
+		"stop": 1649516400,
+		"title": "Chasing Monsters",
+		"nextEventId": 1669
+	}, {
+		"eventId": 1832,
+		"channelName": "ION",
+		"channelUuid": "226b4baff4b5ec3d256a953f1d07932b",
+		"channelNumber": "16.1",
+		"start": 1649512801,
+		"stop": 1649516401,
+		"title": "Law & Order: Special Victims Unit",
+		"description": "After questioning a preteen who has just given birth at the hospital, the detectives are led to an apartment that turns out to be a haven for cult members.",
+		"nextEventId": 1685
+	}, {
+		"eventId": 1677,
+		"channelName": "TruReal",
+		"channelUuid": "92205e3164200840ca831d965e9a3e2a",
+		"channelNumber": "16.6",
+		"start": 1649512801,
+		"stop": 1649514601,
+		"title": "Parking Wars",
+		"description": "A citizen makes Yolanda extremely angry; Eula is forced to help Brian when a woman disputes a ticket; Jen and Mike run into a cultural barrier.",
+		"nextEventId": 1678
+	}, {
+		"eventId": 1978,
+		"channelName": "KUTV2",
+		"channelUuid": "2ddb05b20dde041dd0ecfd3c26deac54",
+		"channelNumber": "2.1",
+		"start": 1649512801,
+		"stop": 1649514601,
+		"title": "Lucky Dog",
+		"description": "Eric checks in with past adopters who were inspired to welcome new furry friends into their lives after a void was created by the passing of a previous pet.",
+		"nextEventId": 1979
+	}, {
+		"eventId": 1828,
+		"channelName": "Bounce",
+		"channelUuid": "9c9c85d94997cdcba6303792beee9e40",
+		"channelNumber": "16.4",
+		"start": 1649512801,
+		"stop": 1649514601,
+		"title": "A Different World",
+		"description": "Dwayne becomes a mentor to teenagers at a juvenile hall, but fights ensue as his two assignees turn out to be members of rival gangs.",
+		"nextEventId": 1829
+	}, {
+		"eventId": 1943,
+		"channelName": "KBYU",
+		"channelUuid": "265e3f35fae22bf4bba2e6186fb7d3e5",
+		"channelNumber": "11.1",
+		"start": 1649513341,
+		"stop": 1649514871,
+		"title": "Best Cake Wins",
+		"nextEventId": 1944
+	}, {
+		"eventId": 1527,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649514600,
+		"stop": 1649516400,
+		"title": "Animal Rescue",
+		"nextEventId": 1536
+	}, {
+		"eventId": 1569,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649514600,
+		"stop": 1649516400,
+		"title": "Jack Hanna's Into the Wild",
+		"nextEventId": 1732
+	}, {
+		"eventId": 1678,
+		"channelName": "TruReal",
+		"channelUuid": "92205e3164200840ca831d965e9a3e2a",
+		"channelNumber": "16.6",
+		"start": 1649514601,
+		"stop": 1649516401,
+		"title": "Parking Wars",
+		"description": "Garfield and Sherry are forced to call for police backup when an irate man tries to remove a boot; Shawn writes a ticket to a man blocking a bus zone.",
+		"nextEventId": 1812
+	}, {
+		"eventId": 1979,
+		"channelName": "KUTV2",
+		"channelUuid": "2ddb05b20dde041dd0ecfd3c26deac54",
+		"channelNumber": "2.1",
+		"start": 1649514601,
+		"stop": 1649516401,
+		"title": "The Henry Ford's Innovation Nation",
+		"nextEventId": 1966
+	}, {
+		"eventId": 1829,
+		"channelName": "Bounce",
+		"channelUuid": "9c9c85d94997cdcba6303792beee9e40",
+		"channelNumber": "16.4",
+		"start": 1649514601,
+		"stop": 1649516401,
+		"title": "A Different World",
+		"description": "Whitley purchases a $700 suit for a job interview, doesn't get the job and stains the suit before she can return it, all while Dwayne is out of town.",
+		"nextEventId": 1816
+	}, {
+		"eventId": 1944,
+		"channelName": "KBYU",
+		"channelUuid": "265e3f35fae22bf4bba2e6186fb7d3e5",
+		"channelNumber": "11.1",
+		"start": 1649514871,
+		"stop": 1649516401,
+		"title": "Best Cake Wins",
+		"nextEventId": 1932
+	}, {
+		"eventId": 1536,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649516400,
+		"stop": 1649518200,
+		"title": "Think Big",
+		"description": "A boy shows his dew collector that produces clean water; a girl presents an autistic learning device that slows down audio and video for easier understanding.",
+		"nextEventId": 1537
+	}, {
+		"eventId": 1688,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649516400,
+		"stop": 1649520000,
+		"title": "Saturday Morning with Callie & Alyce",
+		"nextEventId": 1689
+	}, {
+		"eventId": 1732,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649516400,
+		"stop": 1649518200,
+		"title": "The Open Road with Dr. Chris",
+		"description": "Dr. Chris travels to Malaysia to help orphaned orangutans; is given a ride in the Australian Alps by a team of sled dogs; joins a Canadian wolf pack.",
+		"nextEventId": 1733
+	}, {
+		"eventId": 1669,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649516400,
+		"stop": 1649520000,
+		"title": "Chasing Monsters",
+		"nextEventId": 1670
+	}, {
+		"eventId": 1685,
+		"channelName": "ION",
+		"channelUuid": "226b4baff4b5ec3d256a953f1d07932b",
+		"channelNumber": "16.1",
+		"start": 1649516401,
+		"stop": 1649520001,
+		"title": "Law & Order: Special Victims Unit",
+		"description": "Detectives Benson and Stabler seek evidence to link a wealthy woman's son to the body of a young woman who was found raped and murdered outside of a nightclub.",
+		"nextEventId": 1686
+	}, {
+		"eventId": 1812,
+		"channelName": "TruReal",
+		"channelUuid": "92205e3164200840ca831d965e9a3e2a",
+		"channelNumber": "16.6",
+		"start": 1649516401,
+		"stop": 1649518201,
+		"title": "Parking Wars",
+		"description": "DeAndre argues with an infuriated citizen about parking on public property; the super boot crew boots a widow; Sonja deals out tickets with compassion.",
+		"nextEventId": 1813
+	}, {
+		"eventId": 1966,
+		"channelName": "KUTV2",
+		"channelUuid": "2ddb05b20dde041dd0ecfd3c26deac54",
+		"channelNumber": "2.1",
+		"start": 1649516401,
+		"stop": 1649518201,
+		"title": "Mission Unstoppable",
+		"nextEventId": 1967
+	}, {
+		"eventId": 1932,
+		"channelName": "KBYU",
+		"channelUuid": "265e3f35fae22bf4bba2e6186fb7d3e5",
+		"channelNumber": "11.1",
+		"start": 1649516401,
+		"stop": 1649519401,
+		"title": "Highway to Heaven",
+		"nextEventId": 1933
+	}, {
+		"eventId": 1929,
+		"channelName": "BYURDIO",
+		"channelUuid": "e93cc1b823849eae4dbd7640eec596bc",
+		"channelNumber": "11.2",
+		"start": 1649516401,
+		"stop": 1649520001,
+		"title": "BYU Radio",
+		"nextEventId": 1930
+	}, {
+		"eventId": 1971,
+		"channelName": "Comet",
+		"channelUuid": "f1e8164f60021608ca761d5cf8727648",
+		"channelNumber": "14.2",
+		"start": 1649516401,
+		"stop": 1649518201,
+		"title": "Paid Programming",
+		"nextEventId": 1972
+	}, {
+		"eventId": 1801,
+		"channelName": "Laff",
+		"channelUuid": "f0b084d3b0938f76c83c21cda20c9605",
+		"channelNumber": "16.3",
+		"start": 1649516401,
+		"stop": 1649518201,
+		"title": "Night Court",
+		"description": "A simple man chooses Harry to decide which fortunate person will receive his lottery winnings, causing the courtroom to go wild as each asks to be chosen.",
+		"nextEventId": 1802
+	}, {
+		"eventId": 1926,
+		"channelName": "Classical 89",
+		"channelUuid": "80dcbbfec865d69a98f26b67add17ed4",
+		"channelNumber": "11.3",
+		"start": 1649516401,
+		"stop": 1649520001,
+		"title": "Classical 89",
+		"nextEventId": 1927
+	}, {
+		"eventId": 1537,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649518200,
+		"stop": 1649520000,
+		"title": "Made in Hollywood: Teen Edition",
+		"description": "Preparing teens for careers in the motion-picture, television and multimedia industries, both in front of the camera and behind the scenes.",
+		"nextEventId": 1538
+	}, {
+		"eventId": 1733,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649518200,
+		"stop": 1649520000,
+		"title": "Ready, Set, Pet",
+		"description": "A woman has made the decision to adopt a dog for her two daughters, who she feels are finally ready for the responsibility of caring for a dog.",
+		"nextEventId": 1734
+	}, {
+		"eventId": 1521,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649518200,
+		"stop": 1649525400,
+		"title": "Tommy Boy",
+		"nextEventId": 1522
+	}, {
+		"eventId": 1813,
+		"channelName": "TruReal",
+		"channelUuid": "92205e3164200840ca831d965e9a3e2a",
+		"channelNumber": "16.6",
+		"start": 1649518201,
+		"stop": 1649520001,
+		"title": "Parking Wars",
+		"description": "A vicious snowstorm hits Philadelphia and causes problems for the crew, and citizens get upset when they are forced to retrieve their cars from the impound lot.",
+		"nextEventId": 1814
+	}, {
+		"eventId": 1967,
+		"channelName": "KUTV2",
+		"channelUuid": "2ddb05b20dde041dd0ecfd3c26deac54",
+		"channelNumber": "2.1",
+		"start": 1649518201,
+		"stop": 1649520001,
+		"title": "Hope in the Wild",
+		"nextEventId": 1968
+	}, {
+		"eventId": 1972,
+		"channelName": "Comet",
+		"channelUuid": "f1e8164f60021608ca761d5cf8727648",
+		"channelNumber": "14.2",
+		"start": 1649518201,
+		"stop": 1649520001,
+		"title": "Emeril's Air Fryer Secret + FREE PANS",
+		"nextEventId": 1973
+	}, {
+		"eventId": 1802,
+		"channelName": "Laff",
+		"channelUuid": "f0b084d3b0938f76c83c21cda20c9605",
+		"channelNumber": "16.3",
+		"start": 1649518201,
+		"stop": 1649520001,
+		"title": "Night Court",
+		"description": "A pint-sized computer whiz barricades himself in Harry's office and threatens to erase all his school's records, forcing Harry and the others to intervene.",
+		"nextEventId": 1803
+	}, {
+		"eventId": 1933,
+		"channelName": "KBYU",
+		"channelUuid": "265e3f35fae22bf4bba2e6186fb7d3e5",
+		"channelNumber": "11.1",
+		"start": 1649519401,
+		"stop": 1649521981,
+		"title": "Heartland",
+		"nextEventId": 1934
+	}, {
+		"eventId": 1538,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649520000,
+		"stop": 1649521800,
+		"title": "Missing",
+		"description": "Investigative journalist and host Alex Paen follows a series of cases in an effort to help law enforcement agencies across North America follow scant evidence t",
+		"nextEventId": 1539
+	}, {
+		"eventId": 1689,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649520000,
+		"stop": 1649523600,
+		"title": "Saturday Morning with Callie & Alyce",
+		"nextEventId": 1690
+	}, {
+		"eventId": 1734,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649520000,
+		"stop": 1649521800,
+		"title": "Paid Program",
+		"description": "Sponsored television programming.",
+		"nextEventId": 1735
+	}, {
+		"eventId": 1670,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649520000,
+		"stop": 1649523600,
+		"title": "MonsterQuest",
+		"nextEventId": 1671
+	}, {
+		"eventId": 1686,
+		"channelName": "ION",
+		"channelUuid": "226b4baff4b5ec3d256a953f1d07932b",
+		"channelNumber": "16.1",
+		"start": 1649520001,
+		"stop": 1649523601,
+		"title": "Law & Order: Special Victims Unit",
+		"description": "An elderly woman is suffering abuse at the hands of her son for her prescription pain medication and the detectives attempt to convince her to turn him in.",
+		"nextEventId": 1687
+	}, {
+		"eventId": 1814,
+		"channelName": "TruReal",
+		"channelUuid": "92205e3164200840ca831d965e9a3e2a",
+		"channelNumber": "16.6",
+		"start": 1649520001,
+		"stop": 1649525401,
+		"title": "Married at First Sight",
+		"description": "Family and friends head to the wedding reception to celebrate the couples' weddings, but things go awry when Keith learns an unnerving fact about his bride.",
+		"nextEventId": 1815
+	}, {
+		"eventId": 1968,
+		"channelName": "KUTV2",
+		"channelUuid": "2ddb05b20dde041dd0ecfd3c26deac54",
+		"channelNumber": "2.1",
+		"start": 1649520001,
+		"stop": 1649521801,
+		"title": "Parade of Homes Show",
+		"nextEventId": 1969
+	}, {
+		"eventId": 1930,
+		"channelName": "BYURDIO",
+		"channelUuid": "e93cc1b823849eae4dbd7640eec596bc",
+		"channelNumber": "11.2",
+		"start": 1649520001,
+		"stop": 1649523601,
+		"title": "BYU Radio",
+		"nextEventId": 1931
+	}, {
+		"eventId": 1973,
+		"channelName": "Comet",
+		"channelUuid": "f1e8164f60021608ca761d5cf8727648",
+		"channelNumber": "14.2",
+		"start": 1649520001,
+		"stop": 1649521801,
+		"title": "Car Repair Secrets!",
+		"nextEventId": 1974
+	}, {
+		"eventId": 1803,
+		"channelName": "Laff",
+		"channelUuid": "f0b084d3b0938f76c83c21cda20c9605",
+		"channelNumber": "16.3",
+		"start": 1649520001,
+		"stop": 1649521801,
+		"title": "Night Court",
+		"description": "A volunteer father's organization finally allows Bull to take care of a foster son, but an unexpected change leads to everyone's surprises.",
+		"nextEventId": 1804
+	}, {
+		"eventId": 1927,
+		"channelName": "Classical 89",
+		"channelUuid": "80dcbbfec865d69a98f26b67add17ed4",
+		"channelNumber": "11.3",
+		"start": 1649520001,
+		"stop": 1649523601,
+		"title": "Classical 89",
+		"nextEventId": 1928
+	}, {
+		"eventId": 1539,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649521800,
+		"stop": 1649523600,
+		"title": "Dog Tales",
+		"description": "Host Alex Paen discusses a training facility that teaches unruly dogs how to behave; tips on how to walk a dog; Corgis are profiled.",
+		"nextEventId": 1540
+	}, {
+		"eventId": 1735,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649521800,
+		"stop": 1649523600,
+		"title": "Paid Program",
+		"description": "Sponsored television programming.",
+		"nextEventId": 1736
+	}, {
+		"eventId": 1969,
+		"channelName": "KUTV2",
+		"channelUuid": "2ddb05b20dde041dd0ecfd3c26deac54",
+		"channelNumber": "2.1",
+		"start": 1649521801,
+		"stop": 1649525401,
+		"title": "We Need to Talk",
+		"nextEventId": 1970
+	}, {
+		"eventId": 1974,
+		"channelName": "Comet",
+		"channelUuid": "f1e8164f60021608ca761d5cf8727648",
+		"channelNumber": "14.2",
+		"start": 1649521801,
+		"stop": 1649523601,
+		"title": "Visibly Reduce Crow's Feet, Wrinkles, and Under-Eye Bags in Minutes!",
+		"description": "Plexaderm starts working instantly to reduce the look of fine-lines, deep wrinkles, crow's feet, and under-eye puffiness. You'll be amazed at the transformation you see in just a few short minutes after applying this miracle age-defying cream.",
+		"nextEventId": 1975
+	}, {
+		"eventId": 1804,
+		"channelName": "Laff",
+		"channelUuid": "f0b084d3b0938f76c83c21cda20c9605",
+		"channelNumber": "16.3",
+		"start": 1649521801,
+		"stop": 1649523601,
+		"title": "Night Court",
+		"description": "A nervous Harry finds himself on the other side of the bench when his unorthodox courtroom tactics are under investigation by a disciplinary board.",
+		"nextEventId": 1805
+	}, {
+		"eventId": 1816,
+		"channelName": "Bounce",
+		"channelUuid": "9c9c85d94997cdcba6303792beee9e40",
+		"channelNumber": "16.4",
+		"start": 1649521801,
+		"stop": 1649530801,
+		"title": "Not Easily Broken",
+		"description": "Marriage vows are tested after a car accident, as the wife finds comfort with her physical therapist, while the husband develops a friendship another woman.",
+		"nextEventId": 1817
+	}, {
+		"eventId": 1934,
+		"channelName": "KBYU",
+		"channelUuid": "265e3f35fae22bf4bba2e6186fb7d3e5",
+		"channelNumber": "11.1",
+		"start": 1649521981,
+		"stop": 1649524561,
+		"title": "Heartland",
+		"nextEventId": 1935
+	}, {
+		"eventId": 1540,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649523600,
+		"stop": 1649525400,
+		"title": "America's Heartland",
+		"description": "A magazine-format show about American farming features stories of the hard-working men and women who produce food, fuel and fiber for the world, discussing the ",
+		"nextEventId": 1541
+	}, {
+		"eventId": 1690,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649523600,
+		"stop": 1649527200,
+		"title": "Kitchen Essentials",
+		"description": "HSN offers viewers a special presentation featuring must-have items for every kitchen from leading brands, offered at affordable prices.",
+		"nextEventId": 1514
+	}, {
+		"eventId": 1736,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649523600,
+		"stop": 1649525400,
+		"title": "Paid Program",
+		"description": "Sponsored television programming.",
+		"nextEventId": 1737
+	}, {
+		"eventId": 1671,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649523600,
+		"stop": 1649527200,
+		"title": "MonsterQuest",
+		"nextEventId": 1451
+	}, {
+		"eventId": 1687,
+		"channelName": "ION",
+		"channelUuid": "226b4baff4b5ec3d256a953f1d07932b",
+		"channelNumber": "16.1",
+		"start": 1649523601,
+		"stop": 1649527201,
+		"title": "Law & Order: Special Victims Unit",
+		"description": "After finding a woman's dismembered body, the detectives are led to a transplant surgeon at the center of an illegal ring that deals in human body parts.",
+		"nextEventId": 1820
+	}, {
+		"eventId": 1931,
+		"channelName": "BYURDIO",
+		"channelUuid": "e93cc1b823849eae4dbd7640eec596bc",
+		"channelNumber": "11.2",
+		"start": 1649523601,
+		"stop": 1649527201,
+		"title": "BYU Radio"
+	}, {
+		"eventId": 1975,
+		"channelName": "Comet",
+		"channelUuid": "f1e8164f60021608ca761d5cf8727648",
+		"channelNumber": "14.2",
+		"start": 1649523601,
+		"stop": 1649525401,
+		"title": "Paid Programming",
+		"nextEventId": 1976
+	}, {
+		"eventId": 1805,
+		"channelName": "Laff",
+		"channelUuid": "f0b084d3b0938f76c83c21cda20c9605",
+		"channelNumber": "16.3",
+		"start": 1649523601,
+		"stop": 1649525401,
+		"title": "World's Funniest Videos: Top 10 Countdown",
+		"description": "Funny clips of natural slip-ups, including failed hunter/gatherers, deer friends and scaped knees.",
+		"nextEventId": 1806
+	}, {
+		"eventId": 1928,
+		"channelName": "Classical 89",
+		"channelUuid": "80dcbbfec865d69a98f26b67add17ed4",
+		"channelNumber": "11.3",
+		"start": 1649523601,
+		"stop": 1649527201,
+		"title": "Classical 89"
+	}, {
+		"eventId": 1935,
+		"channelName": "KBYU",
+		"channelUuid": "265e3f35fae22bf4bba2e6186fb7d3e5",
+		"channelNumber": "11.1",
+		"start": 1649524561,
+		"stop": 1649527201,
+		"title": "Heartland"
+	}, {
+		"eventId": 1541,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649525400,
+		"stop": 1649527200,
+		"title": "Go Nitro",
+		"nextEventId": 1766
+	}, {
+		"eventId": 1737,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649525400,
+		"stop": 1649527200,
+		"title": "Paid Program",
+		"description": "Sponsored television programming.",
+		"nextEventId": 1555
+	}, {
+		"eventId": 1522,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649525400,
+		"stop": 1649533200,
+		"title": "The St. Valentine's Day Massacre",
+		"nextEventId": 1841
+	}, {
+		"eventId": 1815,
+		"channelName": "TruReal",
+		"channelUuid": "92205e3164200840ca831d965e9a3e2a",
+		"channelNumber": "16.6",
+		"start": 1649525401,
+		"stop": 1649530801,
+		"title": "Married at First Sight",
+		"description": "The couples spend their first night together as husband and wife; the spouses meet with their new in-laws before going to Antigua for their honeymoon."
+	}, {
+		"eventId": 1970,
+		"channelName": "KUTV2",
+		"channelUuid": "2ddb05b20dde041dd0ecfd3c26deac54",
+		"channelNumber": "2.1",
+		"start": 1649525401,
+		"stop": 1649527201,
+		"title": "The Masters: Moving Day"
+	}, {
+		"eventId": 1976,
+		"channelName": "Comet",
+		"channelUuid": "f1e8164f60021608ca761d5cf8727648",
+		"channelNumber": "14.2",
+		"start": 1649525401,
+		"stop": 1649527201,
+		"title": "Emeril Lagasse Forever Pans + FREE GRILL"
+	}, {
+		"eventId": 1806,
+		"channelName": "Laff",
+		"channelUuid": "f0b084d3b0938f76c83c21cda20c9605",
+		"channelNumber": "16.3",
+		"start": 1649525401,
+		"stop": 1649527201,
+		"title": "World's Funniest Videos: Top 10 Countdown",
+		"description": "Funny clips of a man at the beach as well as a ventriloquist and his cheese sandwich puppet.",
+		"nextEventId": 1872
+	}, {
+		"eventId": 1766,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649527200,
+		"stop": 1649529000,
+		"title": "SSN Sports",
+		"nextEventId": 1767
+	}, {
+		"eventId": 1514,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649527200,
+		"stop": 1649530800,
+		"title": "Spring Cleaning",
+		"nextEventId": 1515
+	}, {
+		"eventId": 1555,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649527200,
+		"stop": 1649529000,
+		"title": "Right This Minute",
+		"nextEventId": 1556
+	}, {
+		"eventId": 1451,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649527200,
+		"stop": 1649530800,
+		"title": "MonsterQuest",
+		"nextEventId": 1452
+	}, {
+		"eventId": 1820,
+		"channelName": "ION",
+		"channelUuid": "226b4baff4b5ec3d256a953f1d07932b",
+		"channelNumber": "16.1",
+		"start": 1649527201,
+		"stop": 1649530801,
+		"title": "Law & Order: Special Victims Unit",
+		"description": "A 9-year-old girl claims that she was sexually abused by her soccer coach; Stabler struggles with the fact that his wife has left him.",
+		"nextEventId": 1821
+	}, {
+		"eventId": 1818,
+		"channelName": "Grit",
+		"channelUuid": "3af847c787f982c240a29e496e6983e5",
+		"channelNumber": "16.2",
+		"start": 1649527201,
+		"stop": 1649534401,
+		"title": "Tomahawk Trail",
+		"nextEventId": 1819
+	}, {
+		"eventId": 1767,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649529000,
+		"stop": 1649530800,
+		"title": "SSN Sports",
+		"nextEventId": 1768
+	}, {
+		"eventId": 1556,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649529000,
+		"stop": 1649530800,
+		"title": "Right This Minute",
+		"nextEventId": 1557
+	}, {
+		"eventId": 1768,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649530800,
+		"stop": 1649532600,
+		"title": "Game Time with Boomer Esiason",
+		"description": "Boomer Esiason, who was a quarterback for 14 seasons in the National Football League, sits down with some of the most recognizable figures in sports for an excl",
+		"nextEventId": 1769
+	}, {
+		"eventId": 1515,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649530800,
+		"stop": 1649534400,
+		"title": "DG2 by Diane Gilman",
+		"nextEventId": 1516
+	}, {
+		"eventId": 1557,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649530800,
+		"stop": 1649532600,
+		"title": "Paid Program",
+		"nextEventId": 1558
+	}, {
+		"eventId": 1452,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649530800,
+		"stop": 1649534400,
+		"title": "Mayday",
+		"nextEventId": 1453
+	}, {
+		"eventId": 1821,
+		"channelName": "ION",
+		"channelUuid": "226b4baff4b5ec3d256a953f1d07932b",
+		"channelNumber": "16.1",
+		"start": 1649530801,
+		"stop": 1649534401,
+		"title": "Law & Order: Special Victims Unit",
+		"description": "A young girl admits to the detectives that she pushed a gang member to his death from the roof of a building after he sexually assaulted her.",
+		"nextEventId": 1822
+	}, {
+		"eventId": 1817,
+		"channelName": "Bounce",
+		"channelUuid": "9c9c85d94997cdcba6303792beee9e40",
+		"channelNumber": "16.4",
+		"start": 1649530801,
+		"stop": 1649539801,
+		"title": "Bait",
+		"nextEventId": 1859
+	}, {
+		"eventId": 1769,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649532600,
+		"stop": 1649534400,
+		"title": "Greatest Sports Legends: Then and Now",
+		"nextEventId": 1770
+	}, {
+		"eventId": 1558,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649532600,
+		"stop": 1649534400,
+		"title": "Paid Program",
+		"nextEventId": 1559
+	}, {
+		"eventId": 1841,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649533200,
+		"stop": 1649541000,
+		"title": "The Osterman Weekend",
+		"nextEventId": 1842
+	}, {
+		"eventId": 1770,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649534400,
+		"stop": 1649538000,
+		"title": "World Poker Tour",
+		"nextEventId": 1856
+	}, {
+		"eventId": 1516,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649534400,
+		"stop": 1649538000,
+		"title": "DG2 by Diane Gilman",
+		"nextEventId": 1545
+	}, {
+		"eventId": 1559,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649534400,
+		"stop": 1649538000,
+		"title": "S.W.A.T.",
+		"nextEventId": 1727
+	}, {
+		"eventId": 1453,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649534400,
+		"stop": 1649538000,
+		"title": "Mayday",
+		"nextEventId": 1542
+	}, {
+		"eventId": 1822,
+		"channelName": "ION",
+		"channelUuid": "226b4baff4b5ec3d256a953f1d07932b",
+		"channelNumber": "16.1",
+		"start": 1649534401,
+		"stop": 1649538001,
+		"title": "Law & Order: Special Victims Unit",
+		"description": "The detectives discover the remains of a child who has been missing since 1980 and launch an investigation into a convicted serial killer already on death row.",
+		"nextEventId": 1849
+	}, {
+		"eventId": 1819,
+		"channelName": "Grit",
+		"channelUuid": "3af847c787f982c240a29e496e6983e5",
+		"channelNumber": "16.2",
+		"start": 1649534401,
+		"stop": 1649541601,
+		"title": "Tomahawk"
+	}, {
+		"eventId": 1856,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649538000,
+		"stop": 1649541600,
+		"title": "Murdoch Mysteries",
+		"nextEventId": 1857
+	}, {
+		"eventId": 1545,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649538000,
+		"stop": 1649541600,
+		"title": "Storage & Organization",
+		"nextEventId": 1546
+	}, {
+		"eventId": 1727,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649538000,
+		"stop": 1649541600,
+		"title": "S.W.A.T.",
+		"nextEventId": 1728
+	}, {
+		"eventId": 1542,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649538000,
+		"stop": 1649541600,
+		"title": "Mayday",
+		"nextEventId": 1543
+	}, {
+		"eventId": 1872,
+		"channelName": "Laff",
+		"channelUuid": "f0b084d3b0938f76c83c21cda20c9605",
+		"channelNumber": "16.3",
+		"start": 1649538001,
+		"stop": 1649539801,
+		"title": "According to Jim",
+		"nextEventId": 1873
+	}, {
+		"eventId": 1873,
+		"channelName": "Laff",
+		"channelUuid": "f0b084d3b0938f76c83c21cda20c9605",
+		"channelNumber": "16.3",
+		"start": 1649539801,
+		"stop": 1649541601,
+		"title": "According to Jim",
+		"nextEventId": 1874
+	}, {
+		"eventId": 1842,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649541000,
+		"stop": 1649548800,
+		"title": "Night Moves",
+		"description": "An L.A. detective travels to the Florida Keys to search for an actress's missing daughter, but soon finds the case is far more complicated than he believed.",
+		"nextEventId": 1800
+	}, {
+		"eventId": 1857,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649541600,
+		"stop": 1649545200,
+		"title": "Chicago Fire",
+		"nextEventId": 1858
+	}, {
+		"eventId": 1546,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649541600,
+		"stop": 1649545200,
+		"title": "Spring Cleaning",
+		"description": "Get ready for some serious spring cleaning with Bissell, featuring lightweight sweepers and deep cleaners designed to help clean your home with ease.",
+		"nextEventId": 1547
+	}, {
+		"eventId": 1728,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649541600,
+		"stop": 1649543400,
+		"title": "The Goldbergs",
+		"nextEventId": 1729
+	}, {
+		"eventId": 1543,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649541600,
+		"stop": 1649545200,
+		"title": "Seconds from Disaster",
+		"nextEventId": 1544
+	}, {
+		"eventId": 1874,
+		"channelName": "Laff",
+		"channelUuid": "f0b084d3b0938f76c83c21cda20c9605",
+		"channelNumber": "16.3",
+		"start": 1649541601,
+		"stop": 1649543401,
+		"title": "According to Jim",
+		"nextEventId": 1875
+	}, {
+		"eventId": 1729,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649543400,
+		"stop": 1649545200,
+		"title": "The Goldbergs",
+		"description": "Murray and Uncle Marvin begin to bond over their fascination with \"Knight Rider\" and attend the Philadelphia Thanksgiving Day parade to see K.I.T.T. in person.",
+		"nextEventId": 1730
+	}, {
+		"eventId": 1875,
+		"channelName": "Laff",
+		"channelUuid": "f0b084d3b0938f76c83c21cda20c9605",
+		"channelNumber": "16.3",
+		"start": 1649543401,
+		"stop": 1649545201,
+		"title": "According to Jim",
+		"nextEventId": 1876
+	}, {
+		"eventId": 1858,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649545200,
+		"stop": 1649548800,
+		"title": "Major Crimes",
+		"nextEventId": 1707
+	}, {
+		"eventId": 1547,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649545200,
+		"stop": 1649548800,
+		"title": "Beauty Report with Amy Morrison",
+		"nextEventId": 1738
+	}, {
+		"eventId": 1730,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649545200,
+		"stop": 1649547000,
+		"title": "Mom",
+		"description": "Christy takes her frustration out on Bonnie after she fails to express excitement about Christy's news that she made the Dean's List at school.",
+		"nextEventId": 1731
+	}, {
+		"eventId": 1544,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649545200,
+		"stop": 1649548800,
+		"title": "Seconds from Disaster",
+		"description": "Advanced computer-generated imaging, re-enactments, archival footage and eyewitness accounts combine to tell the stories of tragic events such as airplane crash",
+		"nextEventId": 1890
+	}, {
+		"eventId": 1876,
+		"channelName": "Laff",
+		"channelUuid": "f0b084d3b0938f76c83c21cda20c9605",
+		"channelNumber": "16.3",
+		"start": 1649545201,
+		"stop": 1649552401,
+		"title": "My Girl"
+	}, {
+		"eventId": 1731,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649547000,
+		"stop": 1649548800,
+		"title": "Mom",
+		"nextEventId": 1655
+	}, {
+		"eventId": 1707,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649548800,
+		"stop": 1649550600,
+		"title": "Wheel of Fortune",
+		"nextEventId": 1708
+	}, {
+		"eventId": 1738,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649548800,
+		"stop": 1649552400,
+		"title": "Beauty Report with Amy Morrison",
+		"nextEventId": 1739
+	}, {
+		"eventId": 1655,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649548800,
+		"stop": 1649550600,
+		"title": "The Big Bang Theory",
+		"description": "Penny's comment about Wolowitz's love life sends him into a depressed stupor, costing the fighting robot team its most critical member during a big competition.",
+		"nextEventId": 1656
+	}, {
+		"eventId": 1890,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649548800,
+		"stop": 1649552400,
+		"title": "Seconds from Disaster",
+		"nextEventId": 1891
+	}, {
+		"eventId": 1800,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649548800,
+		"stop": 1649556900,
+		"title": "The French Connection",
+		"nextEventId": 1762
+	}, {
+		"eventId": 1852,
+		"channelName": "NEWSY",
+		"channelUuid": "b083f98cdce8227447742029892572f9",
+		"channelNumber": "16.7",
+		"start": 1649548801,
+		"stop": 1649550601,
+		"title": "Xploration Awesome Planet",
+		"nextEventId": 1853
+	}, {
+		"eventId": 1849,
+		"channelName": "ION",
+		"channelUuid": "226b4baff4b5ec3d256a953f1d07932b",
+		"channelNumber": "16.1",
+		"start": 1649548801,
+		"stop": 1649552401,
+		"title": "Law & Order: Special Victims Unit",
+		"nextEventId": 1850
+	}, {
+		"eventId": 1708,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649550600,
+		"stop": 1649552400,
+		"title": "Jeopardy!",
+		"nextEventId": 1709
+	}, {
+		"eventId": 1656,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649550600,
+		"stop": 1649552400,
+		"title": "The Big Bang Theory",
+		"nextEventId": 1657
+	}, {
+		"eventId": 1853,
+		"channelName": "NEWSY",
+		"channelUuid": "b083f98cdce8227447742029892572f9",
+		"channelNumber": "16.7",
+		"start": 1649550601,
+		"stop": 1649552401,
+		"title": "Xploration Awesome Planet",
+		"nextEventId": 1854
+	}, {
+		"eventId": 1709,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649552400,
+		"stop": 1649556000,
+		"title": "Bull",
+		"nextEventId": 1710
+	}, {
+		"eventId": 1739,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649552400,
+		"stop": 1649556000,
+		"title": "Beauty Report with Amy Morrison",
+		"nextEventId": 1740
+	}, {
+		"eventId": 1657,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649552400,
+		"stop": 1649554200,
+		"title": "Two and a Half Men",
+		"nextEventId": 1658
+	}, {
+		"eventId": 1891,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649552400,
+		"stop": 1649556000,
+		"title": "Storm Chasers",
+		"nextEventId": 1892
+	}, {
+		"eventId": 1854,
+		"channelName": "NEWSY",
+		"channelUuid": "b083f98cdce8227447742029892572f9",
+		"channelNumber": "16.7",
+		"start": 1649552401,
+		"stop": 1649556001,
+		"title": "Off Camera with Sam Jones",
+		"nextEventId": 1855
+	}, {
+		"eventId": 1850,
+		"channelName": "ION",
+		"channelUuid": "226b4baff4b5ec3d256a953f1d07932b",
+		"channelNumber": "16.1",
+		"start": 1649552401,
+		"stop": 1649556001,
+		"title": "Law & Order: Special Victims Unit",
+		"description": "A psychic volunteers to assist the police in the search for a teenage girl who has been abducted, but Detective Stabler refuses to believe in the man's visions.",
+		"nextEventId": 1851
+	}, {
+		"eventId": 1658,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649554200,
+		"stop": 1649556000,
+		"title": "Two and a Half Men",
+		"nextEventId": 1659
+	}, {
+		"eventId": 1710,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649556000,
+		"stop": 1649559600,
+		"title": "Dateline",
+		"nextEventId": 1664
+	}, {
+		"eventId": 1740,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649556000,
+		"stop": 1649559600,
+		"title": "Spring Cleaning",
+		"nextEventId": 1869
+	}, {
+		"eventId": 1659,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649556000,
+		"stop": 1649557800,
+		"title": "Whose Line Is It Anyway?",
+		"description": "Guest Kyle Richards participates in sketches and performances that boast an improvisational finesse and an affinity for musical expression.",
+		"nextEventId": 1660
+	}, {
+		"eventId": 1892,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649556000,
+		"stop": 1649559600,
+		"title": "Storm Chasers",
+		"nextEventId": 1777
+	}, {
+		"eventId": 1855,
+		"channelName": "NEWSY",
+		"channelUuid": "b083f98cdce8227447742029892572f9",
+		"channelNumber": "16.7",
+		"start": 1649556001,
+		"stop": 1649559601,
+		"title": "Off Camera with Sam Jones"
+	}, {
+		"eventId": 1851,
+		"channelName": "ION",
+		"channelUuid": "226b4baff4b5ec3d256a953f1d07932b",
+		"channelNumber": "16.1",
+		"start": 1649556001,
+		"stop": 1649559601,
+		"title": "Law & Order: Special Victims Unit",
+		"description": "Benson attempts to help an underage girl whose mother reports that she is the victim of statutory rape by her 21-year-old boyfriend.",
+		"nextEventId": 1861
+	}, {
+		"eventId": 1762,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649556900,
+		"stop": 1649565000,
+		"title": "Bat 21",
+		"nextEventId": 1711
+	}, {
+		"eventId": 1660,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649557800,
+		"stop": 1649559600,
+		"title": "Would I Lie to You?",
+		"nextEventId": 1679
+	}, {
+		"eventId": 1859,
+		"channelName": "Bounce",
+		"channelUuid": "9c9c85d94997cdcba6303792beee9e40",
+		"channelNumber": "16.4",
+		"start": 1649557801,
+		"stop": 1649566801,
+		"title": "Sabotage",
+		"description": "A Drug Enforcement Administration task force successfully executes a raid on a cartel safe house, however, team members mysteriously begin to be eliminated.",
+		"nextEventId": 1860
+	}, {
+		"eventId": 1664,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649559600,
+		"stop": 1649563200,
+		"title": "Dateline",
+		"description": "A father meets his untimely end when someone shoots him down just as he's about to pick up his daughter for a court-ordered visit.",
+		"nextEventId": 1665
+	}, {
+		"eventId": 1869,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649559600,
+		"stop": 1649563200,
+		"title": "Electronic Innovations",
+		"nextEventId": 1870
+	}, {
+		"eventId": 1679,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649559600,
+		"stop": 1649561400,
+		"title": "Masters of Illusion",
+		"nextEventId": 1680
+	}, {
+		"eventId": 1777,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649559600,
+		"stop": 1649563200,
+		"title": "Ice Vikings",
+		"description": "Chris Kristjanson hesitates to use his father's new lifting caboose after it is delivered; the machine breaks down in the middle of the lake.",
+		"nextEventId": 1778
+	}, {
+		"eventId": 1861,
+		"channelName": "ION",
+		"channelUuid": "226b4baff4b5ec3d256a953f1d07932b",
+		"channelNumber": "16.1",
+		"start": 1649559601,
+		"stop": 1649563201,
+		"title": "Law & Order: Special Victims Unit",
+		"nextEventId": 1862
+	}, {
+		"eventId": 1680,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649561400,
+		"stop": 1649563200,
+		"title": "Masters of Illusion",
+		"nextEventId": 1681
+	}, {
+		"eventId": 1665,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649563200,
+		"stop": 1649565000,
+		"title": "Family Guy",
+		"description": "Lois learns Peter is a drunken savant when it comes to playing the piano, after he goes on a drinking binge to win one of Pawtucket Pat's silver scrolls.",
+		"nextEventId": 1666
+	}, {
+		"eventId": 1870,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649563200,
+		"stop": 1649566800,
+		"title": "Andrew Lessman Your Vitamins",
+		"nextEventId": 1871
+	}, {
+		"eventId": 1681,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649563200,
+		"stop": 1649565000,
+		"title": "Last Man Standing",
+		"nextEventId": 1682
+	}, {
+		"eventId": 1778,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649563200,
+		"stop": 1649566800,
+		"title": "Ice Vikings",
+		"description": "The bombardiers continue to break down, so the Kristjanson fishers attempt to fix the Cold War relics before the second half of the fishing season begins.",
+		"nextEventId": 1779
+	}, {
+		"eventId": 1862,
+		"channelName": "ION",
+		"channelUuid": "226b4baff4b5ec3d256a953f1d07932b",
+		"channelNumber": "16.1",
+		"start": 1649563201,
+		"stop": 1649566801,
+		"title": "Law & Order: Special Victims Unit",
+		"nextEventId": 1863
+	}, {
+		"eventId": 1666,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649565000,
+		"stop": 1649566800,
+		"title": "Bob's Burgers",
+		"nextEventId": 1667
+	}, {
+		"eventId": 1682,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649565000,
+		"stop": 1649566800,
+		"title": "Last Man Standing",
+		"nextEventId": 1683
+	}, {
+		"eventId": 1711,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649565000,
+		"stop": 1649574300,
+		"title": "Emperor of the North Pole",
+		"description": "In answer to a perceived challenge, a seasoned vagrant plans to be the first to ride on a sadistic conductor's train for free without losing his life.",
+		"nextEventId": 1712
+	}, {
+		"eventId": 1667,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649566800,
+		"stop": 1649568600,
+		"title": "Pawn Stars",
+		"description": "Rick eyes President John F. Kennedy's cigar box and questions a Civil War photo of General Custer; Rick takes the staff to the Hoover Dam.",
+		"nextEventId": 1668
+	}, {
+		"eventId": 1871,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649566800,
+		"stop": 1649570400,
+		"title": "Andrew Lessman Your Vitamins",
+		"nextEventId": 1763
+	}, {
+		"eventId": 1683,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649566800,
+		"stop": 1649568600,
+		"title": "Raw Travel",
+		"nextEventId": 1684
+	}, {
+		"eventId": 1779,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649566800,
+		"stop": 1649570400,
+		"title": "Yukon Gold",
+		"description": "Chris struggles to control his stress level after his mine is shut down due to a breakdown; Big Al takes a pause to honor the anniversary of his wife's death.",
+		"nextEventId": 1741
+	}, {
+		"eventId": 1863,
+		"channelName": "ION",
+		"channelUuid": "226b4baff4b5ec3d256a953f1d07932b",
+		"channelNumber": "16.1",
+		"start": 1649566801,
+		"stop": 1649570401,
+		"title": "Law & Order: Special Victims Unit"
+	}, {
+		"eventId": 1860,
+		"channelName": "Bounce",
+		"channelUuid": "9c9c85d94997cdcba6303792beee9e40",
+		"channelNumber": "16.4",
+		"start": 1649566801,
+		"stop": 1649574001,
+		"title": "On Deadly Ground"
+	}, {
+		"eventId": 1668,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649568600,
+		"stop": 1649572200,
+		"title": "Law & Order: Special Victims Unit",
+		"description": "When a very successful S&M romance author is assaulted by a popular television show host, Amaro discovers a case-threatening secret about the writer.",
+		"nextEventId": 1833
+	}, {
+		"eventId": 1684,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649568600,
+		"stop": 1649570400,
+		"title": "The King of Queens",
+		"nextEventId": 1703
+	}, {
+		"eventId": 1763,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649570400,
+		"stop": 1649574000,
+		"title": "Andrew Lessman Your Vitamins",
+		"nextEventId": 1764
+	}, {
+		"eventId": 1703,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649570400,
+		"stop": 1649572200,
+		"title": "Paid Program",
+		"description": "Sponsored television programming.",
+		"nextEventId": 1704
+	}, {
+		"eventId": 1741,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649570400,
+		"stop": 1649574000,
+		"title": "Ax Men",
+		"nextEventId": 1742
+	}, {
+		"eventId": 1833,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649572200,
+		"stop": 1649575800,
+		"title": "Storm of Suspicion",
+		"nextEventId": 1834
+	}, {
+		"eventId": 1704,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649572200,
+		"stop": 1649574000,
+		"title": "Paid Program",
+		"description": "Sponsored television programming.",
+		"nextEventId": 1705
+	}, {
+		"eventId": 1764,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649574000,
+		"stop": 1649577600,
+		"title": "Andrew Lessman Your Vitamins",
+		"nextEventId": 1765
+	}, {
+		"eventId": 1705,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649574000,
+		"stop": 1649575800,
+		"title": "Paid Program",
+		"description": "Sponsored television programming.",
+		"nextEventId": 1706
+	}, {
+		"eventId": 1742,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649574000,
+		"stop": 1649577600,
+		"title": "Ax Men",
+		"nextEventId": 1743
+	}, {
+		"eventId": 1712,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649574300,
+		"stop": 1649584800,
+		"title": "There Was a Crooked Man ...",
+		"nextEventId": 1713
+	}, {
+		"eventId": 1834,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649575800,
+		"stop": 1649577600,
+		"title": "The Carbonaro Effect",
+		"nextEventId": 1835
+	}, {
+		"eventId": 1706,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649575800,
+		"stop": 1649581200,
+		"title": "Paid Program",
+		"description": "Sponsored television programming.",
+		"nextEventId": 1877
+	}, {
+		"eventId": 1835,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649577600,
+		"stop": 1649579400,
+		"title": "The Carbonaro Effect",
+		"nextEventId": 1750
+	}, {
+		"eventId": 1765,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649577600,
+		"stop": 1649581200,
+		"title": "Andrew Lessman Your Vitamins",
+		"nextEventId": 2005
+	}, {
+		"eventId": 1743,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649577600,
+		"stop": 1649581200,
+		"title": "Ax Men",
+		"nextEventId": 1772
+	}, {
+		"eventId": 1750,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649579400,
+		"stop": 1649588400,
+		"title": "Mommie Dearest",
+		"nextEventId": 1751
+	}, {
+		"eventId": 2005,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649581200,
+		"stop": 1649584800,
+		"title": "Andrew Lessman Your Vitamins",
+		"description": "Purely dedicated to a healthy body, Andrew Lessman brings HSN viewers 100% pure, additive free supplements that encourage optimum health.",
+		"nextEventId": 2006
+	}, {
+		"eventId": 1877,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649581200,
+		"stop": 1649583000,
+		"title": "Paid Program",
+		"nextEventId": 1878
+	}, {
+		"eventId": 1772,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649581200,
+		"stop": 1649583000,
+		"title": "Brojects",
+		"description": "The brothers decide that they need to be able to take their cottage with them on their journeys, which leads them to make a mobile mini cottage.",
+		"nextEventId": 1773
+	}, {
+		"eventId": 1878,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649583000,
+		"stop": 1649584800,
+		"title": "Paid Program",
+		"nextEventId": 1879
+	}, {
+		"eventId": 1773,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649583000,
+		"stop": 1649584800,
+		"title": "Brojects",
+		"nextEventId": 1774
+	}, {
+		"eventId": 2006,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649584800,
+		"stop": 1649588400,
+		"title": "Andrew Lessman Your Vitamins",
+		"nextEventId": 2007
+	}, {
+		"eventId": 1879,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649584800,
+		"stop": 1649586600,
+		"title": "Paid Program",
+		"nextEventId": 1880
+	}, {
+		"eventId": 1774,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649584800,
+		"stop": 1649586600,
+		"title": "Brojects",
+		"description": "Swim-up bars at Caribbean resorts inspire the brothers to build one of their own at their lakeside cottage property, which features a floating pool table.",
+		"nextEventId": 1775
+	}, {
+		"eventId": 1713,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649584800,
+		"stop": 1649585700,
+		"title": "Short MOVIES!",
+		"nextEventId": 1714
+	}, {
+		"eventId": 1714,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649585700,
+		"stop": 1649595600,
+		"title": "The Devil at 4 O'Clock",
+		"description": "On a tiny island in the South Seas, three convicts and a drunken priest try to save a group of children from a volcanic eruption.",
+		"nextEventId": 1952
+	}, {
+		"eventId": 1880,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649586600,
+		"stop": 1649588400,
+		"title": "Paid Program",
+		"nextEventId": 1881
+	}, {
+		"eventId": 1775,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649586600,
+		"stop": 1649588400,
+		"title": "Brojects",
+		"nextEventId": 1776
+	}, {
+		"eventId": 1751,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649588400,
+		"stop": 1649590200,
+		"title": "MyDestination.TV",
+		"nextEventId": 1752
+	}, {
+		"eventId": 2007,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649588400,
+		"stop": 1649592000,
+		"title": "Andrew Lessman Your Vitamins",
+		"description": "Purely dedicated to a healthy body, Andrew Lessman brings HSN viewers 100% pure, additive free supplements that encourage optimum health.",
+		"nextEventId": 1898
+	}, {
+		"eventId": 1881,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649588400,
+		"stop": 1649590200,
+		"title": "Paid Program",
+		"nextEventId": 1882
+	}, {
+		"eventId": 1776,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649588400,
+		"stop": 1649592000,
+		"title": "How the Earth Was Made",
+		"description": "Researchers have discovered ancient fossils of whales, freshwater shells and human remains in the largest and hottest desert in the world.",
+		"nextEventId": 1945
+	}, {
+		"eventId": 1752,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649590200,
+		"stop": 1649592000,
+		"title": "Street Magic",
+		"nextEventId": 1864
+	}, {
+		"eventId": 1882,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649590200,
+		"stop": 1649592000,
+		"title": "Paid Program",
+		"nextEventId": 1980
+	}, {
+		"eventId": 1864,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649592000,
+		"stop": 1649593800,
+		"title": "Paid Program",
+		"nextEventId": 1865
+	}, {
+		"eventId": 1898,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649592000,
+		"stop": 1649595600,
+		"title": "Andrew Lessman Your Vitamins",
+		"description": "Purely dedicated to a healthy body, Andrew Lessman brings HSN viewers 100% pure, additive free supplements that encourage optimum health.",
+		"nextEventId": 1899
+	}, {
+		"eventId": 1945,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649592000,
+		"stop": 1649595600,
+		"title": "How the Earth Was Made",
+		"nextEventId": 1946
+	}, {
+		"eventId": 1865,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649593800,
+		"stop": 1649595600,
+		"title": "Beautiful Homes & Great Estates",
+		"description": "In-depth tours take viewers inside stunning homes and magnificent properties that are explored alongside interviews with the architects and interior designers r",
+		"nextEventId": 1866
+	}, {
+		"eventId": 1866,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649595600,
+		"stop": 1649599200,
+		"title": "2News at 7A Sunday",
+		"nextEventId": 1867
+	}, {
+		"eventId": 1899,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649595600,
+		"stop": 1649599200,
+		"title": "Sunday Garden Spot",
+		"nextEventId": 1900
+	}, {
+		"eventId": 1946,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649595600,
+		"stop": 1649597400,
+		"title": "DragonflyTV Sports",
+		"nextEventId": 1947
+	}, {
+		"eventId": 1952,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649595600,
+		"stop": 1649597400,
+		"title": "Dog Tales",
+		"description": "Dog experts and dog lovers share information about maintaining the health, training, grooming and care of their canine friends of all sizes, shapes and breeds.",
+		"nextEventId": 1953
+	}, {
+		"eventId": 1947,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649597400,
+		"stop": 1649599200,
+		"title": "DragonflyTV Sports",
+		"description": "Perry Stone provides a program dealing with the predictive and sensible studies of God's Word, helping to get a better understanding of biblical prophecy.",
+		"nextEventId": 1948
+	}, {
+		"eventId": 1953,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649597400,
+		"stop": 1649599200,
+		"title": "Dog Tales",
+		"nextEventId": 1954
+	}, {
+		"eventId": 1867,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649599200,
+		"stop": 1649601000,
+		"title": "Through the Bible with Les Feldick",
+		"nextEventId": 1868
+	}, {
+		"eventId": 1900,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649599200,
+		"stop": 1649602800,
+		"title": "Birkenstock Footwear",
+		"nextEventId": 1991
+	}, {
+		"eventId": 1948,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649599200,
+		"stop": 1649602800,
+		"title": "Lost Worlds",
+		"nextEventId": 2016
+	}, {
+		"eventId": 1954,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649599200,
+		"stop": 1649601000,
+		"title": "Getting Green",
+		"nextEventId": 1955
+	}, {
+		"eventId": 1868,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649601000,
+		"stop": 1649602800,
+		"title": "Paid Program",
+		"description": "Sponsored television programming.",
+		"nextEventId": 1902
+	}, {
+		"eventId": 1955,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649601000,
+		"stop": 1649602800,
+		"title": "Getting Green",
+		"nextEventId": 1887
+	}, {
+		"eventId": 1902,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649602800,
+		"stop": 1649606400,
+		"title": "Faith Baptist Church",
+		"nextEventId": 1903
+	}, {
+		"eventId": 1991,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649602800,
+		"stop": 1649606400,
+		"title": "Customer Favorites Weekend",
+		"nextEventId": 1992
+	}, {
+		"eventId": 1980,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649602800,
+		"stop": 1649604600,
+		"title": "Paid Program",
+		"nextEventId": 1981
+	}, {
+		"eventId": 2016,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649602800,
+		"stop": 1649606400,
+		"title": "Lost Worlds",
+		"nextEventId": 2017
+	}, {
+		"eventId": 1887,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649602800,
+		"stop": 1649604600,
+		"title": "Made in Hollywood: Teen Edition",
+		"description": "Preparing teens for careers in the motion-picture, television and multimedia industries, both in front of the camera and behind the scenes.",
+		"nextEventId": 1888
+	}, {
+		"eventId": 1981,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649604600,
+		"stop": 1649606400,
+		"title": "Paid Program",
+		"nextEventId": 1982
+	}, {
+		"eventId": 1888,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649604600,
+		"stop": 1649606400,
+		"title": "Made in Hollywood: Teen Edition",
+		"nextEventId": 1889
+	}, {
+		"eventId": 1903,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649606400,
+		"stop": 1649608200,
+		"title": "Paid Program",
+		"nextEventId": 1904
+	}, {
+		"eventId": 1992,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649606400,
+		"stop": 1649610000,
+		"title": "Customer Favorites Weekend",
+		"nextEventId": 1993
+	}, {
+		"eventId": 1982,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649606400,
+		"stop": 1649608200,
+		"title": "At Home in Utah",
+		"nextEventId": 1983
+	}, {
+		"eventId": 2017,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649606400,
+		"stop": 1649610000,
+		"title": "Fish Tank Kings",
+		"nextEventId": 2018
+	}, {
+		"eventId": 1889,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649606400,
+		"stop": 1649616600,
+		"title": "Sabrina",
+		"description": "The daughter of a chauffeur falls for a rich man, and when she returns after spending two years in Paris, she attracts his attention with her refined new look.",
+		"nextEventId": 1901
+	}, {
+		"eventId": 1904,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649608200,
+		"stop": 1649610000,
+		"title": "Small Town Big Deal",
+		"nextEventId": 1905
+	}, {
+		"eventId": 1983,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649608200,
+		"stop": 1649610000,
+		"title": "Paid Program",
+		"nextEventId": 1984
+	}, {
+		"eventId": 1905,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649610000,
+		"stop": 1649611800,
+		"title": "Full Measure with Sharyl Attkisson",
+		"nextEventId": 1906
+	}, {
+		"eventId": 1993,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649610000,
+		"stop": 1649613600,
+		"title": "Andrew Lessman Your Vitamins",
+		"nextEventId": 1949
+	}, {
+		"eventId": 1984,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649610000,
+		"stop": 1649611800,
+		"title": "Paid Program",
+		"nextEventId": 1985
+	}, {
+		"eventId": 2018,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649610000,
+		"stop": 1649613600,
+		"title": "Fish Tank Kings",
+		"nextEventId": 2008
+	}, {
+		"eventId": 1906,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649611800,
+		"stop": 1649613600,
+		"title": "Paid Program",
+		"nextEventId": 2029
+	}, {
+		"eventId": 1985,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649611800,
+		"stop": 1649613600,
+		"title": "Paid Program",
+		"nextEventId": 1893
+	}, {
+		"eventId": 2029,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649613600,
+		"stop": 1649617200,
+		"title": "Ring of Honor Wrestling",
+		"nextEventId": 2030
+	}, {
+		"eventId": 1949,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649613600,
+		"stop": 1649617200,
+		"title": "To Be Announced",
+		"nextEventId": 1950
+	}, {
+		"eventId": 1893,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649613600,
+		"stop": 1649615400,
+		"title": "Luxury Homes Utah",
+		"nextEventId": 1894
+	}, {
+		"eventId": 2008,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649613600,
+		"stop": 1649617200,
+		"title": "Giant Lobster Hunters",
+		"nextEventId": 2009
+	}, {
+		"eventId": 1894,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649615400,
+		"stop": 1649617200,
+		"title": "Paid Program",
+		"nextEventId": 1895
+	}, {
+		"eventId": 2030,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649617200,
+		"stop": 1649619000,
+		"title": "Utopia TV",
+		"nextEventId": 2031
+	}, {
+		"eventId": 1950,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649617200,
+		"stop": 1649620800,
+		"title": "DG2 by Diane Gilman",
+		"description": "Diane Gilman, who specializes in tailoring denim items with baby boomers in mind, presents a special selection of her perfectly fitted, figure-flattering jeans ",
+		"nextEventId": 1951
+	}, {
+		"eventId": 1895,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649617200,
+		"stop": 1649620800,
+		"title": "F2: Forensic Factor",
+		"nextEventId": 1896
+	}, {
+		"eventId": 2009,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649617200,
+		"stop": 1649620800,
+		"title": "Giant Lobster Hunters",
+		"nextEventId": 2010
+	}, {
+		"eventId": 2031,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649619000,
+		"stop": 1649620800,
+		"title": "Pawn Stars",
+		"nextEventId": 2032
+	}, {
+		"eventId": 2032,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649620800,
+		"stop": 1649622600,
+		"title": "The Liquidator",
+		"nextEventId": 2033
+	}, {
+		"eventId": 1951,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649620800,
+		"stop": 1649624400,
+		"title": "Electronic Innovations",
+		"nextEventId": 1999
+	}, {
+		"eventId": 1896,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649620800,
+		"stop": 1649622600,
+		"title": "Paid Program",
+		"nextEventId": 1897
+	}, {
+		"eventId": 2010,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649620800,
+		"stop": 1649624400,
+		"title": "Giant Lobster Hunters",
+		"nextEventId": 1986
+	}, {
+		"eventId": 2033,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649622600,
+		"stop": 1649624400,
+		"title": "The Liquidator",
+		"nextEventId": 1936
+	}, {
+		"eventId": 1897,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649622600,
+		"stop": 1649624400,
+		"title": "black-ish",
+		"nextEventId": 1907
+	}, {
+		"eventId": 1936,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649624400,
+		"stop": 1649628000,
+		"title": "Murdoch Mysteries",
+		"nextEventId": 1937
+	}, {
+		"eventId": 1999,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649624400,
+		"stop": 1649628000,
+		"title": "Andrew Lessman Your Vitamins",
+		"nextEventId": 2000
+	}, {
+		"eventId": 1907,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649624400,
+		"stop": 1649626200,
+		"title": "black-ish",
+		"nextEventId": 1908
+	}, {
+		"eventId": 1986,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649624400,
+		"stop": 1649628000,
+		"title": "Giant Lobster Hunters",
+		"nextEventId": 1987
+	}, {
+		"eventId": 1901,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649624400,
+		"stop": 1649635200,
+		"title": "Mommie Dearest",
+		"description": "A film, television and theater actress' adopted daughter recounts her years of growing up with the psychotic, abusive and terminally unhappy movie star.",
+		"nextEventId": 2002
+	}, {
+		"eventId": 1908,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649626200,
+		"stop": 1649628000,
+		"title": "Paid Program",
+		"description": "Sponsored television programming.",
+		"nextEventId": 1909
+	}, {
+		"eventId": 1937,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649628000,
+		"stop": 1649631600,
+		"title": "Chicago Fire",
+		"description": "Cruz and his brother are reminded of the presence of the gang they escaped after a shooting occurs in their old neighborhood; Isabella and Mills attend a gala.",
+		"nextEventId": 1938
+	}, {
+		"eventId": 2000,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649628000,
+		"stop": 1649631600,
+		"title": "Birkenstock Footwear",
+		"nextEventId": 2001
+	}, {
+		"eventId": 1909,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649628000,
+		"stop": 1649631600,
+		"title": "Wipeout",
+		"description": "The first-ever episode comprised only of newlyweds kicks off with pairs facing obstacles such as the Cradle of Tough Love and Honeymoon in Paree.",
+		"nextEventId": 1910
+	}, {
+		"eventId": 1987,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649628000,
+		"stop": 1649629800,
+		"title": "Hardcore Pawn",
+		"nextEventId": 1988
+	}, {
+		"eventId": 1988,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649629800,
+		"stop": 1649631600,
+		"title": "Hardcore Pawn",
+		"nextEventId": 1989
+	}, {
+		"eventId": 1938,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649631600,
+		"stop": 1649635200,
+		"title": "MacGyver",
+		"description": "Mac goes undercover as a prisoner in a cell with a high-ranking Codex operative to gather additional information regarding their next move.",
+		"nextEventId": 2024
+	}, {
+		"eventId": 2001,
+		"channelName": "HSN",
+		"channelUuid": "5d48b62e1e5bb96ae8c2bdae3b6a8acf",
+		"channelNumber": "30.4",
+		"start": 1649631600,
+		"stop": 1649635200,
+		"title": "Sundays Rock!"
+	}, {
+		"eventId": 1910,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649631600,
+		"stop": 1649635200,
+		"title": "Wipeout",
+		"description": "Contestants face a variety of winter-themed obstacles, including the Holiday Hams, the Snowplow Sweeper and the Wipeout Ski Lift as they try for $50,000.",
+		"nextEventId": 1994
+	}, {
+		"eventId": 1989,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649631600,
+		"stop": 1649633400,
+		"title": "Hardcore Pawn",
+		"nextEventId": 1990
+	}, {
+		"eventId": 1990,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649633400,
+		"stop": 1649635200,
+		"title": "Hardcore Pawn",
+		"description": "Ashley surprises the other employees with her bargaining capabilities, which reignites her quarrel with Seth; a shark suit puts Les' health in jeopardy.",
+		"nextEventId": 2019
+	}, {
+		"eventId": 1994,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649635200,
+		"stop": 1649637000,
+		"title": "The Big Bang Theory",
+		"nextEventId": 1995
+	}, {
+		"eventId": 2019,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649635200,
+		"stop": 1649637000,
+		"title": "Hardcore Pawn",
+		"nextEventId": 2020
+	}, {
+		"eventId": 1995,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649637000,
+		"stop": 1649638800,
+		"title": "The Big Bang Theory",
+		"nextEventId": 1996
+	}, {
+		"eventId": 2020,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649637000,
+		"stop": 1649638800,
+		"title": "Hardcore Pawn",
+		"nextEventId": 2021
+	}, {
+		"eventId": 1996,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649638800,
+		"stop": 1649640600,
+		"title": "Young Sheldon",
+		"nextEventId": 1997
+	}, {
+		"eventId": 2021,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649638800,
+		"stop": 1649640600,
+		"title": "Hardcore Pawn",
+		"nextEventId": 2022
+	}, {
+		"eventId": 1997,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649640600,
+		"stop": 1649642400,
+		"title": "Young Sheldon",
+		"nextEventId": 1998
+	}, {
+		"eventId": 2022,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649640600,
+		"stop": 1649642400,
+		"title": "Hardcore Pawn",
+		"nextEventId": 2023
+	}, {
+		"eventId": 2002,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649640900,
+		"stop": 1649648700,
+		"title": "High Wall",
+		"nextEventId": 2003
+	}, {
+		"eventId": 1998,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649642400,
+		"stop": 1649646000,
+		"title": "Riverdale",
+		"nextEventId": 2011
+	}, {
+		"eventId": 2023,
+		"channelName": "Quest",
+		"channelUuid": "68a2b5d8f49ebb1e24e670fd8c7b5f01",
+		"channelNumber": "30.3",
+		"start": 1649642400,
+		"stop": 1649646000,
+		"title": "Dual Survival"
+	}, {
+		"eventId": 2024,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649646000,
+		"stop": 1649649600,
+		"title": "Dateline",
+		"nextEventId": 2025
+	}, {
+		"eventId": 2011,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649646000,
+		"stop": 1649647800,
+		"title": "Whose Line Is It Anyway?",
+		"nextEventId": 2012
+	}, {
+		"eventId": 2012,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649647800,
+		"stop": 1649649600,
+		"title": "Would I Lie to You?",
+		"nextEventId": 2013
+	}, {
+		"eventId": 2003,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649648700,
+		"stop": 1649656500,
+		"title": "Cornered",
+		"nextEventId": 2004
+	}, {
+		"eventId": 2025,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649649600,
+		"stop": 1649651400,
+		"title": "Family Guy",
+		"nextEventId": 2026
+	}, {
+		"eventId": 2013,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649649600,
+		"stop": 1649653200,
+		"title": "Castle",
+		"nextEventId": 2014
+	}, {
+		"eventId": 2026,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649651400,
+		"stop": 1649653200,
+		"title": "Bob's Burgers",
+		"nextEventId": 2027
+	}, {
+		"eventId": 2027,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649653200,
+		"stop": 1649655000,
+		"title": "Pawn Stars",
+		"nextEventId": 2028
+	}, {
+		"eventId": 2014,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649653200,
+		"stop": 1649655000,
+		"title": "Celebrity Page",
+		"nextEventId": 2015
+	}, {
+		"eventId": 2028,
+		"channelName": "KJZZ-HD",
+		"channelUuid": "0bd504239f460d84f5e0a5a93133caf2",
+		"channelNumber": "14.1",
+		"start": 1649655000,
+		"stop": 1649658600,
+		"title": "Law & Order: Special Victims Unit"
+	}, {
+		"eventId": 2015,
+		"channelName": "KUCW-HD",
+		"channelUuid": "7c12d64397441a191c3fca93749b92c5",
+		"channelNumber": "30.1",
+		"start": 1649655000,
+		"stop": 1649656800,
+		"title": "Celebrity Page"
+	}, {
+		"eventId": 2004,
+		"channelName": "Movies",
+		"channelUuid": "7e6ea26591b588a14395104e49ecbdf0",
+		"channelNumber": "30.2",
+		"start": 1649656500,
+		"stop": 1649664300,
+		"title": "The Dark Corner"
+	}]
+}
