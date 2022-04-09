@@ -8,6 +8,7 @@ import { GridUpcomingResponse } from "./dvr/entry/grid_upcoming/responsemodel";
 import { StopBydvrUUIDRequest } from "./dvr/entry/stop/requestmodel";
 import { GridEntry, GridResponse } from "./epg/events/grid/responsemodel";
 import { GridRequest } from "./grid-request";
+import { DeleteBydvrUUIDRequest } from "./idnode/delete/requestmodel";
 import { fetchData } from "./util";
 
 /*enum access_enum = {
@@ -317,13 +318,27 @@ export class ApiService {
 		return this.gridUpcomingSubject.asObservable();
 	}
 	public stopBydvrUUID(options: StopBydvrUUIDRequest) {
-		return fetchData("dvr/entry/stop", options).then(() => this.refreshGridUpcoming());
+		return fetchData("dvr/entry/stop", options).then(() => {
+			this.refreshByUUID(options);
+			this.refreshGridUpcoming();
+		});
 	}
 	private options: GridUpcomingRequest = { sort: "start_real", dir: "ASC", duplicates: 0 };
 	public refreshGridUpcoming(options?: GridUpcomingRequest){
 		if(options) this.options = options;
 		fetchData('/dvr/entry/grid_upcoming', this.options).then((data:GridUpcomingResponse) => this.gridUpcomingSubject.next(data));
 	};
+
+	public deleteIdNode(options: DeleteBydvrUUIDRequest){
+		return fetchData("/idnode/delete", options).then(() => this.refreshByUUID(options));
+	}
+
+	private refreshByUUID(options: StopBydvrUUIDRequest | DeleteBydvrUUIDRequest){
+		const refreshable = this.gridResponse?.entries.filter(e => e.dvrUuid && (e.dvrUuid === options.uuid || options.uuid.indexOf(e.dvrUuid) !== -1)).map(e => e.eventId);
+		if(refreshable)
+			this.refreshEntries(refreshable);
+		this.refreshGridUpcoming();
+	}
 
 	//TODO: arrays don't serialize right.
 	private refreshEntries(eventIDs: number[] | number) {

@@ -36,9 +36,14 @@ export class EntryListComponent implements OnChanges {
 		this.pendingAPI = true;
 		this.apiService.createByEvent({event_id, config_uuid: ""}).catch(() => this.pendingAPI = false).then(() => this.pendingAPI = false);
 	}
-	public stop(event_id: GridEntry){
+	public stop(entry: GridEntry){
 		this.pendingAPI = true;
 		//TODO: make safe
-		this.apiService.stopByGridEntry(event_id).catch(() => this.pendingAPI = false).then(() => this.pendingAPI = false);
+		this.apiService.stopByGridEntry(entry).catch(() => this.pendingAPI = false).then(() => this.pendingAPI = false);
+	}
+	public cancelPending(entry: GridEntry){
+		if(entry.dvrUuid)
+			//TODO: make safe.
+			this.apiService.deleteIdNode({uuid: [entry.dvrUuid]});
 	}
 }

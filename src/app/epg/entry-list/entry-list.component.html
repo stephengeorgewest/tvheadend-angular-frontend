@@ -8,9 +8,9 @@
 		<h4>{{topEntry.channelNumber}} {{topEntry.channelName}} 🕰{{ (topEntry.stop - topEntry.start) / 60 }}</h4>
 		<h4>
 			{{ topEntry.start | newDate | date:'medium' }}
-			<mat-icon *ngIf="topEntry.dvrState === 'recording'" class="recording" (click)="stop(topEntry)">fiber_smart_record</mat-icon>
-			<mat-icon *ngIf="topEntry.dvrState === 'scheduled'">videocam</mat-icon>
-			<button *ngIf="!topEntry.dvrUuid" mat-button (click)="record(topEntry.eventId)" [disabled]="pendingAPI">RECORD</button>
+			<button mat-button *ngIf="topEntry.dvrState === 'recording'" (click)="stop(topEntry)"><mat-icon class="recording">fiber_smart_record</mat-icon>Cancel</button>
+			<button mat-button *ngIf="topEntry.dvrState === 'scheduled'" (click)="cancelPending(topEntry)"><mat-icon>videocam</mat-icon>Cancel</button>
+			<button *ngIf="topEntry.dvrState !== 'recording' && topEntry.dvrState !== 'scheduled'" mat-button (click)="record(topEntry.eventId)" [disabled]="pendingAPI">RECORD</button>
 		</h4>
 		<h4><span *ngIf="topEntry.seasonNumber">S{{topEntry.seasonNumber}}</span><span *ngIf="topEntry.episodeNumber">E{{topEntry.episodeNumber }}</span></h4>
 	</div>
@@ -27,9 +27,9 @@
 		<h4 mat-line>{{entry.channelNumber}} {{entry.channelName}} 🕰{{ (entry.stop - entry.start) / 60 }}</h4>
 		<div mat-line class="date">
 			{{ entry.start | newDate | date:'medium' }}
-			<mat-icon *ngIf="entry.dvrState === 'recording'" class="recording">fiber_smart_record</mat-icon>
-			<mat-icon *ngIf="entry.dvrState === 'scheduled'">videocam</mat-icon>
-			<button *ngIf="!entry.dvrUuid" mat-button (click)="record(entry.eventId)" [disabled]="pendingAPI">RECORD</button>
+			<button mat-button *ngIf="entry.dvrState === 'recording'" (click)="stop(entry)"><mat-icon class="recording">fiber_smart_record</mat-icon>Cancel</button>
+			<button mat-button *ngIf="entry.dvrState === 'scheduled'" (click)="cancelPending(entry)"><mat-icon>videocam</mat-icon>Cancel</button>
+			<button *ngIf="entry.dvrState !== 'recording' && entry.dvrState !== 'scheduled'" mat-button (click)="record(entry.eventId)" [disabled]="pendingAPI">RECORD</button>
 		</div>
 		<h4 mat-line class="subtitle" *ngIf="entry.seasonNumber || entry.episodeNumber || entry.subtitle"><span *ngIf="entry.seasonNumber">S{{entry.seasonNumber}}</span><span *ngIf="entry.episodeNumber">E{{entry.episodeNumber }}</span> {{entry.subtitle}}</h4>
 	</mat-list-item>

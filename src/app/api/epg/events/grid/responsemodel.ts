@@ -1,14 +1,14 @@
+import { dvrEntrySchedstatus } from "src/app/api/models";
 import { Entry } from "../../../entry";
 export interface GridResponse {
 	totalCount: number;
 	entries: GridEntry[];
 }
-//https://tvheadend.org/projects/tvheadend/repository/tvheadend/revisions/master/entry/src/dvr/dvr_db.c
-type dvrEntrySchedstatus = "scheduled" |
-	"recordingError" | "recording" |
-	"completed" | "completedError" | "completedRerecord" | "completedWarning" | "unknown";
+
 /**
- * https://tvheadend.org/projects/tvheadend/repository/tvheadend/revisions/master/entry/src/epg.h
+ * https://tvheadend.org/projects/tvheadend/repository/tvheadend/revisions/master/entry/src/epg.h#L252
+ * ->
+ * https://tvheadend.org/projects/tvheadend/repository/tvheadend/revisions/master/entry/src/epg.h#L252
  */
 export interface GridEntry extends Entry {
 	eventId: number;
@@ -119,5 +119,4 @@ export interface GridEntry extends Entry {
 	dvrState?: dvrEntrySchedstatus;
 
 	nextEventId?: number;
-
 }

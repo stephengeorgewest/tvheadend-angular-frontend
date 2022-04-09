@@ -1,3 +1,4 @@
+import { dvrEntrySchedstatus } from "src/app/api/models";
 import { Entry } from "../../../entry";
 
 export interface GridUpcomingResponse {
@@ -5,24 +6,29 @@ export interface GridUpcomingResponse {
 	total: number;
 }
 
+/**
+* https://tvheadend.org/projects/tvheadend/repository/tvheadend/revisions/master/entry/src/dvr/dvr.h#L183/
+*/
 export interface GridUpcomingEntry extends Entry {
-	title: Title;
-	description?: Title;
-	subtitle?: Title;
+	uuid: string; // idnode_t de_id ?
+	channel: string; // channel_t de_channel
+
+	title: LocaleString;
+	description?: LocaleString;
+	subtitle?: LocaleString;
 	channel_icon: string;
 	channelname: string;
 	image: string;
 
-	uuid: string;
 	enabled: boolean;
 	create: number;
 	watched: number;
+
 	start_extra: number;
-	start_real: number;
+	start_real: number; // 1644454470
 	stop_extra: number;
-	stop_real: number;
+	stop_real: number; // 1644471300
 	duration: number;
-	channel: string;
 	fanart_image: string;
 	disp_title: string;
 	disp_subtitle: string;
@@ -57,7 +63,7 @@ export interface GridUpcomingEntry extends Entry {
 	url: string;
 	filesize: number;
 	status: string;
-	sched_status: string;
+	sched_status: dvrEntrySchedstatus;
 	duplicate: number;
 	first_aired: number;
 	comment?: string;
@@ -70,6 +76,6 @@ export interface GridUpcomingEntry extends Entry {
 interface Credits {
 }
 
-interface Title {
+interface LocaleString {
 	eng: string;
 }

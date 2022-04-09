@@ -6,6 +6,7 @@
 		<span class="inprogress_endpad" [style.width]="entry.value[0] | endPercent"></span>
 		<span class="title">{{ entry.value[0].disp_title }} ({{entry.value.length}})</span>
 		<button *ngIf="entry.value[0].sched_status ==='recording'" mat-button (click)="stop(entry.value[0])"><mat-icon class="recording">fiber_smart_record</mat-icon>Cancel</button>
+		<button *ngIf="entry.value[0].sched_status ==='scheduled'" mat-button (click)="cancelPending(entry.value[0])">Cancel</button>
 
 		<mat-icon *ngIf="entry.value[0].data_errors || entry.value[0].data_errors" [title]="entry.value[0].data_errors">warning</mat-icon>
 		<span class="time">{{entry.value[0].start_real | newDate | date: "short"}}</span>

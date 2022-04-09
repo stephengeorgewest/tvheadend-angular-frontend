@@ -52,9 +52,13 @@ export class UpcomingComponent implements OnDestroy {
 			this.selectedEntry = event;
 		}
 	}
-	public stop(event_id: GridUpcomingEntry){
+	public stop(entry: GridUpcomingEntry){
 		//TODO: make safe.
-		this.apiService.stopBydvrUUID(event_id);
+		this.apiService.stopBydvrUUID({uuid: entry.uuid});
+	}
+	public cancelPending(entry: GridUpcomingEntry){
+		//TODO: make safe.
+		this.apiService.deleteIdNode({uuid: [entry.uuid]});
 	}
 
 	public sort = this.timesort;
