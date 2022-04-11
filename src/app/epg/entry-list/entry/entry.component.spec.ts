@@ -17,6 +17,16 @@ describe('EntryComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(EntryComponent);
 		component = fixture.componentInstance;
+		component.entry = {
+			start: 0,
+			stop: 1,
+			eventId: 12,
+		
+			//api_epg_add_channel
+			channelName: "string",
+			channelUuid: "string",
+
+		};
 		fixture.detectChanges();
 	});
 

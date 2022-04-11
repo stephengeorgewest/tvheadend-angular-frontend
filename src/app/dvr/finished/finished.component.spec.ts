@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { DurationPipe, FileSizePipe, FinishedComponent, SortListDirectionPipe, SortListPositionPipe } from './finished.component';
+import { DurationPipe, FileSizePipe, FinishedComponent, SortListDirectionPipe, SortListPositionPipe,InDisplayedColumnsPipe } from './finished.component';
 
 
 describe('FinishedComponent', () => {
@@ -15,8 +16,8 @@ describe('FinishedComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [MatIconModule, FormsModule, MatInputModule, MatOptionModule, MatSelectModule, NoopAnimationsModule],
-			declarations: [FinishedComponent, FileSizePipe, DurationPipe, SortListDirectionPipe, SortListPositionPipe]
+			imports: [MatIconModule, FormsModule, MatInputModule, MatMenuModule, MatOptionModule, MatSelectModule, NoopAnimationsModule],
+			declarations: [FinishedComponent, FileSizePipe, DurationPipe, SortListDirectionPipe, SortListPositionPipe, InDisplayedColumnsPipe]
 		})
 			.compileComponents();
 	});
