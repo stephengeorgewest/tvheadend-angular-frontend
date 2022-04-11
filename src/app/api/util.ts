@@ -24,10 +24,13 @@ function formEncode(options: { [key: string]: any }) {
 	}*/
 
 export function fetchData(page: string, options?: any) {
-	return fetch('http://' + environment.serverUrl + ':9981/api/' + page, {
-		body: formEncode(options),
-		method: 'POST',
-		mode: 'cors',
-		headers: { "content-type": "application/x-www-form-urlencoded; charset=UTF-8" }
-	}).then(response => response.json());
+	return fetch(
+		'http' + environment.server.secure + '://' + environment.server.host + ':' + environment.server.port + '/api/' + page,
+		{
+			body: formEncode(options),
+			method: 'POST',
+			mode: 'cors',
+			headers: { "content-type": "application/x-www-form-urlencoded; charset=UTF-8" }
+		}
+		).then(response => response.json());
 }

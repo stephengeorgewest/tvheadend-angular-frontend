@@ -1,0 +1,50 @@
+{
+	"messages": [{
+		"update": ["774", "599", "598", "790", "608", "718", "594", "593", "648", "647", "846", "588", "773"],
+		"notificationClass": "epg"
+	}, {
+		"uuid": "903fd4a7add1e18e6aa5486b35e595cd",
+		"input": "HDHomeRun ATSC-T Tuner #0 (192.168.0.215)",
+		"stream": "599.028MHz in ATSC-T Network",
+		"subs": 1,
+		"weight": 4,
+		"pids": [0, 1, 7428, 7429, 7430, 7431, 7433, 7435, 7680, 7683, 7687, 7688, 7692, 7693, 8187],
+		"signal": 41287,
+		"signal_scale": 1,
+		"ber": 0,
+		"snr": 64224,
+		"snr_scale": 1,
+		"unc": 0,
+		"bps": 305312,
+		"te": 0,
+		"cc": 0,
+		"ec_bit": 0,
+		"tc_bit": 0,
+		"ec_block": 0,
+		"tc_block": 0,
+		"update": 1,
+		"notificationClass": "input_status"
+	}, {
+		"freediskspace": 182246326272,
+		"useddiskspace": 7054694736,
+		"totaldiskspace": 215059443712,
+		"notificationClass": "diskspaceUpdate"
+	}, {
+		"update": ["588", "704", "709"],
+		"notificationClass": "epg"
+	}, {
+		"id": 1,
+		"start": 1649537270,
+		"errors": 0,
+		"state": "Running",
+		"title": "epggrab",
+		"service": "HDHomeRun ATSC-T Tuner #0 (192.168.0.215)/ATSC-T Network/599.028MHz/Raw PID Subscription",
+		"pids": [0, 1, 7428, 7429, 7430, 7431, 7433, 7435, 7681, 7682, 7683, 7687, 7688, 7692, 7693, 8187],
+		"in": 23397,
+		"out": 8357,
+		"total_in": 723393,
+		"total_out": 307537,
+		"updateEntry": 1,
+		"notificationClass": "subscriptions"
+	}]
+}

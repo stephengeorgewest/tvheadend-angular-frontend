@@ -1,0 +1,46 @@
+{
+	"messages": [{
+		"update": ["781", "682", "771", "814", "707", "706"],
+		"notificationClass": "epg"
+	}, {
+		"uuid": "903fd4a7add1e18e6aa5486b35e595cd",
+		"input": "HDHomeRun ATSC-T Tuner #0 (192.168.0.215)",
+		"stream": "599.028MHz in ATSC-T Network",
+		"subs": 1,
+		"weight": 4,
+		"pids": [0, 1, 7428, 7429, 7430, 7432, 7434, 7435, 7436, 7681, 7683, 7684, 7686, 7687, 7690, 7691, 7693, 8187],
+		"signal": 41287,
+		"signal_scale": 1,
+		"ber": 0,
+		"snr": 64224,
+		"snr_scale": 1,
+		"unc": 0,
+		"bps": 305312,
+		"te": 0,
+		"cc": 0,
+		"ec_bit": 0,
+		"tc_bit": 0,
+		"ec_block": 0,
+		"tc_block": 0,
+		"update": 1,
+		"notificationClass": "input_status"
+	}, {
+		"update": ["675", "695", "730", "817", "831"],
+		"create": ["872", "871", "870"],
+		"notificationClass": "epg"
+	}, {
+		"id": 1,
+		"start": 1649537270,
+		"errors": 0,
+		"state": "Running",
+		"title": "epggrab",
+		"service": "HDHomeRun ATSC-T Tuner #0 (192.168.0.215)/ATSC-T Network/599.028MHz/Raw PID Subscription",
+		"pids": [0, 1, 7428, 7430, 7433, 7434, 7435, 7436, 7681, 7683, 7684, 7686, 7687, 7688, 7690, 7693, 8187],
+		"in": 25459,
+		"out": 9103,
+		"total_in": 659997,
+		"total_out": 279485,
+		"updateEntry": 1,
+		"notificationClass": "subscriptions"
+	}]
+}

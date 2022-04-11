@@ -82,10 +82,10 @@
 							<mat-icon>delete</mat-icon>
 							<span>Remove</span>
 						</button>
-						<button mat-menu-item>
+						<a [href]="serverURL + entry.uuid" mat-menu-item>
 							<mat-icon>download</mat-icon>
 							<span>Download</span>
-						</button>
+						</a>
 						<button mat-menu-item>
 							<mat-icon>info</mat-icon>
 							<span>Info</span>

@@ -1,0 +1,27 @@
+{
+	"boxid": "623d469f43d2925f6923b66fcf945ba43abb2dac",
+	"messages": [{
+		"notificationClass": "accessUpdate",
+		"uilevel": "expert",
+		"theme": "blue",
+		"quicktips": 1,
+		"chname_num": 1,
+		"chname_src": 0,
+		"date_mask": "",
+		"label_formatting": 0,
+		"address": "192.168.0.224",
+		"dvr": 1,
+		"admin": 1,
+		"time": 1649600593,
+		"cookie_expires": 7,
+		"ticket_expires": 300,
+		"info_area": "login,storage,time",
+		"freediskspace": 182246326272,
+		"useddiskspace": 7054694736,
+		"totaldiskspace": 215059443712
+	}, {
+		"notificationClass": "setServerIpPort",
+		"ip": "192.168.0.156",
+		"port": 9981
+	}]
+}

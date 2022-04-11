@@ -1,6 +1,7 @@
 import { Injectable, OnDestroy } from "@angular/core";
 import { BehaviorSubject, Observable, Subject, Subscription } from "rxjs";
-import { ignoreEntry, IgnoreListService, listNames, modificationType } from "../ignore-list.service";
+import { environment } from "src/environments/environment";
+import { cometMessage } from "../ws/responsemodel";
 import { CreateByEventRequest } from "./dvr/entry/create_by_event/requestmodel";
 import { CreateByEventResponse } from "./dvr/entry/create_by_event/responsemodel";
 import { GridUpcomingRequest } from "./dvr/entry/grid_upcoming/requestmodel";
@@ -282,11 +283,95 @@ const pathlist = ["access/entry/class", "access/entry/create", "access/entry/gri
 @Injectable({
 	providedIn: 'root',
 })
-export class ApiService {
+export class ApiService implements OnDestroy {
+	private websocket:WebSocket; 
+	constructor(){
+		this.websocket = new WebSocket("ws" + environment.server.secure + "://" + environment.server.host + ":" + environment.server.port + "/comet/ws");
+		this.websocket.onmessage = (m) => this.onMessage(m);
+	}
+	ngOnDestroy(): void {
+		this.websocket.close();
+	}
+
+	private onMessage(message:MessageEvent<any>){
+		const data = JSON.parse(message.data) as cometMessage;
+		data.messages.forEach(m => {
+			if("reload" in m){
+				switch(m.notificationClass){
+					case "dvrentry":
+						if(this.gridUpcomingResponse)
+							this.refreshGridUpcoming();
+						if(this.gridFinishedResponse)
+							this.refreshGridFinished();
+						
+						break;
+					default:
+						console.log("unhandled reload message", m)
+				}
+			}
+			else{
+				switch(m.notificationClass){
+					case "epg":
+						if("delete" in m || "update" in m || "create" in m
+						){
+							if(this.epgGridResponse)
+								this.refreshEpgGrid();
+						}
+						else {
+							if(this.gridUpcomingResponse)
+								this.refreshGridUpcoming();
+							if(this.gridFinishedResponse)
+								this.refreshGridFinished();
+						}
+						break;
+					case "dvrentry":
+						if(this.gridUpcomingResponse)
+							this.refreshGridUpcoming();
+						if(this.gridFinishedResponse)
+							this.refreshGridFinished();
+						break;
+					default:
+						console.log("unhandlede message", m);
+				}
+			}
+		});
+	}
+
 	private epgGridResponse: GridResponse | undefined = undefined;
 	private epgGridSubject: BehaviorSubject<GridResponse | undefined> = new BehaviorSubject(this.epgGridResponse);
 	public onEpgGridResponse(): Observable<GridResponse | undefined> {
 		return this.epgGridSubject.asObservable();
+	}
+
+	private refreshEpgEvents(eventIDs: number[] | number) {
+		fetchData("epg/events/load", { eventId: eventIDs }).then((data: GridResponse) => {
+			data.entries.forEach(e => {
+				if (!this.epgGridResponse) {
+					this.epgGridResponse = {
+						totalCount: 1,
+						entries: [e]
+					}
+				}
+				else {
+					const matchingEntry = this.epgGridResponse?.entries.findIndex(gridEntry => gridEntry.eventId === e.eventId);
+					if (matchingEntry) {
+						this.epgGridResponse.entries[matchingEntry] = e;
+					}
+				}
+			});
+			this.epgGridSubject.next(this.epgGridResponse);
+		});
+	}
+
+	private epgOptions: GridRequest<GridResponse> = { dir: "ASC", duplicates: 0, start: 0, limit: 300 };
+	public refreshEpgGrid(options?: GridRequest<GridResponse>) {
+		if(options){
+			this.epgOptions = options;
+		}
+		fetchData('epg/events/grid', this.epgOptions).then(data => {
+			this.epgGridResponse = data;
+			this.epgGridSubject.next(this.epgGridResponse);
+		});
 	}
 
 	public createByEvent(options: CreateByEventRequest) {
@@ -326,7 +411,10 @@ export class ApiService {
 	private options: GridUpcomingRequest = { sort: "start_real", dir: "ASC", duplicates: 0 };
 	public refreshGridUpcoming(options?: GridUpcomingRequest) {
 		if (options) this.options = options;
-		fetchData('dvr/entry/grid_upcoming', this.options).then((data: GridUpcomingResponse) => this.gridUpcomingSubject.next(data));
+		fetchData('dvr/entry/grid_upcoming', this.options).then((data: GridUpcomingResponse) => {
+			this.gridUpcomingResponse = data;
+			this.gridUpcomingSubject.next(this.gridUpcomingResponse)
+		});
 	};
 
 	public deleteIdNode(options: DeleteBydvrUUIDRequest) {
@@ -340,30 +428,20 @@ export class ApiService {
 		this.refreshGridUpcoming();
 	}
 
-	private refreshEpgEvents(eventIDs: number[] | number) {
-		fetchData("epg/events/load", { eventId: eventIDs }).then((data: GridResponse) => {
-			data.entries.forEach(e => {
-				if (!this.epgGridResponse) {
-					this.epgGridResponse = {
-						totalCount: 1,
-						entries: [e]
-					}
+	private gridFinishedResponse: GridUpcomingResponse | undefined = undefined;
+	private gridFinishedSubject: BehaviorSubject<GridUpcomingResponse | undefined> = new BehaviorSubject(this.gridFinishedResponse);
+	public onGridFinishedResponse(): Observable<GridUpcomingResponse | undefined> {
+		return this.gridFinishedSubject.asObservable();
+	}
+	public refreshGridFinished() {
+		fetchData(
+			'dvr/entry/grid_finished',
+			{ start: 0, dir: "ASC", duplicates: 0, limit: 999999999 } as GridUpcomingRequest).then(
+				data => {
+					this.gridFinishedResponse = data;
+					this.gridFinishedSubject.next(this.gridFinishedResponse);
 				}
-				else {
-					const matchingEntry = this.epgGridResponse?.entries.findIndex(gridEntry => gridEntry.eventId === e.eventId);
-					if (matchingEntry) {
-						this.epgGridResponse.entries[matchingEntry] = e;
-					}
-				}
-			});
-			this.epgGridSubject.next(this.epgGridResponse);
-		});
+			);
 	}
 
-	public refreshEpgGrid(options: GridRequest<GridResponse>) {
-		fetchData('epg/events/grid', options).then(data => {
-			this.epgGridResponse = data;
-			this.epgGridSubject.next(this.epgGridResponse);
-		});
-	}
 }

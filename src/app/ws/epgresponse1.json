@@ -1,0 +1,9 @@
+{
+	"messages": [{
+		"delete": ["592"],
+		"notificationClass": "epg"
+	}, {
+		"delete": ["723"],
+		"notificationClass": "epg"
+	}]
+}

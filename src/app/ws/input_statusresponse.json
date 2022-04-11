@@ -1,0 +1,23 @@
+{
+	"uuid": "903fd4a7add1e18e6aa5486b35e595cd",
+	"input": "HDHomeRun ATSC-T Tuner #0 (192.168.0.215)",
+	"stream": "599.028MHz in ATSC-T Network",
+	"subs": 1,
+	"weight": 4,
+	"pids": [0, 1, 7428, 7429, 7430, 7431, 7433, 7435, 7680, 7683, 7687, 7688, 7692, 7693, 8187],
+	"signal": 41287,
+	"signal_scale": 1,
+	"ber": 0,
+	"snr": 64224,
+	"snr_scale": 1,
+	"unc": 0,
+	"bps": 305312,
+	"te": 0,
+	"cc": 0,
+	"ec_bit": 0,
+	"tc_bit": 0,
+	"ec_block": 0,
+	"tc_block": 0,
+	"update": 1,
+	"notificationClass": "input_status"
+}

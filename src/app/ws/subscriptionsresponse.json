@@ -1,0 +1,15 @@
+{
+	"id": 1,
+	"start": 1649537270,
+	"errors": 0,
+	"state": "Running",
+	"title": "epggrab",
+	"service": "HDHomeRun ATSC-T Tuner #0 (192.168.0.215)/ATSC-T Network/599.028MHz/Raw PID Subscription",
+	"pids": [0, 1, 7428, 7429, 7430, 7431, 7433, 7435, 7681, 7682, 7683, 7687, 7688, 7692, 7693, 8187],
+	"in": 23397,
+	"out": 8357,
+	"total_in": 723393,
+	"total_out": 307537,
+	"updateEntry": 1,
+	"notificationClass": "subscriptions"
+}

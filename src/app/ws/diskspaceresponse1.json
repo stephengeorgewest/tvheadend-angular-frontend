@@ -1,0 +1,8 @@
+{
+	"messages": [{
+		"freediskspace": 182246326272,
+		"useddiskspace": 7054694736,
+		"totaldiskspace": 215059443712,
+		"notificationClass": "diskspaceUpdate"
+	}]
+}

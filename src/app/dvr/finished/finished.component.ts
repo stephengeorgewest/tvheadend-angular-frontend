@@ -1,11 +1,11 @@
 import { Component, Input, OnDestroy, Pipe, PipeTransform } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ApiService } from 'src/app/api/api';
 import { GridUpcomingRequest } from 'src/app/api/dvr/entry/grid_upcoming/requestmodel';
 import { GridUpcomingEntry, GridUpcomingResponse } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
 import { RemoveBydvrUUIDRequest } from 'src/app/api/dvr/entry/remove/requestmodel';
 import { fetchData } from 'src/app/api/util';
+import { environment } from 'src/environments/environment';
 type groupkeys = keyof Pick<GridUpcomingEntry,
 	"disp_title" |
 	"channelname" |
@@ -155,23 +155,22 @@ export class FinishedComponent {
 	public duration: number = 0;
 	public entryGroups: grouped[] = [];
 	public totalCount = 0;
+	public serverURL = 'http' + environment.server.secure + '://' + environment.server.host + ':' + environment.server.port + '/dvrfile/';
 
 	public selectedEntry: GridUpcomingEntry[] = [];
 
 	private entries: GridUpcomingEntry[] = [];
-	constructor() {
-		this.refresh();
+	private gridFinishedSubscription;
+	constructor(private apiService: ApiService) {
+		this.gridFinishedSubscription = this.apiService.onGridFinishedResponse().subscribe((data) => {
+			this.entries = data?.entries || [];
+			this.totalCount = data?.total|| 0;
+			this.groupAndSort();
+		});
+		this.apiService.refreshGridFinished();
 	}
-	private refresh() {
-		fetchData(
-			'dvr/entry/grid_finished',
-			{ start: 0, dir: "ASC", duplicates: 0, limit: 999999999 } as GridUpcomingRequest).then(
-				data => {
-					this.entries = (data as GridUpcomingResponse).entries;
-					this.totalCount = data.total;
-					this.groupAndSort();
-				}
-			);
+	public ngOnDestroy() {
+		this.gridFinishedSubscription.unsubscribe();
 	}
 	private groupAndSort() {
 		this.filesize = 0;
@@ -270,15 +269,11 @@ export class FinishedComponent {
 	//TODO: make safe
 	public remove(entry: GridUpcomingEntry) {
 		const requets: RemoveBydvrUUIDRequest = { uuid: entry.uuid };
-		fetchData('dvr/entry/remove', requets).then(
-			() => this.refresh()
-		);
+		fetchData('dvr/entry/remove', requets).then();
 	}
 	public removeAll(entries: GridUpcomingEntry[]) {
 		const requets: RemoveBydvrUUIDRequest = { uuid: entries.map(e => e.uuid) };
-		fetchData('dvr/entry/remove', requets).then(
-			() => this.refresh()
-		);
+		fetchData('dvr/entry/remove', requets).then();
 	}
 }
 

@@ -1,0 +1,22 @@
+{
+	"messages": [{
+		"notificationClass": "logmessage",
+		"logtxt": "2022-04-10 19:48:50.195 subscription: 0023: \"DVR: The Equalizer\" unsubscribing from \"KUTV2\", username=\"\""
+	}, {
+		"reload": 1,
+		"notificationClass": "input_status"
+	}, {
+		"reload": 1,
+		"notificationClass": "subscriptions"
+	}, {
+		"notificationClass": "logmessage",
+		"logtxt": "2022-04-10 19:48:50.201 dvr: \"The Equalizer\" on \"KUTV2\": End of program: Completed OK"
+	}, {
+		"update": ["1282", "1285", "1284", "1283", "1209"],
+		"dvr_update": ["1193"],
+		"notificationClass": "epg"
+	}, {
+		"change": ["6bc77055de458fc96b13b3bf33a91678"],
+		"notificationClass": "dvrentry"
+	}]
+}
