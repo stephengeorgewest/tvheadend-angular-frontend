@@ -431,8 +431,6 @@ export class ApiService implements OnDestroy {
 					entry.dvrUuid = u;
 			});
 			this.epgGridSubject.next(this.epgGridResponse);
-			this.refreshEpgEvents([options.event_id]);
-			return eventResponse;
 		});
 	}
 
@@ -440,9 +438,7 @@ export class ApiService implements OnDestroy {
 		if (!options.dvrUuid) {
 			return Promise.reject(() => "error");
 		}
-		return this.stopBydvrUUID({ uuid: options.dvrUuid }).then(() => {
-			this.refreshEpgEvents(options.eventId)
-		});
+		return this.stopBydvrUUID({ uuid: options.dvrUuid });
 	}
 
 	private gridUpcomingResponse: GridUpcomingResponse | undefined = undefined;
@@ -451,10 +447,7 @@ export class ApiService implements OnDestroy {
 		return this.gridUpcomingSubject.asObservable();
 	}
 	public stopBydvrUUID(options: StopBydvrUUIDRequest) {
-		return fetchData("dvr/entry/stop", options).then(() => {
-			this.refreshByUUID(options);
-			this.refreshGridUpcoming();
-		});
+		return fetchData("dvr/entry/stop", options);
 	}
 	private options: GridUpcomingRequest = { sort: "start_real", dir: "ASC", duplicates: 0 };
 	public refreshGridUpcoming(options?: GridUpcomingRequest) {
@@ -466,14 +459,13 @@ export class ApiService implements OnDestroy {
 	};
 
 	public deleteIdNode(options: DeleteBydvrUUIDRequest) {
-		return fetchData("idnode/delete", options).then(() => this.refreshByUUID(options));
+		return fetchData("idnode/delete", options);
 	}
 
 	private refreshByUUID(options: StopBydvrUUIDRequest | DeleteBydvrUUIDRequest) {
 		const refreshable = this.epgGridResponse?.entries.filter(e => e.dvrUuid && (e.dvrUuid === options.uuid || options.uuid.indexOf(e.dvrUuid) !== -1)).map(e => e.eventId);
 		if (refreshable)
 			this.refreshEpgEvents(refreshable);
-		this.refreshGridUpcoming();
 	}
 
 	private gridFinishedResponse: GridUpcomingResponse | undefined = undefined;
