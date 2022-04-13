@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from "@angular/core";
-import { BehaviorSubject, Observable, Subject, Subscription } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { cometMessage } from "../ws/responsemodel";
 import { CreateByEventRequest } from "./dvr/entry/create_by_event/requestmodel";
@@ -295,6 +295,7 @@ export class ApiService implements OnDestroy {
 
 	private onMessage(message:MessageEvent<any>){
 		const data = JSON.parse(message.data) as cometMessage;
+		let epg_uuids_to_reload: string[] = [];
 		data.messages.forEach(m => {
 			if("reload" in m){
 				switch(m.notificationClass){
@@ -303,7 +304,6 @@ export class ApiService implements OnDestroy {
 							this.refreshGridUpcoming();
 						if(this.gridFinishedResponse)
 							this.refreshGridFinished();
-						
 						break;
 					default:
 						console.log("unhandled reload message", m)
@@ -325,16 +325,54 @@ export class ApiService implements OnDestroy {
 						}
 						break;
 					case "dvrentry":
-						if(this.gridUpcomingResponse)
-							this.refreshGridUpcoming();
-						if(this.gridFinishedResponse)
-							this.refreshGridFinished();
+						if(m.delete){
+							if(this.gridUpcomingResponse){
+								let refresh = false;
+								m.delete.forEach(d => {
+									const index = this.gridUpcomingResponse?.entries.findIndex(e => e.uuid === d);
+									if(index && index !== -1){
+										this.gridUpcomingResponse?.entries.splice(index);
+										refresh = true;
+									}
+								});
+								if(refresh)
+									this.gridUpcomingSubject.next(this.gridUpcomingResponse);
+							}
+							if(this.gridFinishedResponse){
+								let refresh = false;
+								m.delete.forEach(d => {
+									const index = this.gridFinishedResponse?.entries.findIndex(e => e.uuid === d);
+									if(index && index !== -1){
+										this.gridFinishedResponse?.entries.splice(index);
+										refresh = true;
+									}
+								});
+								if(refresh)
+									this.gridFinishedSubject.next(this.gridFinishedResponse);
+							}
+							epg_uuids_to_reload.push(...m.delete);	
+						}
+						else {
+							if(m.update)
+								epg_uuids_to_reload.push(...m.update);
+							if(m.create)
+								epg_uuids_to_reload.push(...m.create);
+							
+							if(this.gridUpcomingResponse)
+								this.refreshGridUpcoming();
+							if(this.gridFinishedResponse)
+								this.refreshGridFinished();
+						}
 						break;
 					default:
 						console.log("unhandlede message", m);
 				}
 			}
 		});
+
+		if(epg_uuids_to_reload.length)
+			this.refreshByUUID({uuid: epg_uuids_to_reload});
+
 	}
 
 	private epgGridResponse: GridResponse | undefined = undefined;
@@ -345,21 +383,31 @@ export class ApiService implements OnDestroy {
 
 	private refreshEpgEvents(eventIDs: number[] | number) {
 		fetchData("epg/events/load", { eventId: eventIDs }).then((data: GridResponse) => {
+			let refreshable = false;
 			data.entries.forEach(e => {
 				if (!this.epgGridResponse) {
 					this.epgGridResponse = {
 						totalCount: 1,
 						entries: [e]
-					}
+					};
+					refreshable = true;
 				}
 				else {
 					const matchingEntry = this.epgGridResponse?.entries.findIndex(gridEntry => gridEntry.eventId === e.eventId);
 					if (matchingEntry) {
 						this.epgGridResponse.entries[matchingEntry] = e;
+						refreshable = true;
+					}
+					else{
+						// should never be hit, error instead?
+						this.epgGridResponse.entries.push(e);
+						this.epgGridResponse.totalCount++;
+						refreshable = true;
 					}
 				}
 			});
-			this.epgGridSubject.next(this.epgGridResponse);
+			if(refreshable)
+				this.epgGridSubject.next(this.epgGridResponse);
 		});
 	}
 
