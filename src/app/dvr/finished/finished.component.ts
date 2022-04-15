@@ -1,8 +1,7 @@
 import { Component, Input, OnDestroy, Pipe, PipeTransform } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
 import { ApiService } from 'src/app/api/api';
-import { GridUpcomingRequest } from 'src/app/api/dvr/entry/grid_upcoming/requestmodel';
-import { GridUpcomingEntry, GridUpcomingResponse } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
+import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
 import { RemoveBydvrUUIDRequest } from 'src/app/api/dvr/entry/remove/requestmodel';
 import { fetchData } from 'src/app/api/util';
 import { environment } from 'src/environments/environment';
@@ -276,30 +275,6 @@ export class FinishedComponent {
 		fetchData('dvr/entry/remove', requets).then();
 	}
 }
-
-@Pipe({
-	name: 'filesize'
-})
-export class FileSizePipe implements PipeTransform {
-	transform(size: number) {
-		const sizes = [
-			"b",
-			"Kb",
-			"Mb",
-			"Gb",
-			"Tb"
-		];
-
-		let s = size;
-		let bin = 0;
-		while (s > 1024) {
-			s /= 1024;
-			bin++;
-		}
-		return (bin > 2 ? (s).toFixed(1) : Math.round(s)) + sizes[bin];
-	}
-}
-
 
 @Pipe({
 	name: 'duration'

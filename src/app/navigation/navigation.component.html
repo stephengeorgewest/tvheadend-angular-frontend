@@ -5,6 +5,7 @@
 	<mat-list-item *ngFor="let link of links" [routerLink]="link.path">
 		<mat-icon [color]="link.path === activatedPath ? 'primary': ''">{{link.icon}}</mat-icon>{{ type==="list" ? link.friendlyName: ''}}
 	</mat-list-item>
+	<app-disk-usage></app-disk-usage>
 </mat-list>
 <div class="side-nav" *ngIf="type == 'button'">
 	<button mat-icon-button (click)="menuClicked.emit()">
@@ -13,4 +14,5 @@
 	<button mat-icon-button *ngFor="let link of links" [title]="link.friendlyName" [routerLink]="link.path" [color]="link.path === activatedPath ? 'primary': ''">
 		<mat-icon>{{link.icon}}</mat-icon>
 	</button>
+	<app-disk-usage></app-disk-usage>
 </div>

@@ -1,0 +1,4 @@
+<mat-progress-spinner diameter="24" mode="determinate" strokeWidth="5" [value]="100 * (diskspace.totaldiskspace - diskspace.freediskspace) / diskspace.totaldiskspace" *ngIf="diskspace" [title]="'total: ' + (diskspace.totaldiskspace | filesize) + '\r\nfree: ' + (diskspace.freediskspace | filesize)  + '\r\nused: ' + (diskspace.useddiskspace| filesize)">
+</mat-progress-spinner>
+<mat-progress-spinner diameter="24" mode="indeterminate" strokeWidth="5" *ngIf="!diskspace" title="Unknown">
+</mat-progress-spinner>

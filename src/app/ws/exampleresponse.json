@@ -26,7 +26,10 @@
 		"useddiskspace": 7054694736,
 		"totaldiskspace": 215059443712,
 		"notificationClass": "diskspaceUpdate"
-	}, { "update": ["637", "645", "681", "675", "757", "695", "831", "829", "764"], "notificationClass": "epg" }, {
+	}, {
+		"update": ["637", "645", "681", "675", "757", "695", "831", "829", "764"],
+		"notificationClass": "epg"
+	}, {
 		"update": ["642", "641", "588", "790", "608", "862", "840", "844"],
 		"create": ["874", "873"],
 		"notificationClass": "epg"

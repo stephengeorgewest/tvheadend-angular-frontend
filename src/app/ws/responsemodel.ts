@@ -68,7 +68,7 @@ export type reloadMessage = {
 /**
  * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/dvr/dvr_vfsmgr.c#L413
  */
-type diskspaceBase = {
+export type diskspaceBase = {
 	freediskspace: number;
 	useddiskspace: number;
 	totaldiskspace: number;

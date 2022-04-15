@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
-import { cometMessage } from "../ws/responsemodel";
+import { cometMessage, diskspaceBase } from "../ws/responsemodel";
 import { CreateByEventRequest } from "./dvr/entry/create_by_event/requestmodel";
 import { CreateByEventResponse } from "./dvr/entry/create_by_event/responsemodel";
 import { GridUpcomingRequest } from "./dvr/entry/grid_upcoming/requestmodel";
@@ -338,6 +338,15 @@ export class ApiService implements OnDestroy {
 						if (m.change)
 							m.change.forEach(dvr_uuids_to_reload.add, dvr_uuids_to_reload);
 						break;
+					case "diskspaceUpdate":
+					//case "accessUpdate":
+						this.diskUsageResponse = {
+							totaldiskspace: m.totaldiskspace,
+							useddiskspace: m.useddiskspace,
+							freediskspace: m.freediskspace
+						};
+						this.diskUsageSubject.next(this.diskUsageResponse);
+						break;
 					default:
 						console.log("unhandlede message", m);
 				}
@@ -493,4 +502,10 @@ export class ApiService implements OnDestroy {
 			);
 	}
 
+
+	private diskUsageResponse: diskspaceBase | undefined = undefined;
+	private diskUsageSubject: BehaviorSubject<diskspaceBase | undefined> = new BehaviorSubject(this.diskUsageResponse);
+	public onDiskUsage() {
+		return this.diskUsageSubject.asObservable();
+	}
 }
