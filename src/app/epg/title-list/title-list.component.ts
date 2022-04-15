@@ -134,8 +134,8 @@ export class TitleListComponent implements OnDestroy {
 	@Input() public lastignoredcount: number = 0;
 	@Output() public selectedEntry: EventEmitter<string | undefined> = new EventEmitter();
 
-	public track(index: number, entry: GridEntry[]) {
-		return entry[0].title
+	public keytrack(index: number, entry: KeyValue<any,any>) {
+		return entry.key;
 	}
 	public tapped?: string;
 

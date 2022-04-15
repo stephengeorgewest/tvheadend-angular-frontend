@@ -1,12 +1,12 @@
 <mat-tab-group animationDuration="0">
-	<ng-container *ngFor="let coarseTimeGroup of (coarseTimeGroups | keyvalue: coarseTimeGroupOrder)">
+	<ng-container *ngFor="let coarseTimeGroup of (coarseTimeGroups | keyvalue: coarseTimeGroupOrder); trackBy:keytrack">
 		<mat-tab *ngIf="coarseTimeGroup.value.size" [label]="friendlyNames[coarseTimeGroup.key] + ' (' + coarseTimeGroup.value.size + ')'">
-			<mat-list *ngFor="let fineTimeGroup of (coarseTimeGroup.value | keyvalue)">
+			<mat-list *ngFor="let fineTimeGroup of (coarseTimeGroup.value | keyvalue); trackBy:keytrack">
 				<h3 matSubheader>
 					<mat-icon matListIcon>schedule</mat-icon>
 					{{fineTimeGroup.key | newDate | date: 'mediumTime' }}
 				</h3>
-				<mat-list-item *ngFor="let entry of (fineTimeGroup.value | keyvalue: fineTimeGroupOrder); trackby:track" (mouseenter)="mouseenter(entry.value)" (click)="click(entry.value)" [class.selected]="tapped === entry.value[0].title">
+				<mat-list-item *ngFor="let entry of (fineTimeGroup.value | keyvalue: fineTimeGroupOrder); trackBy:keytrack" (mouseenter)="mouseenter(entry.value)" (click)="click(entry.value)" [class.selected]="tapped === entry.value[0].title">
 					<span class="inprogress" [style.width]="entry.value[0] | completePercent: now"></span>
 					<div class="channel">
 						<div>{{entry.value[0].channelNumber}}</div>
