@@ -83,33 +83,33 @@ export type epgMessage = {
 	/**
 	 * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/epg.c#L849
 	 */
-	delete?: number[];
+	delete?: string[];
 
 	/**
 	 * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/epg.c#L907
 	 */
-	update?: number[];
+	update?: string[];
 
 	/**
 	 * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/epg.c#L910
 	 */
-	create?: number[];
+	create?: string[];
 
 	// webui\static\app\epg.js#L55
 	/**
-	 * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/dvr/dvr_db.c#250
+	 * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/dvr/dvr_db.c#L250
 	 */
-	dvr_delete?: number[];
+	dvr_delete?: string[];
 
 	/**
-	 * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/dvr/dvr_db.c#225
+	 * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/dvr/dvr_db.c#L225
 	 */
-	dvr_update?: number[];
+	dvr_update?: string[];
 	
 	/**
-	 * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/dvr/dvr_db.c#260
+	 * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/dvr/dvr_db.c#L260
 	 */
-	dvr_create: number[];
+	dvr_create?: string[];
 } & messageBase;
 
 export type dvrentryMessage = {
@@ -117,6 +117,7 @@ export type dvrentryMessage = {
 	delete?: string[];
 	update?: string[];
 	create?: string[];
+	change?: string[];
 } & messageBase;
 
 /**
@@ -225,10 +226,12 @@ export type accessMessage = {
 	 */
 	time: number,
 	/**
+	 * In Days.
 	 * Example: 7
 	 */
 	cookie_expires?: number,
 	/**
+	 * In Seconds.
 	 * Example: 300
 	 */
 	ticket_expires?: number,

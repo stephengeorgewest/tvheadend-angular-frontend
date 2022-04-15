@@ -1,0 +1,58 @@
+{
+	"messages": [{
+		"id": 32,
+		"start": 1650028656,
+		"errors": 0,
+		"state": "Running",
+		"username": "",
+		"title": "DVR: Morning Rush",
+		"channel": "NEWSY",
+		"service": "HDHomeRun ATSC-T Tuner #0 (192.168.0.215)/ATSC-T Network/563.028MHz/NEWSY",
+		"pids": [144, 145, 148],
+		"profile": "pass",
+		"in": 133668,
+		"out": 133668,
+		"total_in": 527340,
+		"total_out": 527340,
+		"updateEntry": 1,
+		"notificationClass": "subscriptions"
+	}, {
+		"update": ["1244", "1111", "1110", "1109", "1227", "1226", "1225"],
+		"notificationClass": "epg"
+	}, {
+		"uuid": "85b2454eebaedd1fd4bf0191e8e5009a",
+		"input": "HDHomeRun ATSC-T Tuner #0 (192.168.0.215)",
+		"stream": "563.028MHz in ATSC-T Network",
+		"subs": 1,
+		"weight": 500,
+		"pids": [0, 1, 144, 145, 148, 7426, 7427, 7428, 7429, 7430, 7681, 7683, 7684, 7685, 7686, 8187],
+		"signal": 36699,
+		"signal_scale": 1,
+		"ber": 0,
+		"snr": 59636,
+		"snr_scale": 1,
+		"unc": 0,
+		"bps": 1000160,
+		"te": 0,
+		"cc": 1,
+		"ec_bit": 0,
+		"tc_bit": 0,
+		"ec_block": 0,
+		"tc_block": 0,
+		"update": 1,
+		"notificationClass": "input_status"
+	}, {
+		"reload": 1,
+		"notificationClass": "input_status"
+	}, {
+		"reload": 1,
+		"notificationClass": "subscriptions"
+	}, {
+		"update": ["1253", "1252", "1251", "1250", "1096", "1095"],
+		"dvr_update": ["1207"],
+		"notificationClass": "epg"
+	}, {
+		"change": ["c90167b80f5c2db13d315c60ea2f5c19"],
+		"notificationClass": "dvrentry"
+	}]
+}

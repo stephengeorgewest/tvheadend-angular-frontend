@@ -284,8 +284,8 @@ const pathlist = ["access/entry/class", "access/entry/create", "access/entry/gri
 	providedIn: 'root',
 })
 export class ApiService implements OnDestroy {
-	private websocket:WebSocket; 
-	constructor(){
+	private websocket: WebSocket;
+	constructor() {
 		this.websocket = new WebSocket("ws" + environment.server.secure + "://" + environment.server.host + ":" + environment.server.port + "/comet/ws");
 		this.websocket.onmessage = (m) => this.onMessage(m);
 	}
@@ -293,76 +293,50 @@ export class ApiService implements OnDestroy {
 		this.websocket.close();
 	}
 
-	private onMessage(message:MessageEvent<any>){
+	private onMessage(message: MessageEvent<any>) {
 		const data = JSON.parse(message.data) as cometMessage;
-		let epg_uuids_to_reload: string[] = [];
+		let dvr_uuids_to_reload: Set<string> = new Set();
+		let dvr_uuids_to_delete: Set<string> = new Set();
+		let epg_id_to_reload: Set<string> = new Set();
+		let epg_id_to_delete: Set<string> = new Set();
+		let services_to_reload: Set<string> = new Set();
 		data.messages.forEach(m => {
-			if("reload" in m){
-				switch(m.notificationClass){
-					case "dvrentry":
-						if(this.gridUpcomingResponse)
-							this.refreshGridUpcoming();
-						if(this.gridFinishedResponse)
-							this.refreshGridFinished();
-						break;
-					default:
-						console.log("unhandled reload message", m)
-				}
+			if ("reload" in m) {
+				if (m.reload)
+					switch (m.notificationClass) {
+						case "dvrentry":
+							services_to_reload.add(m.notificationClass);
+							break;
+						default:
+							console.log("unhandled reload message", m)
+					}
 			}
-			else{
-				switch(m.notificationClass){
+			else {
+				switch (m.notificationClass) {
 					case "epg":
-						if("delete" in m || "update" in m || "create" in m
-						){
-							if(this.epgGridResponse)
-								this.refreshEpgGrid();
-						}
-						else {
-							if(this.gridUpcomingResponse)
-								this.refreshGridUpcoming();
-							if(this.gridFinishedResponse)
-								this.refreshGridFinished();
-						}
+						if (m.delete)
+							m.delete.forEach(epg_id_to_delete.add, epg_id_to_delete);
+						if (m.update)
+							m.update.forEach(epg_id_to_reload.add, epg_id_to_reload);
+						if (m.create)
+							m.create.forEach(epg_id_to_reload.add, epg_id_to_reload);
+						if (m.dvr_delete)
+							m.dvr_delete.forEach(epg_id_to_reload.add, epg_id_to_reload);
+						if (m.dvr_update)
+							m.dvr_update.forEach(epg_id_to_reload.add, epg_id_to_reload);
+						if (m.dvr_create)
+							m.dvr_create.forEach(epg_id_to_reload.add, epg_id_to_reload);
 						break;
 					case "dvrentry":
-						if(m.delete){
-							if(this.gridUpcomingResponse){
-								let refresh = false;
-								m.delete.forEach(d => {
-									const index = this.gridUpcomingResponse?.entries.findIndex(e => e.uuid === d);
-									if(index && index !== -1){
-										this.gridUpcomingResponse?.entries.splice(index);
-										refresh = true;
-									}
-								});
-								if(refresh)
-									this.gridUpcomingSubject.next(this.gridUpcomingResponse);
-							}
-							if(this.gridFinishedResponse){
-								let refresh = false;
-								m.delete.forEach(d => {
-									const index = this.gridFinishedResponse?.entries.findIndex(e => e.uuid === d);
-									if(index && index !== -1){
-										this.gridFinishedResponse?.entries.splice(index);
-										refresh = true;
-									}
-								});
-								if(refresh)
-									this.gridFinishedSubject.next(this.gridFinishedResponse);
-							}
-							epg_uuids_to_reload.push(...m.delete);	
-						}
-						else {
-							if(m.update)
-								epg_uuids_to_reload.push(...m.update);
-							if(m.create)
-								epg_uuids_to_reload.push(...m.create);
-							
-							if(this.gridUpcomingResponse)
-								this.refreshGridUpcoming();
-							if(this.gridFinishedResponse)
-								this.refreshGridFinished();
-						}
+						if (m.delete)
+							m.delete.forEach(dvr_uuids_to_delete.add, dvr_uuids_to_delete);
+
+						if (m.update)
+							m.update.forEach(dvr_uuids_to_reload.add, dvr_uuids_to_reload);
+						if (m.create)
+							m.create.forEach(dvr_uuids_to_reload.add, dvr_uuids_to_reload);
+						if (m.change)
+							m.change.forEach(dvr_uuids_to_reload.add, dvr_uuids_to_reload);
 						break;
 					default:
 						console.log("unhandlede message", m);
@@ -370,9 +344,40 @@ export class ApiService implements OnDestroy {
 			}
 		});
 
-		if(epg_uuids_to_reload.length)
-			this.refreshByUUID({uuid: epg_uuids_to_reload});
+		this.refreshEpgByUUID([...dvr_uuids_to_reload, ...dvr_uuids_to_delete], [...epg_id_to_reload].map((id) => parseInt(id)));
 
+		if (dvr_uuids_to_reload.size) {
+			if (this.gridUpcomingResponse)
+				this.refreshGridUpcoming();
+			if (this.gridFinishedResponse)
+				this.refreshGridFinished();
+		}
+		else if (dvr_uuids_to_delete.size) {
+			if (this.gridUpcomingResponse) {
+				let refresh = false;
+				dvr_uuids_to_delete.forEach(d => {
+					const index = this.gridUpcomingResponse?.entries.findIndex(e => e.uuid === d) ?? -1;
+					if (index !== -1) {
+						this.gridUpcomingResponse?.entries.splice(index, 1);
+						refresh = true;
+					}
+				});
+				if (refresh)
+					this.gridUpcomingSubject.next(this.gridUpcomingResponse);
+			}
+			if (this.gridFinishedResponse) {
+				let refresh = false;
+				dvr_uuids_to_delete.forEach(d => {
+					const index = this.gridFinishedResponse?.entries.findIndex(e => e.uuid === d) ?? -1;
+					if (index !== -1) {
+						this.gridFinishedResponse?.entries.splice(index, 1);
+						refresh = true;
+					}
+				});
+				if (refresh)
+					this.gridFinishedSubject.next(this.gridFinishedResponse);
+			}
+		}
 	}
 
 	private epgGridResponse: GridResponse | undefined = undefined;
@@ -394,11 +399,11 @@ export class ApiService implements OnDestroy {
 				}
 				else {
 					const matchingEntry = this.epgGridResponse?.entries.findIndex(gridEntry => gridEntry.eventId === e.eventId);
-					if (matchingEntry) {
+					if (matchingEntry !== -1) {
 						this.epgGridResponse.entries[matchingEntry] = e;
 						refreshable = true;
 					}
-					else{
+					else {
 						// should never be hit, error instead?
 						this.epgGridResponse.entries.push(e);
 						this.epgGridResponse.totalCount++;
@@ -406,14 +411,14 @@ export class ApiService implements OnDestroy {
 					}
 				}
 			});
-			if(refreshable)
+			if (refreshable)
 				this.epgGridSubject.next(this.epgGridResponse);
 		});
 	}
 
 	private epgOptions: GridRequest<GridResponse> = { dir: "ASC", duplicates: 0, start: 0, limit: 300 };
 	public refreshEpgGrid(options?: GridRequest<GridResponse>) {
-		if(options){
+		if (options) {
 			this.epgOptions = options;
 		}
 		fetchData('epg/events/grid', this.epgOptions).then(data => {
@@ -462,10 +467,14 @@ export class ApiService implements OnDestroy {
 		return fetchData("idnode/delete", options);
 	}
 
-	private refreshByUUID(options: StopBydvrUUIDRequest | DeleteBydvrUUIDRequest) {
-		const refreshable = this.epgGridResponse?.entries.filter(e => e.dvrUuid && (e.dvrUuid === options.uuid || options.uuid.indexOf(e.dvrUuid) !== -1)).map(e => e.eventId);
-		if (refreshable)
+	private refreshEpgByUUID(uuids: string[], additional?: number[]) {
+		const refreshable = this.epgGridResponse?.entries.filter(e => e.dvrUuid && uuids.indexOf(e.dvrUuid) !== -1).map(e => e.eventId) ?? [];
+
+		if (additional)
+			refreshable.push(...additional);
+		if (refreshable.length) {
 			this.refreshEpgEvents(refreshable);
+		}
 	}
 
 	private gridFinishedResponse: GridUpcomingResponse | undefined = undefined;
