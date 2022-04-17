@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>
+	<ng-container *ngIf="toStop.length">Stop</ng-container>
+	<ng-container *ngIf="toStop.length && toCancel.length">/</ng-container>
+	<ng-container *ngIf="toCancel.length">Cancel</ng-container>
+	<ng-container *ngIf="(toStop.length + toCancel.length) > 1"> all</ng-container>?
+</h2>
+<ul mat-dialog-content>
+	<li *ngFor="let entry of toStop" [title]="entry.filename">
+		{{entry.disp_title}} - {{entry.episode_disp}} - {{entry.channelname}} {{entry.sched_status }} {{entry.filesize | filesize}}
+	</li>
+	<li *ngFor="let entry of toCancel" [title]="entry.filename">
+		{{entry.disp_title}} - {{entry.episode_disp}} - {{entry.channelname}} {{entry.sched_status }}
+	</li>
+</ul>
+<div mat-dialog-actions align="end">
+	<button mat-raised-button color="warn" [disabled]="deleting" (click)="confirm()">
+		<mat-progress-spinner diameter="24" mode="indeterminate" *ngIf="deleting"></mat-progress-spinner>
+		<ng-container *ngIf="!deleting">Stop/Cancel</ng-container>
+	</button><button mat-stroked-button (click)="dialogref.close()"><del>Cancel</del>Nope</button>
+</div>

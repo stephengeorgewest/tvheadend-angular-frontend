@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, Pipe, PipeTransform, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
+import { ConfirmDvrStopDialog } from '../confirm-stop/confirm-stop.dialog';
 import { UpcomingEntryDialog } from './entry/upcoming-entry.component';
 
 @Component({
@@ -33,6 +34,11 @@ export class UpcomingEntryListComponent implements OnChanges {
 		this.dialog.open(UpcomingEntryDialog, {
 			data: { entry: this.topEntry },
 			panelClass: "custom-dialog-container",
+		});
+	}
+	public stop(entry: GridUpcomingEntry){
+		this.dialog.open(ConfirmDvrStopDialog, {
+			data: [entry]
 		});
 	}
 }

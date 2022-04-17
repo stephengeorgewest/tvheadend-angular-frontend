@@ -1,15 +1,17 @@
 <mat-list>
 	<h3 mat-subheader (click)="switchSort()">switch</h3>
-	<mat-list-item *ngFor="let entry of (entries | keyvalue: sort)" (mouseenter)="mouseenter(entry.value)" (click)="click(entry.value)" [class.selected]="tapped === entry.value[0].uuid">
-		<span class="inprogress" [style.width]="entry.value[0] | completePercent: now"></span>
-		<span class="inprogress_beginpad" [style.width]="entry.value[0] | beginPercent"></span>
-		<span class="inprogress_endpad" [style.width]="entry.value[0] | endPercent"></span>
-		<span class="title">{{ entry.value[0].disp_title }} ({{entry.value.length}})</span>
-		<button *ngIf="entry.value[0].sched_status ==='recording'" mat-button (click)="stop(entry.value[0])"><mat-icon class="recording">fiber_smart_record</mat-icon>Cancel</button>
-		<button *ngIf="entry.value[0].sched_status ==='scheduled'" mat-button (click)="cancelPending(entry.value[0])">Cancel</button>
-
-		<mat-icon *ngIf="entry.value[0].data_errors || entry.value[0].data_errors" [title]="entry.value[0].data_errors">warning</mat-icon>
-		<span class="time">{{entry.value[0].start_real | newDate | date: "short"}}</span>
+	<mat-list-item *ngFor="let entry of (entries | keyvalue: sort)" (mouseenter)="mouseenter(entry.value.list)" (click)="click(entry.value.list)" [class.selected]="tapped === entry.value.list[0].uuid">
+		<span class="inprogress" [style.width]="entry.value.list[0] | completePercent: now"></span>
+		<span class="inprogress_beginpad" [style.width]="entry.value.list[0] | beginPercent"></span>
+		<span class="inprogress_endpad" [style.width]="entry.value.list[0] | endPercent"></span>
+		<span class="title">{{ entry.value.list[0].disp_title }} ({{entry.value.list.length}})</span>
+		<button *ngIf="entry.value.hasRecording || entry.value.hasScheduled" mat-button (click)="stopAll(entry.value.list)">
+			<mat-icon class="recording" *ngIf="entry.value.hasRecording">fiber_smart_record</mat-icon>
+			<mat-icon *ngIf="entry.value.hasScheduled">videocam</mat-icon>
+			Cancel/Stop All
+		</button>
+		<mat-icon *ngIf="entry.value.list[0].data_errors || entry.value.list[0].data_errors" [title]="entry.value.list[0].data_errors">warning</mat-icon>
+		<span class="time">{{entry.value.list[0].start_real | newDate | date: "short"}}</span>
 	</mat-list-item>
 </mat-list>
 <app-upcoming-entry-list [selectedEntry]="selectedEntry"></app-upcoming-entry-list>

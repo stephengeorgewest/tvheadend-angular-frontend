@@ -26,6 +26,8 @@ import { UpcomingComponent } from './dvr/upcoming/upcoming.component';
 import { UpcomingEntryListComponent } from './dvr/upcoming/entry-list/upcoming-entry-list.component';
 import { DvrUpcomingEntryComponent, UpcomingEntryDialog } from './dvr/upcoming/entry-list/entry/upcoming-entry.component';
 import { DurationPipe, EpisodeDisplayComponent,FinishedComponent, InDisplayedColumnsPipe, SortListDirectionPipe, SortListPositionPipe } from './dvr/finished/finished.component';
+import { ConfirmDeleteDialog } from './dvr/finished/confirm-delete/confirm-delete.dialog';
+import { ConfirmDvrStopDialog } from './dvr/upcoming/confirm-stop/confirm-stop.dialog';
 
 
 import { EpgComponent } from './epg/epg.component';
@@ -33,6 +35,8 @@ import { AboutComponent } from './about/about.component';
 import { EntryListComponent } from './epg/entry-list/entry-list.component';
 import { TitleListComponent } from './epg/title-list/title-list.component';
 import { EntryComponent, EntryDialog } from './epg/entry-list/entry/entry.component';
+import { ConfirmStopDialog } from './epg/confirm-stop/confirm-stop.dialog';
+
 import { NavigationComponent } from './navigation/navigation.component';
 
 import { IgnoreListManagmentComponent } from './ignore-list-managment/ignore-list-managment.component';
@@ -45,8 +49,6 @@ import { ListNamesFilterPipe } from './list-name.pipe';
 
 import { ApiService } from './api/api';
 import { IgnoreListService } from './ignore-list.service';
-import { ConfirmDeleteDialog } from './dvr/finished/confirm-delete/confirm-delete.dialog';
-import { ConfirmStopDialog } from './epg/confirm-stop/confirm-stop.dialog';
 
 @NgModule({
 	declarations: [
@@ -58,6 +60,7 @@ import { ConfirmStopDialog } from './epg/confirm-stop/confirm-stop.dialog';
 		UpcomingEntryDialog,
 		FinishedComponent,
 		ConfirmDeleteDialog,
+		ConfirmDvrStopDialog,
 
 		EpgComponent,
 		EntryListComponent,

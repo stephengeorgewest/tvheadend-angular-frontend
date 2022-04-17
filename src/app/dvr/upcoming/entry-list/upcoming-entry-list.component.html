@@ -6,7 +6,10 @@
 		</h2>
 		<h3 *ngIf="topEntry.disp_subtitle">{{topEntry.disp_subtitle}}</h3>
 		<h4>{{topEntry.channelname }} 🕰{{ (topEntry.stop - topEntry.start) / 60 }}</h4>
-		<h4>{{ topEntry.start | newDate | date:'medium' }}</h4>
+		<h4>{{ topEntry.start | newDate | date:'medium' }}
+			<button mat-button *ngIf="topEntry.sched_status === 'recording'" (click)="stop(topEntry)"><mat-icon class="recording">fiber_smart_record</mat-icon>Stop</button>
+			<button mat-button *ngIf="topEntry.sched_status === 'scheduled'" (click)="stop(topEntry)"><mat-icon>videocam</mat-icon>Cancel</button>
+		</h4>
 		<h4>{{ topEntry.episode_disp }}</h4>
 	</div>
 </div>
@@ -20,7 +23,9 @@
 	<mat-list-item *ngFor="let entry of selectedEntry.slice(1);" (click)="click($event, entry)" [class.selected]="topEntry?.uuid == entry.uuid">
 		<mat-icon matListIcon>schedule</mat-icon>
 		<h4 mat-line>{{entry.channelname}} 🕰{{ (entry.stop - entry.start) / 60 }}</h4>
-		<div mat-line class="date">{{ entry.start | newDate | date:'medium' }}</div>
+		<div mat-line class="date">{{ entry.start | newDate | date:'medium' }}
+			<button mat-button *ngIf="entry.sched_status === 'recording'" (click)="stop(entry)"><mat-icon class="recording">fiber_smart_record</mat-icon>Stop</button>
+			<button mat-button *ngIf="entry.sched_status === 'scheduled'" (click)="stop(entry)"><mat-icon>videocam</mat-icon>Cancel</button></div>
 		<h4 mat-line class="subtitle">{{entry.disp_subtitle}}</h4>
 	</mat-list-item>
 </mat-list>
