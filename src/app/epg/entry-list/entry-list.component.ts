@@ -39,11 +39,9 @@ export class EntryListComponent implements OnChanges {
 	public stop(entry: GridEntry){
 		this.pendingAPI = true;
 		//TODO: make safe
-		this.apiService.stopByGridEntry(entry).catch(() => this.pendingAPI = false).then(() => this.pendingAPI = false);
-	}
-	public cancelPending(entry: GridEntry){
-		if(entry.dvrUuid)
-			//TODO: make safe.
-			this.apiService.deleteIdNode({uuid: [entry.dvrUuid]});
+		if(entry.dvrState === "recording")
+			this.apiService.stopByGridEntry(entry).catch(() => this.pendingAPI = false).then(() => this.pendingAPI = false);
+		else if(entry.dvrState === 'scheduled' && entry.dvrUuid)
+			this.apiService.deleteIdNode({uuid: [entry.dvrUuid]}).then(() => this.pendingAPI = false);
 	}
 }
