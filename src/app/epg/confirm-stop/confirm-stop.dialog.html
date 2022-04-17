@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>
+	<ng-container *ngIf="entry.dvrState === 'recording'">Stop</ng-container>
+	<ng-container *ngIf="entry.dvrState === 'scheduled'">Cancel</ng-container>
+	{{ entry.dvrState }}?
+</h2>
+<div mat-dialog-content>
+	<h2>{{entry.title}}</h2>
+	<h3 *ngIf="entry.subtitle">{{entry.subtitle}}</h3>
+	<h4>{{entry.channelNumber}} {{entry.channelName}} 🕰{{ (entry.stop - entry.start) / 60 }}</h4>
+	<h4>{{ entry.start | newDate | date:'medium' }}</h4>
+	<h4><span *ngIf="entry.seasonNumber">S{{entry.seasonNumber}}</span><span *ngIf="entry.episodeNumber">E{{entry.episodeNumber }}</span></h4>
+</div>
+<div mat-dialog-actions align="end">
+	<button mat-raised-button color="warn" [disabled]="deleting" (click)="confirm()">
+		<mat-progress-spinner diameter="24" mode="indeterminate" *ngIf="deleting"></mat-progress-spinner>
+		<ng-container *ngIf="!deleting">
+			<ng-container *ngIf="entry.dvrState === 'recording'">Stop</ng-container>
+			<ng-container *ngIf="entry.dvrState === 'scheduled'">Cancel</ng-container>
+		</ng-container>
+	</button><button mat-stroked-button (click)="dialogref.close()">Cancel</button>
+</div>

@@ -15,8 +15,8 @@
 					<div class="title">
 						{{entry.value[0].title}}
 					</div>
-					<mat-icon *ngIf="entry.value[0].dvrState === 'recording'" class="recording">fiber_smart_record</mat-icon>
-					<mat-icon *ngIf="entry.value[0].dvrState === 'scheduled'">videocam</mat-icon>
+					<mat-icon *ngIf="entry.value.some(hasRecording)" class="recording">fiber_smart_record</mat-icon>
+					<mat-icon *ngIf="entry.value.some(hasScheduled)">videocam</mat-icon>
 					<div class="number">
 						({{entry.value.length}})
 					</div>

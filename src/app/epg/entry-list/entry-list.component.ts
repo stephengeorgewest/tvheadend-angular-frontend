@@ -1,7 +1,8 @@
-import { Component, Input, OnChanges, Pipe, PipeTransform, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from 'src/app/api/api';
 import { GridEntry } from 'src/app/api/epg/events/grid/responsemodel';
+import { ConfirmStopDialog } from '../confirm-stop/confirm-stop.dialog';
 import { EntryDialog } from './entry/entry.component';
 
 @Component({
@@ -38,10 +39,8 @@ export class EntryListComponent implements OnChanges {
 	}
 	public stop(entry: GridEntry){
 		this.pendingAPI = true;
-		//TODO: make safe
-		if(entry.dvrState === "recording")
-			this.apiService.stopByGridEntry(entry).catch(() => this.pendingAPI = false).then(() => this.pendingAPI = false);
-		else if(entry.dvrState === 'scheduled' && entry.dvrUuid)
-			this.apiService.deleteIdNode({uuid: [entry.dvrUuid]}).then(() => this.pendingAPI = false);
+		this.dialog.open(ConfirmStopDialog, {
+			data: entry
+		}).afterClosed().subscribe(() => this.pendingAPI = false);
 	}
 }

@@ -8,7 +8,7 @@
 		<h4>{{topEntry.channelNumber}} {{topEntry.channelName}} 🕰{{ (topEntry.stop - topEntry.start) / 60 }}</h4>
 		<h4>
 			{{ topEntry.start | newDate | date:'medium' }}
-			<button mat-button *ngIf="topEntry.dvrState === 'recording'" (click)="stop(topEntry)"><mat-icon class="recording">fiber_smart_record</mat-icon>Cancel</button>
+			<button mat-button *ngIf="topEntry.dvrState === 'recording'" (click)="stop(topEntry)"><mat-icon class="recording">fiber_smart_record</mat-icon>Stop</button>
 			<button mat-button *ngIf="topEntry.dvrState === 'scheduled'" (click)="stop(topEntry)"><mat-icon>videocam</mat-icon>Cancel</button>
 			<button *ngIf="topEntry.dvrState !== 'recording' && topEntry.dvrState !== 'scheduled'" mat-button (click)="record(topEntry.eventId)" [disabled]="pendingAPI">RECORD</button>
 		</h4>
@@ -27,7 +27,7 @@
 		<h4 mat-line>{{entry.channelNumber}} {{entry.channelName}} 🕰{{ (entry.stop - entry.start) / 60 }}</h4>
 		<div mat-line class="date">
 			{{ entry.start | newDate | date:'medium' }}
-			<button mat-button *ngIf="entry.dvrState === 'recording'" (click)="stop(entry)"><mat-icon class="recording">fiber_smart_record</mat-icon>Cancel</button>
+			<button mat-button *ngIf="entry.dvrState === 'recording'" (click)="stop(entry)"><mat-icon class="recording">fiber_smart_record</mat-icon>Stop</button>
 			<button mat-button *ngIf="entry.dvrState === 'scheduled'" (click)="stop(entry)"><mat-icon>videocam</mat-icon>Cancel</button>
 			<button *ngIf="entry.dvrState !== 'recording' && entry.dvrState !== 'scheduled'" mat-button (click)="record(entry.eventId)" [disabled]="pendingAPI">RECORD</button>
 		</div>

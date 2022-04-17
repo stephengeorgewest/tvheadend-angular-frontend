@@ -46,6 +46,7 @@ import { ListNamesFilterPipe } from './list-name.pipe';
 import { ApiService } from './api/api';
 import { IgnoreListService } from './ignore-list.service';
 import { ConfirmDeleteDialog } from './dvr/finished/confirm-delete/confirm-delete.dialog';
+import { ConfirmStopDialog } from './epg/confirm-stop/confirm-stop.dialog';
 
 @NgModule({
 	declarations: [
@@ -64,6 +65,7 @@ import { ConfirmDeleteDialog } from './dvr/finished/confirm-delete/confirm-delet
 		EntryDialog,
 		EntryComponent,
 		EntryDialog,
+		ConfirmStopDialog,
 
 		IgnoreListManagmentComponent,
  		NavigationComponent,

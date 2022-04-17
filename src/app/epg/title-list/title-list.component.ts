@@ -264,4 +264,10 @@ export class TitleListComponent implements OnDestroy {
 		}
 		return a.value[0].start - b.value[0].start;
 	}
+	public hasRecording(e: GridEntry): boolean {
+		return e.dvrState === 'recording';
+	}
+	public hasScheduled(e: GridEntry): boolean {
+		return e.dvrState === 'scheduled';
+	}
 }
