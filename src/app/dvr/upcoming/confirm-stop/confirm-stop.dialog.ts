@@ -25,8 +25,8 @@ export class ConfirmDvrStopDialog {
 	public confirm() {
 		this.deleting=true;
 		Promise.all([
-			...this.toStop.map(e => this.apiService.stopBydvrUUID({uuid: e.uuid})),
-			this.apiService.deleteIdNode({uuid: this.toCancel.map(e => e.uuid)})
+			this.apiService.stopBydvrUUID({uuid: this.toStop  .map(e => e.uuid)}),
+			this.apiService.deleteIdNode ({uuid: this.toCancel.map(e => e.uuid)})
 		]).then(() => this.dialogref.close());
 	}
 }

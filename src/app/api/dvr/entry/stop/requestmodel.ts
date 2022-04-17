@@ -1,3 +1,3 @@
 export interface StopBydvrUUIDRequest {
-	uuid: string
+	uuid: string | string[]
 }
