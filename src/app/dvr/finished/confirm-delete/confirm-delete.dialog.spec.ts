@@ -30,7 +30,7 @@ describe('ConfirmDeleteComponent', () => {
 		fixture.detectChanges();
 	});
 
-	it('should create2', () => {
+	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
 });
