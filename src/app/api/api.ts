@@ -339,13 +339,22 @@ export class ApiService implements OnDestroy {
 							m.change.forEach(dvr_uuids_to_reload.add, dvr_uuids_to_reload);
 						break;
 					case "diskspaceUpdate":
-					//case "accessUpdate":
 						this.diskUsageResponse = {
 							totaldiskspace: m.totaldiskspace,
 							useddiskspace: m.useddiskspace,
 							freediskspace: m.freediskspace
 						};
 						this.diskUsageSubject.next(this.diskUsageResponse);
+						break;
+					case "accessUpdate":
+						if(m.totaldiskspace && m.useddiskspace && m.freediskspace)
+						this.diskUsageResponse = {
+							totaldiskspace: m.totaldiskspace,
+							useddiskspace: m.useddiskspace,
+							freediskspace: m.freediskspace
+						};
+						this.diskUsageSubject.next(this.diskUsageResponse);
+						console.log("unhandlede access update message bits", m);
 						break;
 					default:
 						console.log("unhandlede message", m);
