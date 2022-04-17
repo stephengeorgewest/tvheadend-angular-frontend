@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
-import { cometMessage, diskspaceBase } from "../ws/responsemodel";
+import { cometMessage, diskspaceBase } from "./ws/responsemodel";
 import { CreateByEventRequest } from "./dvr/entry/create_by_event/requestmodel";
 import { CreateByEventResponse } from "./dvr/entry/create_by_event/responsemodel";
 import { GridUpcomingRequest } from "./dvr/entry/grid_upcoming/requestmodel";

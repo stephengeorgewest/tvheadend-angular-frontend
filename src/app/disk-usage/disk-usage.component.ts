@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../api/api';
-import { diskspaceBase } from '../ws/responsemodel';
+import { diskspaceBase } from '../api/ws/responsemodel';
 
 @Component({
 	selector: 'app-disk-usage',
