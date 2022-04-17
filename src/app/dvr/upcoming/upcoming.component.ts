@@ -1,10 +1,8 @@
 import { KeyValue } from '@angular/common';
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnDestroy } from '@angular/core';
 import { timer } from 'rxjs';
 import { ApiService } from 'src/app/api/api';
-import { GridUpcomingRequest } from 'src/app/api/dvr/entry/grid_upcoming/requestmodel';
-import { GridUpcomingEntry, GridUpcomingResponse } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
+import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
 
 @Component({
 	selector: 'app-dvr-upcoming',

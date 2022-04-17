@@ -1,9 +1,6 @@
-import { useAnimation } from '@angular/animations';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivationEnd, Event, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { ApiService } from '../api/api';
-import { diskspaceBase } from '../ws/responsemodel';
 
 @Component({
 	selector: 'app-navigation',

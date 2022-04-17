@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>
+	Delete?
+</h2>
+<ul mat-dialog-content>
+	<li *ngFor="let entry of entries" [title]="entry.filename">
+		{{entry.disp_title}} - {{entry.episode_disp}} - {{entry.channelname}} {{entry.filesize | filesize}}
+	</li>
+</ul>
+<div mat-dialog-actions align="end">
+	<button mat-raised-button color="warn" [disabled]="deleting" (click)="confirm()">
+		<mat-progress-spinner diameter="24" mode="indeterminate" *ngIf="deleting"></mat-progress-spinner>
+		<ng-container *ngIf="!deleting">Delete</ng-container>
+	</button><button mat-stroked-button (click)="dialogref.close()">Cancel</button>
+</div>

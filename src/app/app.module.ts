@@ -45,6 +45,7 @@ import { ListNamesFilterPipe } from './list-name.pipe';
 
 import { ApiService } from './api/api';
 import { IgnoreListService } from './ignore-list.service';
+import { ConfirmDeleteDialog } from './dvr/finished/confirm-delete/confirm-delete.dialog';
 
 @NgModule({
 	declarations: [
@@ -55,6 +56,7 @@ import { IgnoreListService } from './ignore-list.service';
 		DvrUpcomingEntryComponent,
 		UpcomingEntryDialog,
 		FinishedComponent,
+		ConfirmDeleteDialog,
 
 		EpgComponent,
 		EntryListComponent,

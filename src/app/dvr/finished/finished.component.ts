@@ -1,10 +1,12 @@
 import { Component, Input, OnDestroy, Pipe, PipeTransform } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { ApiService } from 'src/app/api/api';
 import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
 import { RemoveBydvrUUIDRequest } from 'src/app/api/dvr/entry/remove/requestmodel';
 import { fetchData } from 'src/app/api/util';
 import { environment } from 'src/environments/environment';
+import { ConfirmDeleteDialog } from './confirm-delete/confirm-delete.dialog';
 type groupkeys = keyof Pick<GridUpcomingEntry,
 	"disp_title" |
 	"channelname" |
@@ -160,7 +162,7 @@ export class FinishedComponent {
 
 	private entries: GridUpcomingEntry[] = [];
 	private gridFinishedSubscription;
-	constructor(private apiService: ApiService) {
+	constructor(private apiService: ApiService, private dialog: MatDialog) {
 		this.gridFinishedSubscription = this.apiService.onGridFinishedResponse().subscribe((data) => {
 			this.entries = data?.entries || [];
 			this.totalCount = data?.total|| 0;
@@ -265,14 +267,11 @@ export class FinishedComponent {
 			this.selectedEntry = event;
 		}
 	}
-	//TODO: make safe
-	public remove(entry: GridUpcomingEntry) {
-		const requets: RemoveBydvrUUIDRequest = { uuid: entry.uuid };
-		fetchData('dvr/entry/remove', requets).then();
-	}
-	public removeAll(entries: GridUpcomingEntry[]) {
-		const requets: RemoveBydvrUUIDRequest = { uuid: entries.map(e => e.uuid) };
-		fetchData('dvr/entry/remove', requets).then();
+	
+	public remove(entry: GridUpcomingEntry[]) {
+		this.dialog.open(ConfirmDeleteDialog, {
+			data: entry
+		});
 	}
 }
 
