@@ -4,8 +4,8 @@
 		<h2 (click)="open()">
 			{{topEntry.title}}
 		</h2>
-		<h3 *ngIf="topEntry.subtitle">{{topEntry.subtitle}}</h3>
-		<h4>{{topEntry.channelNumber}} {{topEntry.channelName}} 🕰{{ (topEntry.stop - topEntry.start) / 60 }}</h4>
+		<h3 *ngIf="topEntry.subtitle" class="subtitle">{{topEntry.subtitle}}</h3>
+		<h4 class="channel">{{topEntry.channelNumber}} {{topEntry.channelName}} 🕰{{ (topEntry.stop - topEntry.start) / 60 }}</h4>
 		<h4>
 			{{ topEntry.start | newDate | date:'medium' }}
 			<button mat-button *ngIf="topEntry.dvrState === 'recording'" (click)="stop(topEntry)"><mat-icon class="recording">fiber_smart_record</mat-icon>Stop</button>
@@ -16,13 +16,17 @@
 	</div>
 </div>
 <p *ngIf="topEntry">{{topEntry.description}}</p>
-<h3 matSubheader class="upcoming" *ngIf="selectedEntry.length > 1" [class.selected]="topEntry?.eventId !== selectedEntry[0].eventId" (click)="click($event, selectedEntry[0])">
+<h3 matSubheader class="upcoming" *ngIf="selectedEntry.length > 1" [class.selected]="topEntry?.eventId !== selectedEntry[0].eventId">
 	Upcoming ({{selectedEntry.length - 1}})
-	<mat-icon *ngIf="topEntry?.eventId !== selectedEntry[0].eventId">reset_tv</mat-icon>
+	
+	<button mat-icon-button [disabled]="topEntry?.eventId === selectedEntry[0].eventId" (click)="select(selectedEntry[0], true)"><mat-icon>keyboard_double_arrow_up</mat-icon></button>
+	<button mat-icon-button [disabled]="topEntry?.eventId === selectedEntry[0].eventId" (click)="prev()"><mat-icon>keyboard_arrow_up</mat-icon></button>
+	<button mat-icon-button [disabled]="topEntry?.eventId === selectedEntry[selectedEntry.length - 1].eventId" (click)="next()"><mat-icon>keyboard_arrow_down</mat-icon></button>
+	<button mat-icon-button [disabled]="topEntry?.eventId === selectedEntry[selectedEntry.length - 1].eventId" (click)="select(selectedEntry[selectedEntry.length - 1], true)"><mat-icon>keyboard_double_arrow_down</mat-icon></button>
 </h3>
 <mat-divider></mat-divider>
-<mat-list *ngIf="selectedEntry.length > 1" (click)="click($event, selectedEntry[0])">
-	<mat-list-item *ngFor="let entry of selectedEntry.slice(1);" (click)="click($event, entry)" [class.selected]="topEntry?.eventId == entry.eventId">
+<mat-list *ngIf="selectedEntry.length > 1" id="entry-list">
+	<mat-list-item *ngFor="let entry of selectedEntry.slice(1);" (click)="topEntry?.eventId == entry.eventId ? select(selectedEntry[0]): select(entry)" [class.selected]="topEntry?.eventId == entry.eventId" [id]="entry.eventId">
 		<mat-icon matListIcon>schedule</mat-icon>
 		<h4 mat-line>{{entry.channelNumber}} {{entry.channelName}} 🕰{{ (entry.stop - entry.start) / 60 }}</h4>
 		<div mat-line class="date">

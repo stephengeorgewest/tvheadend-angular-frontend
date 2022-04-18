@@ -21,11 +21,24 @@ img {
 h4 {
 	margin-bottom: 0;
 }
+h3.subtitle {
+	min-height: 2.5em;
+	margin-bottom:0em
+}
+h4.channel {
+	margin-top: 0em;
+}
 
 p {
 	margin-left: 1em;
 	text-indent: 1em;
 	max-width: 35em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	min-height: 3.5em;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
 }
 
 .upcoming {
