@@ -5,6 +5,7 @@ import { MatListModule } from '@angular/material/list';
 
 import { UpcomingComponent } from './upcoming.component';
 import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-upcoming-entry-list ',
@@ -20,7 +21,7 @@ describe('UpcomingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[MatIconModule, MatListModule],
+      imports:[MatDialogModule, MatIconModule, MatListModule],
       declarations: [ UpcomingComponent, MockUpcomingEntryListComponent ]
     })
     .compileComponents();
