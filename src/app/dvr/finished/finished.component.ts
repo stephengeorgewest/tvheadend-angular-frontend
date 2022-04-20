@@ -1,10 +1,10 @@
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { Component, Input, OnDestroy, Pipe, PipeTransform } from '@angular/core';
+import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { ApiService } from 'src/app/api/api';
 import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
-import { RemoveBydvrUUIDRequest } from 'src/app/api/dvr/entry/remove/requestmodel';
-import { fetchData } from 'src/app/api/util';
 import { environment } from 'src/environments/environment';
 import { ConfirmDeleteDialog } from './confirm-delete/confirm-delete.dialog';
 type groupkeys = keyof Pick<GridUpcomingEntry,
@@ -43,8 +43,16 @@ type grouped = {
 
 type sortType<T> = {
 	key: T,
-	ascending: boolean
+	ascending: boolean,
 }
+type sortColumn = {
+	displayString: string,
+	sort: boolean,
+	sortOrder: number,
+	ascending: boolean,
+	display: boolean,
+	displayOrder: number
+};
 
 @Component({
 	selector: 'app-dvr-finished',
@@ -52,31 +60,83 @@ type sortType<T> = {
 	styleUrls: ['./finished.component.css']
 })
 export class FinishedComponent {
-	public mapping: { [property in sortkeys]?: string } = {
-		disp_title: "Title",
-		disp_description: "Description",
-		disp_subtitle: "Subtitle",
-		episode_disp: "Episode",
-		channelname: "Channel",
-		start_real: "Start Time",
-		duration: "Duration",
-		filesize: "Size",
-		errors: "Errors",
-		data_errors: "data Errors"
+	public columns: { [property in sortkeys]: sortColumn } = {
+		disp_title: {
+			displayString: "Title",
+			sort: true,
+			sortOrder: 1,
+			ascending: false,
+			display: true,
+			displayOrder: 1
+		},
+		disp_description: {
+			displayString: "Description",
+			sort: false,
+			sortOrder: 10,
+			ascending: false,
+			display: false,
+			displayOrder: 10
+		},
+		disp_subtitle: {
+			displayString: "Subtitle",
+			sort: true,
+			sortOrder: 3, ascending: false,
+			display: true,
+			displayOrder: 3
+		},
+		episode_disp: {
+			displayString: "Episode",
+			sort: true, sortOrder: 2, ascending: true,
+			display: true,
+			displayOrder: 2
+		},
+		channelname: {
+			displayString: "Channel",
+			sort: true, sortOrder: 4, ascending: false,
+			display: true,
+			displayOrder: 4
+		},
+		start_real: {
+			displayString: "Start Time",
+			sort: true, sortOrder: 5, ascending: false,
+			display: true,
+			displayOrder: 5
+		},
+		duration: {
+			displayString: "Duration",
+			sort: true, sortOrder: 6, ascending: false,
+			display: true,
+			displayOrder: 6
+		},
+		filesize: {
+			displayString: "Size",
+			sort: true, sortOrder: 7, ascending: false,
+			display: true,
+			displayOrder: 7
+		},
+		errors: {
+			displayString: "Errors",
+			sort: true, sortOrder: 8, ascending: false,
+			display: true,
+			displayOrder: 8
+		},
+		data_errors: {
+			displayString: "Data Errors",
+			sort: true,
+			sortOrder: 9, ascending: false,
+			display: true,
+			displayOrder: 9
+		}
 	};
-
-	public displayedColumns: Array<sortkeys> = [
-		"disp_title",
-		"episode_disp",
-		"disp_subtitle",
-		/*"disp_description",*/
-		"channelname",
-		"start_real",
-		"duration",
-		"filesize",
-		"errors",
-		"data_errors"
-	];
+	private displayedColumnUpdate() {
+		this.displayedColumns = Object.entries(this.columns).filter(([key, value]) => value.display).sort(([key_a, value_a],[key_b, vaule_b]) => value_a.displayOrder - vaule_b.displayOrder).map(([key, value]) => key as sortkeys)
+	}
+	public displayedColumns: Array<sortkeys> = [];
+	public displayedColumnsChange(event: MatCheckboxChange, columnKey: sortkeys) {
+		//event.stopPropagation();
+		//this.columns[columnKey].display = !this.columns[columnKey].display;
+		this.displayedColumnUpdate();
+	}
 
 	public groupList: Array<groupkeys> = [
 		"disp_title",
@@ -109,47 +169,38 @@ export class FinishedComponent {
 		{ key: "duration", ascending: false },
 		{ key: "filesize", ascending: false },
 	];
-	public sortList: Array<sortType<sortkeys>> = [
-		{ key: "disp_title", ascending: false },
-		{ key: "disp_description", ascending: false },
-		{ key: "disp_subtitle", ascending: false },
-		{ key: "episode_disp", ascending: false },
-		{ key: "channelname", ascending: false },
-		{ key: "start_real", ascending: false },
-		{ key: "duration", ascending: false },
-		{ key: "filesize", ascending: false },
-		{ key: "errors", ascending: false },
-		{ key: "data_errors", ascending: false }
-	];
 	public reverse(sortKey: sortkeys) {
-		const sort = this.sortList.find(s => sortKey === s.key);
-		if (sort) {
-			sort.ascending = !sort.ascending;
-		}
-		this.sortList = [...this.sortList];
+		this.columns[sortKey].ascending = !this.columns[sortKey].ascending;
 		this.sortEntries();
 	}
-	public up(sortKey: sortkeys): void {
-		const index = this.sortList.findIndex((s) => sortKey === s.key);
-		if (index === -1)
+	public up(sortKey: sortkeys, type: "sortOrder" | "displayOrder"): void {
+		const previousOrder = this.columns[sortKey][type];
+		if (previousOrder === 1)
 			return;
-		const sort = this.sortList[index];
-		if (index !== 0) {
-			this.sortList[index] = this.sortList[index - 1];
-			this.sortList[index - 1] = sort;
-		}
-		this.sortList = [...this.sortList];
-		this.sortEntries();
+
+		const swap = Object.entries(this.columns).find(([key, value]) => value[type] === previousOrder - 1) as [sortkeys, any];
+		if (swap)
+			this.columns[swap[0]][type]= previousOrder;
+		this.columns[sortKey][type] = previousOrder - 1;
+
+		type === "sortOrder" ?
+		this.sortEntries(): this.displayedColumnUpdate();
 	}
-	public down(sortKey: sortkeys): void {
-		const index = this.sortList.findIndex((s) => sortKey === s.key);
-		const sort = this.sortList[index];
-		if (index !== this.sortList.length - 1) {
-			this.sortList[index] = this.sortList[index + 1];
-			this.sortList[index + 1] = sort;
-		}
-		this.sortList = [...this.sortList];
-		this.sortEntries();
+	public down(sortKey: sortkeys, type: "sortOrder" | "displayOrder"): void {
+		const previousOrder = this.columns[sortKey][type];
+		const maxOrder = 
+			Object.values(this.columns)
+			.reduce((pre, cur) => pre > cur[type] ? pre : cur[type], 0);
+		if (previousOrder === maxOrder)
+			return;
+
+		const swap = Object.entries(this.columns).find(([key, value]) => value[type] === previousOrder + 1) as [sortkeys, any];
+		if (swap)
+			this.columns[swap[0]][type] = previousOrder;
+		this.columns[sortKey][type] = previousOrder + 1;
+
+		type === "sortOrder" ?
+		this.sortEntries(): this.displayedColumnUpdate();
 	}
 
 	public filesize: number = 0;
@@ -165,10 +216,11 @@ export class FinishedComponent {
 	constructor(private apiService: ApiService, private dialog: MatDialog) {
 		this.gridFinishedSubscription = this.apiService.onGridFinishedResponse().subscribe((data) => {
 			this.entries = data?.entries || [];
-			this.totalCount = data?.total|| 0;
+			this.totalCount = data?.total || 0;
 			this.groupAndSort();
 		});
 		this.apiService.refreshGridFinished();
+		this.displayedColumnUpdate();
 	}
 	public ngOnDestroy() {
 		this.gridFinishedSubscription.unsubscribe();
@@ -236,11 +288,17 @@ export class FinishedComponent {
 		});
 	}
 	private sortEntries() {
+		const sortList = Object.entries(this.columns)
+			.filter(([key, value]) => value.sort)
+			.sort(([key_a, value_a], [key_b, value_b]) => (value_a.sortOrder - value_b.sortOrder))
+			.map(([key, value]) => ({ key: key as sortkeys, ascending: value.ascending }));
 		for (let g of this.entryGroups) {
 			g.entries.sort((a, b) => {
-				for (let s of this.sortList) {
-					const v = this.compare(a[s.key], b[s.key]);
-					if (v != 0) { return s.ascending ? v : -v; }
+				for (let s of sortList) {
+					if (this.columns[s.key].display) {
+						const v = this.compare(a[s.key], b[s.key]);
+						if (v != 0) { return s.ascending ? v : -v; }
+					}
 				}
 				return 0;
 			});
@@ -267,7 +325,7 @@ export class FinishedComponent {
 			this.selectedEntry = event;
 		}
 	}
-	
+
 	public remove(entry: GridUpcomingEntry[]) {
 		this.dialog.open(ConfirmDeleteDialog, {
 			data: entry
@@ -325,8 +383,8 @@ export class EpisodeDisplayComponent {
 	name: 'sortListPosition'
 })
 export class SortListPositionPipe implements PipeTransform {
-	transform(sortKey: keyof GridUpcomingEntry, sortList: Array<sortType<any>>) {
-		return sortList.findIndex((s: sortType<any>) => s.key === sortKey);
+	transform(sortKey: keyof GridUpcomingEntry, sortList: Array<sortType<sortkeys>>, displayedColumns: Array<sortkeys>) {
+		return sortList.findIndex(s => s.key === sortKey);
 	}
 }
 
@@ -334,8 +392,8 @@ export class SortListPositionPipe implements PipeTransform {
 	name: 'sortListDirection'
 })
 export class SortListDirectionPipe implements PipeTransform {
-	transform(sortKey: keyof GridUpcomingEntry, sortList: Array<sortType<any>>) {
-		return sortList.find((s: sortType<any>) => s.key === sortKey)?.ascending;
+	transform(sortKey: keyof GridUpcomingEntry, sortList: Array<sortType<sortkeys>>) {
+		return sortList.find(s => s.key === sortKey)?.ascending;
 	}
 }
 

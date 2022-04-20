@@ -2,7 +2,8 @@
 	<fieldset>
 		<legend>Options</legend>
 		<mat-form-field>
-			<mat-select (selectionChange)="groupChange($event)" [(ngModel)]="groupBy" [ngModelOptions]="{standalone: true}">
+			<mat-select (selectionChange)="groupChange($event)" [(ngModel)]="groupBy"
+				[ngModelOptions]="{standalone: true}">
 				<mat-option [value]="undefined"></mat-option>
 				<mat-option value="disp_title">Title</mat-option>
 				<mat-option value="channelname">Channel</mat-option>
@@ -11,8 +12,10 @@
 			<mat-label>GroupBy</mat-label>
 		</mat-form-field>
 		<mat-form-field>
-			<mat-select (selectionChange)="groupSortChange($event)" [disabled]="!groupBy" [(ngModel)]="groupSort" [ngModelOptions]="{standalone: true}">
-				<mat-option *ngFor="let sort of groupsortList" [value]="sort">{{mapping[sort.key]}}</mat-option>
+			<mat-select (selectionChange)="groupSortChange($event)" [disabled]="!groupBy" [(ngModel)]="groupSort"
+				[ngModelOptions]="{standalone: true}">
+				<mat-option *ngFor="let sort of groupsortList" [value]="sort">{{columns[sort.key]?.displayString}}
+				</mat-option>
 			</mat-select>
 			<mat-label>GroupSort</mat-label>
 		</mat-form-field>
@@ -23,29 +26,56 @@
 		<thead>
 			<!--revert to <caption> once browsers support sticky on caption -->
 			<tr>
-				<th class="caption" [attr.colspan]="displayedColumns.length+1">({{totalCount}}) {{filesize | filesize}} - {{ duration| duration}}</th>
+				<th class="caption" [attr.colspan]="displayedColumns.length+1">({{totalCount}}) {{filesize | filesize}}
+					- {{ duration| duration}}</th>
 			</tr>
 			<tr>
 				<th rowspan="2">
-					<button mat-icon-button [matMenuTriggerFor]="rowmenu" aria-label="Example icon-button with a menu">
+					<button mat-icon-button [matMenuTriggerFor]="rowmenu" aria-label="Change displayed columns">
 						<mat-icon>menu</mat-icon>
 					</button>
 					<mat-menu #rowmenu="matMenu">
-						<button role="menuitemcheckbox" *ngFor="let column of mapping | keyvalue" [class]="column.key" mat-menu-item>
-							<mat-checkbox (click)="$event.stopPropagation()" [checked]="$any(column.key) | inDisplayedColumns:displayedColumns">{{column.value}}</mat-checkbox>
-						</button>
+						<div
+							role="menuitemcheckbox"
+							mat-menu-item
+							*ngFor="let column of columns | keyvalue"
+							(click)="$event.stopPropagation();"
+						>
+							<mat-checkbox [class]="column.key" [(ngModel)]="column.value.display"
+								(change)="displayedColumnsChange($event, $any(column.key))">
+								{{column.value.displayString}}</mat-checkbox>
+							<span>
+								<button mat-icon-button [disabled]="column.value.displayOrder === 1"
+									(click)="up($any(column.key), 'displayOrder')">
+									<mat-icon>keyboard_double_arrow_up</mat-icon>
+								</button>
+								<span class="sort-order">{{column.value.displayOrder }}</span>
+								<button mat-icon-button [disabled]="column.value.displayOrder === 10"
+									(click)="down($any(column.key), 'displayOrder')">
+									<mat-icon>keyboard_double_arrow_down</mat-icon>
+								</button>
+							</span>
+						</div>
 					</mat-menu>
 				</th>
 				<th *ngFor="let col of displayedColumns" [class]="col">
-					{{mapping[col]}}
+					{{columns[col]?.displayString}}
 				</th>
 			</tr>
 			<tr>
-				<th *ngFor="let col of displayedColumns" [class]="col">
-					<mat-icon [class.ascending]="col | sortListDirection: sortList " (click)="reverse(col)">sort
-					</mat-icon>
-					<mat-icon (click)="up(col)">keyboard_double_arrow_up</mat-icon>{{col | sortListPosition: sortList}}
-					<mat-icon (click)="down(col)">keyboard_double_arrow_down</mat-icon>
+				<th *ngFor="let column of displayedColumns" [class]="column">
+					<button mat-icon-button (click)="reverse(column)">
+						<mat-icon [class.ascending]="columns[column].ascending ">sort
+						</mat-icon>
+					</button>
+					<button mat-icon-button [disabled]="columns[column].sortOrder === 1"
+						(click)="up(column, 'sortOrder')">
+						<mat-icon>keyboard_double_arrow_up</mat-icon>
+					</button><span class="sort-order">{{columns[column].sortOrder }}</span>
+					<button mat-icon-button [disabled]="columns[column].sortOrder === 10"
+						(click)="down(column, 'sortOrder')">
+						<mat-icon>keyboard_double_arrow_down</mat-icon>
+					</button>
 				</th>
 			</tr>
 		</thead>
@@ -110,7 +140,7 @@
 		<tfoot>
 			<tr>
 				<th></th>
-				<th *ngFor="let col of displayedColumns">{{mapping[col]}}</th>
+				<th *ngFor="let col of displayedColumns">{{columns[col]?.displayString}}</th>
 			</tr>
 		</tfoot>
 	</table>

@@ -64,6 +64,32 @@ th {
 	z-index: 2;
 }
 
+div[role="menuitemcheckbox"] {
+	display: flex;
+	width: calc(100% - 16px);
+	padding-right: 0;
+}
+div[role="menuitemcheckbox"] mat-checkbox {
+	flex-grow: 1;
+}
+div[role="menuitemcheckbox"].mat-menu-item button .mat-icon{
+	margin-right: 0;
+}
+
+div[role="menuitemcheckbox"].mat-menu-item span span.sort-order,
+thead tr th span.sort-order {
+	display: inline-block;
+	min-width: 1.2em;
+	text-align: center;
+}
+
+div[role="menuitemcheckbox"].mat-menu-item button.mat-icon-button a,
+thead tr th .mat-icon-button {
+	height: 28px;
+	width: 28px;
+	line-height: 28px;
+}
+
 thead tr:nth-child(2) th {
 	/* Don't forget this, required for the stickiness */
 	top: 2em;
