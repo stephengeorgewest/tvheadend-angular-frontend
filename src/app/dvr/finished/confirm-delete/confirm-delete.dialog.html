@@ -11,5 +11,5 @@
 		<mat-progress-spinner diameter="24" mode="indeterminate" *ngIf="deleting"></mat-progress-spinner>
 		<ng-container *ngIf="!deleting">Delete</ng-container>
 	</button>
-	<button mat-stroked-button cdk-focus-start (click)="dialogref.close()">Cancel</button>
+	<button mat-stroked-button cdkFocusRegionstart (click)="dialogref.close()">Cancel</button>
 </div>

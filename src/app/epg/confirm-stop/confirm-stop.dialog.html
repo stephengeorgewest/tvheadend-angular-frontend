@@ -17,5 +17,6 @@
 			<ng-container *ngIf="entry.dvrState === 'recording'">Stop</ng-container>
 			<ng-container *ngIf="entry.dvrState === 'scheduled'">Cancel</ng-container>
 		</ng-container>
-	</button><button mat-stroked-button cdk-focus-start (click)="dialogref.close()">Cancel</button>
+	</button>
+	<button mat-stroked-button cdkFocusRegionstart (click)="dialogref.close()">Cancel</button>
 </div>
