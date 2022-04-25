@@ -19,12 +19,12 @@ export class EntryListComponent implements OnChanges {
 		if (!changes['selectedEntry'].firstChange)
 			this.select(this.selectedEntry[0], true);
 	}
-	public select(entry: GridEntry | undefined, scroll?: boolean) {
-		this.topEntry = entry;
+	public select(entry: GridEntry, scroll?: boolean) {
+		this.topEntry = this.topEntry?.eventId == entry?.eventId ? this.selectedEntry[0]: entry;
 		if (scroll) {
 			const container = document.getElementById("entry-list");
+			const id = entry?.eventId || 0;
 			if (container) {
-				const id = entry?.eventId || 0;
 				const target = document.getElementById(id.toString());
 				if (!target) {
 					container?.scrollTo({ behavior: "smooth", top: 0 });
@@ -56,25 +56,21 @@ export class EntryListComponent implements OnChanges {
 		}).afterClosed().subscribe(() => this.pendingAPI = false);
 	}
 	public prev() {
-		let entry;
 		if (!this.topEntry)
-			entry = this.selectedEntry[0];
+			this.select(this.selectedEntry[0], true);
 		else {
 			const index = this.selectedEntry.findIndex(e => e.eventId === this.topEntry?.eventId);
-			if (index !== 0)
-				entry = this.selectedEntry[index - 1];
+			if (index > 0)
+				this.select(this.selectedEntry[index - 1], true);
 		}
-		this.select(entry, true);
 	}
 	public next() {
-		let entry;
 		if (!this.topEntry)
-			entry = this.selectedEntry[0];
+			this.select(this.selectedEntry[0], true);
 		else {
 			const index = this.selectedEntry.findIndex(e => e.eventId === this.topEntry?.eventId);
 			if (index !== this.selectedEntry.length - 1)
-				entry = this.selectedEntry[index + 1];
+				this.select(this.selectedEntry[index + 1], true);
 		}
-		this.select(entry, true);
 	}
 }
