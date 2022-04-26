@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from 'src/app/api/api';
 import { GridEntry } from 'src/app/api/epg/events/grid/responsemodel';
+import { scrollElementIntoView } from 'src/app/util';
 import { ConfirmStopDialog } from '../confirm-stop/confirm-stop.dialog';
 import { EntryDialog } from './entry/entry.component';
 
@@ -22,20 +23,7 @@ export class EntryListComponent implements OnChanges {
 	public select(entry: GridEntry, scroll?: boolean) {
 		this.topEntry = this.topEntry?.eventId == entry?.eventId ? this.selectedEntry[0]: entry;
 		if (scroll) {
-			const container = document.getElementById("entry-list");
-			const id = entry?.eventId || 0;
-			if (container) {
-				const target = document.getElementById(id.toString());
-				if (!target) {
-					container?.scrollTo({ behavior: "smooth", top: 0 });
-				}
-				else if (target.getBoundingClientRect().bottom > container.getBoundingClientRect().bottom) {
-					target.scrollIntoView({ behavior: 'smooth', block: "end" });
-				}
-				else if (target.getBoundingClientRect().top < container.getBoundingClientRect().top) {
-					target.scrollIntoView({ behavior: 'smooth', block: "start" });
-				}
-			}
+			scrollElementIntoView((entry?.eventId || 0).toString(), "entry-list");
 		}
 	}
 	public open() {

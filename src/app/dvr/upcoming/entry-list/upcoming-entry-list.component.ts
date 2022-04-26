@@ -1,7 +1,8 @@
-import { Component, Input, OnChanges, Pipe, PipeTransform, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+
 import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
-import { GridEntry } from 'src/app/api/epg/events/grid/responsemodel';
+import { scrollElementIntoView } from 'src/app/util';
 import { ConfirmDvrStopDialog } from '../confirm-stop/confirm-stop.dialog';
 import { UpcomingEntryDialog } from './entry/upcoming-entry.component';
 
@@ -20,26 +21,9 @@ export class UpcomingEntryListComponent implements OnChanges {
 			this.select(this.selectedEntry[0], true)
 	}
 	public select(entry: GridUpcomingEntry, scroll?: boolean) {
-		if (this.topEntry?.uuid === entry.uuid) {
-			this.topEntry = this.selectedEntry[0];
-		}
-		else {
-			this.topEntry = entry;
-		}if (scroll) {
-			const container = document.getElementById("upcoming-entry-list");
-			const id = entry?.uuid || 0;
-			if (container) {
-				const target = document.getElementById(id.toString());
-				if (!target) {
-					container?.scrollTo({ behavior: "smooth", top: 0 });
-				}
-				else if (target.getBoundingClientRect().bottom > container.getBoundingClientRect().bottom) {
-					target.scrollIntoView({ behavior: 'smooth', block: "end" });
-				}
-				else if (target.getBoundingClientRect().top < container.getBoundingClientRect().top) {
-					target.scrollIntoView({ behavior: 'smooth', block: "start" });
-				}
-			}
+		this.topEntry = this.topEntry?.uuid === entry.uuid ? this.selectedEntry[0]: entry;
+		if (scroll) {
+			scrollElementIntoView((entry?.uuid || 0).toString(), "upcoming-entry-list");
 		}
 	}
 	public open() {
