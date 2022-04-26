@@ -49,7 +49,7 @@ type sortColumn = {
 	displayString: string,
 	sort: boolean,
 	sortOrder: number,
-	ascending: boolean,
+	descending: boolean,
 	display: boolean,
 	displayOrder: number
 };
@@ -65,7 +65,7 @@ export class FinishedComponent {
 			displayString: "Title",
 			sort: true,
 			sortOrder: 1,
-			ascending: false,
+			descending: false,
 			display: true,
 			displayOrder: 1
 		},
@@ -73,63 +73,63 @@ export class FinishedComponent {
 			displayString: "Description",
 			sort: false,
 			sortOrder: 10,
-			ascending: false,
+			descending: false,
 			display: false,
 			displayOrder: 10
 		},
 		disp_subtitle: {
 			displayString: "Subtitle",
 			sort: true,
-			sortOrder: 3, ascending: false,
+			sortOrder: 3, descending: false,
 			display: true,
 			displayOrder: 3
 		},
 		episode_disp: {
 			displayString: "Episode",
-			sort: true, sortOrder: 2, ascending: true,
+			sort: true, sortOrder: 2, descending: true,
 			display: true,
 			displayOrder: 2
 		},
 		channelname: {
 			displayString: "Channel",
-			sort: true, sortOrder: 4, ascending: false,
+			sort: true, sortOrder: 4, descending: false,
 			display: true,
 			displayOrder: 4
 		},
 		start_real: {
 			displayString: "Start Time",
-			sort: true, sortOrder: 5, ascending: false,
+			sort: true, sortOrder: 5, descending: false,
 			display: true,
 			displayOrder: 5
 		},
 		duration: {
 			displayString: "Duration",
-			sort: true, sortOrder: 6, ascending: false,
+			sort: true, sortOrder: 6, descending: false,
 			display: true,
 			displayOrder: 6
 		},
 		filesize: {
 			displayString: "Size",
-			sort: true, sortOrder: 7, ascending: false,
+			sort: true, sortOrder: 7, descending: false,
 			display: true,
 			displayOrder: 7
 		},
 		errors: {
 			displayString: "Errors",
-			sort: true, sortOrder: 8, ascending: false,
+			sort: true, sortOrder: 8, descending: false,
 			display: true,
 			displayOrder: 8
 		},
 		data_errors: {
 			displayString: "Data Errors",
 			sort: true,
-			sortOrder: 9, ascending: false,
+			sortOrder: 9, descending: false,
 			display: true,
 			displayOrder: 9
 		}
 	};
 	private displayedColumnUpdate() {
-		this.displayedColumns = Object.entries(this.columns).filter(([key, value]) => value.display).sort(([key_a, value_a],[key_b, vaule_b]) => value_a.displayOrder - vaule_b.displayOrder).map(([key, value]) => key as sortkeys)
+		this.displayedColumns = Object.entries(this.columns).filter(([key, value]) => value.display).sort(([key_a, value_a], [key_b, vaule_b]) => value_a.displayOrder - vaule_b.displayOrder).map(([key, value]) => key as sortkeys)
 	}
 	public displayedColumns: Array<sortkeys> = [];
 	public displayedColumnsChange(event: MatCheckboxChange, columnKey: sortkeys) {
@@ -170,7 +170,7 @@ export class FinishedComponent {
 		{ key: "filesize", ascending: false },
 	];
 	public reverse(sortKey: sortkeys) {
-		this.columns[sortKey].ascending = !this.columns[sortKey].ascending;
+		this.columns[sortKey].descending = !this.columns[sortKey].descending;
 		this.sortEntries();
 	}
 	public up(sortKey: sortkeys, type: "sortOrder" | "displayOrder"): void {
@@ -180,17 +180,17 @@ export class FinishedComponent {
 
 		const swap = Object.entries(this.columns).find(([key, value]) => value[type] === previousOrder - 1) as [sortkeys, any];
 		if (swap)
-			this.columns[swap[0]][type]= previousOrder;
+			this.columns[swap[0]][type] = previousOrder;
 		this.columns[sortKey][type] = previousOrder - 1;
 
 		type === "sortOrder" ?
-		this.sortEntries(): this.displayedColumnUpdate();
+			this.sortEntries() : this.displayedColumnUpdate();
 	}
 	public down(sortKey: sortkeys, type: "sortOrder" | "displayOrder"): void {
 		const previousOrder = this.columns[sortKey][type];
-		const maxOrder = 
+		const maxOrder =
 			Object.values(this.columns)
-			.reduce((pre, cur) => pre > cur[type] ? pre : cur[type], 0);
+				.reduce((pre, cur) => pre > cur[type] ? pre : cur[type], 0);
 		if (previousOrder === maxOrder)
 			return;
 
@@ -200,7 +200,7 @@ export class FinishedComponent {
 		this.columns[sortKey][type] = previousOrder + 1;
 
 		type === "sortOrder" ?
-		this.sortEntries(): this.displayedColumnUpdate();
+			this.sortEntries() : this.displayedColumnUpdate();
 	}
 
 	public filesize: number = 0;
@@ -273,7 +273,7 @@ export class FinishedComponent {
 			switch (this.groupSort.key) {
 				case "duration":
 				case "filesize":
-					sortValue = this.compare(a[this.groupSort.key], b[this.groupSort.key]);
+					sortValue = this.compare(a[this.groupSort.key], b[this.groupSort.key], this.groupSort.key);
 					break;
 				case "start_real":
 					const f = (cur: number, prev: GridUpcomingEntry) => prev.start_real < cur ? prev.start_real : cur;
@@ -291,22 +291,30 @@ export class FinishedComponent {
 		const sortList = Object.entries(this.columns)
 			.filter(([key, value]) => value.sort)
 			.sort(([key_a, value_a], [key_b, value_b]) => (value_a.sortOrder - value_b.sortOrder))
-			.map(([key, value]) => ({ key: key as sortkeys, ascending: value.ascending }));
+			.map(([key, value]) => ({ key: key as sortkeys, descending: value.descending }));
 		for (let g of this.entryGroups) {
 			g.entries.sort((a, b) => {
 				for (let s of sortList) {
 					if (this.columns[s.key].display) {
-						const v = this.compare(a[s.key], b[s.key]);
-						if (v != 0) { return s.ascending ? v : -v; }
+						const v = this.compare(a[s.key], b[s.key], s.key);
+						if (v != 0) { return s.descending ? -v : v; }
 					}
 				}
 				return 0;
 			});
 		}
 	}
-	private compare<T extends string | number>(a: T, b: T): number {
-		if (typeof a === "string")
-			return a.localeCompare(<string>b);
+	private compare<T extends string | number>(a: T, b: T, type: sortkeys): number {
+		if (type === "episode_disp") {
+			const a_parsed = parse_episode_disp(<string>a);
+			const b_parsed = parse_episode_disp(<string>b);
+			if(a_parsed?.season === b_parsed?.season)
+				return (b_parsed?.episode ?? 0) - (a_parsed?.episode ?? 0);
+			else
+				return (b_parsed?.season ?? 0) - (a_parsed?.season ?? 0);
+		}
+		else if (typeof b === "string")
+			return b.localeCompare(<string>a);
 		else
 			return <number>b - <number>a;
 	}
@@ -361,22 +369,33 @@ export class DurationPipe implements PipeTransform {
 
 @Component({
 	selector: 'episode_disp',
-	template: "<div *ngIf='season'>{{season}}</div><div>{{episode}}</div>",
+	template: "<div *ngIf='d?.season'>Season {{d?.season}}</div><div *ngIf='d?.episode'>Episode {{d?.episode}}</div>",
 	styles: ["div {white-space:nowrap;}"]
 })
 export class EpisodeDisplayComponent {
-	public season: string = "";
-	public episode: string = "";
+	public d: {season?: number, episode: number} | undefined;
 	@Input() public set season_episode(season_episode: string) {
-		const season_episode_array = season_episode.split(".");
-		if (season_episode_array.length === 2) {
-			this.season = season_episode_array[0];
-			this.episode = season_episode_array[1];
-		}
-		else if (season_episode_array.length === 1) {
-			if (season_episode_array[0].startsWith("E")) this.episode = season_episode_array[0];
-		}
+		this.d = parse_episode_disp(season_episode);
 	}
+}
+/**
+ * Season 1.Episode 4 => {season: 1, episode: 4}
+ * Episode 105 => {episode: 105}
+ * @param season_episode 
+ * @returns 
+ */
+function parse_episode_disp(season_episode: string): { season?: number, episode: number } | undefined {
+	const season_episode_array = season_episode.split(".");
+	if (season_episode_array.length === 2) {
+		return {
+			season: parseInt(season_episode_array[0].split(" ")[1]),
+			episode: parseInt(season_episode_array[1].split(" ")[1])
+		};
+	}
+	else if (season_episode_array.length === 1) {
+		if (season_episode_array[0].startsWith("E")) return { episode: parseInt(season_episode_array[0].split(" ")[1]) };
+	}
+	return undefined;
 }
 
 @Pipe({

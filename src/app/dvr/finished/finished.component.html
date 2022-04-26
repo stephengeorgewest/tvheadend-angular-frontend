@@ -65,7 +65,7 @@
 			<tr>
 				<th *ngFor="let column of displayedColumns" [class]="column">
 					<button mat-icon-button (click)="reverse(column)">
-						<mat-icon [class.ascending]="columns[column].ascending ">sort
+						<mat-icon [class.descending]="columns[column].descending ">sort
 						</mat-icon>
 					</button>
 					<button mat-icon-button [disabled]="columns[column].sortOrder === 1"
@@ -125,7 +125,7 @@
 				<td *ngFor="let col of displayedColumns" [ngSwitch]="col" [class]="col">
 					<ng-container *ngSwitchCase="'filesize'">{{entry.filesize | filesize}}</ng-container>
 					<ng-container *ngSwitchCase="'data_errors'">
-						<mat-icon *ngIf="entry.data_errors || entry.data_errors">warning</mat-icon>
+						<mat-icon *ngIf="entry.data_errors">warning</mat-icon>{{entry.data_errors}}
 					</ng-container>
 					<ng-container *ngSwitchCase="'start_real'">
 						<div>{{entry.start_real | newDate | date: "shortDate"}}</div>

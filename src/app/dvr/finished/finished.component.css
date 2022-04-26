@@ -100,7 +100,7 @@ thead tr:nth-child(3) th {
 	top: 3.2em;
 }
 
-.ascending {
+.descending {
 	transform: scaleY(-1);
 }
 
@@ -146,4 +146,7 @@ td.errors,
 td.data_errors,
 td.start_real {
 	text-align: center;
+}
+td.data_errors .mat-icon{
+	vertical-align: bottom;
 }
