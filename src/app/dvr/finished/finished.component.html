@@ -35,12 +35,8 @@
 						<mat-icon>menu</mat-icon>
 					</button>
 					<mat-menu #rowmenu="matMenu">
-						<div
-							role="menuitemcheckbox"
-							mat-menu-item
-							*ngFor="let column of columns | keyvalue"
-							(click)="$event.stopPropagation();"
-						>
+						<div role="menuitemcheckbox" mat-menu-item *ngFor="let column of columns | keyvalue"
+							(click)="$event.stopPropagation();">
 							<mat-checkbox [class]="column.key" [(ngModel)]="column.value.display"
 								(change)="displayedColumnsChange($event, $any(column.key))">
 								{{column.value.displayString}}</mat-checkbox>
@@ -55,6 +51,17 @@
 									<mat-icon>keyboard_double_arrow_down</mat-icon>
 								</button>
 							</span>
+						</div>
+						<div role="menuitem">
+							<button mat-button [disabled]="selectedEntry.length === 0" (click)="remove(selectedEntry)">
+								<mat-icon>delete</mat-icon>Remove Selected
+							</button>
+							<button mat-button [disabled]="selectedEntry.length === 0" (click)="selectedEntry = []">
+								<mat-icon>deselect</mat-icon>Deselect All
+							</button>
+							<button mat-button (click)="selectAllEntries()">
+								<mat-icon>select_all</mat-icon>Select All
+							</button>
 						</div>
 					</mat-menu>
 				</th>
@@ -88,7 +95,19 @@
 					<mat-menu #menu="matMenu">
 						<button mat-menu-item (click)="remove(group.entries)">
 							<mat-icon>delete</mat-icon>
-							<span>Remove All</span>
+							<span>Remove All in Group</span>
+						</button>
+						<button mat-menu-item (click)="selectAll(group.entries)">
+							<mat-icon>select_all</mat-icon>
+							<span>Select All in Group</span>
+						</button>
+						<button mat-menu-item (click)="selectAllAdd(group.entries)">
+							<mat-icon>select_all</mat-icon>
+							<span>Add All in Group To Selection</span>
+						</button>
+						<button mat-menu-item (click)="deselectAll(group.entries)">
+							<mat-icon>deselect</mat-icon>
+							<span>De-Select All in Group</span>
 						</button>
 					</mat-menu>
 					<span *ngIf="groupBy === 'disp_title'">{{ group.grouptitle }}</span>
@@ -98,7 +117,8 @@
 						}}</span>
 				</th>
 			</tr>
-			<tr *ngFor="let entry of group.entries">
+			<tr *ngFor="let entry of group.entries" (click)="click($event, entry)"
+				[class.selected]="entry.uuid | inSelected: selectedEntry">
 				<td>
 					<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
 						<mat-icon>menu</mat-icon>

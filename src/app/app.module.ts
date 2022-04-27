@@ -25,7 +25,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { UpcomingComponent } from './dvr/upcoming/upcoming.component';
 import { UpcomingEntryListComponent } from './dvr/upcoming/entry-list/upcoming-entry-list.component';
 import { DvrUpcomingEntryComponent, UpcomingEntryDialog } from './dvr/upcoming/entry-list/entry/upcoming-entry.component';
-import { DurationPipe, EpisodeDisplayComponent,FinishedComponent, InDisplayedColumnsPipe, SortListDirectionPipe, SortListPositionPipe } from './dvr/finished/finished.component';
+import { DurationPipe, EpisodeDisplayComponent, FinishedComponent, InDisplayedColumnsPipe, InSelectedPipe, SortListDirectionPipe, SortListPositionPipe } from './dvr/finished/finished.component';
 import { ConfirmDeleteDialog } from './dvr/finished/confirm-delete/confirm-delete.dialog';
 import { ConfirmDvrStopDialog } from './dvr/upcoming/confirm-stop/confirm-stop.dialog';
 
@@ -71,10 +71,10 @@ import { IgnoreListService } from './ignore-list.service';
 		ConfirmStopDialog,
 
 		IgnoreListManagmentComponent,
- 		NavigationComponent,
+		NavigationComponent,
 
 		DiskUsageComponent,
-		
+
 		AboutComponent,
 
 		CompletePercentPipe,
@@ -87,7 +87,8 @@ import { IgnoreListService } from './ignore-list.service';
 		EpisodeDisplayComponent,
 		SortListPositionPipe,
 		SortListDirectionPipe,
-		InDisplayedColumnsPipe
+		InDisplayedColumnsPipe,
+		InSelectedPipe
 	],
 	imports: [
 		BrowserModule,

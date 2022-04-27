@@ -1,8 +1,9 @@
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
-import { Component, Input, OnDestroy, Pipe, PipeTransform } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, Pipe, PipeTransform } from '@angular/core';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
+import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/api/api';
 import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
 import { environment } from 'src/environments/environment';
@@ -57,7 +58,8 @@ type sortColumn = {
 @Component({
 	selector: 'app-dvr-finished',
 	templateUrl: './finished.component.html',
-	styleUrls: ['./finished.component.css']
+	styleUrls: ['./finished.component.css'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FinishedComponent {
 	public columns: { [property in sortkeys]: sortColumn } = {
@@ -129,7 +131,12 @@ export class FinishedComponent {
 		}
 	};
 	private displayedColumnUpdate() {
-		this.displayedColumns = Object.entries(this.columns).filter(([key, value]) => value.display).sort(([key_a, value_a], [key_b, vaule_b]) => value_a.displayOrder - vaule_b.displayOrder).map(([key, value]) => key as sortkeys)
+		this.displayedColumns = Object.entries(this.columns)
+			.filter(([key, value]) => value.display && this.groupBy !== key)
+			.sort(([key_a, value_a], [key_b, vaule_b]) => value_a.displayOrder - vaule_b.displayOrder)
+			.map(([key, value]) => key as sortkeys)
+
+		this.changeDetectorRef.detectChanges();
 	}
 	public displayedColumns: Array<sortkeys> = [];
 	public displayedColumnsChange(event: MatCheckboxChange, columnKey: sortkeys) {
@@ -201,6 +208,7 @@ export class FinishedComponent {
 
 		type === "sortOrder" ?
 			this.sortEntries() : this.displayedColumnUpdate();
+
 	}
 
 	public filesize: number = 0;
@@ -212,8 +220,9 @@ export class FinishedComponent {
 	public selectedEntry: GridUpcomingEntry[] = [];
 
 	private entries: GridUpcomingEntry[] = [];
-	private gridFinishedSubscription;
-	constructor(private apiService: ApiService, private dialog: MatDialog) {
+	private gridFinishedSubscription: Subscription | undefined;
+	constructor(private apiService: ApiService, private dialog: MatDialog, private changeDetectorRef: ChangeDetectorRef) { }
+	public ngOnInit() {
 		this.gridFinishedSubscription = this.apiService.onGridFinishedResponse().subscribe((data) => {
 			this.entries = data?.entries || [];
 			this.totalCount = data?.total || 0;
@@ -221,9 +230,10 @@ export class FinishedComponent {
 		});
 		this.apiService.refreshGridFinished();
 		this.displayedColumnUpdate();
+		this.changeDetectorRef.markForCheck();
 	}
 	public ngOnDestroy() {
-		this.gridFinishedSubscription.unsubscribe();
+		this.gridFinishedSubscription?.unsubscribe();
 	}
 	private groupAndSort() {
 		this.filesize = 0;
@@ -252,6 +262,7 @@ export class FinishedComponent {
 		}, new Map<string | number, grouped>()).values()];
 		this.sortGroups();
 		this.sortEntries();
+		this.changeDetectorRef.markForCheck();
 	}
 	private getBin(binSize: number, filesize: number) {
 		let s = filesize;
@@ -286,6 +297,7 @@ export class FinishedComponent {
 			}
 			return this.groupSort ? sortValue : - sortValue;
 		});
+		this.displayedColumnUpdate();
 	}
 	private sortEntries() {
 		const sortList = Object.entries(this.columns)
@@ -303,12 +315,14 @@ export class FinishedComponent {
 				return 0;
 			});
 		}
+
+		this.changeDetectorRef.markForCheck();
 	}
 	private compare<T extends string | number>(a: T, b: T, type: sortkeys): number {
 		if (type === "episode_disp") {
 			const a_parsed = parse_episode_disp(<string>a);
 			const b_parsed = parse_episode_disp(<string>b);
-			if(a_parsed?.season === b_parsed?.season)
+			if (a_parsed?.season === b_parsed?.season)
 				return (b_parsed?.episode ?? 0) - (a_parsed?.episode ?? 0);
 			else
 				return (b_parsed?.season ?? 0) - (a_parsed?.season ?? 0);
@@ -319,19 +333,54 @@ export class FinishedComponent {
 			return <number>b - <number>a;
 	}
 
-	public tapped: string = "";
-	public mouseenter(event: GridUpcomingEntry[]) {
-		if (!this.tapped)
-			this.selectedEntry = event;
+	public click(event: MouseEvent, entry: GridUpcomingEntry) {
+		event.stopPropagation();
+		const foundIndex = this.selectedEntry.findIndex(se => se.uuid === entry.uuid);
+		if (event.shiftKey && this.selectedEntry.length) {
+			const lastSelected = this.selectedEntry[this.selectedEntry.length - 1];
+			let adding: { start: GridUpcomingEntry, end: GridUpcomingEntry } | undefined = undefined;
+			this.entryGroups.every(g => g.entries.every(e => {
+				if (!adding) {
+					if (e.uuid === entry.uuid)
+						adding = { start: entry, end: lastSelected };
+					if (e.uuid === lastSelected.uuid)
+						adding = { start: lastSelected, end: entry };
+				}
+				if (adding && !this.selectedEntry.find(se => se.uuid === e.uuid)) {
+					this.selectedEntry.push(e);
+				}
+				if (e.uuid === adding?.end.uuid)
+					return false;
+				else
+					return true;
+			}));
+		}
+		else if (event.ctrlKey) {
+			if (foundIndex > -1) {
+				this.selectedEntry.splice(foundIndex, 1);
+			}
+			else {
+				this.selectedEntry.push(entry);
+			}
+		}
+		else if (this.selectedEntry.length === 1 && this.selectedEntry[0].uuid === entry.uuid)
+			this.selectedEntry = [];
+		else
+			this.selectedEntry = [entry];
+
+		this.changeDetectorRef.markForCheck();
 	}
-	public click(event: GridUpcomingEntry[]) {
-		if (this.tapped == event[0].uuid) {
-			this.tapped = "";
-		}
-		else {
-			this.tapped = event[0].uuid;
-			this.selectedEntry = event;
-		}
+	public selectAllEntries(){
+		this.selectedEntry = this.entryGroups.flatMap(g => g.entries);
+	}
+	public selectAll(entry: GridUpcomingEntry[]) {
+		this.selectedEntry = [...entry];
+	}
+	public selectAllAdd(entry: GridUpcomingEntry[]) {
+		this.selectedEntry.push(...entry.filter(e => !this.selectedEntry.some(se => se.uuid === e.uuid)));
+	}
+	public deselectAll(entry: GridUpcomingEntry[]) {
+		this.selectedEntry = this.selectedEntry.filter(se => !entry.some(e => se.uuid === e.uuid))
 	}
 
 	public remove(entry: GridUpcomingEntry[]) {
@@ -370,13 +419,16 @@ export class DurationPipe implements PipeTransform {
 @Component({
 	selector: 'episode_disp',
 	template: "<div *ngIf='d?.season'>Season {{d?.season}}</div><div *ngIf='d?.episode'>Episode {{d?.episode}}</div>",
-	styles: ["div {white-space:nowrap;}"]
+	styles: ["div {white-space:nowrap;}"],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EpisodeDisplayComponent {
-	public d: {season?: number, episode: number} | undefined;
+	public d: { season?: number, episode: number } | undefined;
 	@Input() public set season_episode(season_episode: string) {
 		this.d = parse_episode_disp(season_episode);
+		this.changeDetectorRef.detectChanges();
 	}
+	constructor(private changeDetectorRef: ChangeDetectorRef) { }
 }
 /**
  * Season 1.Episode 4 => {season: 1, episode: 4}
@@ -399,16 +451,16 @@ function parse_episode_disp(season_episode: string): { season?: number, episode:
 }
 
 @Pipe({
-	name: 'sortListPosition'
+	name: 'sortListPosition', pure: false
 })
 export class SortListPositionPipe implements PipeTransform {
-	transform(sortKey: keyof GridUpcomingEntry, sortList: Array<sortType<sortkeys>>, displayedColumns: Array<sortkeys>) {
+	transform(sortKey: keyof GridUpcomingEntry, sortList: Array<sortType<sortkeys>>) {
 		return sortList.findIndex(s => s.key === sortKey);
 	}
 }
 
 @Pipe({
-	name: 'sortListDirection'
+	name: 'sortListDirection', pure: false
 })
 export class SortListDirectionPipe implements PipeTransform {
 	transform(sortKey: keyof GridUpcomingEntry, sortList: Array<sortType<sortkeys>>) {
@@ -417,10 +469,19 @@ export class SortListDirectionPipe implements PipeTransform {
 }
 
 @Pipe({
-	name: 'inDisplayedColumns'
+	name: 'inDisplayedColumns', pure: false
 })
 export class InDisplayedColumnsPipe implements PipeTransform {
 	transform(columnKey: sortkeys, displayedColumns: Array<sortkeys>) {
 		return !!displayedColumns.find((s) => s === columnKey);
+	}
+}
+
+@Pipe({
+	name: 'inSelected', pure: false
+})
+export class InSelectedPipe implements PipeTransform {
+	transform(uuid: string, selected: Array<GridUpcomingEntry>) {
+		return !!selected.find((e) => e.uuid === uuid);
 	}
 }
