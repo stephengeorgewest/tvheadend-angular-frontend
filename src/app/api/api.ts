@@ -11,6 +11,7 @@ import { GridEntry, GridResponse } from "./epg/events/grid/responsemodel";
 import { GridRequest } from "./grid-request";
 import { DeleteBydvrUUIDRequest } from "./idnode/delete/requestmodel";
 import { fetchData } from "./util";
+import { GuardService } from "../guard.service";
 
 /*enum access_enum = {
 	ACCESS_ADMIN,
@@ -285,7 +286,7 @@ const pathlist = ["access/entry/class", "access/entry/create", "access/entry/gri
 })
 export class ApiService implements OnDestroy {
 	private websocket: WebSocket;
-	constructor() {
+	constructor(private guardService: GuardService) {
 		this.websocket = new WebSocket("ws" + environment.server.secure + "://" + environment.server.host + ":" + environment.server.port + "/comet/ws");
 		this.websocket.onmessage = (m) => this.onMessage(m);
 	}
@@ -354,6 +355,7 @@ export class ApiService implements OnDestroy {
 							freediskspace: m.freediskspace
 						};
 						this.diskUsageSubject.next(this.diskUsageResponse);
+						this.guardService.setGuardData({dvr: !!m.dvr, admin: !!m.admin});
 						console.log("unhandlede access update message bits", m);
 						break;
 					default:

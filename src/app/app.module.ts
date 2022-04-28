@@ -49,6 +49,9 @@ import { ListNamesFilterPipe } from './list-name.pipe';
 
 import { ApiService } from './api/api';
 import { IgnoreListService } from './ignore-list.service';
+import { LoginComponent } from './login/login.component';
+import { AuthenticationService } from './authentication.service';
+import { StreamComponent } from './status/stream/stream.component';
 
 @NgModule({
 	declarations: [
@@ -72,6 +75,7 @@ import { IgnoreListService } from './ignore-list.service';
 
 		IgnoreListManagmentComponent,
 		NavigationComponent,
+		LoginComponent,
 
 		DiskUsageComponent,
 
@@ -88,7 +92,8 @@ import { IgnoreListService } from './ignore-list.service';
 		SortListPositionPipe,
 		SortListDirectionPipe,
 		InDisplayedColumnsPipe,
-		InSelectedPipe
+		InSelectedPipe,
+  StreamComponent
 	],
 	imports: [
 		BrowserModule,
@@ -113,6 +118,7 @@ import { IgnoreListService } from './ignore-list.service';
 	],
 	providers: [
 		ApiService,
+		AuthenticationService,
 		IgnoreListService
 	],
 	bootstrap: [AppComponent]
