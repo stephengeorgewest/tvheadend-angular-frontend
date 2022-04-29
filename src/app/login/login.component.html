@@ -1,20 +1,22 @@
 <form #loginform="ngForm" *ngIf="!authenticated" (ngSubmit)="closing=true; authenticationService.login(username.value, password.value); snackbarref.dismissWithAction();">
+	<iframe [src]="loginUrl"></iframe>
 	<mat-form-field>
 		<label>Username</label>
-		<input #username [(ngModel)]="username.value" matInput required type="text" name="username" />
+		<input value="fake" #username [(ngModel)]="username.value" matInput required type="text" name="username" />
 	</mat-form-field>
 	<mat-form-field>
 		<label>Password</label>
-		<input #password [(ngModel)]="password.value" matInput required type="password" name="password" />
+		<input value="login" #password [(ngModel)]="password.value" matInput required type="password" name="password" />
 	</mat-form-field>
 	<div class="buttons">
-		<button mat-raised-button type="submit" [disabled]="!loginform.form.valid">Login</button>
+		<button mat-raised-button type="submit" [disabled]="!loginform.form.valid">Login Succedded - restart websocket</button>
 		<button mat-stroked-button type="button" (click)="snackbarref.dismiss()">Cancel</button>
 	</div>
 </form>
 <form *ngIf="authenticated" (ngSubmit)="closing=true; authenticationService.logout(); snackbarref.dismissWithAction();">
+	<iframe [src]="logoutUrl"></iframe>
 	<div class="buttons">
-		<button mat-raised-button type="submit">Logout</button>
+		<button mat-raised-button type="submit">Logout Succedded - restart websocket</button>
 		<button mat-stroked-button type="button" (click)="snackbarref.dismiss()">Cancel</button>
 	</div>
 </form>
