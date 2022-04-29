@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ApiService } from 'src/app/api/api';
+import { DvrService } from 'src/app/api/dvr/dvr.service';
 import { GridEntry } from 'src/app/api/epg/events/grid/responsemodel';
 import { scrollElementIntoView } from 'src/app/util';
 import { ConfirmStopDialog } from '../confirm-stop/confirm-stop.dialog';
@@ -16,7 +16,7 @@ export class EntryListComponent implements OnChanges {
 	@Input() public selectedEntry: GridEntry[] = [];
 
 	constructor(
-		private apiService: ApiService,
+		private dvrService: DvrService,
 		public dialog: MatDialog
 	) { }
 
@@ -39,7 +39,7 @@ export class EntryListComponent implements OnChanges {
 	public pendingAPI = false;
 	public record(event_id: number) {
 		this.pendingAPI = true;
-		this.apiService.createByEvent({ event_id, config_uuid: "" }).catch(() => this.pendingAPI = false).then(() => this.pendingAPI = false);
+		this.dvrService.createByEvent({ event_id, config_uuid: "" }).catch(() => this.pendingAPI = false).then(() => this.pendingAPI = false);
 	}
 	public stop(entry: GridEntry) {
 		this.pendingAPI = true;

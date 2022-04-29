@@ -47,11 +47,15 @@ import { NewDatePipe } from './date-from-unix-date.pipe';
 import { FileSizePipe } from './file-size.pipe';
 import { ListNamesFilterPipe } from './list-name.pipe';
 
-import { ApiService } from './api/api';
-import { IgnoreListService } from './ignore-list.service';
 import { LoginComponent } from './login/login.component';
-import { AuthenticationService } from './authentication.service';
 import { StreamComponent } from './status/stream/stream.component';
+
+import { IgnoreListService } from './ignore-list.service';
+import { AuthenticationService } from './authentication.service';
+import { WebsocketService } from './api/ws/websocket.service';
+import { GuardService } from './guard.service';
+import { DvrService } from './api/dvr/dvr.service';
+import { EpgService } from './api/epg/epg.service';
 
 @NgModule({
 	declarations: [
@@ -79,6 +83,7 @@ import { StreamComponent } from './status/stream/stream.component';
 
 		DiskUsageComponent,
 
+		StreamComponent,
 		AboutComponent,
 
 		CompletePercentPipe,
@@ -93,7 +98,6 @@ import { StreamComponent } from './status/stream/stream.component';
 		SortListDirectionPipe,
 		InDisplayedColumnsPipe,
 		InSelectedPipe,
-  StreamComponent
 	],
 	imports: [
 		BrowserModule,
@@ -117,9 +121,12 @@ import { StreamComponent } from './status/stream/stream.component';
 		AppRoutingModule
 	],
 	providers: [
-		ApiService,
 		AuthenticationService,
-		IgnoreListService
+		DvrService,
+		EpgService,
+		GuardService,
+		IgnoreListService,
+		WebsocketService
 	],
 	bootstrap: [AppComponent]
 })

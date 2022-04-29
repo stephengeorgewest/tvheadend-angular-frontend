@@ -3,7 +3,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { Subscription } from 'rxjs';
-import { ApiService } from 'src/app/api/api';
+import { DvrService } from 'src/app/api/dvr/dvr.service';
 import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
 import { environment } from 'src/environments/environment';
 import { ConfirmDeleteDialog } from './confirm-delete/confirm-delete.dialog';
@@ -222,17 +222,18 @@ export class FinishedComponent {
 	private gridFinishedSubscription: Subscription | undefined;
 
 	constructor(
-		public apiService: ApiService,
+		public dvrService: DvrService,
 		private dialog: MatDialog,
 		private changeDetectorRef: ChangeDetectorRef
 	) { }
+
 	public ngOnInit() {
-		this.gridFinishedSubscription = this.apiService.onGridFinishedResponse().subscribe((data) => {
+		this.gridFinishedSubscription = this.dvrService.onGridFinishedResponse().subscribe((data) => {
 			this.entries = data?.entries || [];
 			this.totalCount = data?.total || 0;
 			this.groupAndSort();
 		});
-		this.apiService.refreshGridFinished();
+		this.dvrService.refreshGridFinished();
 		this.displayedColumnUpdate();
 		this.changeDetectorRef.markForCheck();
 	}

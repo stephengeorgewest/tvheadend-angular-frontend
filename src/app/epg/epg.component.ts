@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { GridRequest } from '../api/grid-request';
 import { GridEntry, GridResponse } from '../api/epg/events/grid/responsemodel';
 import { ignoreEntry, IgnoreListService, listNames, modificationType } from '../ignore-list.service';
-import { ApiService } from '../api/api';
+import { EpgService } from '../api/epg/epg.service';
 
 const halfHour = 30 * 60;
 const hour = 60 * 60;
@@ -29,9 +29,9 @@ export class EpgComponent implements OnInit, OnDestroy {
 	private subscription: Subscription;
 	constructor(
 		private ignoreService: IgnoreListService,
-		private apiService: ApiService
+		private epgService: EpgService
 	) {
-		this.apiService.onEpgGridResponse().subscribe(data => (this.refresh(data)));
+		this.epgService.onEpgGridResponse().subscribe(data => (this.refresh(data)));
 		this.subscription = this.ignoreService.onList().subscribe((e) => {
 			this.ignoreLists = e.list;
 			switch (e.type) {
@@ -147,7 +147,7 @@ export class EpgComponent implements OnInit, OnDestroy {
 
 	public options: GridRequest<GridResponse> = { dir: "ASC", duplicates: 0, start: 0, limit: 300 };
 	public refreshGrid() {
-		this.apiService.refreshEpgGrid(this.options);
+		this.epgService.refreshEpgGrid(this.options);
 	}
 	public refresh(data: GridResponse | undefined) {
 		if(data){

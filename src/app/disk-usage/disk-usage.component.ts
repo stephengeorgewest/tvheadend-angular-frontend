@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiService } from '../api/api';
+import { DiskUsageService } from './disk-usage.service';
 import { diskspaceBase } from '../api/ws/responsemodel';
 
 @Component({
@@ -10,8 +10,8 @@ import { diskspaceBase } from '../api/ws/responsemodel';
 export class DiskUsageComponent {
 	public diskspace: diskspaceBase | undefined;
 
-	constructor(private apiservice: ApiService) {
-		this.apiservice.onDiskUsage().subscribe(diskUsage => this.diskspace = diskUsage);
+	constructor(private diskUsageService: DiskUsageService) {
+		this.diskUsageService.onDiskUsage().subscribe(diskUsage => this.diskspace = diskUsage);
 	}
 }
 

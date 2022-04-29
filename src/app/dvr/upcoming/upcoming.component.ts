@@ -2,7 +2,7 @@ import { KeyValue } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { timer } from 'rxjs';
-import { ApiService } from 'src/app/api/api';
+import { DvrService } from 'src/app/api/dvr/dvr.service';
 import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
 import { ConfirmDvrStopDialog } from './confirm-stop/confirm-stop.dialog';
 
@@ -25,10 +25,10 @@ export class UpcomingComponent implements OnDestroy {
 	private sub;
 
 	constructor(
-		private apiService: ApiService,
+		private dvrService: DvrService,
 		private dialog: MatDialog
 	) {
-		this.apiService.onGridUpcomingResponse().subscribe((data) => {
+		this.dvrService.onGridUpcomingResponse().subscribe((data) => {
 			this.entries = (data?.entries || []).reduce((prev, cur) => {
 				const e = prev.get(cur.disp_title);
 				if(e){
@@ -48,7 +48,7 @@ export class UpcomingComponent implements OnDestroy {
 		this.sub = timer(60*1000, 60*1000).subscribe(() => {
 			this.now = Date.now()/1000;
 		});
-		this.apiService.refreshGridUpcoming();
+		this.dvrService.refreshGridUpcoming();
 	}
 	public ngOnDestroy(): void {
 		this.sub.unsubscribe();

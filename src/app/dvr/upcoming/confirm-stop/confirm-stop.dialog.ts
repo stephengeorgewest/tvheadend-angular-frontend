@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ApiService } from 'src/app/api/api';
+import { DvrService } from 'src/app/api/dvr/dvr.service';
 import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
 
 
@@ -14,7 +14,7 @@ export class ConfirmDvrStopDialog {
 	public toStop;
 	public toCancel;
 	constructor(
-		private apiService: ApiService,
+		private dvrService: DvrService,
 		@Inject(MAT_DIALOG_DATA) private entries: Array<GridUpcomingEntry>,
 		public dialogref: MatDialogRef<ConfirmDvrStopDialog>
 	) {
@@ -25,8 +25,8 @@ export class ConfirmDvrStopDialog {
 	public confirm() {
 		this.deleting=true;
 		Promise.all([
-			this.apiService.stopBydvrUUID({uuid: this.toStop  .map(e => e.uuid)}),
-			this.apiService.deleteIdNode ({uuid: this.toCancel.map(e => e.uuid)})
+			this.dvrService.stopBydvrUUID({uuid: this.toStop  .map(e => e.uuid)}),
+			this.dvrService.deleteIdNode ({uuid: this.toCancel.map(e => e.uuid)})
 		]).then(() => this.dialogref.close());
 	}
 }

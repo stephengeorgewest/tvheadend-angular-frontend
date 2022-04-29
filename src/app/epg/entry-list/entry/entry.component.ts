@@ -1,6 +1,6 @@
 import { Component, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ApiService } from 'src/app/api/api';
+import { DvrService } from 'src/app/api/dvr/dvr.service';
 import { GridEntry } from 'src/app/api/epg/events/grid/responsemodel';
 
 @Component({
@@ -12,16 +12,16 @@ export class EntryDialog {
 	public json = false;
 
 	constructor(
-		private apiService: ApiService,
+		private dvrService: DvrService,
 		@Inject(MAT_DIALOG_DATA) public data: { entry: GridEntry }
 	) {
 		this.entry = data.entry;
 	}
 
 	public pendingAPI = false;
-	public async record(event_id: number){
+	public async record(event_id: number) {
 		this.pendingAPI = true;
-		this.apiService.createByEvent({event_id, config_uuid: ""}).catch(() => this.pendingAPI = false).then(() => this.pendingAPI = false);
+		this.dvrService.createByEvent({ event_id, config_uuid: "" }).catch(() => this.pendingAPI = false).then(() => this.pendingAPI = false);
 	}
 }
 
@@ -35,13 +35,13 @@ export class EntryComponent {
 	public json = false;
 
 	constructor(
-		private apiService: ApiService
+		private dvrService: DvrService
 	) { }
 	
 	public pendingAPI = false;
 	public async record(event_id: number) {
 		this.pendingAPI = true;
-		this.apiService.createByEvent({ event_id, config_uuid: "" }).catch(() => this.pendingAPI = false).then(() => this.pendingAPI = false);
+		this.dvrService.createByEvent({ event_id, config_uuid: "" }).catch(() => this.pendingAPI = false).then(() => this.pendingAPI = false);
 	}
 }
 

@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ApiService } from 'src/app/api/api';
+import { DvrService } from 'src/app/api/dvr/dvr.service';
 import { GridEntry } from 'src/app/api/epg/events/grid/responsemodel';
 
 @Component({
@@ -11,7 +11,7 @@ import { GridEntry } from 'src/app/api/epg/events/grid/responsemodel';
 export class ConfirmStopDialog {
 	public deleting = false;
 	constructor(
-		private apiService: ApiService,
+		private dvrService: DvrService,
 		@Inject(MAT_DIALOG_DATA) public entry: GridEntry,
 		public dialogref: MatDialogRef<ConfirmStopDialog>
 	) { }
@@ -19,9 +19,9 @@ export class ConfirmStopDialog {
 	public confirm() {
 		this.deleting=true;
 		if(this.entry.dvrState === "recording")
-			this.apiService.stopByGridEntry(this.entry).then(() => this.finish());
+			this.dvrService.stopByGridEntry(this.entry).then(() => this.finish());
 		else if(this.entry.dvrState === 'scheduled' && this.entry.dvrUuid)
-			this.apiService.deleteIdNode({uuid: [this.entry.dvrUuid]}).then(() => this.finish());
+			this.dvrService.deleteIdNode({uuid: [this.entry.dvrUuid]}).then(() => this.finish());
 	}
 	private finish() {
 		this.deleting = false;
