@@ -27,7 +27,10 @@ export class EpgComponent implements OnInit, OnDestroy {
 	private ignoreLists: { [key in listNames]: Array<ignoreEntry> } = { "Recorded": [], "Garbage": [], "Meh": [] };
 
 	private subscription: Subscription;
-	constructor(private ignoreService: IgnoreListService, private apiService: ApiService) {
+	constructor(
+		private ignoreService: IgnoreListService,
+		private apiService: ApiService
+	) {
 		this.apiService.onEpgGridResponse().subscribe(data => (this.refresh(data)));
 		this.subscription = this.ignoreService.onList().subscribe((e) => {
 			this.ignoreLists = e.list;

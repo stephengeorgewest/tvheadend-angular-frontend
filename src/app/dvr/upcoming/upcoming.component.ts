@@ -24,7 +24,10 @@ export class UpcomingComponent implements OnDestroy {
 	public now: number = Date.now()/1000;
 	private sub;
 
-	constructor(private apiService: ApiService, private dialog: MatDialog) {
+	constructor(
+		private apiService: ApiService,
+		private dialog: MatDialog
+	) {
 		this.apiService.onGridUpcomingResponse().subscribe((data) => {
 			this.entries = (data?.entries || []).reduce((prev, cur) => {
 				const e = prev.get(cur.disp_title);

@@ -15,7 +15,11 @@ export class EntryListComponent implements OnChanges {
 	public topEntry: GridEntry | undefined;
 	@Input() public selectedEntry: GridEntry[] = [];
 
-	constructor(private apiService: ApiService, public dialog: MatDialog) { }
+	constructor(
+		private apiService: ApiService,
+		public dialog: MatDialog
+	) { }
+
 	ngOnChanges(changes: SimpleChanges): void {
 		if (!changes['selectedEntry'].firstChange)
 			this.select(this.selectedEntry[0], true);

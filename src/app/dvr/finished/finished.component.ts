@@ -1,6 +1,5 @@
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, Pipe, PipeTransform } from '@angular/core';
-import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, Pipe, PipeTransform } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { Subscription } from 'rxjs';
@@ -221,7 +220,12 @@ export class FinishedComponent {
 
 	private entries: GridUpcomingEntry[] = [];
 	private gridFinishedSubscription: Subscription | undefined;
-	constructor(private apiService: ApiService, private dialog: MatDialog, private changeDetectorRef: ChangeDetectorRef) { }
+
+	constructor(
+		public apiService: ApiService,
+		private dialog: MatDialog,
+		private changeDetectorRef: ChangeDetectorRef
+	) { }
 	public ngOnInit() {
 		this.gridFinishedSubscription = this.apiService.onGridFinishedResponse().subscribe((data) => {
 			this.entries = data?.entries || [];
@@ -370,7 +374,8 @@ export class FinishedComponent {
 
 		this.changeDetectorRef.markForCheck();
 	}
-	public selectAllEntries(){
+
+	public selectAllEntries() {
 		this.selectedEntry = this.entryGroups.flatMap(g => g.entries);
 	}
 	public selectAll(entry: GridUpcomingEntry[]) {

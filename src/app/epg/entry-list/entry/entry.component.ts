@@ -10,9 +10,14 @@ import { GridEntry } from 'src/app/api/epg/events/grid/responsemodel';
 export class EntryDialog {
 	public entry: GridEntry;
 	public json = false;
-	constructor(private apiService: ApiService, @Inject(MAT_DIALOG_DATA) public data: {entry: GridEntry}) {
+
+	constructor(
+		private apiService: ApiService,
+		@Inject(MAT_DIALOG_DATA) public data: { entry: GridEntry }
+	) {
 		this.entry = data.entry;
 	}
+
 	public pendingAPI = false;
 	public async record(event_id: number){
 		this.pendingAPI = true;
@@ -26,13 +31,17 @@ export class EntryDialog {
 	styleUrls: ['./entry.component.css']
 })
 export class EntryComponent {
-	constructor(private apiService: ApiService){}
 	@Input() public entry!: GridEntry;
 	public json = false;
+
+	constructor(
+		private apiService: ApiService
+	) { }
+	
 	public pendingAPI = false;
-	public async record(event_id: number){
+	public async record(event_id: number) {
 		this.pendingAPI = true;
-		this.apiService.createByEvent({event_id, config_uuid: ""}).catch(() => this.pendingAPI = false).then(() => this.pendingAPI = false);
+		this.apiService.createByEvent({ event_id, config_uuid: "" }).catch(() => this.pendingAPI = false).then(() => this.pendingAPI = false);
 	}
 }
 

@@ -7,24 +7,24 @@ import { MatListModule } from '@angular/material/list';
 import { EntryListComponent } from './entry-list.component';
 
 describe('EntryListComponent', () => {
-  let component: EntryListComponent;
-  let fixture: ComponentFixture<EntryListComponent>;
+	let component: EntryListComponent;
+	let fixture: ComponentFixture<EntryListComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [MatDialogModule, MatListModule, MatIconModule, MatDividerModule],
-      declarations: [ EntryListComponent ]
-    })
-    .compileComponents();
-  });
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			imports: [MatDialogModule, MatListModule, MatIconModule, MatDividerModule],
+			declarations: [EntryListComponent]
+		})
+			.compileComponents();
+	});
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(EntryListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(EntryListComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

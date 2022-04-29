@@ -8,32 +8,32 @@ import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsem
 import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-upcoming-entry-list ',
-  template: ''
+	selector: 'app-upcoming-entry-list ',
+	template: ''
 })
 class MockUpcomingEntryListComponent {
-  @Input() public selectedEntry:GridUpcomingEntry[] =[];
+	@Input() public selectedEntry: GridUpcomingEntry[] = [];
 }
 
 describe('UpcomingComponent', () => {
-  let component: UpcomingComponent;
-  let fixture: ComponentFixture<UpcomingComponent>;
+	let component: UpcomingComponent;
+	let fixture: ComponentFixture<UpcomingComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports:[MatDialogModule, MatIconModule, MatListModule],
-      declarations: [ UpcomingComponent, MockUpcomingEntryListComponent ]
-    })
-    .compileComponents();
-  });
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			imports: [MatDialogModule, MatIconModule, MatListModule],
+			declarations: [UpcomingComponent, MockUpcomingEntryListComponent]
+		})
+			.compileComponents();
+	});
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(UpcomingComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(UpcomingComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

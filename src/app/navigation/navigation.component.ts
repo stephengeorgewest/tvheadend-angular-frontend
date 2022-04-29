@@ -12,7 +12,7 @@ import { LoginComponent } from '../login/login.component';
 	styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent {
-	public guardData: GuardData = {dvr: false, admin: false};
+	public guardData: GuardData = { dvr: false, admin: false };
 	public authenticated: boolean = false;
 	@Input() public type: "button" | "list" = "list";
 	@Output() public menuClicked: EventEmitter<void> = new EventEmitter();
@@ -34,12 +34,12 @@ export class NavigationComponent {
 		this.guardService.guardChanges.subscribe(data => this.guardData = data);
 		this.authenticationService.authentication.subscribe(authentication => this.authenticated = !!authentication);
 	}
-	public login(){
-		this.snackbar.openFromComponent(LoginComponent,{
+	public login() {
+		this.snackbar.openFromComponent(LoginComponent, {
 			verticalPosition: 'top',
 		});
 	}
-	public logout(){
+	public logout() {
 		this.authenticationService.logout();
 	}
 }
