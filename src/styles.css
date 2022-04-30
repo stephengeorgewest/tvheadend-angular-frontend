@@ -1,11 +1,12 @@
 :root {
-	--main-fg-color: #FFFFFF;
+	--main-fg-color-value: 255, 255, 255;
+	--main-fg-color: rgb(var(--main-fg-color-value));
 	--main-bg-color: #303030;
 	--secondary-bg-color: #242424;
 	--tertiary-bg-color: #141414;
 	--highlight-color: #7b1fa2;
 	--link-visited-color: lightcoral;
-	--pad-color: rgba(240, 128, 128, 0.459);
+	--pad-color: rgba(240, 128, 128, 0.5);
 }
 
 html,
@@ -98,5 +99,8 @@ mat-list-item span.inprogress {
 .mat-snack-bar-container {
 	color: inherit;
 	background: var(--secondary-bg-color);
-	box-shadow: 0px 3px 5px -1px rgba(255, 255, 255, 0.2),0px 6px 10px 0px rgba(255, 255, 255, 0.14),0px 1px 18px 0px rgba(255, 255, 255, 0.12);
+	box-shadow:
+		0px 3px 5px -1px rgba(var(--main-fg-color-value), 0.2),
+		0px 6px 10px 0px rgba(var(--main-fg-color-value), 0.14),
+		0px 1px 18px 0px rgba(var(--main-fg-color-value), 0.12);
   }
