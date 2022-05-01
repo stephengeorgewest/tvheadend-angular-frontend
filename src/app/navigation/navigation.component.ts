@@ -3,8 +3,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, ActivationEnd, Event, NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs';
-import { AuthenticationService } from '../authentication.service';
-import { GuardData, GuardKeys, GuardService } from '../guard.service';
+import { WebsocketService } from '../api/ws/websocket.service';
+import { AuthenticationService, GuardData } from '../authentication.service';
 import { LoginComponent } from '../login/login.component';
 
 @Component({
@@ -14,16 +14,16 @@ import { LoginComponent } from '../login/login.component';
 })
 export class NavigationComponent {
 	public guardData: GuardData = { dvr: false, admin: false };
-	public authenticated: boolean = false;
+	public authentication: string | undefined;
 	@Input() public type: "button" | "list" = "list";
 	@Output() public menuClicked: EventEmitter<void> = new EventEmitter();
 
-	public links: { path?: string, icon?: string, friendlyName?: string, guard?: GuardKeys }[];
+	public links: { path?: string, icon?: string, friendlyName?: string, guard?: keyof GuardData }[];
 	public activatedPath: string | undefined;
 
 	constructor(
 		public router: Router,
-		private guardService: GuardService,
+		private webSocketService: WebsocketService,
 		private authenticationService: AuthenticationService,
 		private snackbar: MatSnackBar,
 		private titleService: Title
@@ -33,8 +33,8 @@ export class NavigationComponent {
 			filter((e: Event): e is ActivationEnd/*NavigationEnd??*/ => e instanceof ActivationEnd),
 		)
 			.subscribe((event: ActivationEnd) => this.activatedPath = event.snapshot.url[0].path);
-		this.guardService.guardChanges.subscribe(data => this.guardData = data);
-		this.authenticationService.authentication.subscribe(authentication => this.authenticated = !!authentication);
+		this.authenticationService.guardChanges.subscribe(data => this.guardData = data);
+		this.authenticationService.authentication.subscribe(authentication => this.authentication = authentication);
 
 		this.router.events
 			.pipe(
@@ -63,6 +63,6 @@ export class NavigationComponent {
 		});
 	}
 	public logout() {
-		this.authenticationService.logout();
+		this.webSocketService.reload();
 	}
 }

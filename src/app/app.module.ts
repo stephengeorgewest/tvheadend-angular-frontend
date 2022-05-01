@@ -53,7 +53,6 @@ import { StreamComponent } from './status/stream/stream.component';
 import { IgnoreListService } from './ignore-list.service';
 import { AuthenticationService } from './authentication.service';
 import { WebsocketService } from './api/ws/websocket.service';
-import { GuardService } from './guard.service';
 import { DvrService } from './api/dvr/dvr.service';
 import { EpgService } from './api/epg/epg.service';
 
@@ -124,7 +123,6 @@ import { EpgService } from './api/epg/epg.service';
 		AuthenticationService,
 		DvrService,
 		EpgService,
-		GuardService,
 		IgnoreListService,
 		WebsocketService
 	],

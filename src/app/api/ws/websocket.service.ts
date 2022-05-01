@@ -1,7 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { AuthenticationService } from 'src/app/authentication.service';
 import { DiskUsageService } from 'src/app/disk-usage/disk-usage.service';
-import { GuardService } from 'src/app/guard.service';
 import { DvrService } from '../dvr/dvr.service';
 
 import { environment } from 'src/environments/environment';
@@ -11,12 +10,11 @@ import { EpgService } from '../epg/epg.service';
 @Injectable({
 	providedIn: 'root'
 })
-export class WebsocketService implements OnDestroy  {
+export class WebsocketService implements OnDestroy {
 	private websocket!: WebSocket;
 	private boxid: string | null;
 
 	constructor(
-		private guardService: GuardService,
 		private authenticationService: AuthenticationService,
 		private diskUsageService: DiskUsageService,
 		private epgService: EpgService,
@@ -24,21 +22,20 @@ export class WebsocketService implements OnDestroy  {
 	) {
 		this.boxid = localStorage.getItem("boxid");
 		this.createWebSocket();
-
-		this.authenticationService.authentication.subscribe(a =>{
-			this.websocket.close();
-			this.boxid = null;
-			this.createWebSocket();
-		});
+	}
+	public reload() {
+		this.websocket.close();
+		this.boxid = null;
+		this.createWebSocket();
 	}
 	ngOnDestroy(): void {
 		this.websocket.close();
 	}
-	private createWebSocket(){
+	private createWebSocket() {
 		const url = "ws" + environment.server.secure + "://" + environment.server.host + ":" + environment.server.port + "/comet/ws" + (this.boxid ? '?boxid=' + this.boxid : "");
 		this.websocket = new WebSocket(url);
 		this.websocket.onmessage = (m) => this.onMessage(m);
-		this.websocket.onerror = (e) => {console.log(e)};
+		this.websocket.onerror = (e) => { console.log(e) };
 	}
 
 	private onMessage(message: MessageEvent<any>) {
@@ -48,7 +45,7 @@ export class WebsocketService implements OnDestroy  {
 		let epg_id_to_reload: Set<string> = new Set();
 		let epg_id_to_delete: Set<string> = new Set();
 		let services_to_reload: Set<string> = new Set();
-		if(data.boxid){
+		if (data.boxid) {
 			this.boxid = data.boxid;
 			localStorage.setItem("boxid", this.boxid);
 		}
@@ -98,13 +95,13 @@ export class WebsocketService implements OnDestroy  {
 						});
 						break;
 					case "accessUpdate":
-						if(m.totaldiskspace && m.useddiskspace && m.freediskspace)
-						this.diskUsageService.setDiskUsage({
-							totaldiskspace: m.totaldiskspace,
-							useddiskspace: m.useddiskspace,
-							freediskspace: m.freediskspace
-						});
-						this.guardService.setGuardData({dvr: !!m.dvr, admin: !!m.admin});
+						if (m.totaldiskspace && m.useddiskspace && m.freediskspace)
+							this.diskUsageService.setDiskUsage({
+								totaldiskspace: m.totaldiskspace,
+								useddiskspace: m.useddiskspace,
+								freediskspace: m.freediskspace
+							});
+						this.authenticationService.setGuardData({ username: m.username, dvr: !!m.dvr, admin: !!m.admin });
 						console.log("unhandlede access update message bits", m);
 						break;
 					default:
