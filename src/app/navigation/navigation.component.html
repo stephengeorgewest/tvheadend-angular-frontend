@@ -6,11 +6,11 @@
 		<mat-icon [color]="link.path === activatedPath ? 'primary': ''">{{link.icon}}</mat-icon>{{ type==="list" ? link.friendlyName: ''}}
 	</mat-list-item>
 	
-	<mat-list-item *ngIf="!authentication" (click)="login()">
-		<mat-icon>account_circle</mat-icon>Login
+	<mat-list-item *ngIf="!username" (click)="login()">
+		<mat-icon>account_circle</mat-icon>{{username}}({{socketusername}}) - Login
 	</mat-list-item>
-	<mat-list-item *ngIf="authentication" (click)="login()">
-		<mat-icon>no_accounts</mat-icon>{{authentication}} - Logout
+	<mat-list-item *ngIf="username" (click)="login()">
+		<mat-icon>no_accounts</mat-icon>{{username}}({{socketusername}}) - Logout
 	</mat-list-item>
 	<app-disk-usage></app-disk-usage>
 </mat-list>
@@ -25,7 +25,7 @@
 	>
 		<mat-icon>{{link.icon}}</mat-icon>
 	</button>
-	<button mat-icon-button *ngIf="!authentication" (click)="login()"><mat-icon>account_circle</mat-icon></button>
-	<button mat-icon-button *ngIf="authentication" [title]="authentication" (click)="login()"><mat-icon>no_accounts</mat-icon></button>
+	<button mat-icon-button *ngIf="!username" (click)="login()" [color]="username === socketusername ? 'primary' : 'warn'"><mat-icon>account_circle</mat-icon></button>
+	<button mat-icon-button *ngIf="username" [title]="username" (click)="login()" [color]="username === socketusername ? 'primary' : 'warn'"><mat-icon>no_accounts</mat-icon></button>
 	<app-disk-usage></app-disk-usage>
 </div>

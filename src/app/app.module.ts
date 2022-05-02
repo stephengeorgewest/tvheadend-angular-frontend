@@ -48,7 +48,7 @@ import { FileSizePipe } from './file-size.pipe';
 import { ListNamesFilterPipe } from './list-name.pipe';
 
 import { LoginComponent } from './login/login.component';
-import { StreamComponent } from './status/stream/stream.component';
+import { InputComponent } from './status/input/input.component';
 
 import { IgnoreListService } from './ignore-list.service';
 import { AuthenticationService } from './authentication.service';
@@ -82,7 +82,7 @@ import { EpgService } from './api/epg/epg.service';
 
 		DiskUsageComponent,
 
-		StreamComponent,
+		InputComponent,
 		AboutComponent,
 
 		CompletePercentPipe,

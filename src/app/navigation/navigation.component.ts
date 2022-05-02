@@ -14,7 +14,8 @@ import { LoginComponent } from '../login/login.component';
 })
 export class NavigationComponent {
 	public guardData: GuardData = { dvr: false, admin: false };
-	public authentication: string | undefined;
+	public username: string | undefined;
+	public socketusername: string | undefined;
 	@Input() public type: "button" | "list" = "list";
 	@Output() public menuClicked: EventEmitter<void> = new EventEmitter();
 
@@ -23,7 +24,6 @@ export class NavigationComponent {
 
 	constructor(
 		public router: Router,
-		private webSocketService: WebsocketService,
 		private authenticationService: AuthenticationService,
 		private snackbar: MatSnackBar,
 		private titleService: Title
@@ -34,7 +34,10 @@ export class NavigationComponent {
 		)
 			.subscribe((event: ActivationEnd) => this.activatedPath = event.snapshot.url[0].path);
 		this.authenticationService.guardChanges.subscribe(data => this.guardData = data);
-		this.authenticationService.authentication.subscribe(authentication => this.authentication = authentication);
+		this.authenticationService.authentication.subscribe(authentication => {
+			this.username = authentication.username;
+			this.socketusername = authentication.socketusername;
+		});
 
 		this.router.events
 			.pipe(
@@ -61,8 +64,5 @@ export class NavigationComponent {
 		this.snackbar.openFromComponent(LoginComponent, {
 			verticalPosition: 'top',
 		});
-	}
-	public logout() {
-		this.webSocketService.reload();
 	}
 }

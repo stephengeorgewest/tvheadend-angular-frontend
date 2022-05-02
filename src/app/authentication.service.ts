@@ -6,8 +6,14 @@ export type GuardData = {
 	"admin": boolean
 };
 
-type accessData = GuardData & { username: string | undefined };
+const guardDataKey = "guardData";
 
+type authenticationData = {
+	username: string | undefined;
+	socketusername: string | undefined;
+	basic: string | undefined;
+}
+const authenticationDataKey = "authenticationData"
 @Injectable({
 	providedIn: 'root'
 })
@@ -15,40 +21,61 @@ export class AuthenticationService {
 	private guardSubject: BehaviorSubject<GuardData>;
 	public guardChanges: Observable<GuardData>;
 
-	public setGuardData(data: accessData) {
-		localStorage.setItem("guardData", JSON.stringify(data));
-		if (data.username !== undefined) {
-			this.authenticationSubject.next(data.username);
+	public setGuardData(data: GuardData, username?: string) {
+		if (username !== undefined) {
+			const v = this.authenticationValue;
+			if( v.socketusername !== username) {
+				this.authenticationSubject.next({
+					username: v.username,
+					socketusername: username,
+					basic: v.basic
+				});
+				localStorage.setItem(authenticationDataKey, JSON.stringify(this.authenticationValue));
+			}
 		}
 
-		if (this.guardSubject.value.admin !== data.admin || this.guardSubject.value.dvr !== data.dvr)
+		if (this.guardSubject.value.admin !== data.admin || this.guardSubject.value.dvr !== data.dvr){
 			this.guardSubject.next(data);
+			localStorage.setItem(guardDataKey, JSON.stringify(data));
+		}
 	}
 
-	private authenticationSubject: BehaviorSubject<string | undefined>;
-	public authentication: Observable<string | undefined>;
-	public get authenticationValue(): string | undefined {
+	private authenticationSubject: BehaviorSubject<authenticationData>;
+	public authentication: Observable<authenticationData>;
+	public get authenticationValue(): authenticationData {
 		return this.authenticationSubject.value;
 	}
 
-	constructor() {
-		const json = localStorage.getItem("guardData");
-		const data = json ? JSON.parse(json) as accessData : undefined;
-		if (data) {
-			this.authenticationSubject = new BehaviorSubject<string | undefined>(data.username);
-			this.guardSubject = new BehaviorSubject<GuardData>({
-				dvr: data.dvr,
-				admin: data.admin
+	public setAuthentication(username: string, password: string){
+		const v = this.authenticationValue;
+		const basic = window.btoa(username + ":" + password);
+		if(v.username !== username || v.basic !== basic){
+			this.authenticationSubject.next({
+				username: username,
+				basic: basic,
+				socketusername: v.socketusername
 			});
-		} else {
-			this.authenticationSubject = new BehaviorSubject<string | undefined>(undefined);
-			this.guardSubject = new BehaviorSubject<GuardData>({
-				dvr: false,
-				admin: false
-			});
+			localStorage.setItem(authenticationDataKey, JSON.stringify(this.authenticationValue));
 		}
 
+	}
+
+	constructor() {
+		const guardjson = localStorage.getItem(guardDataKey);
+		const guarddata = guardjson && guardjson !== 'undefined' ? JSON.parse(guardjson) as GuardData : undefined;
+		this.guardSubject = new BehaviorSubject<GuardData>({
+			dvr: guarddata?.dvr || false,
+			admin: guarddata?.admin || false
+		});
+		this.guardChanges = this.guardSubject.asObservable();
+
+		const authenticationjson = localStorage.getItem(authenticationDataKey);
+		const authenticationData = authenticationjson && authenticationjson !== 'undefined' ? JSON.parse(authenticationjson) as authenticationData : undefined;
+		this.authenticationSubject = new BehaviorSubject<authenticationData>({
+			username: authenticationData?.username,
+			basic: authenticationData?.basic,
+			socketusername: authenticationData?.socketusername
+		});
 		this.authentication = this.authenticationSubject.asObservable();
-		this.guardChanges = this.guardSubject.asObservable()
 	}
 }

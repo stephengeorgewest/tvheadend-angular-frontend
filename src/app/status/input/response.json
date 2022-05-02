@@ -1,0 +1,62 @@
+{
+	"entries": [
+		{
+			"uuid": "8a49bcbeef9e25de905aa900546c1c24",
+			"input": "Samsung S5H1409 QAM/8VSB Frontend #0 : ATSC-T #0",
+			"subs": 0,
+			"weight": 0,
+			"signal": 0,
+			"signal_scale": 0,
+			"ber": 0,
+			"snr": 0,
+			"snr_scale": 0,
+			"unc": 0,
+			"bps": 0,
+			"te": 0,
+			"cc": 24095,
+			"ec_bit": 0,
+			"tc_bit": 0,
+			"ec_block": 0,
+			"tc_block": 0
+		},
+		{
+			"uuid": "b9183d4bc25c48160458078746980b53",
+			"input": "HDHomeRun ATSC-T Tuner #0 (192.168.0.215)",
+			"subs": 0,
+			"weight": 0,
+			"signal": 0,
+			"signal_scale": 0,
+			"ber": 0,
+			"snr": 0,
+			"snr_scale": 0,
+			"unc": 0,
+			"bps": 0,
+			"te": 171,
+			"cc": 563,
+			"ec_bit": 0,
+			"tc_bit": 0,
+			"ec_block": 0,
+			"tc_block": 0
+		},
+		{
+			"uuid": "87b43a77b4edb225fa8e2bca88700e8b",
+			"input": "HDHomeRun ATSC-T Tuner #1 (192.168.0.215)",
+			"subs": 0,
+			"weight": 0,
+			"signal": 0,
+			"signal_scale": 0,
+			"ber": 0,
+			"snr": 0,
+			"snr_scale": 0,
+			"unc": 0,
+			"bps": 0,
+			"te": 5,
+			"cc": 141,
+			"ec_bit": 0,
+			"tc_bit": 0,
+			"ec_block": 0,
+			"tc_block": 0
+		}
+	],
+	"totalCount": 3
+}

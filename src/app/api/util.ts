@@ -23,14 +23,17 @@ function formEncode(options: { [key: string]: any }) {
 
 	}*/
 
-export function fetchData(page: string, options?: any) {
+export function fetchData(page: string, options?: any, auth?: string) {
+	const headers: HeadersInit = { "content-type": "application/x-www-form-urlencoded; charset=UTF-8" };
+	if(auth)
+		headers["Authorization"] = "Basic " + auth;
 	return fetch(
 		'http' + environment.server.secure + '://' + environment.server.host + ':' + environment.server.port + '/api/' + page,
 		{
 			body: formEncode(options||{}),
 			method: 'POST',
 			mode: 'cors',
-			headers: { "content-type": "application/x-www-form-urlencoded; charset=UTF-8" }
+			headers
 		}
 		).then(response => response.json());
 }

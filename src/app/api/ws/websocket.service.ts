@@ -13,6 +13,8 @@ import { EpgService } from '../epg/epg.service';
 export class WebsocketService implements OnDestroy {
 	private websocket!: WebSocket;
 	private boxid: string | null;
+	private authenticationSubscription;
+	private authusername: string | undefined;
 
 	constructor(
 		private authenticationService: AuthenticationService,
@@ -22,14 +24,22 @@ export class WebsocketService implements OnDestroy {
 	) {
 		this.boxid = localStorage.getItem("boxid");
 		this.createWebSocket();
+		this.authusername = this.authenticationService.authenticationValue.username;
+		this.authenticationSubscription = this.authenticationService.authentication.subscribe(d => {
+			if(d.username !== this.authusername){
+				this.authusername = d.username;
+				this.reload();
+			}
+		});
 	}
-	public reload() {
+	private reload() {
 		this.websocket.close();
 		this.boxid = null;
 		this.createWebSocket();
 	}
 	ngOnDestroy(): void {
 		this.websocket.close();
+		this.authenticationSubscription.unsubscribe();
 	}
 	private createWebSocket() {
 		const url = "ws" + environment.server.secure + "://" + environment.server.host + ":" + environment.server.port + "/comet/ws" + (this.boxid ? '?boxid=' + this.boxid : "");
@@ -101,7 +111,7 @@ export class WebsocketService implements OnDestroy {
 								useddiskspace: m.useddiskspace,
 								freediskspace: m.freediskspace
 							});
-						this.authenticationService.setGuardData({ username: m.username, dvr: !!m.dvr, admin: !!m.admin });
+						this.authenticationService.setGuardData({dvr: !!m.dvr, admin: !!m.admin }, m.username);
 						console.log("unhandlede access update message bits", m);
 						break;
 					default:
