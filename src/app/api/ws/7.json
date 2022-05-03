@@ -1,0 +1,67 @@
+{
+	"messages": [
+		{
+			"id": 4808,
+			"start": 1651518077,
+			"errors": 0,
+			"state": "Running",
+			"username": "admin",
+			"title": "DVR: Nature Cat",
+			"channel": "KUED-HD",
+			"service": "Samsung S5H1409 QAM/8VSB Frontend #0 : ATSC-T #0/ATSC-T Network/551.028MHz/KUED-HD",
+			"pids": [
+				48,
+				49,
+				52,
+				53,
+				54
+			],
+			"profile": "pass",
+			"in": 859724,
+			"out": 859724,
+			"total_in": 108016340,
+			"total_out": 108016340,
+			"updateEntry": 1,
+			"notificationClass": "subscriptions"
+		},
+		{
+			"uuid": "d3a9c2bb2befbcca5bf3b4dc5dfb2a32",
+			"input": "Samsung S5H1409 QAM/8VSB Frontend #0 : ATSC-T #0",
+			"stream": "551.028MHz in ATSC-T Network",
+			"subs": 1,
+			"weight": 500,
+			"pids": [
+				0,
+				1,
+				48,
+				49,
+				52,
+				53,
+				54,
+				7424,
+				7425,
+				7427,
+				7680,
+				7681,
+				7682,
+				7683,
+				8187
+			],
+			"signal": 50556,
+			"signal_scale": 1,
+			"ber": 0,
+			"snr": 270,
+			"snr_scale": 1,
+			"unc": 0,
+			"bps": 6963520,
+			"te": 0,
+			"cc": 11313,
+			"ec_bit": 0,
+			"tc_bit": 0,
+			"ec_block": 0,
+			"tc_block": 0,
+			"update": 1,
+			"notificationClass": "input_status"
+		}
+	]
+}

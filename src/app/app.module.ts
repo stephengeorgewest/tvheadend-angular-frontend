@@ -48,7 +48,7 @@ import { FileSizePipe } from './file-size.pipe';
 import { ListNamesFilterPipe } from './list-name.pipe';
 
 import { LoginComponent } from './login/login.component';
-import { InputComponent } from './status/input/input.component';
+import { InputComponent, PidPipe, ScalePipe } from './status/input/input.component';
 
 import { IgnoreListService } from './ignore-list.service';
 import { AuthenticationService } from './authentication.service';
@@ -97,6 +97,8 @@ import { EpgService } from './api/epg/epg.service';
 		SortListDirectionPipe,
 		InDisplayedColumnsPipe,
 		InSelectedPipe,
+		ScalePipe,
+		PidPipe
 	],
 	imports: [
 		BrowserModule,

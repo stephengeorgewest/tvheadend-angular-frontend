@@ -1,9 +1,7 @@
-import { dvrEntrySchedstatus } from "src/app/api/models";
+import { dvrEntrySchedstatus, Grid2 } from "src/app/api/models";
 import { Entry } from "../../../entry";
-export interface GridResponse {
-	totalCount: number;
-	entries: GridEntry[];
-}
+
+export type GridResponse = Grid2<GridEntry>;
 
 /**
  * https://tvheadend.org/projects/tvheadend/repository/tvheadend/revisions/master/entry/src/epg.h#L252
@@ -83,7 +81,7 @@ export interface GridEntry extends Entry {
 	/**
 	 * uint16_t                   aspect;           ///< Aspect ratio (*100)
 	 */
-	aspect?:number;
+	aspect?: number;
 	//  /* Episode info */
 	//epg_broadcast_get_epnum(eb, &epnum);
 	seasonNumber?: number;
@@ -115,7 +113,7 @@ export interface GridEntry extends Entry {
 	 */
 	genre?: string[];
 
-	dvrUuid?:string;
+	dvrUuid?: string;
 	dvrState?: dvrEntrySchedstatus;
 
 	nextEventId?: number;

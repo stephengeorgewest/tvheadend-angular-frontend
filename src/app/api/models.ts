@@ -1,21 +1,14 @@
-
-export type Entry = {
-	start: number; // 1644454800
-	stop: number; // 1644471000
-
-	duration: number; // 16800
-	image: string; // "https://zap2it.tmsimg.com/assets/p21254064_b_v13_aa.jpg"
-};
-
 // /api/dvr/entry/grid_upcoming
-// /api/epg/events/grid
-export type Grid = {
-	entries: Entry[];
+// /api/status/inputs
+export type Grid<T> = {
+	entries: T[];
 	total: number; // 219
 };
 
-export interface LocaleString {
-	eng: string;
+// /api/epg/events/grid
+export type Grid2<T> = {
+	entries: T[];
+	totalCount: number;
 }
 
 // https://tvheadend.org/projects/tvheadend/repository/tvheadend/revisions/master/entry/src/dvr/dvr.h#L142

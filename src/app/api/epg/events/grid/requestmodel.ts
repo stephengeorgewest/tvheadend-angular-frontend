@@ -1,4 +1,4 @@
 import { GridRequest } from "src/app/api/grid-request";
-import { GridResponse } from "./responsemodel";
+import { GridEntry } from "./responsemodel";
 
-export type EpgEventsGridRequest = GridRequest<GridResponse>;
+export type EpgEventsGridRequest = GridRequest<GridEntry>;

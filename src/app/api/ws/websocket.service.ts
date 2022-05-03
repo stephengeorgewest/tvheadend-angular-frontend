@@ -6,6 +6,8 @@ import { DvrService } from '../dvr/dvr.service';
 import { environment } from 'src/environments/environment';
 import { cometMessage } from './responsemodel';
 import { EpgService } from '../epg/epg.service';
+import { Input } from '../status/inputs/responsemodel';
+import { InputsService } from '../status/inputs/inputs.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -21,12 +23,13 @@ export class WebsocketService implements OnDestroy {
 		private diskUsageService: DiskUsageService,
 		private epgService: EpgService,
 		private dvrService: DvrService,
+		private inputsService: InputsService
 	) {
 		this.boxid = localStorage.getItem("boxid");
 		this.createWebSocket();
 		this.authusername = this.authenticationService.authenticationValue.username;
 		this.authenticationSubscription = this.authenticationService.authentication.subscribe(d => {
-			if(d.username !== this.authusername){
+			if (d.username !== this.authusername) {
 				this.authusername = d.username;
 				this.reload();
 			}
@@ -54,21 +57,33 @@ export class WebsocketService implements OnDestroy {
 		let dvr_uuids_to_delete: Set<string> = new Set();
 		let epg_id_to_reload: Set<string> = new Set();
 		let epg_id_to_delete: Set<string> = new Set();
-		let services_to_reload: Set<string> = new Set();
+		let services_to_reload: Set<"dvrentry" | "input_status"/* TODO: reloadMessage->notificationClass */> = new Set();
+		let input_status_to_update: Map<string, Input> = new Map();
 		if (data.boxid) {
 			this.boxid = data.boxid;
 			localStorage.setItem("boxid", this.boxid);
 		}
 		data.messages.forEach(m => {
 			if ("reload" in m) {
-				if (m.reload)
-					switch (m.notificationClass) {
-						case "dvrentry":
-							services_to_reload.add(m.notificationClass);
-							break;
-						default:
-							console.log("unhandled reload message", m)
-					}
+				switch (m.notificationClass) {
+					case "dvrentry":
+						services_to_reload.add(m.notificationClass);
+						break;
+					case "input_status":
+						services_to_reload.add(m.notificationClass);
+						break;
+					default:
+						console.log("unhandled reload message", m)
+				}
+			}
+			else if ("update" in m) {
+				switch (m.notificationClass) {
+					case "input_status":
+						input_status_to_update.set(m.uuid, m);
+						break;
+					default:
+						console.log("unhandled update message", m);
+				}
 			}
 			else {
 				switch (m.notificationClass) {
@@ -111,7 +126,7 @@ export class WebsocketService implements OnDestroy {
 								useddiskspace: m.useddiskspace,
 								freediskspace: m.freediskspace
 							});
-						this.authenticationService.setGuardData({dvr: !!m.dvr, admin: !!m.admin }, m.username);
+						this.authenticationService.setGuardData({ dvr: !!m.dvr, admin: !!m.admin }, m.username);
 						console.log("unhandlede access update message bits", m);
 						break;
 					default:
@@ -120,12 +135,31 @@ export class WebsocketService implements OnDestroy {
 			}
 		});
 
+		// Push data out to services. ensure updates happnen before reloads.
 		this.epgService.deleteEpg([...epg_id_to_delete].map((id) => parseInt(id)));
+		this.dvrService.clearFromServiceByUUID(dvr_uuids_to_delete);
+		this.inputsService.update([...input_status_to_update.values()]);
+
+		//Reloads ensure they happen after updates
 		this.epgService.refreshEpgByUUID(
 			[...dvr_uuids_to_reload, ...dvr_uuids_to_delete],
 			[...epg_id_to_reload].map((id) => parseInt(id)),
 		);
 
-		this.dvrService.refreshByUUID(dvr_uuids_to_reload, dvr_uuids_to_delete);
+		if (dvr_uuids_to_reload.size && !services_to_reload.has("dvrentry"))
+			this.dvrService.refreshIfLoaded();// TODO? more specific like epg
+
+		for (let service of services_to_reload.values()) {
+			switch (service) {
+				case "dvrentry":
+					this.dvrService.refreshIfLoaded();
+					break;
+				case "input_status":
+					this.inputsService.refreshIfLoaded();
+					break;
+				default:
+					console.log("unhandled reload message:", service);
+			}
+		}
 	}
 }

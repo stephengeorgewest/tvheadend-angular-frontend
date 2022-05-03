@@ -1,1 +1,42 @@
-<pre>{{inputs | json}}</pre>
+<table>
+	<thead>
+		<tr>
+			<td></td>
+			<td>Input</td>
+			<td>Stream</td>
+			<td>Subs No.</td>
+			<td>Weight</td>
+			<td>PID list</td>
+			<td>Bandwidth (kb/s)</td>
+			<td>BER</td>
+			<td>PER</td>
+			<td>Uncorrected Blocks</td>
+			<td>Transport Errors</td>
+			<td>Continuity Errors</td>
+			<td>SNR</td>
+			<td>Signal Strength</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let input of inputs; trackBy:uuidTrack">
+			<td>
+				<mat-menu></mat-menu>
+			</td>
+			<td>{{input.input}}</td>
+			<td>{{input.stream}}</td>
+			<td>{{input.subs}}</td>
+			<td>{{input.weight}}</td>
+			<td>
+				<div class="pid_list">{{input.pids | pidlist}}</div>
+			</td>
+			<td>{{(input.bps / 1024).toFixed(0)}}</td>
+			<td>{{input.tc_bit === 0 ? input.ber : input.ec_bit / input.tc_bit}}</td>
+			<td>{{input.tc_block === 0 ? 'unknown' : input.ec_block/input.tc_block}}</td>
+			<td>{{input.unc}}</td>
+			<td>{{input.te}}</td>
+			<td>{{input.cc}}</td>
+			<td>{{input.snr | scale : input.snr_scale : " dB"}}</td>
+			<td>{{input.signal | scale: input.signal_scale : "dBm"}}</td>
+		</tr>
+	</tbody>
+</table>

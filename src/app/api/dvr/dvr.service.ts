@@ -17,42 +17,6 @@ export class DvrService {
 	constructor(
 		private epgService: EpgService
 	) { }
-
-	public refreshByUUID(dvr_uuids_to_reload: Set<string>, dvr_uuids_to_delete: Set<string>) {
-		if (dvr_uuids_to_reload.size) {
-			if (this.gridUpcomingResponse)
-				this.refreshGridUpcoming();
-			if (this.gridFinishedResponse)
-				this.refreshGridFinished();
-		}
-		else if (dvr_uuids_to_delete.size) {
-			if (this.gridUpcomingResponse) {
-				let refresh = false;
-				dvr_uuids_to_delete.forEach(d => {
-					const index = this.gridUpcomingResponse?.entries.findIndex(e => e.uuid === d) ?? -1;
-					if (index !== -1) {
-						this.gridUpcomingResponse?.entries.splice(index, 1);
-						refresh = true;
-					}
-				});
-				if (refresh)
-					this.gridUpcomingSubject.next(this.gridUpcomingResponse);
-			}
-			if (this.gridFinishedResponse) {
-				let refresh = false;
-				dvr_uuids_to_delete.forEach(d => {
-					const index = this.gridFinishedResponse?.entries.findIndex(e => e.uuid === d) ?? -1;
-					if (index !== -1) {
-						this.gridFinishedResponse?.entries.splice(index, 1);
-						refresh = true;
-					}
-				});
-				if (refresh)
-					this.gridFinishedSubject.next(this.gridFinishedResponse);
-			}
-		}
-	}
-
 	public createByEvent(options: CreateByEventRequest) {
 		return fetchData("dvr/entry/create_by_event", options).then(response => {
 			const eventResponse = response as CreateByEventResponse;// todo validation?
@@ -102,5 +66,39 @@ export class DvrService {
 					this.gridFinishedSubject.next(this.gridFinishedResponse);
 				}
 			);
+	}
+
+	public clearFromServiceByUUID(dvr_uuids_to_delete: Set<string>) {
+		if (this.gridUpcomingResponse) {
+			let refresh = false;
+			dvr_uuids_to_delete.forEach(d => {
+				const index = this.gridUpcomingResponse?.entries.findIndex(e => e.uuid === d) ?? -1;
+				if (index !== -1) {
+					this.gridUpcomingResponse?.entries.splice(index, 1);
+					refresh = true;
+				}
+			});
+			if (refresh)
+				this.gridUpcomingSubject.next(this.gridUpcomingResponse);
+		}
+		if (this.gridFinishedResponse) {
+			let refresh = false;
+			dvr_uuids_to_delete.forEach(d => {
+				const index = this.gridFinishedResponse?.entries.findIndex(e => e.uuid === d) ?? -1;
+				if (index !== -1) {
+					this.gridFinishedResponse?.entries.splice(index, 1);
+					refresh = true;
+				}
+			});
+			if (refresh)
+				this.gridFinishedSubject.next(this.gridFinishedResponse);
+		}
+	}
+
+	public refreshIfLoaded() {
+		if (this.gridFinishedResponse)
+			this.refreshGridFinished();
+		if (this.gridUpcomingResponse)
+			this.refreshGridUpcoming();
 	}
 }

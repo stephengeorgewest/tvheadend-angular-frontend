@@ -1,9 +1,11 @@
+import { Input, InputsResponse } from "../status/inputs/responsemodel";
+
 /**
  * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/webui/comet.c#L253
  */
 export type cometMessage = {
 	boxid?: string;
-	messages: Array<accessMessage | setServerIpPortMessage | reloadMessage | diskspaceMessage | epgMessage | dvrentryMessage | subscriptionsMessage | titleMessage | servicemapperMessage>;
+	messages: Array<accessMessage | setServerIpPortMessage | reloadMessage | diskspaceMessage | epgMessage | dvrentryMessage | subscriptionsMessage | input_statusMessage | titleMessage | servicemapperMessage>;
 };
 
 /**
@@ -65,6 +67,16 @@ export type reloadMessage = {
 	reload: number;
 } & messageBase;
 
+type updateMessage = {
+	notificationClass: "input_status";
+	update: number;
+} & messageBase;
+
+type updateEntryMessage = {
+	notificationClass: "subscriptions";
+	updateEntry: number;
+} & messageBase;
+
 /**
  * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/dvr/dvr_vfsmgr.c#L413
  */
@@ -105,7 +117,7 @@ export type epgMessage = {
 	 * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/dvr/dvr_db.c#L225
 	 */
 	dvr_update?: string[];
-	
+
 	/**
 	 * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/dvr/dvr_db.c#L260
 	 */
@@ -136,8 +148,7 @@ type subscriptionsMessage = {
 	out: number;
 	total_in: number;
 	total_out: number;
-	updateEntry: number;
-} & messageBase;
+} & updateEntryMessage;
 
 /**
  * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/idnode.c#L1925
@@ -164,29 +175,9 @@ type servicemapperMessage = {
 /**
  * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/input/mpegts/mpegts_input.c#L2047
  */
-export type input_statusMessage = {
+type input_statusMessage = {
 	notificationClass: "input_status";
-	uuid: string; // "903fd4a7add1e18e6aa5486b35e595cd",
-	input: string; // "HDHomeRun ATSC-T Tuner #0 (192.168.0.215)",
-	stream: string; // "599.028MHz in ATSC-T Network",
-	subs: number;
-	weight: number;
-	pids: number[];
-	signal: number;
-	signal_scale: number;
-	ber: number;
-	snr: number;
-	snr_scale: number;
-	unc: number;
-	bps: number;
-	te: number;
-	cc: number;
-	ec_bit: number;
-	tc_bit: number;
-	ec_block: number;
-	tc_block: number;
-	update: number;
-} & messageBase;
+} & updateMessage & Input;
 
 /**
  * webui\comet.c#L154

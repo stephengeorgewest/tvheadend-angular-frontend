@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { GridRequest } from '../api/grid-request';
-import { GridEntry, GridResponse } from '../api/epg/events/grid/responsemodel';
+import { GridResponse, GridEntry } from '../api/epg/events/grid/responsemodel';
 import { ignoreEntry, IgnoreListService, listNames, modificationType } from '../ignore-list.service';
 import { EpgService } from '../api/epg/epg.service';
+import { EpgEventsGridRequest } from '../api/epg/events/grid/requestmodel';
 
 const halfHour = 30 * 60;
 const hour = 60 * 60;
@@ -45,14 +45,14 @@ export class EpgComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit(): void {
-		if(!this.entries || !this.entries.length)
+		if (!this.entries || !this.entries.length)
 			this.refreshGrid();
 	}
 	ngOnDestroy(): void {
 		this.subscription.unsubscribe();
 	}
 	private selectedEntryTitle: string | undefined;
-	public selectEntry(entryTitle: string | undefined){
+	public selectEntry(entryTitle: string | undefined) {
 		this.selectedEntry = this.filteredEntries.get(entryTitle || "") || [];
 		this.selectedEntryTitle = this.selectedEntry.length ? entryTitle : undefined;
 	}
@@ -77,12 +77,12 @@ export class EpgComponent implements OnInit, OnDestroy {
 		}
 		this.lastignoredcount = count - this.length(this.filteredEntries);
 		this.totalIgnored = this.entries.length - this.length(this.filteredEntries);
-		
+
 		this.selectEntry(this.selectedEntryTitle);
 	}
 	public filterAll() {
 		this.filter(this.entries);
-		
+
 		this.selectEntry(this.selectedEntryTitle);
 	}
 	private filter(list: GridEntry[]) {
@@ -145,12 +145,12 @@ export class EpgComponent implements OnInit, OnDestroy {
 		return match_title || match_channel || match_both || false;
 	}
 
-	public options: GridRequest<GridResponse> = { dir: "ASC", duplicates: 0, start: 0, limit: 300 };
+	public options: EpgEventsGridRequest = { dir: "ASC", duplicates: 0, start: 0, limit: 300 };
 	public refreshGrid() {
 		this.epgService.refreshEpgGrid(this.options);
 	}
 	public refresh(data: GridResponse | undefined) {
-		if(data){
+		if (data) {
 			this.entries = data.entries;
 			this.totalCount = data.totalCount;
 			this.filteredEntries = new Map();

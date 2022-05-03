@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { GridRequest } from '../grid-request';
 import { fetchData } from '../util';
-import { GridResponse } from './events/grid/responsemodel';
+import { GridEntry, GridResponse } from './events/grid/responsemodel';
 
 @Injectable({
 	providedIn: 'root'
@@ -14,7 +14,7 @@ export class EpgService {
 		return this.epgGridSubject.asObservable();
 	}
 
-	public updateRecordingUuidByEventId(uuid: string[], event_id: number){
+	public updateRecordingUuidByEventId(uuid: string[], event_id: number) {
 		uuid.forEach(u => {
 			const entry = this.epgGridResponse?.entries.find(e => event_id === e.eventId);
 			if (entry)
@@ -24,7 +24,7 @@ export class EpgService {
 	}
 
 	public deleteEpg(epg_id_to_delete: number[]) {
-		if(this.epgGridResponse){
+		if (this.epgGridResponse) {
 			this.epgGridResponse.entries = this.epgGridResponse?.entries.filter(e => !epg_id_to_delete.some(id => e.eventId === id));
 		}
 	}
@@ -41,6 +41,7 @@ export class EpgService {
 
 	public refreshEpgEvents(eventIDs: number[] | number) {
 		fetchData("epg/events/load", { eventId: eventIDs }).then((data: GridResponse) => {
+			//? refreshable = !!eventIDs.length
 			let refreshable = false;
 			data.entries.forEach(e => {
 				if (!this.epgGridResponse) {
@@ -69,8 +70,8 @@ export class EpgService {
 		});
 	}
 
-	private epgOptions: GridRequest<GridResponse> = { dir: "ASC", duplicates: 0, start: 0, limit: 300 };
-	public refreshEpgGrid(options?: GridRequest<GridResponse>) {
+	private epgOptions: GridRequest<GridEntry> = { dir: "ASC", duplicates: 0, start: 0, limit: 300 };
+	public refreshEpgGrid(options?: GridRequest<GridEntry>) {
 		if (options) {
 			this.epgOptions = options;
 		}

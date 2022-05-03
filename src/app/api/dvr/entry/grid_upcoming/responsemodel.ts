@@ -1,10 +1,7 @@
-import { dvrEntrySchedstatus } from "src/app/api/models";
+import { dvrEntrySchedstatus, Grid } from "src/app/api/models";
 import { Entry } from "../../../entry";
 
-export interface GridUpcomingResponse {
-	entries: GridUpcomingEntry[];
-	total: number;
-}
+export type GridUpcomingResponse = Grid<GridUpcomingEntry>;
 
 /**
 * https://tvheadend.org/projects/tvheadend/repository/tvheadend/revisions/master/entry/src/dvr/dvr.h#L183/
