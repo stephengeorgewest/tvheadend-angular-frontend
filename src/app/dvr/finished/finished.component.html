@@ -117,7 +117,7 @@
 						}}</span>
 				</th>
 			</tr>
-			<tr *ngFor="let entry of group.entries" (click)="click($event, entry)"
+			<tr *ngFor="let entry of group.entries; trackBy:uuidTrack" (click)="click($event, entry)"
 				[class.selected]="entry.uuid | inSelected: selectedEntry">
 				<td>
 					<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">

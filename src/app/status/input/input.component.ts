@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, Pipe, PipeTransform } from '@angular/core
 import { Subscription } from 'rxjs';
 import { InputsService } from 'src/app/api/status/inputs/inputs.service';
 import { Input } from 'src/app/api/status/inputs/responsemodel';
+import { uuidTrack } from 'src/app/util';
 
 @Component({
 	selector: 'app-input',
@@ -11,6 +12,7 @@ import { Input } from 'src/app/api/status/inputs/responsemodel';
 export class InputComponent implements OnInit, OnDestroy {
 	public inputs: Input[] = [];
 	private inputsResponseSub: Subscription | undefined;
+	public uuidTrack = uuidTrack;
 	constructor(public inputsService: InputsService) { }
 
 	ngOnInit(): void {
@@ -24,11 +26,6 @@ export class InputComponent implements OnInit, OnDestroy {
 	ngOnDestroy(): void {
 		this.inputsResponseSub?.unsubscribe();
 	}
-
-	public uuidTrack(index: number, entry: { uuid: string }) {
-		return entry.uuid;
-	}
-
 }
 
 @Pipe({

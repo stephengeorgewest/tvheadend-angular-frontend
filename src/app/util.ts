@@ -13,3 +13,7 @@ export function scrollElementIntoView(id: string, containerId: string) {
 		}
 	}
 }
+
+export function uuidTrack(index: number, entry: { uuid: string }) {
+	return entry.uuid;
+}

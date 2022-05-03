@@ -5,6 +5,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { Subscription } from 'rxjs';
 import { DvrService } from 'src/app/api/dvr/dvr.service';
 import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
+import { uuidTrack } from 'src/app/util';
 import { environment } from 'src/environments/environment';
 import { ConfirmDeleteDialog } from './confirm-delete/confirm-delete.dialog';
 type groupkeys = keyof Pick<GridUpcomingEntry,
@@ -220,6 +221,7 @@ export class FinishedComponent {
 
 	private entries: GridUpcomingEntry[] = [];
 	private gridFinishedSubscription: Subscription | undefined;
+	public uuidTrack = uuidTrack;
 
 	constructor(
 		public dvrService: DvrService,
