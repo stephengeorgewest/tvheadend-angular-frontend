@@ -1,0 +1,27 @@
+{
+	"entries": [
+		{
+			"id": 4901,
+			"start": 1651662796,
+			"errors": 0,
+			"state": "Testing",
+			"hostname": "::ffff:192.168.0.224",
+			"username": "::ffff:192.168.0.224",
+			"client": "Kodi Media Center",
+			"title": "::ffff:192.168.0.224 [ Kodi Media Center ]",
+			"channel": "METV",
+			"service": "Samsung S5H1409 QAM/8VSB Frontend #0 : ATSC-T #0/ATSC-T Network/569.028MHz/METV",
+			"pids": [
+				64,
+				65,
+				68
+			],
+			"profile": "htsp",
+			"in": 0,
+			"out": 0,
+			"total_in": 0,
+			"total_out": 0
+		}
+	],
+	"totalCount": 1
+}

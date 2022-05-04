@@ -49,6 +49,7 @@ import { ListNamesFilterPipe } from './list-name.pipe';
 
 import { LoginComponent } from './login/login.component';
 import { InputComponent, PidPipe, ScalePipe } from './status/input/input.component';
+import { SubscriptionsComponent } from './status/subscriptions/subscriptions.component';
 
 import { IgnoreListService } from './ignore-list.service';
 import { AuthenticationService } from './authentication.service';
@@ -65,6 +66,7 @@ import { EpgService } from './api/epg/epg.service';
 		DvrUpcomingEntryComponent,
 		UpcomingEntryDialog,
 		FinishedComponent,
+		EpisodeDisplayComponent,
 		ConfirmDeleteDialog,
 		ConfirmDvrStopDialog,
 
@@ -83,6 +85,7 @@ import { EpgService } from './api/epg/epg.service';
 		DiskUsageComponent,
 
 		InputComponent,
+		SubscriptionsComponent,
 		AboutComponent,
 
 		CompletePercentPipe,
@@ -92,7 +95,6 @@ import { EpgService } from './api/epg/epg.service';
 		ListNamesFilterPipe,
 		FileSizePipe,
 		DurationPipe,
-		EpisodeDisplayComponent,
 		SortListPositionPipe,
 		SortListDirectionPipe,
 		InDisplayedColumnsPipe,

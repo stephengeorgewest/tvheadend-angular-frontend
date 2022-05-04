@@ -9,6 +9,8 @@ import { FinishedComponent } from './dvr/finished/finished.component';
 import { EpgComponent } from './epg/epg.component';
 import { IgnoreListManagmentComponent } from './ignore-list-managment/ignore-list-managment.component';
 import { InputComponent } from './status/input/input.component';
+import { SubscriptionsComponent } from './status/subscriptions/subscriptions.component';
+
 export const routes: Routes = [
 	{
 		path: "grid",
@@ -31,6 +33,12 @@ export const routes: Routes = [
 		path: "stream",
 		component: InputComponent,
 		data: { icon: "insights", friendlyName: "Streams", guard: "admin" },
+		canActivate: [AuthGuard]
+	},
+	{
+		path: "subscriptions",
+		component: SubscriptionsComponent,
+		data: { icon: "hub", friendlyName: "Subscriptions", guard: "admin" },
 		canActivate: [AuthGuard]
 	},
 	{

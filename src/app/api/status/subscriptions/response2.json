@@ -1,0 +1,20 @@
+{
+	"entries": [
+		{
+			"id": 4902,
+			"start": 1651663707,
+			"errors": 0,
+			"state": "Idle",
+			"hostname": "::ffff:192.168.0.224",
+			"username": "::ffff:192.168.0.224",
+			"client": "Kodi Media Center",
+			"title": "HTSP",
+			"service": "file:///mnt/Data/tvheadend/Curious George/Curious George - S01E26 - Housebound!; Curious George Rides a Bike.ts",
+			"in": 3002512,
+			"out": 3002512,
+			"total_in": 3657872,
+			"total_out": 3657872
+		}
+	],
+	"totalCount": 1
+}
