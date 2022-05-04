@@ -7,7 +7,7 @@ import { uuidTrack } from 'src/app/util';
 @Component({
 	selector: 'app-input',
 	templateUrl: './input.component.html',
-	styleUrls: ['./input.component.css']
+	styleUrls: ['./input.component.css', '../status.css']
 })
 export class InputComponent implements OnInit, OnDestroy {
 	public inputs: Input[] = [];
@@ -39,21 +39,5 @@ export class ScalePipe implements PipeTransform {
 			: scale === 2 && value > 0 ?
 				(value * 0.001) + " " + suffix
 				: 'unknown';
-	}
-}
-
-@Pipe({
-	name: 'pidlist',
-	pure: false
-})
-export class PidPipe implements PipeTransform {
-	transform(pid: number[] | undefined): string {
-		if (pid) {
-			pid.sort();
-			return pid[pid.length - 1] === 65535 ?
-				"all" :
-				pid.join(', ');
-		}
-		return "";
 	}
 }

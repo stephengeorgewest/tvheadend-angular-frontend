@@ -1,1 +1,44 @@
-<pre>{{subscriptions | json}}</pre>
+<table>
+	<thead>
+		<tr>
+			<td></td>
+			<td>ID</td>
+			<td>Hostname</td>
+			<td>Username</td>
+			<td>Title</td>
+			<td>Client/User Agent</td>
+			<td>Channel</td>
+			<td>Service</td>
+			<td>Profile</td>
+			<td>Start</td>
+			<td>State</td>
+			<td>PID list</td>
+			<td>Descramble</td>
+			<td>Errors</td>
+			<td>Input (kb/s)</td>
+			<td>Output (kb/s)</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let subscription of subscriptions; trackBy:idTrack">
+			<td>
+				<mat-menu></mat-menu>
+			</td>
+			<td>{{subscription.id}}</td>
+			<td>{{subscription.hostname}}</td>
+			<td>{{subscription.username}}</td>
+			<td>{{subscription.title}}</td>
+			<td>{{subscription.client}}</td>
+			<td>{{subscription.channel}}</td>
+			<td>{{subscription.service}}</td>
+			<td>{{subscription.profile}}</td>
+			<td>{{subscription.start}}</td>
+			<td>{{subscription.state}}</td>
+			<td class="pid_list">{{subscription.pids | pidlist}}</td>
+			<td>{{subscription.descramble}}</td>
+			<td>{{subscription.errors}}</td>
+			<td>{{(subscription.in / 125).toFixed(0)}}</td>
+			<td>{{(subscription.out / 125).toFixed(0)}}</td>
+		</tr>
+	</tbody>
+</table>

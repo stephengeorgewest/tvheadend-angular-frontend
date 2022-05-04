@@ -1,0 +1,14 @@
+.pid_list {
+	/*text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: 5rem;*/
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	min-height: 3.5em;
+	max-width: 10em;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}

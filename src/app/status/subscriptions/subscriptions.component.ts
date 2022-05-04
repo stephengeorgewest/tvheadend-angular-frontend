@@ -6,7 +6,7 @@ import { SubscriptionsService } from 'src/app/api/status/subscriptions/subscript
 @Component({
 	selector: 'app-subscriptions',
 	templateUrl: './subscriptions.component.html',
-	styleUrls: ['./subscriptions.component.css']
+	styleUrls: ['./subscriptions.component.css', '../status.css']
 })
 export class SubscriptionsComponent implements OnInit, OnDestroy {
 	public subscriptions: tvhSubscription[] = [];
@@ -19,6 +19,9 @@ export class SubscriptionsComponent implements OnInit, OnDestroy {
 	}
 	ngOnDestroy(): void {
 		this.subcriptionsResponseSubs?.unsubscribe();
+	}
+	public idTrack(index: number, entry: {id: number}){
+		return entry.id;
 	}
 
 }

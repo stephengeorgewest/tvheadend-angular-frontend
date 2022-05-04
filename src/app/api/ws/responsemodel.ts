@@ -1,4 +1,5 @@
 import { Input, InputsResponse } from "../status/inputs/responsemodel";
+import { Subscription } from "../status/subscriptions/responsemodel";
 
 /**
  * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/webui/comet.c#L253
@@ -137,18 +138,7 @@ export type dvrentryMessage = {
  */
 type subscriptionsMessage = {
 	notificationClass: "subscriptions";
-	id: number;
-	start: number;
-	errors: number;
-	state: string; // "Running";
-	title: string; //"epggrab";
-	service: string; // "HDHomeRun ATSC-T Tuner #0 (192.168.0.215)/ATSC-T Network/599.028MHz/Raw PID Subscription";
-	pids: number[];
-	in: number;
-	out: number;
-	total_in: number;
-	total_out: number;
-} & updateEntryMessage;
+} & updateEntryMessage & Subscription;
 
 /**
  * https://github.com/tvheadend/tvheadend/blob/58df4bf5142a7628b3994ec6c0c4b8e1d8d27694/src/idnode.c#L1925

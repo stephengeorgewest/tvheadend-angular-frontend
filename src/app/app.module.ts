@@ -48,8 +48,9 @@ import { FileSizePipe } from './file-size.pipe';
 import { ListNamesFilterPipe } from './list-name.pipe';
 
 import { LoginComponent } from './login/login.component';
-import { InputComponent, PidPipe, ScalePipe } from './status/input/input.component';
+import { InputComponent, ScalePipe } from './status/input/input.component';
 import { SubscriptionsComponent } from './status/subscriptions/subscriptions.component';
+import { PidPipe } from './status/pid.pipe';
 
 import { IgnoreListService } from './ignore-list.service';
 import { AuthenticationService } from './authentication.service';

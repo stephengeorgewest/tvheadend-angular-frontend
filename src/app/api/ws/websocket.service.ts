@@ -8,6 +8,8 @@ import { cometMessage } from './responsemodel';
 import { EpgService } from '../epg/epg.service';
 import { Input } from '../status/inputs/responsemodel';
 import { InputsService } from '../status/inputs/inputs.service';
+import { Subscription } from '../status/subscriptions/responsemodel';
+import { SubscriptionsService } from '../status/subscriptions/subscriptions.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -23,7 +25,8 @@ export class WebsocketService implements OnDestroy {
 		private diskUsageService: DiskUsageService,
 		private epgService: EpgService,
 		private dvrService: DvrService,
-		private inputsService: InputsService
+		private inputsService: InputsService,
+		private subscriptionsService: SubscriptionsService
 	) {
 		this.boxid = localStorage.getItem("boxid");
 		this.createWebSocket();
@@ -57,8 +60,10 @@ export class WebsocketService implements OnDestroy {
 		let dvr_uuids_to_delete: Set<string> = new Set();
 		let epg_id_to_reload: Set<string> = new Set();
 		let epg_id_to_delete: Set<string> = new Set();
-		let services_to_reload: Set<"dvrentry" | "input_status"/* TODO: reloadMessage->notificationClass */> = new Set();
+		let services_to_reload: Set<"dvrentry" | "input_status" | "subscriptions"/* TODO: reloadMessage->notificationClass */> = new Set();
 		let input_status_to_update: Map<string, Input> = new Map();
+		let subcriptions_to_update: Map<number, Subscription> = new Map();
+
 		if (data.boxid) {
 			this.boxid = data.boxid;
 			localStorage.setItem("boxid", this.boxid);
@@ -70,6 +75,9 @@ export class WebsocketService implements OnDestroy {
 						services_to_reload.add(m.notificationClass);
 						break;
 					case "input_status":
+						services_to_reload.add(m.notificationClass);
+						break;
+					case "subscriptions":
 						services_to_reload.add(m.notificationClass);
 						break;
 					default:
@@ -84,6 +92,9 @@ export class WebsocketService implements OnDestroy {
 					default:
 						console.log("unhandled update message", m);
 				}
+			}
+			else if("updateEntry" in m){
+				subcriptions_to_update.set(m.id, m);
 			}
 			else {
 				switch (m.notificationClass) {
@@ -139,6 +150,7 @@ export class WebsocketService implements OnDestroy {
 		this.epgService.deleteEpg([...epg_id_to_delete].map((id) => parseInt(id)));
 		this.dvrService.clearFromServiceByUUID(dvr_uuids_to_delete);
 		this.inputsService.update([...input_status_to_update.values()]);
+		this.subscriptionsService.update([...subcriptions_to_update.values()]);
 
 		//Reloads ensure they happen after updates
 		this.epgService.refreshEpgByUUID(
@@ -156,6 +168,9 @@ export class WebsocketService implements OnDestroy {
 					break;
 				case "input_status":
 					this.inputsService.refreshIfLoaded();
+					break;
+				case "subscriptions":
+					this.subscriptionsService.refreshIfLoaded();
 					break;
 				default:
 					console.log("unhandled reload message:", service);

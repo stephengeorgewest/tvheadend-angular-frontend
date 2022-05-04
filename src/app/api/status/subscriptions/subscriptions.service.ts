@@ -28,7 +28,7 @@ export class SubscriptionsService {
 		const entries = this.subscriptionsResponse.value?.entries || [];
 		subscriptions.forEach(s => {
 			const matchingIndex = entries.findIndex(e => e.id === s.id);
-			if(matchingIndex !== -1)
+			if(matchingIndex === -1)
 				entries.push(s);
 			else
 				entries[matchingIndex] = s;
