@@ -35,6 +35,54 @@ table {
 	width: 100%;
 	border-spacing: 0;
 	border-collapse: collapse;
+	position: relative;
+}
+
+
+th.caption {
+	background-color: var(--tertiary-bg-color);
+	position: sticky;
+	top: 0em;
+	height: 2em;
+}
+
+th {
+	background: var(--secondary-bg-color);
+	position: sticky;
+	box-shadow: 0 2px 2px -1px var(--tertiary-bg-color);
+	white-space: nowrap;
+	padding: 0;
+	z-index: 2;
+}
+
+div[role="menuitemcheckbox"].mat-menu-item button.mat-icon-button a,
+thead tr th .mat-icon-button {
+	height: 28px;
+	width: 28px;
+	line-height: 28px;
+}
+
+.descending {
+	transform: scaleY(-1);
+}
+
+/*
+tbody {
+	display: block;
+	transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+	height: auto;
+}
+
+tbody.hide {
+	height: 1em;
+}
+
+tr {
+	display: table-row;
+}*/
+
+tbody tr th {
+	background-color: var(--tertiary-bg-color);
 }
 
 tbody:nth-child(2n) tr:nth-child(2n) {
@@ -46,7 +94,13 @@ tbody:nth-child(2n+1) tr:nth-child(2n+1) {
 }
 
 td {
+	border-left: 1px dotted var(--highlight-color);
 	padding: .5em;
+}
+
+tfoot tr th {
+	/* Don't forget this, required for the stickiness */
+	bottom: 0em;
 }
 
 .custom-dialog-container .mat-dialog-container {

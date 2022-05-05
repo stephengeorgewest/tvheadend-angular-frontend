@@ -43,27 +43,6 @@ mat-list-item mat-icon {
 	flex: 0 0 1em;
 }
 
-table {
-	position: relative;
-	border-collapse: collapse;
-}
-
-th.caption {
-	background-color: var(--tertiary-bg-color);
-	position: sticky;
-	top: 0em;
-	height: 2em;
-}
-
-th {
-	background: var(--secondary-bg-color);
-	position: sticky;
-	box-shadow: 0 2px 2px -1px var(--tertiary-bg-color);
-	white-space: nowrap;
-	padding: 0;
-	z-index: 2;
-}
-
 div[role="menuitemcheckbox"] {
 	display: flex;
 	width: calc(100% - 16px);
@@ -83,13 +62,6 @@ thead tr th span.sort-order {
 	text-align: center;
 }
 
-div[role="menuitemcheckbox"].mat-menu-item button.mat-icon-button a,
-thead tr th .mat-icon-button {
-	height: 28px;
-	width: 28px;
-	line-height: 28px;
-}
-
 thead tr:nth-child(2) th {
 	/* Don't forget this, required for the stickiness */
 	top: 2em;
@@ -100,40 +72,10 @@ thead tr:nth-child(3) th {
 	top: 3.2em;
 }
 
-.descending {
-	transform: scaleY(-1);
-}
-
-
-/*
-tbody {
-	display: block;
-	transition: cubic-bezier(0.075, 0.82, 0.165, 1);
-	height: auto;
-}
-
-tbody.hide {
-	height: 1em;
-}
-
-tr {
-	display: table-row;
-}*/
-
 tbody tr th {
 	/* Don't forget this, required for the stickiness */
 	top: 4.95em;
-	background-color: var(--tertiary-bg-color);
 	height: 2em;
-}
-
-tfoot tr th {
-	/* Don't forget this, required for the stickiness */
-	bottom: 0em;
-}
-
-td {
-	border-left: 1px dotted var(--highlight-color);
 }
 
 td.filesize,
