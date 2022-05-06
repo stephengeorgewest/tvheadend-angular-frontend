@@ -1,0 +1,35 @@
+{
+	"entries": [
+		{
+			"id": 20006,
+			"server": "::ffff:192.168.0.237",
+			"server_port": 9982,
+			"peer": "::ffff:192.168.0.224",
+			"peer_port": 18985,
+			"started": 1651704984,
+			"streaming": 0,
+			"type": "HTSP"
+		},
+		{
+			"id": 19434,
+			"server": "::ffff:192.168.0.150",
+			"server_port": 9982,
+			"peer": "::ffff:192.168.0.143",
+			"peer_port": 42484,
+			"started": 1651456929,
+			"streaming": 0,
+			"type": "HTSP"
+		},
+		{
+			"id": 15567,
+			"server": "::ffff:192.168.0.150",
+			"server_port": 9982,
+			"peer": "::ffff:192.168.0.154",
+			"peer_port": 57638,
+			"started": 1648955860,
+			"streaming": 0,
+			"type": "HTSP"
+		}
+	],
+	"totalCount": 3
+}

@@ -17,3 +17,7 @@ export function scrollElementIntoView(id: string, containerId: string) {
 export function uuidTrack(index: number, entry: { uuid: string }) {
 	return entry.uuid;
 }
+
+export function idTrack(index: number, entry: {id: number}){
+	return entry.id;
+}

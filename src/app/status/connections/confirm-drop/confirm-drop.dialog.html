@@ -1,0 +1,18 @@
+<h2 mat-dialog-title *ngIf="connection">
+	Drop Connection?
+</h2>
+<h2 mat-dialog-title *ngIf="!connection">
+	Drop All Connections?
+</h2>
+<ul mat-dialog-content *ngIf="connection">
+	<li *ngFor="let entry of connection | keyvalue">
+		{{entry.key}} - {{entry.value}}
+	</li>
+</ul>
+<div mat-dialog-actions align="end">
+	<button mat-raised-button color="warn" [disabled]="deleting" (click)="confirm()">
+		<mat-progress-spinner diameter="24" mode="indeterminate" *ngIf="deleting"></mat-progress-spinner>
+		<ng-container *ngIf="!deleting">Drop</ng-container>
+	</button>
+	<button mat-stroked-button cdkFocusRegionstart (click)="dialogref.close()">Cancel</button>
+</div>

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Subscription as tvhSubscription } from 'src/app/api/status/subscriptions/responsemodel';
 import { SubscriptionsService } from 'src/app/api/status/subscriptions/subscriptions.service';
+import { idTrack } from 'src/app/util';
 
 @Component({
 	selector: 'app-subscriptions',
@@ -11,6 +12,7 @@ import { SubscriptionsService } from 'src/app/api/status/subscriptions/subscript
 export class SubscriptionsComponent implements OnInit, OnDestroy {
 	public subscriptions: tvhSubscription[] = [];
 	private subcriptionsResponseSubs: Subscription |undefined;
+	public idTrack = idTrack;
 	constructor(private subscriptionsService: SubscriptionsService) { }
 
 	ngOnInit(): void {
@@ -20,8 +22,4 @@ export class SubscriptionsComponent implements OnInit, OnDestroy {
 	ngOnDestroy(): void {
 		this.subcriptionsResponseSubs?.unsubscribe();
 	}
-	public idTrack(index: number, entry: {id: number}){
-		return entry.id;
-	}
-
 }

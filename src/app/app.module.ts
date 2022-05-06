@@ -57,6 +57,8 @@ import { AuthenticationService } from './authentication.service';
 import { WebsocketService } from './api/ws/websocket.service';
 import { DvrService } from './api/dvr/dvr.service';
 import { EpgService } from './api/epg/epg.service';
+import { ConnectionsComponent } from './status/connections/connections.component';
+import { ConfirmDropDialog } from './status/connections/confirm-drop/confirm-drop.dialog';
 
 @NgModule({
 	declarations: [
@@ -87,6 +89,8 @@ import { EpgService } from './api/epg/epg.service';
 
 		InputComponent,
 		SubscriptionsComponent,
+		ConnectionsComponent,
+		ConfirmDropDialog,
 		AboutComponent,
 
 		CompletePercentPipe,

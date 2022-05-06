@@ -1,0 +1,49 @@
+<table>
+	<thead>
+		<tr>
+			<th><button mat-icon-button (click)="deleteAll()"><mat-icon>delete_sweep</mat-icon></button></th>
+			<th>id</th>
+			<th>Server</th>
+			<th>Server Port</th>
+			<th>Client Address</th>
+			<th>Client Port</th>
+			<th>Started</th>
+			<th>Streaming</th>
+			<th>Type</th>
+			<th>Username</th>
+			<th>Proxy Address</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let connection of connections; trackBy:idTrack">
+			<td>
+				<button mat-icon-button (click)="delete(connection)"><mat-icon>delete</mat-icon></button>
+			</td>
+			<td>{{connection.id}}</td>
+			<td>{{connection.server}}</td>
+			<td>{{connection.server_port}}</td>
+			<td>{{connection.peer}}</td>
+			<td>{{connection.peer_port}}</td>
+			<td>{{connection.started}}</td>
+			<td>{{connection.streaming}}</td>
+			<td>{{connection.type}}</td>
+			<td>{{connection.username}}</td>
+			<td>{{connection.proxy_address}}</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<th></th>
+			<th>id</th>
+			<th>Server</th>
+			<th>Server Port</th>
+			<th>Client Address</th>
+			<th>Client Port</th>
+			<th>Started</th>
+			<th>Streaming</th>
+			<th>Type</th>
+			<th>Username</th>
+			<th>Proxy Address</th>
+		</tr>
+	</tfoot>
+</table>

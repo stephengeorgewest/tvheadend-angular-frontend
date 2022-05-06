@@ -10,6 +10,7 @@ import { EpgComponent } from './epg/epg.component';
 import { IgnoreListManagmentComponent } from './ignore-list-managment/ignore-list-managment.component';
 import { InputComponent } from './status/input/input.component';
 import { SubscriptionsComponent } from './status/subscriptions/subscriptions.component';
+import { ConnectionsComponent } from './status/connections/connections.component';
 
 export const routes: Routes = [
 	{
@@ -39,6 +40,12 @@ export const routes: Routes = [
 		path: "subscriptions",
 		component: SubscriptionsComponent,
 		data: { icon: "hub", friendlyName: "Subscriptions", guard: "admin" },
+		canActivate: [AuthGuard]
+	},
+	{
+		path: "connections",
+		component: ConnectionsComponent,
+		data: { icon: "settings_ethernet", friendlyName: "Connections", guard: "admin" },
 		canActivate: [AuthGuard]
 	},
 	{
