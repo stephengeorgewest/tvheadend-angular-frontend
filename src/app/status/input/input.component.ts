@@ -13,7 +13,7 @@ export class InputComponent implements OnInit, OnDestroy {
 	public inputs: Input[] = [];
 	private inputsResponseSub: Subscription | undefined;
 	public uuidTrack = uuidTrack;
-	constructor(private inputsService: InputsService) { }
+	constructor(public inputsService: InputsService) { }
 
 	ngOnInit(): void {
 		if (!this.inputsService.inputsValue) {

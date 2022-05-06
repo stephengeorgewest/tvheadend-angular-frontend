@@ -1,7 +1,16 @@
 <table>
 	<thead>
 		<tr>
-			<th></th>
+			<th><button mat-icon-button [matMenuTriggerFor]="rowmenu" aria-label="Clear Statistics for all Inputs">
+				<mat-icon>restart_alt</mat-icon>
+			</button>
+			<mat-menu #rowmenu="matMenu">
+				<div role="menuitem" mat-menu-item>
+					<button mat-raised-button color="warn" (click)="inputsService.clearAll()">
+						Clear Statistics for all Inputs
+					</button>
+				</div>
+			</mat-menu></th>
 			<th>Input</th>
 			<th>Stream</th>
 			<th>Subs No.</th>
@@ -20,7 +29,16 @@
 	<tbody>
 		<tr *ngFor="let input of inputs; trackBy:uuidTrack">
 			<td>
-				<mat-menu></mat-menu>
+				<button mat-icon-button [matMenuTriggerFor]="rowmenu" aria-label="Clear Statistics">
+					<mat-icon>restart_alt</mat-icon>
+				</button>
+				<mat-menu #rowmenu="matMenu">
+					<div role="menuitem" mat-menu-item>
+						<button mat-raised-button color="warn" (click)="inputsService.clear(input.uuid)">
+							Clear Statistics
+						</button>
+					</div>
+				</mat-menu>
 			</td>
 			<td>{{input.input}}</td>
 			<td>{{input.stream}}</td>
