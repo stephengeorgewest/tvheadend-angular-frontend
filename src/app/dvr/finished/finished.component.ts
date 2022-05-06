@@ -13,12 +13,7 @@ type groupkeys = keyof Pick<GridUpcomingEntry,
 	"channelname" |
 	"filesize"
 >;
-type groupsortkeys = keyof Pick<GridUpcomingEntry,
-	"disp_title" |
-	"disp_description" |
-	"disp_subtitle" |
-	"episode_disp" |
-	"channelname" |
+type groupsortkeys = "groupkey" | keyof Pick<GridUpcomingEntry,
 	"start_real" |
 	"duration" |
 	"filesize"
@@ -50,7 +45,7 @@ type sortColumn = {
 	displayString: string,
 	sort: boolean,
 	sortOrder: number,
-	descending: boolean,
+	ascending: boolean,
 	display: boolean,
 	displayOrder: number
 };
@@ -67,7 +62,7 @@ export class FinishedComponent {
 			displayString: "Title",
 			sort: true,
 			sortOrder: 1,
-			descending: false,
+			ascending: true,
 			display: true,
 			displayOrder: 1
 		},
@@ -75,57 +70,71 @@ export class FinishedComponent {
 			displayString: "Description",
 			sort: false,
 			sortOrder: 10,
-			descending: false,
+			ascending: true,
 			display: false,
 			displayOrder: 10
 		},
 		disp_subtitle: {
 			displayString: "Subtitle",
 			sort: true,
-			sortOrder: 3, descending: false,
+			sortOrder: 3,
+			ascending: true,
 			display: true,
 			displayOrder: 3
 		},
 		episode_disp: {
 			displayString: "Episode",
-			sort: true, sortOrder: 2, descending: true,
+			sort: true,
+			sortOrder: 2,
+			ascending: true,
 			display: true,
 			displayOrder: 2
 		},
 		channelname: {
 			displayString: "Channel",
-			sort: true, sortOrder: 4, descending: false,
+			sort: true,
+			sortOrder: 4,
+			ascending: false,
 			display: true,
 			displayOrder: 4
 		},
 		start_real: {
 			displayString: "Start Time",
-			sort: true, sortOrder: 5, descending: false,
+			sort: true,
+			sortOrder: 5,
+			ascending: false,
 			display: true,
 			displayOrder: 5
 		},
 		duration: {
 			displayString: "Duration",
-			sort: true, sortOrder: 6, descending: false,
+			sort: true,
+			sortOrder: 6,
+			ascending: false,
 			display: true,
 			displayOrder: 6
 		},
 		filesize: {
 			displayString: "Size",
-			sort: true, sortOrder: 7, descending: false,
+			sort: true,
+			sortOrder: 7,
+			ascending: false,
 			display: true,
 			displayOrder: 7
 		},
 		errors: {
 			displayString: "Errors",
-			sort: true, sortOrder: 8, descending: false,
+			sort: true,
+			sortOrder: 8,
+			ascending: false,
 			display: true,
 			displayOrder: 8
 		},
 		data_errors: {
 			displayString: "Data Errors",
 			sort: true,
-			sortOrder: 9, descending: false,
+			sortOrder: 9,
+			ascending: false,
 			display: true,
 			displayOrder: 9
 		}
@@ -151,10 +160,13 @@ export class FinishedComponent {
 		"filesize"
 	];
 	public groupBy: groupkeys | undefined = "disp_title";
-	public groupSort: sortType<groupsortkeys> = {
-		key: "episode_disp",
-		ascending: true
-	};
+	public groupsortList: Array<sortType<groupsortkeys>> = [
+		{ key: "groupkey", ascending: true},
+		{ key: "start_real", ascending: true },
+		{ key: "duration", ascending: true },
+		{ key: "filesize", ascending: true },
+	];
+	public groupSort: sortType<groupsortkeys> = this.groupsortList[0];
 
 	public groupChange(event: MatSelectChange) {
 		if (event.value)
@@ -166,18 +178,12 @@ export class FinishedComponent {
 			this.groupSort = (event.value as sortType<groupsortkeys>);
 		this.sortGroups();
 	}
-	public groupsortList: Array<sortType<groupsortkeys>> = [
-		{ key: "disp_title", ascending: false },
-		{ key: "disp_description", ascending: false },
-		{ key: "disp_subtitle", ascending: false },
-		{ key: "episode_disp", ascending: false },
-		{ key: "channelname", ascending: false },
-		{ key: "start_real", ascending: false },
-		{ key: "duration", ascending: false },
-		{ key: "filesize", ascending: false },
-	];
+	public reverseGroupSort(){
+		this.groupSort.ascending = !this.groupSort.ascending;
+		this.sortGroups();
+	}
 	public reverse(sortKey: sortkeys) {
-		this.columns[sortKey].descending = !this.columns[sortKey].descending;
+		this.columns[sortKey].ascending = !this.columns[sortKey].ascending;
 		this.sortEntries();
 	}
 	public up(sortKey: sortkeys, type: "sortOrder" | "displayOrder"): void {
@@ -289,6 +295,9 @@ export class FinishedComponent {
 		this.entryGroups.sort((a, b) => {
 			let sortValue: number;
 			switch (this.groupSort.key) {
+				case "groupkey":
+					sortValue = this.groupBy ? this.compare(a.grouptitle, b.grouptitle): 0;
+					break;
 				case "duration":
 				case "filesize":
 					sortValue = this.compare(a[this.groupSort.key], b[this.groupSort.key], this.groupSort.key);
@@ -297,12 +306,12 @@ export class FinishedComponent {
 					const f = (cur: number, prev: GridUpcomingEntry) => prev.start_real < cur ? prev.start_real : cur;
 					const aStart = a.entries.reduce(f, 9999999999);
 					const bStart = b.entries.reduce(f, 9999999999);
-					sortValue = bStart - aStart;
+					sortValue = aStart - bStart;
 					break;
 				default:
 					sortValue = 0;
 			}
-			return this.groupSort ? sortValue : - sortValue;
+			return this.groupSort.ascending ? sortValue : -sortValue;
 		});
 		this.displayedColumnUpdate();
 	}
@@ -310,13 +319,13 @@ export class FinishedComponent {
 		const sortList = Object.entries(this.columns)
 			.filter(([key, value]) => value.sort)
 			.sort(([key_a, value_a], [key_b, value_b]) => (value_a.sortOrder - value_b.sortOrder))
-			.map(([key, value]) => ({ key: key as sortkeys, descending: value.descending }));
+			.map(([key, value]) => ({ key: key as sortkeys, descending: value.ascending }));
 		for (let g of this.entryGroups) {
 			g.entries.sort((a, b) => {
 				for (let s of sortList) {
 					if (this.columns[s.key].display) {
 						const v = this.compare(a[s.key], b[s.key], s.key);
-						if (v != 0) { return s.descending ? -v : v; }
+						if (v != 0) { return s.descending ? v : -v; }
 					}
 				}
 				return 0;
@@ -325,19 +334,19 @@ export class FinishedComponent {
 
 		this.changeDetectorRef.markForCheck();
 	}
-	private compare<T extends string | number>(a: T, b: T, type: sortkeys): number {
+	private compare<T extends string | number>(a: T, b: T, type?: sortkeys): number {
 		if (type === "episode_disp") {
 			const a_parsed = parse_episode_disp(<string>a);
 			const b_parsed = parse_episode_disp(<string>b);
 			if (a_parsed?.season === b_parsed?.season)
-				return (b_parsed?.episode ?? 0) - (a_parsed?.episode ?? 0);
+				return (a_parsed?.episode ?? 0) - (b_parsed?.episode ?? 0);
 			else
-				return (b_parsed?.season ?? 0) - (a_parsed?.season ?? 0);
+				return (a_parsed?.season ?? 0) - (b_parsed?.season ?? 0);
 		}
-		else if (typeof b === "string")
-			return b.localeCompare(<string>a);
+		else if (typeof a === "string")
+			return a.localeCompare(<string>b);
 		else
-			return <number>b - <number>a;
+			return <number>a - <number>b;
 	}
 
 	public click(event: MouseEvent, entry: GridUpcomingEntry) {

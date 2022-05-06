@@ -14,11 +14,28 @@
 		<mat-form-field>
 			<mat-select (selectionChange)="groupSortChange($event)" [disabled]="!groupBy" [(ngModel)]="groupSort"
 				[ngModelOptions]="{standalone: true}">
-				<mat-option *ngFor="let sort of groupsortList" [value]="sort">{{columns[sort.key]?.displayString}}
+				<mat-option *ngFor="let sort of groupsortList" [value]="sort">
+					<ng-container *ngIf="sort.key === 'groupkey'">
+						<ng-container *ngIf="groupBy !== undefined">
+							{{columns[groupBy]?.displayString}}
+						</ng-container>
+						<ng-container *ngIf="groupBy == undefined">groupkey</ng-container>
+					</ng-container>
+					<ng-container *ngIf="sort.key !== 'groupkey'">
+						{{columns[sort.key]?.displayString}}
+					</ng-container>
 				</mat-option>
 			</mat-select>
 			<mat-label>GroupSort</mat-label>
 		</mat-form-field>
+
+		<button mat-icon-button (click)="reverseGroupSort()" title="Sort">
+			<mat-icon [class.ascending]="groupSort.ascending">sort
+			</mat-icon>
+		</button>
+		<button mat-icon-button (click)="dvrService.refreshGridFinished()" title="Refresh">
+			<mat-icon>refresh</mat-icon>
+		</button>
 	</fieldset>
 </form>
 <div class="table">
@@ -26,8 +43,10 @@
 		<thead>
 			<!--revert to <caption> once browsers support sticky on caption -->
 			<tr>
-				<th class="caption" [attr.colspan]="displayedColumns.length+1">({{totalCount}}) {{filesize | filesize}}
-					- {{ duration| duration}}</th>
+				<th class="caption" [attr.colspan]="displayedColumns.length+1">
+					({{totalCount}}) {{filesize | filesize}}
+					- {{ duration| duration}}
+				</th>
 			</tr>
 			<tr>
 				<th rowspan="2">
@@ -65,16 +84,16 @@
 						</div>
 					</mat-menu>
 				</th>
-				<th *ngFor="let col of displayedColumns" [class]="col">
-					{{columns[col]?.displayString}}
+				<th *ngFor="let column of displayedColumns" [class]="column">
+					{{columns[column]?.displayString}}
+					<button mat-icon-button (click)="reverse(column)">
+						<mat-icon [class.ascending]="columns[column].ascending ">sort
+						</mat-icon>
+					</button>
 				</th>
 			</tr>
 			<tr>
 				<th *ngFor="let column of displayedColumns" [class]="column">
-					<button mat-icon-button (click)="reverse(column)">
-						<mat-icon [class.descending]="columns[column].descending ">sort
-						</mat-icon>
-					</button>
 					<button mat-icon-button [disabled]="columns[column].sortOrder === 1"
 						(click)="up(column, 'sortOrder')">
 						<mat-icon>keyboard_double_arrow_up</mat-icon>

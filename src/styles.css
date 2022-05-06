@@ -62,7 +62,7 @@ thead tr th .mat-icon-button {
 	line-height: 28px;
 }
 
-.descending {
+.ascending {
 	transform: scaleY(-1);
 }
 
