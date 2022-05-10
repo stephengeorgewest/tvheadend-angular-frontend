@@ -80,6 +80,41 @@ tbody tr th {
 	height: 2em;
 }
 
+th button:last-child .mat-icon/*,
+td div,
+td episode_disp,
+td button*/ {
+	transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+	transition-duration: 1s;
+	/*max-height: 4em;*/
+}
+
+.collapsed th button:last-child .mat-icon {
+	transform: rotate(180deg);
+}
+
+.collapsed th>div {
+	border-bottom: 3px dashed var(--secondary-bg-color);
+}
+
+.collapsed td episode_disp,
+.collapsed td button {
+	display: block;
+}
+
+.collapsed td {
+	margin: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.collapsed td div,
+.collapsed td episode_disp,
+.collapsed td button {
+	max-height: 0;
+	overflow: hidden;
+}
+
 td.filesize,
 td.duration {
 	text-align: right;

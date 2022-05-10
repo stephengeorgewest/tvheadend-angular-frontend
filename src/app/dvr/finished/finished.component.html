@@ -46,6 +46,12 @@
 				<th class="caption" [attr.colspan]="displayedColumns.length+1">
 					({{totalCount}}) {{filesize | filesize}}
 					- {{ duration| duration}}
+					<button mat-icon-button *ngIf="groupBy" (click)="collapseAll()" [disabled]="!expandable">
+						<mat-icon>expand</mat-icon>
+					</button>
+					<button mat-icon-button *ngIf="groupBy" (click)="collapseAll(true)" [disabled]="!collapsable">
+						<mat-icon>compress</mat-icon>
+					</button>
 				</th>
 			</tr>
 			<tr>
@@ -105,35 +111,42 @@
 				</th>
 			</tr>
 		</thead>
-		<tbody *ngFor="let group of entryGroups">
+		<tbody *ngFor="let group of entryGroups; trackBy: groupTrack" [class.collapsed]="groupBy && group.collapsed">
 			<tr>
 				<th [attr.colspan]="displayedColumns.length + 1">
-					<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-						<mat-icon>menu</mat-icon>
-					</button>
-					<mat-menu #menu="matMenu">
-						<button mat-menu-item (click)="remove(group.entries)">
-							<mat-icon>delete</mat-icon>
-							<span>Remove All in Group</span>
+					<div>
+						<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+							<mat-icon>menu</mat-icon>
 						</button>
-						<button mat-menu-item (click)="selectAll(group.entries)">
-							<mat-icon>select_all</mat-icon>
-							<span>Select All in Group</span>
+						<mat-menu #menu="matMenu">
+							<button mat-menu-item (click)="remove(group.entries)">
+								<mat-icon>delete</mat-icon>
+								<span>Remove All in Group</span>
+							</button>
+							<button mat-menu-item (click)="selectAll(group.entries)">
+								<mat-icon>select_all</mat-icon>
+								<span>Select All in Group</span>
+							</button>
+							<button mat-menu-item (click)="selectAllAdd(group.entries)">
+								<mat-icon>select_all</mat-icon>
+								<span>Add All in Group To Selection</span>
+							</button>
+							<button mat-menu-item (click)="deselectAll(group.entries)">
+								<mat-icon>deselect</mat-icon>
+								<span>De-Select All in Group</span>
+							</button>
+						</mat-menu>
+						<span *ngIf="groupBy === 'disp_title'">{{ group.grouptitle }}</span>
+						<span *ngIf="groupBy === 'channelname'">Channel: {{ group.grouptitle }}</span>
+						<span *ngIf="groupBy === 'filesize'">Sizebin: {{ $any(group.grouptitle) | filesize }}</span>
+						<span> ({{ group.entries.length }}) - {{ group.filesize | filesize }} - {{ group.duration |
+							duration
+							}}</span>
+
+						<button mat-icon-button *ngIf="groupBy" (click)="collapse(group)">
+							<mat-icon>expand_more</mat-icon>
 						</button>
-						<button mat-menu-item (click)="selectAllAdd(group.entries)">
-							<mat-icon>select_all</mat-icon>
-							<span>Add All in Group To Selection</span>
-						</button>
-						<button mat-menu-item (click)="deselectAll(group.entries)">
-							<mat-icon>deselect</mat-icon>
-							<span>De-Select All in Group</span>
-						</button>
-					</mat-menu>
-					<span *ngIf="groupBy === 'disp_title'">{{ group.grouptitle }}</span>
-					<span *ngIf="groupBy === 'channelname'">Channel: {{ group.grouptitle }}</span>
-					<span *ngIf="groupBy === 'filesize'">Sizebin: {{ $any(group.grouptitle) | filesize }}</span>
-					<span> ({{ group.entries.length }}) - {{ group.filesize | filesize }} - {{ group.duration | duration
-						}}</span>
+					</div>
 				</th>
 			</tr>
 			<tr *ngFor="let entry of group.entries; trackBy:uuidTrack" (click)="click($event, entry)"
@@ -162,17 +175,17 @@
 					</mat-menu>
 				</td>
 				<td *ngFor="let col of displayedColumns" [ngSwitch]="col" [class]="col">
-					<ng-container *ngSwitchCase="'filesize'">{{entry.filesize | filesize}}</ng-container>
-					<ng-container *ngSwitchCase="'data_errors'">
+					<div *ngSwitchCase="'filesize'">{{entry.filesize | filesize}}</div>
+					<div *ngSwitchCase="'data_errors'">
 						<mat-icon *ngIf="entry.data_errors">warning</mat-icon>{{entry.data_errors}}
-					</ng-container>
-					<ng-container *ngSwitchCase="'start_real'">
+					</div>
+					<div *ngSwitchCase="'start_real'">
 						<div>{{entry.start_real | newDate | date: "shortDate"}}</div>
 						<div>{{entry.start_real | newDate | date: "shortTime"}}</div>
-					</ng-container>
-					<ng-container *ngSwitchCase="'duration'">{{entry.duration | duration: "short"}}</ng-container>
+					</div>
+					<div *ngSwitchCase="'duration'">{{entry.duration | duration: "short"}}</div>
 					<episode_disp *ngSwitchCase="'episode_disp'" [season_episode]="entry.episode_disp"></episode_disp>
-					<ng-container *ngSwitchDefault>{{entry[col]}}</ng-container>
+					<div *ngSwitchDefault>{{entry[col]}}</div>
 				</td>
 			</tr>
 		</tbody>

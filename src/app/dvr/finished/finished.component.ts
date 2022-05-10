@@ -35,6 +35,7 @@ type grouped = {
 	filesize: number;
 	duration: number;
 	entries: GridUpcomingEntry[];
+	collapsed?: boolean;
 };
 
 type sortType<T> = {
@@ -266,6 +267,7 @@ export class FinishedComponent {
 	private groupAndSort() {
 		this.filesize = 0;
 		this.duration = 0;
+		const allCollapsed = this.entryGroups.every(g => g.collapsed);
 		this.entryGroups = [...this.entries.reduce((prev, cur) => {
 			const group = !this.groupBy ?
 				"NO_GROUP" :
@@ -290,6 +292,13 @@ export class FinishedComponent {
 		}, new Map<string | number, grouped>()).values()];
 		this.sortGroups();
 		this.sortEntries();
+		if(allCollapsed)
+			this.collapseAll(true);
+		else{
+			this.collapsable = true;
+			this.expandable = false;
+		}
+		
 		this.changeDetectorRef.markForCheck();
 	}
 	private getBin(binSize: number, filesize: number) {
@@ -363,6 +372,33 @@ export class FinishedComponent {
 		else
 			return <number>a - <number>b;
 	}
+	public expandable = false;
+	public collapsable = true;
+	public collapse(group: grouped){
+		group.collapsed = !group.collapsed;
+		if(group.collapsed){
+			this.expandable = true;
+		}
+		else{
+			this.expandable = this.entryGroups.some(g => g.collapsed);
+		}
+		if(group.collapsed){
+			this.collapsable = true;
+		}
+		else{
+			this.collapsable = this.entryGroups.some(g => !g.collapsed);
+		}
+	}
+	public collapseAll(collapse?: boolean){
+		this.entryGroups.forEach((group) => group.collapsed = collapse);
+		if(collapse){
+			this.collapsable = false;
+			this.expandable = true;
+		}else{
+			this.collapsable = true;
+			this.expandable = false;
+		}
+	}
 
 	public click(event: MouseEvent, entry: GridUpcomingEntry) {
 		event.stopPropagation();
@@ -419,6 +455,10 @@ export class FinishedComponent {
 		this.dialog.open(ConfirmDeleteDialog, {
 			data: entry
 		});
+	}
+
+	public groupTrack(index: number, entry: grouped) {
+		return entry.grouptitle;
 	}
 }
 
