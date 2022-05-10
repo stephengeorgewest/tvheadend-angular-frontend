@@ -159,7 +159,7 @@ export class WebsocketService implements OnDestroy {
 		);
 
 		if (dvr_uuids_to_reload.size && !services_to_reload.has("dvrentry"))
-			this.dvrService.refreshIfLoaded();// TODO? more specific like epg
+			this.dvrService.refreshIfLoaded(dvr_uuids_to_reload);// TODO? more specific like epg
 
 		for (let service of services_to_reload.values()) {
 			switch (service) {

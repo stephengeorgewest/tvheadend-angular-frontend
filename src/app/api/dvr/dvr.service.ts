@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { EpgService } from '../epg/epg.service';
 import { GridEntry } from '../epg/events/grid/responsemodel';
 import { DeleteBydvrUUIDRequest } from '../idnode/delete/requestmodel';
+import { idnodeLoadRequest } from '../idnode/load/request';
+import { idnodeLoadResponse } from '../idnode/load/response';
 import { fetchData } from '../util';
 import { CreateByEventRequest } from './entry/create_by_event/requestmodel';
 import { CreateByEventResponse } from './entry/create_by_event/responsemodel';
@@ -94,11 +96,32 @@ export class DvrService {
 				this.gridFinishedSubject.next(this.gridFinishedResponse);
 		}
 	}
+	private gridUpdateSubject: Subject<idnodeLoadResponse> = new Subject();
+	public onGridUpdateResponse(): Observable<idnodeLoadResponse> {
+		return this.gridUpdateSubject.asObservable();
+	}
+	public refreshIfLoaded(dvr_to_reload?: Set<string>) {
+		if (dvr_to_reload?.size) {
+			const request: idnodeLoadRequest = {uuid: [...dvr_to_reload], grid: "1", list: ["category","enabled","duplicate","disp_title","disp_extratext","episode_disp","channel","image","copyright_year","start_real","stop_real","duration","pri","filesize","sched_status","errors","data_errors","config_name","owner","creator","comment","genre","broadcast"]};
+			fetchData(
+				'idnode/load',
+				{
+					uuid: request.uuid,
+					grid: request.grid,
+					list: request.list.join(",")
+				}
+				).then(
+					(data:idnodeLoadResponse) => {
+						//console.log(data);
+						this.gridUpdateSubject.next(data);
+					}
+				);
+		} else {
+			if (this.gridFinishedResponse)
+				this.refreshGridFinished();
+			if (this.gridUpcomingResponse)
+				this.refreshGridUpcoming();
 
-	public refreshIfLoaded() {
-		if (this.gridFinishedResponse)
-			this.refreshGridFinished();
-		if (this.gridUpcomingResponse)
-			this.refreshGridUpcoming();
+		}
 	}
 }

@@ -243,6 +243,21 @@ export class FinishedComponent {
 		});
 		this.dvrService.refreshGridFinished();
 		this.displayedColumnUpdate();
+		this.dvrService.onGridUpdateResponse().subscribe(data => this.entryGroups.every(group => group.entries.every(oldEntry => {
+			const newIndex = data.entries.findIndex(e => e.uuid === oldEntry.uuid)
+			if (newIndex !== -1) {
+				const newEntry = data.entries.splice(newIndex)[0];
+				if (newEntry.filesize)
+					group.filesize - oldEntry.filesize + newEntry.filesize;
+				(Object.keys(newEntry) as Array<keyof Partial<GridUpcomingEntry>>).forEach(key => {
+					const newValue = newEntry[key];
+					if (newValue)
+						(oldEntry as any)[key as any] = newValue as any;
+				});
+
+				this.changeDetectorRef.markForCheck();
+			}
+		})));
 		this.changeDetectorRef.markForCheck();
 	}
 	public ngOnDestroy() {

@@ -1,0 +1,28 @@
+{
+	"entries": [
+		{
+			"uuid": "3a4b9b9f4d6a0226706054a4a6640311",
+			"category": [],
+			"enabled": true,
+			"duplicate": 0,
+			"disp_title": "Batman",
+			"disp_extratext": "The Catwoman Goeth",
+			"episode_disp": "Season 2.Episode 34",
+			"channel": "ab96ac19a917b4a7858a833c3a7e9d49",
+			"image": "https://zap2it.tmsimg.com/assets/p1035352_e_v9_aa.jpg",
+			"copyright_year": 0,
+			"start_real": 1652016270,
+			"stop_real": 1652018700,
+			"duration": 2400,
+			"pri": 6,
+			"filesize": 280930468,
+			"sched_status": "recording",
+			"errors": 0,
+			"data_errors": 0,
+			"config_name": "035ba226f0e6a53908770ac79a7260b1",
+			"creator": "::ffff:192.168.0.224",
+			"genre": [],
+			"broadcast": 109389210
+		}
+	]
+}

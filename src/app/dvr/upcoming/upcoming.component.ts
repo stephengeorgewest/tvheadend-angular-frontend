@@ -48,6 +48,21 @@ export class UpcomingComponent implements OnDestroy {
 		this.sub = timer(60 * 1000, 60 * 1000).subscribe(() => {
 			this.now = Date.now() / 1000;
 		});
+		this.dvrService.onGridUpdateResponse().subscribe(data => {
+			for (let [key, row] of this.entries) {
+				row.list.every(oldEntry => {
+					const newIndex = data.entries.findIndex(e => e.uuid === oldEntry.uuid)
+					if (newIndex !== -1) {
+						const newEntry = data.entries.splice(newIndex)[0];
+						(Object.keys(newEntry) as Array<keyof Partial<GridUpcomingEntry>>).forEach(key => {
+							const newValue = newEntry[key];
+							if (newValue)
+								(oldEntry as any)[key as any] = newValue as any;
+						});
+					}
+				});
+			}
+		});
 		this.dvrService.refreshGridUpcoming();
 	}
 	public ngOnDestroy(): void {
