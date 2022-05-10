@@ -84,15 +84,6 @@ export class WebsocketService implements OnDestroy {
 						console.log("unhandled reload message", m)
 				}
 			}
-			else if ("update" in m) {
-				switch (m.notificationClass) {
-					case "input_status":
-						input_status_to_update.set(m.uuid, m);
-						break;
-					default:
-						console.log("unhandled update message", m);
-				}
-			}
 			else if("updateEntry" in m){
 				subcriptions_to_update.set(m.id, m);
 			}
@@ -115,13 +106,17 @@ export class WebsocketService implements OnDestroy {
 					case "dvrentry":
 						if (m.delete)
 							m.delete.forEach(dvr_uuids_to_delete.add, dvr_uuids_to_delete);
-
 						if (m.update)
 							m.update.forEach(dvr_uuids_to_reload.add, dvr_uuids_to_reload);
 						if (m.create)
 							m.create.forEach(dvr_uuids_to_reload.add, dvr_uuids_to_reload);
 						if (m.change)
 							m.change.forEach(dvr_uuids_to_reload.add, dvr_uuids_to_reload);
+						break;
+					case "input_status":
+						if (m.update) {
+							input_status_to_update.set(m.uuid, m);
+						}
 						break;
 					case "diskspaceUpdate":
 						this.diskUsageService.setDiskUsage({
