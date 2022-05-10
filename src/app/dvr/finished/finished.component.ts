@@ -161,7 +161,7 @@ export class FinishedComponent {
 	];
 	public groupBy: groupkeys | undefined = "disp_title";
 	public groupsortList: Array<sortType<groupsortkeys>> = [
-		{ key: "groupkey", ascending: true},
+		{ key: "groupkey", ascending: true },
 		{ key: "start_real", ascending: true },
 		{ key: "duration", ascending: true },
 		{ key: "filesize", ascending: true },
@@ -178,7 +178,7 @@ export class FinishedComponent {
 			this.groupSort = (event.value as sortType<groupsortkeys>);
 		this.sortGroups();
 	}
-	public reverseGroupSort(){
+	public reverseGroupSort() {
 		this.groupSort.ascending = !this.groupSort.ascending;
 		this.sortGroups();
 	}
@@ -269,7 +269,7 @@ export class FinishedComponent {
 				grouptitle: group,
 				filesize: cur.filesize,
 				duration: cur.duration,
-				entries: [cur]
+				entries: [cur],
 			});
 			return prev;
 		}, new Map<string | number, grouped>()).values()];
@@ -296,7 +296,7 @@ export class FinishedComponent {
 			let sortValue: number;
 			switch (this.groupSort.key) {
 				case "groupkey":
-					sortValue = this.groupBy ? this.compare(a.grouptitle, b.grouptitle): 0;
+					sortValue = this.groupBy ? this.compare(a.grouptitle, b.grouptitle) : 0;
 					break;
 				case "duration":
 				case "filesize":

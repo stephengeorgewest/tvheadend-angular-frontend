@@ -6,7 +6,7 @@ import { DvrService } from 'src/app/api/dvr/dvr.service';
 import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
 import { ConfirmDvrStopDialog } from './confirm-stop/confirm-stop.dialog';
 
-type row ={
+type row = {
 	hasRecording: boolean;
 	hasScheduled: boolean;
 	list: GridUpcomingEntry[]
@@ -21,7 +21,7 @@ export class UpcomingComponent implements OnDestroy {
 	public totalCount = 0;
 
 	public selectedEntry: GridUpcomingEntry[] = [];
-	public now: number = Date.now()/1000;
+	public now: number = Date.now() / 1000;
 	private sub;
 
 	constructor(
@@ -31,7 +31,7 @@ export class UpcomingComponent implements OnDestroy {
 		this.dvrService.onGridUpcomingResponse().subscribe((data) => {
 			this.entries = (data?.entries || []).reduce((prev, cur) => {
 				const e = prev.get(cur.disp_title);
-				if(e){
+				if (e) {
 					e.hasRecording ||= cur.sched_status === 'recording';
 					e.hasScheduled ||= cur.sched_status === 'scheduled';
 					e.list.push(cur);
@@ -42,11 +42,11 @@ export class UpcomingComponent implements OnDestroy {
 					list: [cur]
 				});
 				return prev;
-			}, new Map<string,row>());
+			}, new Map<string, row>());
 			this.totalCount = data?.total || 0;
 		});
-		this.sub = timer(60*1000, 60*1000).subscribe(() => {
-			this.now = Date.now()/1000;
+		this.sub = timer(60 * 1000, 60 * 1000).subscribe(() => {
+			this.now = Date.now() / 1000;
 		});
 		this.dvrService.refreshGridUpcoming();
 	}
@@ -68,21 +68,21 @@ export class UpcomingComponent implements OnDestroy {
 			this.selectedEntry = event;
 		}
 	}
-	public stopAll(entry: GridUpcomingEntry[]){
+	public stopAll(entry: GridUpcomingEntry[]) {
 		this.dialog.open(ConfirmDvrStopDialog, {
 			data: entry
 		});
 	}
 
 	public sort = this.timesort;
-	public switchSort(){
+	public switchSort() {
 		console.log("switched");
 		this.sort = this.asort;
 	}
-	public timesort(a: KeyValue<string, row>, b: KeyValue<string, row>){
+	public timesort(a: KeyValue<string, row>, b: KeyValue<string, row>) {
 		return a.value.list[0].start - b.value.list[0].start;
 	}
-	public asort(a: KeyValue<string, row>, b: KeyValue<string, row>){
+	public asort(a: KeyValue<string, row>, b: KeyValue<string, row>) {
 		return 0;
 	}
 }

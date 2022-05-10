@@ -48,10 +48,12 @@ div[role="menuitemcheckbox"] {
 	width: calc(100% - 16px);
 	padding-right: 0;
 }
+
 div[role="menuitemcheckbox"] mat-checkbox {
 	flex-grow: 1;
 }
-div[role="menuitemcheckbox"].mat-menu-item button .mat-icon{
+
+div[role="menuitemcheckbox"].mat-menu-item button .mat-icon {
 	margin-right: 0;
 }
 
@@ -89,6 +91,7 @@ td.data_errors,
 td.start_real {
 	text-align: center;
 }
-td.data_errors .mat-icon{
+
+td.data_errors .mat-icon {
 	vertical-align: bottom;
 }
