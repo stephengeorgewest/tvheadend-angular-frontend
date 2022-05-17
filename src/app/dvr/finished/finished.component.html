@@ -113,9 +113,9 @@
 		</thead>
 		<tbody *ngFor="let group of entryGroups; trackBy: groupTrack" [class.collapsed]="groupBy && group.collapsed">
 			<tr>
-				<th [attr.colspan]="displayedColumns.length + 1">
+				<th [attr.colspan]="displayedColumns.length + 1" (click)="collapse(group)">
 					<div>
-						<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+						<button mat-icon-button (click)="$event.stopPropagation()" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
 							<mat-icon>menu</mat-icon>
 						</button>
 						<mat-menu #menu="matMenu">
@@ -143,7 +143,7 @@
 							duration
 							}}</span>
 
-						<button mat-icon-button *ngIf="groupBy" (click)="collapse(group)">
+						<button mat-icon-button *ngIf="groupBy">
 							<mat-icon>expand_more</mat-icon>
 						</button>
 					</div>
