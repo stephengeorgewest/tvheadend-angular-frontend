@@ -1,4 +1,15 @@
+#websocketsform {
+	display: flex;
+}
+#websocketsform div {
+	margin-left: 0.3em;
+}
+#websocketsform button {
+	margin-left: 0.3em;
+	float: right;
+}
 div.buttons {
+	margin-top: 0.3em;
 	text-align: center;
 }
 button {

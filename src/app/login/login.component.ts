@@ -20,6 +20,7 @@ export class LoginComponent implements OnDestroy {
 	private auth_sub: Subscription;
 	constructor(
 		public authenticationService: AuthenticationService,
+		public websocketService: WebsocketService,
 		public snackbarref: MatSnackBarRef<LoginComponent>,
 		sanitizer: DomSanitizer
 	) {

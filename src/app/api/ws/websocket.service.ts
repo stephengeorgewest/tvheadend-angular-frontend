@@ -38,7 +38,7 @@ export class WebsocketService implements OnDestroy {
 			}
 		});
 	}
-	private reload() {
+	public reload() {
 		this.websocket.close();
 		this.boxid = null;
 		this.createWebSocket();
