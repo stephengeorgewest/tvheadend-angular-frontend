@@ -327,10 +327,13 @@ export class FinishedComponent {
 					sortValue = this.compare(a[this.groupSort.key], b[this.groupSort.key], this.groupSort.key);
 					break;
 				case "start_real":
-					const f = (cur: number, prev: GridUpcomingEntry) => prev.start_real < cur ? prev.start_real : cur;
-					const aStart = a.entries.reduce(f, 9999999999);
-					const bStart = b.entries.reduce(f, 9999999999);
-					sortValue = aStart - bStart;
+					const aStart = a.entries.map(e => e.start_real).sort();
+					const bStart = b.entries.map(e => e.start_real).sort();
+					if(!this.groupSort.ascending){
+						aStart.reverse();
+						bStart.reverse();
+					}
+					sortValue = this.groupSort.ascending ? aStart[0] - bStart[0]: aStart[0] - bStart[0];
 					break;
 				default:
 					sortValue = 0;
