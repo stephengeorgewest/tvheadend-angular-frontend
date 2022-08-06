@@ -35,7 +35,9 @@ export class InputComponent implements OnInit, OnDestroy {
 export class ScalePipe implements PipeTransform {
 	transform(value: number, scale: number, suffix: string): number | string | "unknown" {
 		return scale === 1 ?
-			(value / 65535 * 100).toFixed(0) + "%"
+			(value / (
+				value > 255 ? 65535: 255 // Workaround for happaguge driver using 8bits instead of 16
+			) * 100).toFixed(0) + "%"
 			: scale === 2 && value > 0 ?
 				(value * 0.001) + " " + suffix
 				: 'unknown';
