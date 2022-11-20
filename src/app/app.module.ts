@@ -40,7 +40,7 @@ import { ConfirmStopDialog } from './epg/confirm-stop/confirm-stop.dialog';
 import { NavigationComponent } from './navigation/navigation.component';
 
 import { IgnoreListManagmentComponent } from './ignore-list-managment/ignore-list-managment.component';
-import { DiskUsageComponent } from './disk-usage/disk-usage.component';
+import { DiskUsageComponent, PathPipe } from './disk-usage/disk-usage.component';
 
 import { BeginPercentPipe, CompletePercentPipe, EndPercentPipe } from './complete-percent.pipe';
 import { NewDatePipe } from './date-from-unix-date.pipe';
@@ -105,7 +105,8 @@ import { ConfirmDropDialog } from './status/connections/confirm-drop/confirm-dro
 		InDisplayedColumnsPipe,
 		InSelectedPipe,
 		ScalePipe,
-		PidPipe
+		PidPipe,
+		PathPipe
 	],
 	imports: [
 		BrowserModule,

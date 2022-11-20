@@ -1,4 +1,10 @@
-<mat-progress-spinner diameter="24" mode="determinate" strokeWidth="5" [value]="100 * (diskspace.totaldiskspace - diskspace.freediskspace) / diskspace.totaldiskspace" *ngIf="diskspace" [title]="'total: ' + (diskspace.totaldiskspace | filesize) + '\r\nfree: ' + (diskspace.freediskspace | filesize)  + '\r\nused: ' + (diskspace.useddiskspace| filesize)">
-</mat-progress-spinner>
-<mat-progress-spinner diameter="24" mode="indeterminate" strokeWidth="5" *ngIf="!diskspace" title="Unknown">
-</mat-progress-spinner>
+<svg [attr.width]="height" [attr.height]="height">
+	<title>{{altString}}</title>
+	<circle *ngIf="!freeSpace " [attr.cx]="center" [attr.cy]="center" [attr.r]="radius">
+		<animate attributeName="opacity" values="0.25;0.75;0.25"  dur="1s" repeatCount="indefinite" />
+		<animate attributeName="stroke-width" [attr.values]="'1;'+stroke_radius*2+';1'" dur="2s" repeatCount="indefinite" />
+	</circle>
+	<path class="otherSpace" [attr.d]="otherSpace | pathPipe" [style.stroke-width]="stroke_radius*2"></path>
+	<path class="usedSpace" [attr.d]="usedSpace | pathPipe" [style.stroke-width]="stroke_radius*2"></path>
+	<path class="freeSpace" [attr.d]="freeSpace | pathPipe"></path>
+</svg>

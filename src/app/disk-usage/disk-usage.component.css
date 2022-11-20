@@ -4,6 +4,35 @@
 	display: flex;
 }
 
-mat-progress-spinner {
+svg {
 	margin: auto;
+}
+
+circle {
+	stroke: var(--link-visited-color);
+	fill: transparent;
+}
+
+path {
+	opacity:1;
+	fill:none;
+	fill-opacity:1;
+	stroke-linejoin:miter;
+	stroke-miterlimit:4;
+	stroke-dasharray:none;
+	stroke-opacity:1;
+	paint-order:stroke fill markers;
+}
+
+.otherSpace{
+	stroke: var(--link-visited-color);
+}
+
+.usedSpace{
+	stroke: var(--highlight-color);
+}
+
+.freeSpace{
+	stroke: var(--pad-color);
+	stroke-width: 1px;
 }
