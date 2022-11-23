@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { DiskUsageComponent } from './disk-usage.component';
+import { DiskUsageComponent, PathPipe } from './disk-usage.component';
 
 describe('DiskUsageComponent', () => {
 	let component: DiskUsageComponent;
@@ -10,7 +10,7 @@ describe('DiskUsageComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [MatProgressSpinnerModule],
-			declarations: [DiskUsageComponent]
+			declarations: [DiskUsageComponent, PathPipe]
 		})
 			.compileComponents();
 	});
