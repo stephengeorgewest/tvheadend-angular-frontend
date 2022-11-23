@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 
 import { InputComponent } from './input.component';
@@ -9,7 +10,7 @@ describe('InputComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [MatMenuModule],
+			imports: [MatIconModule, MatMenuModule],
 			declarations: [InputComponent]
 		})
 			.compileComponents();

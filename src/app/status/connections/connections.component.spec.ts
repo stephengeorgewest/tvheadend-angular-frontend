@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ConnectionsComponent } from './connections.component';
 
@@ -9,7 +10,7 @@ describe('ConnectionsComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [MatDialogModule],
+			imports: [MatDialogModule, MatIconModule],
 			declarations: [ConnectionsComponent]
 		})
 			.compileComponents();
