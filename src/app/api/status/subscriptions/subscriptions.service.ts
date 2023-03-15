@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { APP_CONFIG, AppConfig } from 'src/app/app.config';
 import { AuthenticationService } from 'src/app/authentication.service';
 import { fetchData } from '../../util';
 import { Subscription, SubscriptionsResponse } from './responsemodel';
@@ -15,10 +16,11 @@ export class SubscriptionsService {
 
 	constructor(
 		private authenticationService: AuthenticationService,
+		@Inject(APP_CONFIG) private config: AppConfig
 	) { }
 
 	public getSubscriptions() {
-		fetchData("status/subscriptions", {}, this.authenticationService.authenticationValue.basic).then((data: SubscriptionsResponse) => this.subscriptionsResponse.next(data));
+		fetchData(this.config, "status/subscriptions", {}, this.authenticationService.authenticationValue.basic).then((data: SubscriptionsResponse) => this.subscriptionsResponse.next(data));
 	}
 	public refreshIfLoaded(){
 		if(this.subscriptionsResponse.value)

@@ -1,0 +1,7 @@
+{
+	"server": {
+		"host": "tvheadend",
+		"port": 9981,
+		"secure": ""
+	}
+}

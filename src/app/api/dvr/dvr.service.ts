@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { APP_CONFIG, AppConfig } from 'src/app/app.config';
 import { EpgService } from '../epg/epg.service';
 import { GridEntry } from '../epg/events/grid/responsemodel';
 import { DeleteBydvrUUIDRequest } from '../idnode/delete/requestmodel';
@@ -17,10 +18,12 @@ import { StopBydvrUUIDRequest } from './entry/stop/requestmodel';
 })
 export class DvrService {
 	constructor(
-		private epgService: EpgService
+		private epgService: EpgService,
+		@Inject(APP_CONFIG) private config: AppConfig
 	) { }
+
 	public createByEvent(options: CreateByEventRequest) {
-		return fetchData("dvr/entry/create_by_event", options).then(response => {
+		return fetchData(this.config, "dvr/entry/create_by_event", options).then(response => {
 			const eventResponse = response as CreateByEventResponse;// todo validation?
 			this.epgService.updateRecordingUuidByEventId(eventResponse.uuid, options.event_id);
 		});
@@ -39,19 +42,19 @@ export class DvrService {
 		return this.gridUpcomingSubject.asObservable();
 	}
 	public stopBydvrUUID(options: StopBydvrUUIDRequest) {
-		return fetchData("dvr/entry/stop", options);
+		return fetchData(this.config, "dvr/entry/stop", options);
 	}
 	private options: GridUpcomingRequest = { sort: "start_real", dir: "ASC", duplicates: 0 };
 	public refreshGridUpcoming(options?: GridUpcomingRequest) {
 		if (options) this.options = options;
-		fetchData('dvr/entry/grid_upcoming', this.options).then((data: GridUpcomingResponse) => {
+		fetchData(this.config, 'dvr/entry/grid_upcoming', this.options).then((data: GridUpcomingResponse) => {
 			this.gridUpcomingResponse = data;
 			this.gridUpcomingSubject.next(this.gridUpcomingResponse)
 		});
 	};
 
 	public deleteIdNode(options: DeleteBydvrUUIDRequest) {
-		return fetchData("idnode/delete", options);
+		return fetchData(this.config, "idnode/delete", options);
 	}
 
 	private gridFinishedResponse: GridUpcomingResponse | undefined = undefined;
@@ -60,7 +63,7 @@ export class DvrService {
 		return this.gridFinishedSubject.asObservable();
 	}
 	public refreshGridFinished() {
-		fetchData(
+		fetchData(this.config,
 			'dvr/entry/grid_finished',
 			{ start: 0, dir: "ASC", duplicates: 0, limit: 999999999 } as GridUpcomingRequest).then(
 				data => {
@@ -103,7 +106,7 @@ export class DvrService {
 	public refreshIfLoaded(dvr_to_reload?: Set<string>) {
 		if (dvr_to_reload?.size) {
 			const request: idnodeLoadRequest = {uuid: [...dvr_to_reload], grid: "1", list: ["category","enabled","duplicate","disp_title","disp_extratext","episode_disp","channel","image","copyright_year","start_real","stop_real","duration","pri","filesize","sched_status","errors","data_errors","config_name","owner","creator","comment","genre","broadcast"]};
-			fetchData(
+			fetchData(this.config,
 				'idnode/load',
 				{
 					uuid: request.uuid,

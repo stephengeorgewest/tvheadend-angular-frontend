@@ -1,8 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { MatSnackBarRef } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { APP_CONFIG, AppConfig } from '../app.config';
 import { WebsocketService } from '../api/ws/websocket.service';
 import { AuthenticationService } from '../authentication.service';
 
@@ -22,10 +22,11 @@ export class LoginComponent implements OnDestroy {
 		public authenticationService: AuthenticationService,
 		public websocketService: WebsocketService,
 		public snackbarref: MatSnackBarRef<LoginComponent>,
-		sanitizer: DomSanitizer
+		sanitizer: DomSanitizer,
+		@Inject(APP_CONFIG) public config: AppConfig
 	) {
-		this.loginUrl = sanitizer.bypassSecurityTrustResourceUrl("http" + environment.server.secure + "://" + environment.server.host + ":" + environment.server.port + "/login");
-		this.logoutUrl = sanitizer.bypassSecurityTrustResourceUrl("http" + environment.server.secure + "://" + environment.server.host + ":" + environment.server.port + "/logout?logout=1");
+		this.loginUrl = sanitizer.bypassSecurityTrustResourceUrl("http" + config.server.secure + "://" + config.server.host + ":" + config.server.port + "/login");
+		this.logoutUrl = sanitizer.bypassSecurityTrustResourceUrl("http" + config.server.secure + "://" + config.server.host + ":" + config.server.port + "/logout?logout=1");
 		this.auth_sub = this.authenticationService.authentication.subscribe(authentication => {
 			if (!this.closing) {
 				this.authenticated = !!authentication.socketusername;

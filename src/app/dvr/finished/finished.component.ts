@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, Pipe, PipeTransform } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input, Pipe, PipeTransform } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { Subscription } from 'rxjs';
 import { DvrService } from 'src/app/api/dvr/dvr.service';
 import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsemodel';
+import { AppConfig, APP_CONFIG } from 'src/app/app.config';
 import { uuidTrack } from 'src/app/util';
-import { environment } from 'src/environments/environment';
 import { ConfirmDeleteDialog } from './confirm-delete/confirm-delete.dialog';
 type groupkeys = keyof Pick<GridUpcomingEntry,
 	"disp_title" |
@@ -222,7 +222,7 @@ export class FinishedComponent {
 	public duration: number = 0;
 	public entryGroups: grouped[] = [];
 	public totalCount = 0;
-	public serverURL = 'http' + environment.server.secure + '://' + environment.server.host + ':' + environment.server.port + '/dvrfile/';
+	public serverURL;
 
 	public selectedEntry: GridUpcomingEntry[] = [];
 
@@ -233,8 +233,11 @@ export class FinishedComponent {
 	constructor(
 		public dvrService: DvrService,
 		private dialog: MatDialog,
-		private changeDetectorRef: ChangeDetectorRef
-	) { }
+		private changeDetectorRef: ChangeDetectorRef,
+		@Inject(APP_CONFIG) config: AppConfig
+	) {
+		this.serverURL = 'http' + config.server.secure + '://' + config.server.host + ':' + config.server.port + '/dvrfile/';
+	}
 
 	public ngOnInit() {
 		this.gridFinishedSubscription = this.dvrService.onGridFinishedResponse().subscribe((data) => {

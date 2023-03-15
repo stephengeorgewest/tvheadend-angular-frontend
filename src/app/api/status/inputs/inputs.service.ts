@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, filter, map } from 'rxjs';
+import { APP_CONFIG, AppConfig } from 'src/app/app.config';
 import { AuthenticationService } from 'src/app/authentication.service';
 import { fetchData } from '../../util';
 import { Input, InputsResponse } from './responsemodel';
@@ -18,10 +19,11 @@ export class InputsService {
 
 	constructor(
 		private authenticationService: AuthenticationService,
+		@Inject(APP_CONFIG) private config: AppConfig
 	) { }
 
 	public getInputs() {
-		fetchData("status/inputs", {
+		fetchData(this.config, "status/inputs", {
 			//_dc: Date.now()
 		}, this.authenticationService.authenticationValue.basic).then((data: InputsResponse) => this.inputsResponse.next(data));
 	}
@@ -29,7 +31,7 @@ export class InputsService {
 		this.clear1(uuid).then(() => this.getInputs());
 	}
 	private clear1(uuid: string) {
-		return fetchData('api/status/inputclrstats', { uuid: uuid })
+		return fetchData(this.config, 'api/status/inputclrstats', { uuid: uuid })
 	}
 	public clearAll() {
 		if (this.inputsResponse.value)

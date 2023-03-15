@@ -1,9 +1,9 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { AuthenticationService } from 'src/app/authentication.service';
 import { DiskUsageService } from 'src/app/disk-usage/disk-usage.service';
 import { DvrService } from '../dvr/dvr.service';
 
-import { environment } from 'src/environments/environment';
+import { APP_CONFIG, AppConfig } from 'src/app/app.config';
 import { cometMessage } from './responsemodel';
 import { EpgService } from '../epg/epg.service';
 import { Input } from '../status/inputs/responsemodel';
@@ -26,29 +26,30 @@ export class WebsocketService implements OnDestroy {
 		private epgService: EpgService,
 		private dvrService: DvrService,
 		private inputsService: InputsService,
-		private subscriptionsService: SubscriptionsService
+		private subscriptionsService: SubscriptionsService,
+		@Inject(APP_CONFIG) config: AppConfig
 	) {
 		this.boxid = localStorage.getItem("boxid");
-		this.createWebSocket();
+		this.createWebSocket(config);
 		this.authusername = this.authenticationService.authenticationValue.username;
 		this.authenticationSubscription = this.authenticationService.authentication.subscribe(d => {
 			if (d.username !== this.authusername) {
 				this.authusername = d.username;
-				this.reload();
+				this.reload(config);
 			}
 		});
 	}
-	public reload() {
+	public reload(config: AppConfig) {
 		this.websocket.close();
 		this.boxid = null;
-		this.createWebSocket();
+		this.createWebSocket(config);
 	}
 	ngOnDestroy(): void {
 		this.websocket.close();
 		this.authenticationSubscription.unsubscribe();
 	}
-	private createWebSocket() {
-		const url = "ws" + environment.server.secure + "://" + environment.server.host + ":" + environment.server.port + "/comet/ws" + (this.boxid ? '?boxid=' + this.boxid : "");
+	private createWebSocket(config: AppConfig) {
+		const url = "ws" + config.server.secure + "://" + config.server.host + ":" + config.server.port + "/comet/ws" + (this.boxid ? '?boxid=' + this.boxid : "");
 		this.websocket = new WebSocket(url);
 		this.websocket.onmessage = (m) => this.onMessage(m);
 		this.websocket.onerror = (e) => { console.log(e) };

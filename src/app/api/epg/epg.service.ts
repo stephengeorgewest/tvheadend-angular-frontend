@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { APP_CONFIG, AppConfig } from 'src/app/app.config';
 import { GridRequest } from '../grid-request';
 import { fetchData } from '../util';
 import { GridEntry, GridResponse } from './events/grid/responsemodel';
@@ -10,6 +11,9 @@ import { GridEntry, GridResponse } from './events/grid/responsemodel';
 export class EpgService {
 	private epgGridResponse: GridResponse | undefined = undefined;
 	private epgGridSubject: BehaviorSubject<GridResponse | undefined> = new BehaviorSubject(this.epgGridResponse);
+
+	constructor(@Inject(APP_CONFIG) private config: AppConfig){}
+
 	public onEpgGridResponse(): Observable<GridResponse | undefined> {
 		return this.epgGridSubject.asObservable();
 	}
@@ -40,7 +44,7 @@ export class EpgService {
 	}
 
 	public refreshEpgEvents(eventIDs: number[] | number) {
-		fetchData("epg/events/load", { eventId: eventIDs }).then((data: GridResponse) => {
+		fetchData(this.config, "epg/events/load", { eventId: eventIDs }).then((data: GridResponse) => {
 			//? refreshable = !!eventIDs.length
 			let refreshable = false;
 			data.entries.forEach(e => {
@@ -75,7 +79,7 @@ export class EpgService {
 		if (options) {
 			this.epgOptions = options;
 		}
-		fetchData('epg/events/grid', this.epgOptions).then(data => {
+		fetchData(this.config, 'epg/events/grid', this.epgOptions).then(data => {
 			this.epgGridResponse = data;
 			this.epgGridSubject.next(this.epgGridResponse);
 		});

@@ -1,7 +1,7 @@
 <div id="websocketsform">
 	<iframe [src]="authenticated ? logoutUrl : loginUrl"></iframe>
 	<div>
-		<button mat-mini-fab type="button" color="primary" (click)="websocketService.reload()" aria-label="Restart Websocket" title="Restart Websocket"><mat-icon>refresh</mat-icon></button>
+		<button mat-mini-fab type="button" color="primary" (click)="websocketService.reload(config)" aria-label="Restart Websocket" title="Restart Websocket"><mat-icon>refresh</mat-icon></button>
 		If login / logout is unsuccessful try <code>shift-f5</code>
 	</div>
 </div>
