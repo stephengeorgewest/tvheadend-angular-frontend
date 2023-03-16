@@ -10,25 +10,36 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { EpgComponent } from './epg.component';
 import { GridEntry } from '../api/epg/events/grid/responsemodel';
+import { EpgService } from '../api/epg/epg.service';
+import { NEVER, of } from 'rxjs';
+import { IgnoreListService } from '../ignore-list.service';
 
 @Component({
 	selector: 'app-title-list',
 	template: ''
-  })
-  class MockTitleListComponent {
-	  @Input() public filteredEntries: Map<string, GridEntry[]> = new Map;
-	  @Output() public selectedEntry: EventEmitter<GridEntry[]> = new EventEmitter();
-  }
+})
+class MockTitleListComponent {
+	@Input() public filteredEntries: Map<string, GridEntry[]> = new Map;
+	@Output() public selectedEntry: EventEmitter<GridEntry[]> = new EventEmitter();
+}
 
-  @Component({
+@Component({
 	selector: 'app-entry-list',
 	template: ''
-  })
-  class MockEntryListComponent {
-	  @Input() public selectedEntry: GridEntry[] = []
-  }
+})
+class MockEntryListComponent {
+	@Input() public selectedEntry: GridEntry[] = []
+}
 
-  
+const IgnoreListServiceStub: Partial<IgnoreListService> = {
+	onList: ()=> NEVER,
+}
+
+const EpgServiceStub: Partial<EpgService> = {
+	onEpgGridResponse: ()=> of(undefined),
+	refreshEpgGrid: ()=>{}
+}
+
 describe('EpgComponent', () => {
 	let component: EpgComponent;
 	let fixture: ComponentFixture<EpgComponent>;
@@ -36,11 +47,15 @@ describe('EpgComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [
-				HttpClientTestingModule,
 				MatIconModule, MatSnackBarModule,
 				FormsModule, MatInputModule, MatButtonModule, NoopAnimationsModule
 			],
-			declarations: [EpgComponent, MockTitleListComponent, MockEntryListComponent]
+			declarations: [EpgComponent, MockTitleListComponent, MockEntryListComponent],
+			providers: [{
+				provide: IgnoreListService, useValue: IgnoreListServiceStub
+			},{
+				provide: EpgService, useValue: EpgServiceStub
+			}]
 		})
 			.compileComponents();
 	});

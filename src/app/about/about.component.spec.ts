@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { APP_CONFIG } from '../app.config';
 
 import { AboutComponent } from './about.component';
 
@@ -8,7 +9,12 @@ describe('AboutComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [AboutComponent]
+			declarations: [AboutComponent],
+			providers: [
+				{
+					provide: APP_CONFIG, useValue: {server: {host: "", port: 0, secure: ""}}
+				}
+			]
 		})
 			.compileComponents();
 	});

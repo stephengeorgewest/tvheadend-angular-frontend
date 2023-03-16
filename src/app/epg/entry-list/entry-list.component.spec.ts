@@ -3,6 +3,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { DvrService } from 'src/app/api/dvr/dvr.service';
 
 import { EntryListComponent } from './entry-list.component';
 
@@ -13,7 +14,8 @@ describe('EntryListComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [MatDialogModule, MatListModule, MatIconModule, MatDividerModule],
-			declarations: [EntryListComponent]
+			declarations: [EntryListComponent],
+			providers: [{provide: DvrService, useValue: {}}]
 		})
 			.compileComponents();
 	});

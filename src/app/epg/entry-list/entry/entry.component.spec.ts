@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
+import { DvrService } from 'src/app/api/dvr/dvr.service';
 import { NewDatePipe } from 'src/app/date-from-unix-date.pipe';
 
 import { EntryComponent } from './entry.component';
@@ -11,7 +12,8 @@ describe('EntryComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [MatIconModule],
-			declarations: [EntryComponent, NewDatePipe]
+			declarations: [EntryComponent, NewDatePipe],
+			providers: [{provide: DvrService, useValue: {}}]
 		})
 			.compileComponents();
 	});

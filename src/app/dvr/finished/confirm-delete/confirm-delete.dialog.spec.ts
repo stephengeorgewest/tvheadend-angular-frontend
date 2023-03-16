@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { APP_CONFIG } from 'src/app/app.config';
 
 import { ConfirmDeleteDialog } from './confirm-delete.dialog';
 
-describe('ConfirmDeleteComponent', () => {
+describe('ConfirmDeleteDialog', () => {
 	let component: ConfirmDeleteDialog;
 	let fixture: ComponentFixture<ConfirmDeleteDialog>;
 
@@ -13,6 +14,9 @@ describe('ConfirmDeleteComponent', () => {
 			imports: [MatDialogModule, MatProgressSpinnerModule],
 			declarations: [ConfirmDeleteDialog],
 			providers: [
+				{
+					provide: APP_CONFIG, useValue: {server: {host: "", port: 0, secure: ""}}
+				},
 				{
 					provide: MAT_DIALOG_DATA,
 					useValue: []

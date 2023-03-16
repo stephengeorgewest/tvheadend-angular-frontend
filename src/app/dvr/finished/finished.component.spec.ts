@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { APP_CONFIG } from 'src/app/app.config';
 import { FileSizePipe } from 'src/app/file-size.pipe';
 
 import { DurationPipe, FinishedComponent, SortListDirectionPipe, SortListPositionPipe,InDisplayedColumnsPipe } from './finished.component';
@@ -19,6 +20,9 @@ describe('FinishedComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
+			providers: [
+				{provide: APP_CONFIG, useValue: {server: {host: "", port: 0, secure: ""}}}
+			],
 			imports: [MatCheckboxModule, MatDialogModule, MatIconModule, FormsModule, MatInputModule, MatMenuModule, MatOptionModule, MatSelectModule, NoopAnimationsModule],
 			declarations: [FinishedComponent, FileSizePipe, DurationPipe, SortListDirectionPipe, SortListPositionPipe, InDisplayedColumnsPipe]
 		})
