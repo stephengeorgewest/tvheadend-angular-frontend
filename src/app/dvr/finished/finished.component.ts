@@ -271,6 +271,10 @@ export class FinishedComponent {
 		this.filesize = 0;
 		this.duration = 0;
 		const allCollapsed = this.entryGroups.every(g => g.collapsed);
+		const prevCollapsed = this.entryGroups.reduce((collapsed, g) => {
+			collapsed.set(g.grouptitle, g.collapsed)
+			return collapsed;
+		}, new Map());
 		this.entryGroups = [...this.entries.reduce((prev, cur) => {
 			const group = !this.groupBy ?
 				"NO_GROUP" :
@@ -287,6 +291,7 @@ export class FinishedComponent {
 			}
 			else prev.set(group, {
 				grouptitle: group,
+				collapsed: prevCollapsed.get(group),
 				filesize: cur.filesize,
 				duration: cur.duration,
 				entries: [cur],
