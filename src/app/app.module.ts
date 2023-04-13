@@ -27,6 +27,7 @@ import { UpcomingEntryListComponent } from './dvr/upcoming/entry-list/upcoming-e
 import { DvrUpcomingEntryComponent, UpcomingEntryDialog } from './dvr/upcoming/entry-list/entry/upcoming-entry.component';
 import { DurationPipe, EpisodeDisplayComponent, FinishedComponent, InDisplayedColumnsPipe, InSelectedPipe, SortListDirectionPipe, SortListPositionPipe } from './dvr/finished/finished.component';
 import { ConfirmDeleteDialog } from './dvr/finished/confirm-delete/confirm-delete.dialog';
+import { InfoDialog } from './dvr/finished/info/info.dialog';
 import { ConfirmDvrStopDialog } from './dvr/upcoming/confirm-stop/confirm-stop.dialog';
 
 
@@ -71,6 +72,7 @@ import { ConfirmDropDialog } from './status/connections/confirm-drop/confirm-dro
 		FinishedComponent,
 		EpisodeDisplayComponent,
 		ConfirmDeleteDialog,
+		InfoDialog,
 		ConfirmDvrStopDialog,
 
 		EpgComponent,

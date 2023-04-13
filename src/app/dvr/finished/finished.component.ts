@@ -8,6 +8,7 @@ import { GridUpcomingEntry } from 'src/app/api/dvr/entry/grid_upcoming/responsem
 import { AppConfig, APP_CONFIG } from 'src/app/app.config';
 import { uuidTrack } from 'src/app/util';
 import { ConfirmDeleteDialog } from './confirm-delete/confirm-delete.dialog';
+import { InfoDialog } from './info/info.dialog';
 type groupkeys = keyof Pick<GridUpcomingEntry,
 	"disp_title" |
 	"channelname" |
@@ -466,6 +467,10 @@ export class FinishedComponent {
 		this.dialog.open(ConfirmDeleteDialog, {
 			data: entry
 		});
+	}
+
+	public info(entry: GridUpcomingEntry){
+		this.dialog.open(InfoDialog, {data: entry});
 	}
 
 	public groupTrack(index: number, entry: grouped) {

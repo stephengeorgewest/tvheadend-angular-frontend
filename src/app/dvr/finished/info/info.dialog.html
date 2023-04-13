@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>
+	Info
+</h2>
+<ul mat-dialog-content>
+	<pre>{{entry | json}}</pre>
+</ul>
+<div mat-dialog-actions align="end">
+	<button mat-stroked-button cdkFocusRegionstart (click)="dialogref.close()">Cancel</button>
+</div>
