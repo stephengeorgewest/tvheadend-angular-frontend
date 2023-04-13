@@ -185,7 +185,7 @@
 					</div>
 					<div *ngSwitchCase="'duration'">{{entry.duration | duration: "short"}}</div>
 					<episode_disp *ngSwitchCase="'episode_disp'" [season_episode]="entry.episode_disp"></episode_disp>
-					<div *ngSwitchDefault>{{entry[col]}}</div>
+					<div *ngSwitchDefault [title]="entry.filename">{{entry[col]}}</div>
 				</td>
 			</tr>
 		</tbody>
