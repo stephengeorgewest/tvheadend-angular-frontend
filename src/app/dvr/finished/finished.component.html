@@ -17,12 +17,12 @@
 				<mat-option *ngFor="let sort of groupsortList" [value]="sort">
 					<ng-container *ngIf="sort.key === 'groupkey'">
 						<ng-container *ngIf="groupBy !== undefined">
-							{{columns[groupBy]?.displayString}}
+							{{columns[groupBy].displayString}}
 						</ng-container>
 						<ng-container *ngIf="groupBy == undefined">groupkey</ng-container>
 					</ng-container>
 					<ng-container *ngIf="sort.key !== 'groupkey'">
-						{{columns[sort.key]?.displayString}}
+						{{columns[sort.key].displayString}}
 					</ng-container>
 				</mat-option>
 			</mat-select>
@@ -91,7 +91,7 @@
 					</mat-menu>
 				</th>
 				<th *ngFor="let column of displayedColumns" [class]="column">
-					{{columns[column]?.displayString}}
+					{{columns[column].displayString}}
 					<button mat-icon-button (click)="reverse(column)">
 						<mat-icon [class.ascending]="columns[column].ascending ">sort
 						</mat-icon>
@@ -192,7 +192,7 @@
 		<tfoot>
 			<tr>
 				<th></th>
-				<th *ngFor="let col of displayedColumns">{{columns[col]?.displayString}}</th>
+				<th *ngFor="let col of displayedColumns">{{columns[col].displayString}}</th>
 			</tr>
 		</tfoot>
 	</table>

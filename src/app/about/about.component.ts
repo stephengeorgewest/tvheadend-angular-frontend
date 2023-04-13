@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { fetchData } from 'src/app/api/util';
 import { AppConfig, APP_CONFIG } from '../app.config';
 
